@@ -1,0 +1,9 @@
+scalar Date
+
+schema {
+  query: Query
+}
+
+type Query {
+  user(id: ID!): User
+}
