@@ -1,0 +1,7 @@
+{
+  "name": "graphql-codegen-ddd-apollo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "suzukalight <mail@mkubara.com>",
+  "license": "MIT"
+}
