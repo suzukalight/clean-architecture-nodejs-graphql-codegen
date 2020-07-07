@@ -17,6 +17,24 @@
       "**/@generated/**"
     ]
   },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ]
+  },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.16.0",
     "@graphql-codegen/fragment-matcher": "^1.16.0",
@@ -24,9 +42,16 @@
     "@graphql-codegen/typescript-document-nodes": "^1.16.0",
     "@graphql-codegen/typescript-graphql-files-modules": "^1.16.0",
     "@graphql-codegen/typescript-operations": "^1.16.0",
-    "graphql": "^15.2.0"
+    "@types/jest": "^26.0.3",
+    "graphql": "^15.2.0",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
   },
   "scripts": {
-    "codegen:domain": "yarn workspace domain codegen"
+    "test": "yarn test:domain",
+    "test:domain": "yarn workspace domain-model test",
+    "codegen": "yarn codegen:domain",
+    "codegen:domain": "yarn workspace domain-model codegen"
   }
 }
