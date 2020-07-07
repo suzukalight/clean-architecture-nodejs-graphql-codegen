@@ -1,0 +1,30 @@
+{
+  "name": "domain-model",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "suzukalight <mail@mkubara.com>",
+  "license": "MIT",
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "codegen": "graphql-codegen --config codegen.yml"
+  }
+}
