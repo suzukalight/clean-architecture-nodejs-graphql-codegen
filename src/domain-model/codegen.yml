@@ -4,3 +4,6 @@ generates:
   src/types.ts:
     plugins:
       - typescript
+config:
+  scalars:
+    DateTime: Date
