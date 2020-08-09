@@ -36,17 +36,17 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.16.0",
-    "@graphql-codegen/fragment-matcher": "^1.16.0",
-    "@graphql-codegen/typescript": "^1.16.0",
-    "@graphql-codegen/typescript-document-nodes": "^1.16.0",
-    "@graphql-codegen/typescript-graphql-files-modules": "^1.16.0",
-    "@graphql-codegen/typescript-operations": "^1.16.0",
-    "@types/jest": "^26.0.3",
-    "graphql": "^15.2.0",
-    "jest": "^26.1.0",
-    "ts-jest": "^26.1.1",
-    "typescript": "^3.9.6"
+    "@graphql-codegen/cli": "^1.17.7",
+    "@graphql-codegen/fragment-matcher": "^1.17.7",
+    "@graphql-codegen/typescript": "^1.17.7",
+    "@graphql-codegen/typescript-document-nodes": "^1.17.7",
+    "@graphql-codegen/typescript-graphql-files-modules": "^1.17.7",
+    "@graphql-codegen/typescript-operations": "^1.17.7",
+    "@types/jest": "^26.0.9",
+    "graphql": "^15.3.0",
+    "jest": "^26.2.2",
+    "ts-jest": "^26.1.4",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "test": "yarn test:domain",
