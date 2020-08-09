@@ -5,7 +5,8 @@
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
   "dependencies": {
-    "common": "*"
+    "common": "*",
+    "graphql-scalars": "^1.2.6"
   },
   "jest": {
     "moduleFileExtensions": [
