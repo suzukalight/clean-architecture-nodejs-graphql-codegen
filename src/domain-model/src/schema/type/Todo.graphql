@@ -1,0 +1,11 @@
+enum TodoStatus {
+  UNDONE
+  DONE
+}
+
+type Todo {
+  id: ID!
+  title: String!
+  status: TodoStatus!
+  dueDate: DateTime
+}

@@ -1,4 +1,4 @@
-scalar Date
+scalar DateTime
 
 schema {
   query: Query
@@ -6,4 +6,5 @@ schema {
 
 type Query {
   user(id: ID!): User
+  todo(id: ID!): Todo
 }
