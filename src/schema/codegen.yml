@@ -4,6 +4,12 @@ generates:
   types.ts:
     plugins:
       - typescript
+      - typescript-resolvers
+    config:
+      useIndexSignature: true
+  schema.graphql:
+    plugins:
+      - schema-ast
 config:
   scalars:
     DateTime: Date
