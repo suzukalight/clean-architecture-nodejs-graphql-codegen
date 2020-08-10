@@ -1,0 +1,53 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "suzukalight <mail@mkubara.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev ./src/infrastructure/apollo-server/index.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^6.0.16",
+    "@graphql-tools/load": "^6.0.16",
+    "@graphql-tools/schema": "^6.0.16",
+    "apollo-server": "^2.16.1",
+    "apollo-server-express": "^2.16.1",
+    "common": "*",
+    "cors": "^2.8.5",
+    "domain-model": "*",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "graphql-scalars": "^1.2.6",
+    "schema": "*"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.32",
+    "@types/graphql-resolvers": "^0.3.0",
+    "@types/node": "^14.0.27",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.56",
+    "typescript": "^3.9.7"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ]
+  }
+}
