@@ -1,0 +1,37 @@
+enum TodoStatus {
+  DONE
+  UNDONE
+}
+
+type Todo {
+  dueDate: DateTime
+  id: ID!
+  owner: User
+  ownerId: ID!
+  status: TodoStatus!
+  title: String!
+}
+
+type User {
+  email: String
+  id: ID!
+}
+
+scalar DateTime
+
+type Query {
+  todo(id: ID!): Todo
+  user(id: ID!): User
+}
+
+input CreateUserRequest {
+  email: String!
+}
+
+type CreateUserResponse {
+  user: User
+}
+
+type Mutation {
+  createUser(input: CreateUserRequest): CreateUserResponse
+}

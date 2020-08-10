@@ -1,4 +1,4 @@
-type CreateUserRequest {
+input CreateUserRequest {
   email: String!
 }
 
@@ -6,6 +6,6 @@ type CreateUserResponse {
   user: User
 }
 
-type Query {
-  createUser(input: CreateUserRequest!): CreateUserResponse!
+type Mutation {
+  createUser(input: CreateUserRequest): CreateUserResponse
 }
