@@ -1,7 +1,8 @@
-import { User } from '../../types';
-import { UserEntity } from '../UserEntity';
+import { User } from 'schema/types';
 import { PropertyRequiredError } from 'common/error/PropertyRequired';
 import { IllegalArgumentError } from 'common/error/IllegalArgument';
+
+import { UserEntity } from '../UserEntity';
 
 describe('UserEntity', () => {
   it('エンティティを生成できた', () => {

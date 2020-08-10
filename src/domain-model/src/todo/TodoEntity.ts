@@ -1,10 +1,12 @@
-import { ID } from '../common/ID';
+import { TodoStatus, Todo } from 'schema/types';
 import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { TodoStatus, Todo } from '../types';
+
+import { ID } from '../common/ID';
 
 export const isValidArguments = (todo: Todo) => {
   if (!todo) throw new PropertyRequiredError('user');
   if (!todo.id) throw new PropertyRequiredError('id');
+  if (!todo.ownerId) throw new PropertyRequiredError('ownerId');
   if (!todo.title) throw new PropertyRequiredError('title');
   if (!todo.status) throw new PropertyRequiredError('status');
   return true;
@@ -12,6 +14,7 @@ export const isValidArguments = (todo: Todo) => {
 
 export class TodoEntity {
   private id: ID;
+  private ownerId: ID;
   private title: string;
   private status: TodoStatus;
   private dueDate: Date | null | undefined;
@@ -19,13 +22,18 @@ export class TodoEntity {
   constructor(todo: Todo) {
     isValidArguments(todo);
     this.id = new ID(todo.id);
+    this.ownerId = new ID(todo.ownerId);
     this.title = todo.title;
     this.status = todo.status;
     this.dueDate = todo.dueDate;
   }
 
-  getID() {
+  getId() {
     return this.id;
+  }
+
+  getOwnerId() {
+    return this.ownerId;
   }
 
   getTitle() {
@@ -42,6 +50,11 @@ export class TodoEntity {
 
   setId(id: ID) {
     this.id = id;
+    this.isValid();
+  }
+
+  setOwnerId(ownerId: ID) {
+    this.ownerId = ownerId;
     this.isValid();
   }
 
@@ -66,6 +79,7 @@ export class TodoEntity {
   toJSON(): Todo {
     return {
       id: this.id.toString(),
+      ownerId: this.ownerId.toString(),
       title: this.title,
       status: this.status,
       dueDate: this.dueDate,

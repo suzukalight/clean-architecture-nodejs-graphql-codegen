@@ -5,7 +5,10 @@ enum TodoStatus {
 
 type Todo {
   id: ID!
+  ownerId: ID!
   title: String!
   status: TodoStatus!
   dueDate: DateTime
+
+  owner: User
 }

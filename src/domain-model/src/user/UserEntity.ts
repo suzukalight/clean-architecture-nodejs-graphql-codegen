@@ -1,7 +1,8 @@
-import { User } from '../types';
+import { User } from 'schema/types';
+import { PropertyRequiredError } from 'common/error/PropertyRequired';
+
 import { ID } from '../common/ID';
 import { Email } from '../common/Email';
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
 
 export const isValidArguments = (user: User) => {
   if (!user) throw new PropertyRequiredError('user');

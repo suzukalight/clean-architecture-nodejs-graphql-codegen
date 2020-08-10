@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "common": "*",
+    "schema": "*",
     "graphql-scalars": "^1.2.6"
   },
   "jest": {
@@ -28,7 +29,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "test": "jest"
   }
 }

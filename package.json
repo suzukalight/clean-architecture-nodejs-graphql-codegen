@@ -51,7 +51,7 @@
   "scripts": {
     "test": "yarn test:domain",
     "test:domain": "yarn workspace domain-model test",
-    "codegen": "yarn codegen:domain",
-    "codegen:domain": "yarn workspace domain-model codegen"
+    "codegen": "yarn codegen:schema",
+    "codegen:schema": "yarn workspace schema codegen"
   }
 }
