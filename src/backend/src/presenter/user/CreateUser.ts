@@ -1,11 +1,11 @@
-import { CreateUserResponse } from 'schema/types';
+import { CreateUserResponse, Maybe } from 'schema/types';
 
-type MayBeCreateUserResponse = CreateUserResponse | undefined;
+import { CreateUserPresenter as CreateUserPresenterIF } from '../../usecase/user/presenter.interface';
 
-export class CreateUserPresenter implements CreateUserPresenter {
-  private response: MayBeCreateUserResponse;
+export class CreateUserPresenter implements CreateUserPresenterIF {
+  private response: Maybe<CreateUserResponse> = null;
 
-  public getResponse(): MayBeCreateUserResponse {
+  public getResponse(): Maybe<CreateUserResponse> {
     return this.response;
   }
 
