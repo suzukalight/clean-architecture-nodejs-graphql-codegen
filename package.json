@@ -37,12 +37,21 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
-    "jest": "^26.2.2",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "babel-jest": "^26.3.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.3.0",
+    "jest-cli": "^26.3.0",
+    "prettier": "^2.0.5",
     "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts}\"",
+    "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts,graphql}\"",
     "lint": "eslint --fix ./src",
     "test": "yarn test:domain",
     "test:domain": "yarn workspace domain-model test",
