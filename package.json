@@ -24,7 +24,9 @@
     "test:domain": "yarn workspace domain-model test",
     "test:backend": "yarn workspace backend test",
     "codegen": "yarn codegen:schema",
-    "codegen:schema": "yarn workspace schema codegen"
+    "codegen:schema": "yarn workspace schema codegen",
+    "docker": "yarn docker:backend",
+    "docker:backend": "yarn workspace backend docker"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
