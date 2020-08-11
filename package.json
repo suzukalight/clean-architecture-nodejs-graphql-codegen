@@ -18,6 +18,7 @@
     ]
   },
   "scripts": {
+    "dev:backend": "yarn workspace backend dev",
     "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts,graphql}\"",
     "lint": "eslint --fix ./src",
     "test": "yarn test:domain && yarn test:backend",
