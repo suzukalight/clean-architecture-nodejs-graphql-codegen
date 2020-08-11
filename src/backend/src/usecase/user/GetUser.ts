@@ -5,25 +5,21 @@ import { UserRepository } from './repository.interface';
 import { GetUserUseCase } from './usecase.interface';
 import { GetUserPresenter } from './presenter.interface';
 
-class GetUserResponseFactory {
-  public create(userEntity: Maybe<UserEntity>): Maybe<User> {
-    return userEntity ? userEntity.toJSON() : null;
-  }
-}
+const createGetUserResponse = (userEntity: Maybe<UserEntity>): Maybe<User> =>
+  userEntity ? userEntity.toJSON() : null;
 
 export class GetUserInteractor implements GetUserUseCase {
-  private userRepository: UserRepository;
-  private getUserPresenter: GetUserPresenter;
+  private repository: UserRepository;
+  private presenter: GetUserPresenter;
 
-  constructor(userRepository: UserRepository, getUserPresenter: GetUserPresenter) {
-    this.userRepository = userRepository;
-    this.getUserPresenter = getUserPresenter;
+  constructor(repository: UserRepository, presenter: GetUserPresenter) {
+    this.repository = repository;
+    this.presenter = presenter;
   }
 
   public async handle(id: string) {
-    const userEntity = await this.userRepository.getById(id);
+    const userEntity = await this.repository.getById(id);
 
-    const factory = new GetUserResponseFactory();
-    this.getUserPresenter.output(factory.create(userEntity));
+    this.presenter.output(createGetUserResponse(userEntity));
   }
 }

@@ -1,7 +1,7 @@
 import { CreateUserRequest } from 'schema/types';
 import { UserEntity } from 'domain-model/src/user/UserEntity';
 
-import { UserRepository } from '../../../usecase/user/repository.interface';
+import { UserRepository as UserRepositoryIF } from '../../usecase/user/repository.interface';
 
 type InMemoryStore = {
   idCounter: number;
@@ -17,7 +17,7 @@ export const createInMemoryStore = (idCounter = 0): InMemoryStore => {
 
 const sharedStore = createInMemoryStore();
 
-export class InMemoryUserRepository implements UserRepository {
+export class UserRepository implements UserRepositoryIF {
   private store: InMemoryStore;
 
   constructor(store?: InMemoryStore) {
