@@ -36,23 +36,14 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.17.7",
-    "@graphql-codegen/fragment-matcher": "^1.17.7",
-    "@graphql-codegen/introspection": "^1.17.7",
-    "@graphql-codegen/schema-ast": "^1.17.7",
-    "@graphql-codegen/typescript": "^1.17.7",
-    "@graphql-codegen/typescript-document-nodes": "^1.17.7",
-    "@graphql-codegen/typescript-graphql-files-modules": "^1.17.7",
-    "@graphql-codegen/typescript-operations": "^1.17.7",
-    "@graphql-codegen/typescript-react-apollo": "^2.0.5",
-    "@graphql-codegen/typescript-resolvers": "^1.17.7",
     "@types/jest": "^26.0.9",
-    "graphql": "^15.3.0",
     "jest": "^26.2.2",
     "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"
   },
   "scripts": {
+    "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts}\"",
+    "lint": "eslint --fix ./src",
     "test": "yarn test:domain",
     "test:domain": "yarn workspace domain-model test",
     "codegen": "yarn codegen:schema",

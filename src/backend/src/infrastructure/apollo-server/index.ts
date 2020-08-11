@@ -29,13 +29,13 @@ const schemaWithResolvers = addResolversToSchema({
 const app = express();
 app.use(cors());
 
+//
+// apply graphql server to express
+//
 const server = new ApolloServer({
   schema: schemaWithResolvers,
 });
 
-//
-// apply graphql server to express
-//
 server.applyMiddleware({ app, path: '/graphql' });
 
 const httpServer = http.createServer(app);
