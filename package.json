@@ -1,5 +1,5 @@
 {
-  "name": "graphql-codegen-ddd-apollo",
+  "name": "clean-architecture-nodejs-graphql-codegen",
   "version": "1.0.0",
   "main": "index.js",
   "author": "suzukalight <mail@mkubara.com>",
