@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "docker",
+    "password": "docker",
+    "database": "graphql_clean_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "docker",
+    "password": "docker",
+    "database": "graphql_clean_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "docker",
+    "password": "docker",
+    "database": "graphql_clean",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

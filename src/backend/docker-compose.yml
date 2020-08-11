@@ -7,7 +7,7 @@ services:
     container_name: mysql_host
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: graphql_clean
+      MYSQL_DATABASE: graphql_clean_dev
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: 'Asia/Tokyo'
