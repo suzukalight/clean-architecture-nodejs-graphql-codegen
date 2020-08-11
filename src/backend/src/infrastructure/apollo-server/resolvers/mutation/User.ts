@@ -6,7 +6,7 @@ import { CreateUserPresenter } from '../../../../presenter/user/CreateUser';
 import { InMemoryUserRepository } from '../../../../repository/memory/user';
 
 export const Mutation: MutationResolvers = {
-  createUser: async (_parent, args, _context) => {
+  createUser: async (_parent, args) => {
     const createUserPresenter = new CreateUserPresenter();
     const controller = new CreateUserController(
       new CreateUserInteractor(new InMemoryUserRepository(), createUserPresenter),

@@ -8,7 +8,7 @@ type InMemoryStore = {
   entities: Map<string, UserEntity>;
 };
 
-export const createInMemoryStore = (idCounter: number = 0): InMemoryStore => {
+export const createInMemoryStore = (idCounter = 0): InMemoryStore => {
   return {
     idCounter,
     entities: new Map<string, UserEntity>(),

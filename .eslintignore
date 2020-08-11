@@ -1,1 +1,4 @@
 node_modules/**
+**/__tests__/*
+**/__mocks__/*
+src/schema/types.ts

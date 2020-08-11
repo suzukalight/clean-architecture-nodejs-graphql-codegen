@@ -18,7 +18,7 @@ export class UserEntity {
   constructor(user: User) {
     isValidArguments(user);
     this.id = new ID(user.id);
-    this.email = new Email(user.email!);
+    this.email = new Email(user.email);
   }
 
   getID() {

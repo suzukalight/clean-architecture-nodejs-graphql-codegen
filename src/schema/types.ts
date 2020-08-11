@@ -30,7 +30,7 @@ export type Todo = {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
-  email?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
 };
 
 
@@ -181,7 +181,7 @@ export type TodoResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
