@@ -4,31 +4,13 @@
   "main": "index.js",
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
   "dependencies": {
     "common": "*",
     "schema": "*",
     "graphql-scalars": "^1.2.6"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
-      }
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ]
-  },
-  "scripts": {
-    "build": "tsc",
-    "test": "jest"
   }
 }

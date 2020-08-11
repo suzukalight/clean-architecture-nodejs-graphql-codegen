@@ -17,23 +17,14 @@
       "**/@generated/**"
     ]
   },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
-      }
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ]
+  "scripts": {
+    "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts,graphql}\"",
+    "lint": "eslint --fix ./src",
+    "test": "yarn test:domain && yarn test:backend",
+    "test:domain": "yarn workspace domain-model test",
+    "test:backend": "yarn workspace backend test",
+    "codegen": "yarn codegen:schema",
+    "codegen:schema": "yarn workspace schema codegen"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
@@ -49,13 +40,5 @@
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"
-  },
-  "scripts": {
-    "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts,graphql}\"",
-    "lint": "eslint --fix ./src",
-    "test": "yarn test:domain",
-    "test:domain": "yarn workspace domain-model test",
-    "codegen": "yarn codegen:schema",
-    "codegen:schema": "yarn workspace schema codegen"
   }
 }
