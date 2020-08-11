@@ -13,42 +13,26 @@ export type Scalars = {
 };
 
 export enum TodoStatus {
-  Done = 'DONE',
-  Undone = 'UNDONE'
+  Undone = 'UNDONE',
+  Done = 'DONE'
 }
 
 export type Todo = {
   __typename?: 'Todo';
-  dueDate?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
-  owner?: Maybe<User>;
   ownerId: Scalars['ID'];
-  status: TodoStatus;
   title: Scalars['String'];
+  status: TodoStatus;
+  dueDate?: Maybe<Scalars['DateTime']>;
+  owner?: Maybe<User>;
 };
 
 export type User = {
   __typename?: 'User';
+  id: Scalars['ID'];
   email?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
 };
 
-
-export type Query = {
-  __typename?: 'Query';
-  todo?: Maybe<Todo>;
-  user?: Maybe<User>;
-};
-
-
-export type QueryTodoArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryUserArgs = {
-  id: Scalars['ID'];
-};
 
 export type CreateUserRequest = {
   email: Scalars['String'];
@@ -67,6 +51,16 @@ export type Mutation = {
 
 export type MutationCreateUserArgs = {
   input?: Maybe<CreateUserRequest>;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  user?: Maybe<User>;
+};
+
+
+export type QueryUserArgs = {
+  id: Scalars['ID'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -154,10 +148,10 @@ export type ResolversTypes = ResolversObject<{
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
-  Query: ResolverTypeWrapper<{}>;
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: ResolverTypeWrapper<CreateUserResponse>;
   Mutation: ResolverTypeWrapper<{}>;
+  Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
@@ -168,37 +162,32 @@ export type ResolversParentTypes = ResolversObject<{
   String: Scalars['String'];
   User: User;
   DateTime: Scalars['DateTime'];
-  Query: {};
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: CreateUserResponse;
   Mutation: {};
+  Query: {};
   Boolean: Scalars['Boolean'];
 }>;
 
 export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = ResolversObject<{
-  dueDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   ownerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['TodoStatus'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['TodoStatus'], ParentType, ContextType>;
+  dueDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
 }
-
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QueryTodoArgs, 'id'>>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
-}>;
 
 export type CreateUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateUserResponse'] = ResolversParentTypes['CreateUserResponse']> = ResolversObject<{
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
@@ -209,13 +198,17 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createUser?: Resolver<Maybe<ResolversTypes['CreateUserResponse']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, never>>;
 }>;
 
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+}>;
+
 export type Resolvers<ContextType = any> = ResolversObject<{
   Todo?: TodoResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
-  Query?: QueryResolvers<ContextType>;
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Query?: QueryResolvers<ContextType>;
 }>;
 
 
