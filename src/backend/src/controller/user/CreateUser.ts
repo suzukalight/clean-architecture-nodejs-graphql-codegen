@@ -10,6 +10,6 @@ export class CreateUserController {
   }
 
   public async handle(request: CreateUserRequest) {
-    this.createUserUseCase.handle(request);
+    await this.createUserUseCase.handle(request);
   }
 }

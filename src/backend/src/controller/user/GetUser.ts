@@ -8,6 +8,6 @@ export class GetUserController {
   }
 
   public async handle(id: string) {
-    this.createUserUseCase.handle(id);
+    await this.createUserUseCase.handle(id);
   }
 }
