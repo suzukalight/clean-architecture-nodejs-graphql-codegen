@@ -9,6 +9,8 @@ import http from 'http';
 import path from 'path';
 
 import { resolvers } from './resolvers';
+import { sequelize } from '../sequelize/sequelize';
+import { models } from '../sequelize/models';
 
 dotenv.config();
 
@@ -34,6 +36,7 @@ app.use(cors());
 //
 const server = new ApolloServer({
   schema: schemaWithResolvers,
+  context: () => ({ sequelize, models }),
 });
 
 server.applyMiddleware({ app, path: '/graphql' });
@@ -45,6 +48,8 @@ server.installSubscriptionHandlers(httpServer);
 // run server
 //
 const port = 3000;
-httpServer.listen({ port }, () => {
-  console.log(`Apollo Server on http://localhost:${port}/graphql`);
+sequelize.sync().then(async () => {
+  httpServer.listen({ port }, () => {
+    console.log(`Apollo Server on http://localhost:${port}/graphql`);
+  });
 });
