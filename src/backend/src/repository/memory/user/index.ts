@@ -3,22 +3,39 @@ import { UserEntity } from 'domain-model/src/user/UserEntity';
 
 import { UserRepository } from '../../../usecase/user/repository.interface';
 
+type InMemoryStore = {
+  idCounter: number;
+  entities: Map<string, UserEntity>;
+};
+
+export const createInMemoryStore = (idCounter: number = 0): InMemoryStore => {
+  return {
+    idCounter,
+    entities: new Map<string, UserEntity>(),
+  };
+};
+
+const sharedStore = createInMemoryStore();
+
 export class InMemoryUserRepository implements UserRepository {
-  private static idCounter = 0;
-  private static entities = new Map<string, UserEntity>();
+  private store: InMemoryStore;
+
+  constructor(store?: InMemoryStore) {
+    this.store = store ?? sharedStore;
+  }
 
   public async getById(id: string) {
-    return InMemoryUserRepository.entities.get(id) ?? null;
+    return this.store.entities.get(id) ?? null;
   }
 
   public async create(user: CreateUserRequest) {
-    const id = `${++InMemoryUserRepository.idCounter}`;
+    const id = `${++this.store.idCounter}`;
     const newEntity = new UserEntity({
       id,
       email: user.email,
     });
 
-    InMemoryUserRepository.entities.set(id, newEntity);
+    this.store.entities.set(id, newEntity);
     return newEntity;
   }
 }
