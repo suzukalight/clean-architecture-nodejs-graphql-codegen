@@ -15,6 +15,7 @@ type Todo {
 type User {
   id: ID!
   email: String!
+  todos: [Todo]
 }
 
 scalar DateTime
