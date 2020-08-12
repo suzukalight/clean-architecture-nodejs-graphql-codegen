@@ -10,7 +10,7 @@ export class GetTodoPresenter implements GetTodoPresenterIF {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<TodoEntity>) {
-    this.response = userEntity ? userEntity.toJSON() : null;
+  public async output(todoEntity: Maybe<TodoEntity>) {
+    this.response = todoEntity ? todoEntity.toJSON() : null;
   }
 }
