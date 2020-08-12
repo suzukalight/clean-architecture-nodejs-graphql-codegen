@@ -21,11 +21,18 @@ export class TodoRepository implements TodoRepositoryIF {
     return entity;
   }
 
+  public async allByOwnerId(ownerId: string) {
+    const repository = this.dbConnection.getRepository(OrmTodo);
+    const result = await repository.find({ where: { ownerId } });
+    if (!result) return null;
+
+    console.log(result);
+    const entities = result.map((todo) => new TodoEntity((todo as unknown) as Todo));
+    return entities;
+  }
+
   public async create(request: CreateTodoRequest) {
-    const todo = new OrmTodo();
-    todo.ownerId = +request.ownerId;
-    todo.title = request.title;
-    todo.status = TodoStatus.Undone;
+    const todo = new OrmTodo(+request.ownerId, request.title, TodoStatus.Undone);
     if (request.dueDate) todo.dueDate = request.dueDate;
 
     const repository = this.dbConnection.getRepository(OrmTodo);

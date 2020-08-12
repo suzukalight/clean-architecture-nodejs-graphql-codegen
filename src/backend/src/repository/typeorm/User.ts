@@ -22,9 +22,7 @@ export class UserRepository implements UserRepositoryIF {
   }
 
   public async create(request: CreateUserRequest) {
-    const user = new OrmUser();
-    user.email = request.email;
-
+    const user = new OrmUser(request.email);
     const repository = this.dbConnection.getRepository(OrmUser);
     const result = await repository.save(user);
 
