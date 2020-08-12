@@ -8,10 +8,7 @@
     "dev": "ts-node-dev ./src/infrastructure/apollo-server/index.ts",
     "build": "tsc",
     "test": "jest",
-    "docker": "docker-compose up",
-    "sequelize-cli": "sequelize-cli",
-    "db:migrate": "sequelize-cli db:migrate",
-    "db:seed:all": "sequelize-cli db:seed:all"
+    "docker": "docker-compose up"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^6.0.16",
@@ -27,14 +24,14 @@
     "graphql": "^15.3.0",
     "graphql-scalars": "^1.2.6",
     "mysql2": "^2.1.0",
+    "reflect-metadata": "^0.1.13",
     "schema": "*",
-    "sequelize": "^6.3.4"
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.32",
     "@types/graphql-resolvers": "^0.3.0",
     "@types/node": "^14.0.27",
-    "sequelize-cli": "^6.2.0",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.56",
     "typescript": "^3.9.7"

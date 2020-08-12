@@ -3,12 +3,12 @@ import { QueryResolvers } from 'schema/types';
 import { GetUserPresenter } from '../../../../presenter/user/GetUser';
 import { GetUserController } from '../../../../controller/user/GetUser';
 import { GetUserInteractor } from '../../../../usecase/user/GetUser';
-import { UserRepository } from '../../../../repository/sequelize/User';
-import { sequelize } from '../../../sequelize/sequelize';
+import { UserRepository } from '../../../../repository/typeorm/User';
 
 export const Query: QueryResolvers = {
-  user: async (_parent, args) => {
-    const repository = new UserRepository(sequelize);
+  user: async (_parent, args, ctx) => {
+    const { dbConnection } = ctx;
+    const repository = new UserRepository(dbConnection);
     const presenter = new GetUserPresenter();
     const usecase = new GetUserInteractor(repository, presenter);
     const controller = new GetUserController(usecase);

@@ -9,8 +9,7 @@ import http from 'http';
 import path from 'path';
 
 import { resolvers } from './resolvers';
-import { sequelize } from '../sequelize/sequelize';
-import { models } from '../sequelize/models';
+import { createDbConnection } from '../typeorm/connection';
 
 dotenv.config();
 
@@ -32,23 +31,26 @@ const app = express();
 app.use(cors());
 
 //
-// apply graphql server to express
+// create DB connection
 //
-const server = new ApolloServer({
-  schema: schemaWithResolvers,
-  context: () => ({ sequelize, models }),
-});
+createDbConnection().then((dbConnection) => {
+  //
+  // apply graphql server to express
+  //
+  const server = new ApolloServer({
+    schema: schemaWithResolvers,
+    context: () => ({ dbConnection }),
+  });
 
-server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app, path: '/graphql' });
 
-const httpServer = http.createServer(app);
-server.installSubscriptionHandlers(httpServer);
+  const httpServer = http.createServer(app);
+  server.installSubscriptionHandlers(httpServer);
 
-//
-// run server
-//
-const port = 3000;
-sequelize.sync().then(async () => {
+  //
+  // run server
+  //
+  const port = 3000;
   httpServer.listen({ port }, () => {
     console.log(`Apollo Server on http://localhost:${port}/graphql`);
   });

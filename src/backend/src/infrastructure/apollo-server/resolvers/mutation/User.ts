@@ -3,12 +3,12 @@ import { MutationResolvers } from 'schema/types';
 import { CreateUserController } from '../../../../controller/user/CreateUser';
 import { CreateUserInteractor } from '../../../../usecase/user/CreateUser';
 import { CreateUserPresenter } from '../../../../presenter/user/CreateUser';
-import { UserRepository } from '../../../../repository/sequelize/User';
-import { sequelize } from '../../../sequelize/sequelize';
+import { UserRepository } from '../../../../repository/typeorm/User';
 
 export const Mutation: MutationResolvers = {
-  createUser: async (_parent, args) => {
-    const repository = new UserRepository(sequelize);
+  createUser: async (_parent, args, ctx) => {
+    const { dbConnection } = ctx;
+    const repository = new UserRepository(dbConnection);
     const presenter = new CreateUserPresenter();
     const usecase = new CreateUserInteractor(repository, presenter);
     const controller = new CreateUserController(usecase);

@@ -1,0 +1,13 @@
+{
+  "type": "mysql",
+  "host": "127.0.0.1",
+  "port": 3306,
+  "username": "docker",
+  "password": "docker",
+  "database": "graphql_clean_dev",
+  "synchronize": false,
+  "logging": false,
+  "entities": ["src/infrastructure/typeorm/entity/**/*.ts"],
+  "migrations": ["src/infrastructure/typeorm/migration/**/*.ts"],
+  "subscribers": ["src/infrastructure/typeorm/subscriber/**/*.ts"]
+}
