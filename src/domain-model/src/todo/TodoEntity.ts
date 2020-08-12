@@ -4,7 +4,7 @@ import { PropertyRequiredError } from 'common/error/PropertyRequired';
 import { ID } from '../common/ID';
 
 export const isValidArguments = (todo: Todo) => {
-  if (!todo) throw new PropertyRequiredError('user');
+  if (!todo) throw new PropertyRequiredError('todo');
   if (!todo.id) throw new PropertyRequiredError('id');
   if (!todo.ownerId) throw new PropertyRequiredError('ownerId');
   if (!todo.title) throw new PropertyRequiredError('title');

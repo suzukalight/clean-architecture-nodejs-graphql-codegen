@@ -19,18 +19,30 @@ type User {
 
 scalar DateTime
 
+input CreateTodoRequest {
+  ownerId: ID!
+  title: String!
+  dueDate: DateTime
+}
+
+type CreateTodoResponse {
+  todo: Todo
+}
+
+type Mutation {
+  createTodo(input: CreateTodoRequest): CreateTodoResponse
+  createUser(input: CreateUserRequest): CreateUserResponse
+}
+
+type Query {
+  todo(id: ID!): Todo
+  user(id: ID!): User
+}
+
 input CreateUserRequest {
   email: String!
 }
 
 type CreateUserResponse {
   user: User
-}
-
-type Mutation {
-  createUser(input: CreateUserRequest): CreateUserResponse
-}
-
-type Query {
-  user(id: ID!): User
 }

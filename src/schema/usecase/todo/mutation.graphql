@@ -1,0 +1,13 @@
+input CreateTodoRequest {
+  ownerId: ID!
+  title: String!
+  dueDate: DateTime
+}
+
+type CreateTodoResponse {
+  todo: Todo
+}
+
+type Mutation {
+  createTodo(input: CreateTodoRequest): CreateTodoResponse
+}

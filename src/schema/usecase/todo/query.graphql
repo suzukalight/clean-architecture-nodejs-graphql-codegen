@@ -1,0 +1,3 @@
+type Query {
+  todo(id: ID!): Todo
+}
