@@ -24,9 +24,8 @@ export class TodoRepository implements TodoRepositoryIF {
   public async allByOwnerId(ownerId: string) {
     const repository = this.dbConnection.getRepository(OrmTodo);
     const result = await repository.find({ where: { ownerId } });
-    if (!result) return null;
+    if (!result.length) return null;
 
-    console.log(result);
     const entities = result.map((todo) => new TodoEntity((todo as unknown) as Todo));
     return entities;
   }
