@@ -1,4 +1,5 @@
 import { CreateUserResponse, Maybe } from 'schema/types';
+import { UserEntity } from 'domain-model/src/user/UserEntity';
 
 import { CreateUserPresenter as CreateUserPresenterIF } from '../../usecase/user/presenter.interface';
 
@@ -9,8 +10,7 @@ export class CreateUserPresenter implements CreateUserPresenterIF {
     return this.response;
   }
 
-  public async output(response: CreateUserResponse) {
-    this.response = response;
-    return response;
+  public async output(userEntity: Maybe<UserEntity>) {
+    this.response = { user: userEntity ? userEntity.toJSON() : null };
   }
 }

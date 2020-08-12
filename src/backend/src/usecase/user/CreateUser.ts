@@ -1,13 +1,8 @@
-import { CreateUserRequest, CreateUserResponse } from 'schema/types';
-import { UserEntity } from 'domain-model/src/user/UserEntity';
+import { CreateUserRequest } from 'schema/types';
 
 import { UserRepository } from './repository.interface';
 import { CreateUserUseCase } from './usecase.interface';
 import { CreateUserPresenter } from './presenter.interface';
-
-const createCreateUserResponse = (userEntity: UserEntity): CreateUserResponse => ({
-  user: userEntity.toJSON(),
-});
 
 export class CreateUserInteractor implements CreateUserUseCase {
   private repository: UserRepository;
@@ -21,6 +16,6 @@ export class CreateUserInteractor implements CreateUserUseCase {
   public async handle(request: CreateUserRequest) {
     const userEntity = await this.repository.create(request);
 
-    this.presenter.output(createCreateUserResponse(userEntity));
+    this.presenter.output(userEntity);
   }
 }
