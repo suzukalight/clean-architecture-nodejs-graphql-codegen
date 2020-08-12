@@ -1,12 +1,10 @@
 import { CreateUserResponse, User, Maybe } from 'schema/types';
 import { UserEntity } from 'domain-model/src/user/UserEntity';
 
-export interface GetUserPresenter {
+interface UserPresenter<Response> {
   output(userEntity: Maybe<UserEntity>): void;
-  getResponse(): Maybe<User>;
+  getResponse(): Maybe<Response>;
 }
 
-export interface CreateUserPresenter {
-  output(userEntity: Maybe<UserEntity>): void;
-  getResponse(): Maybe<CreateUserResponse>;
-}
+export type GetUserPresenter = UserPresenter<User>;
+export type CreateUserPresenter = UserPresenter<CreateUserResponse>;
