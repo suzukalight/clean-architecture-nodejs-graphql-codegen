@@ -12,7 +12,7 @@ import { Todo } from './Todo';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  readonly id?: number;
+  id?: number;
 
   @Column()
   email: string;
