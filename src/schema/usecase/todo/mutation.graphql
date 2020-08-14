@@ -8,6 +8,24 @@ type CreateTodoResponse {
   todo: Todo
 }
 
+input DoneTodoRequest {
+  id: ID!
+}
+
+type DoneTodoResponse {
+  todo: Todo!
+}
+
+input UndoneTodoRequest {
+  id: ID!
+}
+
+type UndoneTodoResponse {
+  todo: Todo!
+}
+
 type Mutation {
   createTodo(input: CreateTodoRequest): CreateTodoResponse
+  doneTodo(input: DoneTodoRequest): DoneTodoResponse
+  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
 }

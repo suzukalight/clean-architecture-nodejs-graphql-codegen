@@ -9,12 +9,16 @@ type Todo {
   title: String!
   status: TodoStatus!
   dueDate: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
   owner: User
 }
 
 type User {
   id: ID!
   email: String!
+  createdAt: DateTime
+  updatedAt: DateTime
   todos: [Todo]
 }
 
@@ -30,9 +34,27 @@ type CreateTodoResponse {
   todo: Todo
 }
 
+input DoneTodoRequest {
+  id: ID!
+}
+
+type DoneTodoResponse {
+  todo: Todo!
+}
+
+input UndoneTodoRequest {
+  id: ID!
+}
+
+type UndoneTodoResponse {
+  todo: Todo!
+}
+
 type Mutation {
   createTodo(input: CreateTodoRequest): CreateTodoResponse
   createUser(input: CreateUserRequest): CreateUserResponse
+  doneTodo(input: DoneTodoRequest): DoneTodoResponse
+  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
 }
 
 type Query {

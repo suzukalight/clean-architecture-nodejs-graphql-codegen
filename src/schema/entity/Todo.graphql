@@ -9,6 +9,8 @@ type Todo {
   title: String!
   status: TodoStatus!
   dueDate: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
 
   owner: User
 }
