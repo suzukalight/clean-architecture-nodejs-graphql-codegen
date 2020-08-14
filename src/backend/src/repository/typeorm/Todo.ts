@@ -17,8 +17,7 @@ export class TodoRepository implements TodoRepositoryIF {
     const result = await repository.findOne(id);
     if (!result) return null;
 
-    const entity = new TodoEntity((result as unknown) as Todo);
-    return entity;
+    return OrmTodoFactory.toEntity(result);
   }
 
   public async allByOwnerId(ownerId: string) {
@@ -26,7 +25,7 @@ export class TodoRepository implements TodoRepositoryIF {
     const result = await repository.find({ where: { ownerId } });
     if (!result.length) return null;
 
-    const entities = result.map((todo) => new TodoEntity((todo as unknown) as Todo));
+    const entities = result.map((todo) => OrmTodoFactory.toEntity(todo));
     return entities;
   }
 
@@ -35,10 +34,9 @@ export class TodoRepository implements TodoRepositoryIF {
     if (request.dueDate) todo.dueDate = request.dueDate;
 
     const repository = this.dbConnection.getRepository(OrmTodo);
-    const result = await repository.save(todo);
+    const created = await repository.save(todo);
 
-    const entity = new TodoEntity((result as unknown) as Todo);
-    return entity;
+    return OrmTodoFactory.toEntity(created);
   }
 
   public async update(todoEntity: TodoEntity) {
@@ -46,6 +44,6 @@ export class TodoRepository implements TodoRepositoryIF {
     const todo = OrmTodoFactory.fromEntity(todoEntity);
     const saved = await repository.save(todo);
 
-    return new TodoEntity(OrmTodoFactory.toSchema(saved));
+    return OrmTodoFactory.toEntity(saved);
   }
 }

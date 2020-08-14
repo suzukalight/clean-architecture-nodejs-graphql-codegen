@@ -47,10 +47,16 @@ export class Todo {
 }
 
 export class OrmTodoFactory {
-  public static fromSchema(todoSchema: TodoSchema) {
-    const ormTodo = new Todo(+todoSchema.ownerId, todoSchema.title, todoSchema.status);
-    Object.assign(ormTodo, todoSchema);
-    return ormTodo;
+  public static fromSchema(todo: TodoSchema): Todo {
+    return {
+      id: +todo.id,
+      ownerId: +todo.ownerId,
+      title: todo.title,
+      status: todo.status,
+      dueDate: todo.dueDate,
+      createdAt: todo.createdAt ?? undefined,
+      updatedAt: todo.updatedAt ?? undefined,
+    };
   }
 
   public static fromEntity(todoEntity: TodoEntity) {
@@ -68,5 +74,10 @@ export class OrmTodoFactory {
       createdAt: todo.createdAt,
       updatedAt: todo.updatedAt,
     };
+  }
+
+  public static toEntity(todo: Todo): TodoEntity {
+    const schema = OrmTodoFactory.toSchema(todo);
+    return new TodoEntity(schema);
   }
 }
