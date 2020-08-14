@@ -1,4 +1,4 @@
-import { CreateTodoRequest } from 'schema/types';
+import { CreateTodoRequest, DoneTodoRequest, UndoneTodoRequest } from 'schema/types';
 
 interface TodoUseCase<Request> {
   handle(request: Request): void;
@@ -6,3 +6,5 @@ interface TodoUseCase<Request> {
 
 export type GetTodoUseCase = TodoUseCase<string>;
 export type CreateTodoUseCase = TodoUseCase<CreateTodoRequest>;
+export type DoneTodoUseCase = TodoUseCase<DoneTodoRequest>;
+export type UndoneTodoUseCase = TodoUseCase<UndoneTodoRequest>;

@@ -9,11 +9,13 @@ import {
 } from 'typeorm';
 
 import { User } from './User';
+import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
+import { Todo as TodoSchema, TodoStatus } from 'schema/types';
 
 @Entity('todos')
 export class Todo {
   @PrimaryGeneratedColumn()
-  readonly id?: number;
+  id?: number;
 
   @Column()
   ownerId: number;
@@ -41,5 +43,30 @@ export class Todo {
     this.ownerId = ownerId;
     this.title = title;
     this.status = status;
+  }
+}
+
+export class OrmTodoFactory {
+  public static fromSchema(todoSchema: TodoSchema) {
+    const ormTodo = new Todo(+todoSchema.ownerId, todoSchema.title, todoSchema.status);
+    Object.assign(ormTodo, todoSchema);
+    return ormTodo;
+  }
+
+  public static fromEntity(todoEntity: TodoEntity) {
+    const todoSchema = todoEntity.toJSON();
+    return OrmTodoFactory.fromSchema(todoSchema);
+  }
+
+  public static toSchema(todo: Todo): TodoSchema {
+    return {
+      id: `${todo.id}`,
+      ownerId: `${todo.ownerId}`,
+      title: todo.title,
+      status: todo.status as TodoStatus,
+      dueDate: todo.dueDate,
+      createdAt: todo.createdAt,
+      updatedAt: todo.updatedAt,
+    };
   }
 }

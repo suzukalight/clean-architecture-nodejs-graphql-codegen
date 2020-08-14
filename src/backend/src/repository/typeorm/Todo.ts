@@ -3,7 +3,7 @@ import { CreateTodoRequest, Todo, TodoStatus } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 
 import { TodoRepository as TodoRepositoryIF } from '../../usecase/todo/repository.interface';
-import { Todo as OrmTodo } from '../../infrastructure/typeorm/entity/Todo';
+import { Todo as OrmTodo, OrmTodoFactory } from '../../infrastructure/typeorm/entity/Todo';
 
 export class TodoRepository implements TodoRepositoryIF {
   private dbConnection: Connection;
@@ -39,5 +39,13 @@ export class TodoRepository implements TodoRepositoryIF {
 
     const entity = new TodoEntity((result as unknown) as Todo);
     return entity;
+  }
+
+  public async update(todoEntity: TodoEntity) {
+    const repository = this.dbConnection.getRepository(OrmTodo);
+    const todo = OrmTodoFactory.fromEntity(todoEntity);
+    const saved = await repository.save(todo);
+
+    return new TodoEntity(OrmTodoFactory.toSchema(saved));
   }
 }
