@@ -1,5 +1,5 @@
 import { DeleteTodoResponse } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
+import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
 
 import { DeleteTodoPresenter as DeleteTodoPresenterIF } from '../../usecase/todo/interface/presenter';
 

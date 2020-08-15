@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import { CreateUserRequest, User } from 'schema/types';
-import { UserEntity } from 'domain-model/src/user/UserEntity';
+import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 import { UserRepository as UserRepositoryIF } from '../../usecase/user/interface/repository';
 import { User as OrmUser } from '../../infrastructure/typeorm/entity/User';

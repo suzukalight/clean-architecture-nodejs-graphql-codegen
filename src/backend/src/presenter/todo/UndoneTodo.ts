@@ -1,5 +1,5 @@
 import { UndoneTodoResponse } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
+import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
 
 import { UndoneTodoPresenter as UndoneTodoPresenterIF } from '../../usecase/todo/interface/presenter';
 

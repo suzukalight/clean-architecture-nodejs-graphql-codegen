@@ -1,5 +1,5 @@
 import { CreateUserResponse, User, Maybe } from 'schema/types';
-import { UserEntity } from 'domain-model/src/user/UserEntity';
+import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 interface UserPresenter<Response> {
   output(userEntity: Maybe<UserEntity>): void;

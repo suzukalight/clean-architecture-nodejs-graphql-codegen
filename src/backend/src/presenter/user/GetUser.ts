@@ -1,5 +1,5 @@
 import { Maybe, User } from 'schema/types';
-import { UserEntity } from 'domain-model/src/user/UserEntity';
+import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 import { GetUserPresenter as GetUserPresenterIF } from '../../usecase/user/interface/presenter';
 

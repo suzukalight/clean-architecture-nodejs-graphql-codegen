@@ -1,5 +1,5 @@
 import { Maybe, Todo } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
+import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
 
 import { GetTodoPresenter as GetTodoPresenterIF } from '../../usecase/todo/interface/presenter';
 

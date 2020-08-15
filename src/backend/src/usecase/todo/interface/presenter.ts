@@ -6,7 +6,7 @@ import {
   UndoneTodoResponse,
   DeleteTodoResponse,
 } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
+import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
 
 interface TodoPresenter<Response> {
   output(TodoEntity: Maybe<TodoEntity>): void;

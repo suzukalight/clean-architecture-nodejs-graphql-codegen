@@ -1,5 +1,5 @@
 import { CreateUserResponse, Maybe } from 'schema/types';
-import { UserEntity } from 'domain-model/src/user/UserEntity';
+import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 import { CreateUserPresenter as CreateUserPresenterIF } from '../../usecase/user/interface/presenter';
 
