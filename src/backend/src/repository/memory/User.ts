@@ -1,7 +1,6 @@
 import { CreateUserRequest } from 'schema/types';
 import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
-
-import { UserRepository as UserRepositoryIF } from '../../usecase/user/interface/repository';
+import { UserRepository as UserRepositoryIF } from 'domain-model/src/usecase/user/interface/repository';
 
 type InMemoryStore = {
   idCounter: number;

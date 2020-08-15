@@ -1,17 +1,17 @@
 import { MutationResolvers } from 'schema/types';
+import { CreateTodoInteractor } from 'domain-model/src/usecase/todo/CreateTodo';
+import { DoneTodoInteractor } from 'domain-model/src/usecase/todo/DoneTodo';
+import { UndoneTodoInteractor } from 'domain-model/src/usecase/todo/UndoneTodo';
+import { DeleteTodoInteractor } from 'domain-model/src/usecase/todo/DeleteTodo';
 
 import { TodoRepository } from '../../../../repository/typeorm/Todo';
 import { CreateTodoController } from '../../../../controller/todo/CreateTodo';
-import { CreateTodoInteractor } from '../../../../usecase/todo/CreateTodo';
 import { CreateTodoPresenter } from '../../../../presenter/todo/CreateTodo';
 import { DoneTodoPresenter } from '../../../../presenter/todo/DoneTodo';
-import { DoneTodoInteractor } from '../../../../usecase/todo/DoneTodo';
 import { DoneTodoController } from '../../../../controller/todo/DoneTodo';
 import { UndoneTodoPresenter } from '../../../../presenter/todo/UndoneTodo';
-import { UndoneTodoInteractor } from '../../../../usecase/todo/UndoneTodo';
 import { UndoneTodoController } from '../../../../controller/todo/UndoneTodo';
 import { DeleteTodoPresenter } from '../../../../presenter/todo/DeleteTodo';
-import { DeleteTodoInteractor } from '../../../../usecase/todo/DeleteTodo';
 import { DeleteTodoController } from '../../../../controller/todo/DeleteTodo';
 
 export const Mutation: MutationResolvers = {

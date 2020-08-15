@@ -1,7 +1,7 @@
 import { MutationResolvers } from 'schema/types';
+import { CreateUserInteractor } from 'domain-model/src/usecase/user/CreateUser';
 
 import { CreateUserController } from '../../../../controller/user/CreateUser';
-import { CreateUserInteractor } from '../../../../usecase/user/CreateUser';
 import { CreateUserPresenter } from '../../../../presenter/user/CreateUser';
 import { UserRepository } from '../../../../repository/typeorm/User';
 

@@ -1,6 +1,5 @@
 import { DeleteTodoRequest } from 'schema/types';
-
-import { DeleteTodoUseCase } from '../../usecase/todo/interface/usecase';
+import { DeleteTodoUseCase } from 'domain-model/src/usecase/todo/interface/usecase';
 
 export class DeleteTodoController {
   private deleteTodoUseCase: DeleteTodoUseCase;

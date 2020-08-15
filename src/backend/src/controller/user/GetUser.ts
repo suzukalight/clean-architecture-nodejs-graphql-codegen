@@ -1,4 +1,4 @@
-import { GetUserUseCase } from '../../usecase/user/interface/usecase';
+import { GetUserUseCase } from 'domain-model/src/usecase/user/interface/usecase';
 
 export class GetUserController {
   private createUserUseCase: GetUserUseCase;

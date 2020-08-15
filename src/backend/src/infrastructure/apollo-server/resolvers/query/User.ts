@@ -1,8 +1,8 @@
 import { QueryResolvers } from 'schema/types';
+import { GetUserInteractor } from 'domain-model/src/usecase/user/GetUser';
 
 import { GetUserPresenter } from '../../../../presenter/user/GetUser';
 import { GetUserController } from '../../../../controller/user/GetUser';
-import { GetUserInteractor } from '../../../../usecase/user/GetUser';
 import { UserRepository } from '../../../../repository/typeorm/User';
 
 export const Query: QueryResolvers = {

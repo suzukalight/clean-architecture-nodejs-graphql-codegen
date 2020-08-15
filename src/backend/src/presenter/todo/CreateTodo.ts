@@ -1,7 +1,6 @@
 import { CreateTodoResponse } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
-
-import { CreateTodoPresenter as CreateTodoPresenterIF } from '../../usecase/todo/interface/presenter';
+import { CreateTodoPresenter as CreateTodoPresenterIF } from 'domain-model/src/usecase/todo/interface/presenter';
 
 export class CreateTodoPresenter implements CreateTodoPresenterIF {
   private response: CreateTodoResponse;

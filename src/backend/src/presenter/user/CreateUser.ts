@@ -1,7 +1,6 @@
 import { CreateUserResponse, Maybe } from 'schema/types';
 import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
-
-import { CreateUserPresenter as CreateUserPresenterIF } from '../../usecase/user/interface/presenter';
+import { CreateUserPresenter as CreateUserPresenterIF } from 'domain-model/src/usecase/user/interface/presenter';
 
 export class CreateUserPresenter implements CreateUserPresenterIF {
   private response: Maybe<CreateUserResponse> = null;
