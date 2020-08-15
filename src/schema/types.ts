@@ -68,10 +68,20 @@ export type UndoneTodoResponse = {
   todo: Todo;
 };
 
+export type DeleteTodoRequest = {
+  id: Scalars['ID'];
+};
+
+export type DeleteTodoResponse = {
+  __typename?: 'DeleteTodoResponse';
+  todo: Todo;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createTodo?: Maybe<CreateTodoResponse>;
   createUser?: Maybe<CreateUserResponse>;
+  deleteTodo?: Maybe<DeleteTodoResponse>;
   doneTodo?: Maybe<DoneTodoResponse>;
   undoneTodo?: Maybe<UndoneTodoResponse>;
 };
@@ -84,6 +94,11 @@ export type MutationCreateTodoArgs = {
 
 export type MutationCreateUserArgs = {
   input?: Maybe<CreateUserRequest>;
+};
+
+
+export type MutationDeleteTodoArgs = {
+  input?: Maybe<DeleteTodoRequest>;
 };
 
 
@@ -212,6 +227,8 @@ export type ResolversTypes = ResolversObject<{
   DoneTodoResponse: ResolverTypeWrapper<DoneTodoResponse>;
   UndoneTodoRequest: UndoneTodoRequest;
   UndoneTodoResponse: ResolverTypeWrapper<UndoneTodoResponse>;
+  DeleteTodoRequest: DeleteTodoRequest;
+  DeleteTodoResponse: ResolverTypeWrapper<DeleteTodoResponse>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   CreateUserRequest: CreateUserRequest;
@@ -232,6 +249,8 @@ export type ResolversParentTypes = ResolversObject<{
   DoneTodoResponse: DoneTodoResponse;
   UndoneTodoRequest: UndoneTodoRequest;
   UndoneTodoResponse: UndoneTodoResponse;
+  DeleteTodoRequest: DeleteTodoRequest;
+  DeleteTodoResponse: DeleteTodoResponse;
   Mutation: {};
   Query: {};
   CreateUserRequest: CreateUserRequest;
@@ -279,9 +298,15 @@ export type UndoneTodoResponseResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
+export type DeleteTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteTodoResponse'] = ResolversParentTypes['DeleteTodoResponse']> = ResolversObject<{
+  todo?: Resolver<ResolversTypes['Todo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createTodo?: Resolver<Maybe<ResolversTypes['CreateTodoResponse']>, ParentType, ContextType, RequireFields<MutationCreateTodoArgs, never>>;
   createUser?: Resolver<Maybe<ResolversTypes['CreateUserResponse']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, never>>;
+  deleteTodo?: Resolver<Maybe<ResolversTypes['DeleteTodoResponse']>, ParentType, ContextType, RequireFields<MutationDeleteTodoArgs, never>>;
   doneTodo?: Resolver<Maybe<ResolversTypes['DoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationDoneTodoArgs, never>>;
   undoneTodo?: Resolver<Maybe<ResolversTypes['UndoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationUndoneTodoArgs, never>>;
 }>;
@@ -303,6 +328,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   CreateTodoResponse?: CreateTodoResponseResolvers<ContextType>;
   DoneTodoResponse?: DoneTodoResponseResolvers<ContextType>;
   UndoneTodoResponse?: UndoneTodoResponseResolvers<ContextType>;
+  DeleteTodoResponse?: DeleteTodoResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;

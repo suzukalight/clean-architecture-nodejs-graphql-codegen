@@ -10,6 +10,9 @@ import { DoneTodoController } from '../../../../controller/todo/DoneTodo';
 import { UndoneTodoPresenter } from '../../../../presenter/todo/UndoneTodo';
 import { UndoneTodoInteractor } from '../../../../usecase/todo/UndoneTodo';
 import { UndoneTodoController } from '../../../../controller/todo/UndoneTodo';
+import { DeleteTodoPresenter } from '../../../../presenter/todo/DeleteTodo';
+import { DeleteTodoInteractor } from '../../../../usecase/todo/DeleteTodo';
+import { DeleteTodoController } from '../../../../controller/todo/DeleteTodo';
 
 export const Mutation: MutationResolvers = {
   createTodo: async (_parent, args, ctx) => {
@@ -42,6 +45,18 @@ export const Mutation: MutationResolvers = {
     const presenter = new UndoneTodoPresenter();
     const usecase = new UndoneTodoInteractor(repository, presenter);
     const controller = new UndoneTodoController(usecase);
+
+    await controller.handle(args.input!);
+
+    return presenter.getResponse()!;
+  },
+
+  deleteTodo: async (_parent, args, ctx) => {
+    const { dbConnection } = ctx;
+    const repository = new TodoRepository(dbConnection);
+    const presenter = new DeleteTodoPresenter();
+    const usecase = new DeleteTodoInteractor(repository, presenter);
+    const controller = new DeleteTodoController(usecase);
 
     await controller.handle(args.input!);
 

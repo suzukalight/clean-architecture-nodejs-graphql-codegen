@@ -1,4 +1,4 @@
-import { Maybe, CreateTodoRequest } from 'schema/types';
+import { Maybe, CreateTodoRequest, DeleteTodoRequest } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 
 export interface TodoRepository {
@@ -6,4 +6,5 @@ export interface TodoRepository {
 
   create(input: CreateTodoRequest): Promise<TodoEntity>;
   update(input: TodoEntity): Promise<TodoEntity>;
+  delete(input: DeleteTodoRequest): Promise<TodoEntity>;
 }

@@ -50,9 +50,18 @@ type UndoneTodoResponse {
   todo: Todo!
 }
 
+input DeleteTodoRequest {
+  id: ID!
+}
+
+type DeleteTodoResponse {
+  todo: Todo!
+}
+
 type Mutation {
   createTodo(input: CreateTodoRequest): CreateTodoResponse
   createUser(input: CreateUserRequest): CreateUserResponse
+  deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
   doneTodo(input: DoneTodoRequest): DoneTodoResponse
   undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
 }
