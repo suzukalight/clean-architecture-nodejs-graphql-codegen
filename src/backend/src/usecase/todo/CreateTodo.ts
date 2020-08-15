@@ -14,8 +14,8 @@ export class CreateTodoInteractor implements CreateTodoUseCase {
   }
 
   public async handle(request: CreateTodoRequest) {
-    const TodoEntity = await this.repository.create(request);
+    const todoEntity = await this.repository.create(request);
 
-    this.presenter.output(TodoEntity);
+    this.presenter.output(todoEntity);
   }
 }

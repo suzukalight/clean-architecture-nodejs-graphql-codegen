@@ -12,8 +12,8 @@ export class GetTodoInteractor implements GetTodoUseCase {
   }
 
   public async handle(id: string) {
-    const userEntity = await this.repository.getById(id);
+    const todoEntity = await this.repository.getById(id);
 
-    this.presenter.output(userEntity);
+    this.presenter.output(todoEntity);
   }
 }
