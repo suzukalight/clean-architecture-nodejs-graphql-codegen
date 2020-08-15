@@ -5,7 +5,7 @@
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev ./src/infrastructure/apollo-server/index.ts",
+    "dev": "ts-node-dev ./src/index.ts",
     "build": "tsc",
     "test": "jest",
     "docker": "docker-compose up",

@@ -15,5 +15,5 @@ export const createDbConnection = async () => {
     entities: [User, Todo],
     synchronize: false,
     logging: false,
-  }).catch((error) => console.log(error));
+  });
 };
