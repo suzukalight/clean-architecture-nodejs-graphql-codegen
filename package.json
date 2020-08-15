@@ -20,7 +20,7 @@
   "scripts": {
     "dev:backend": "yarn workspace backend dev",
     "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts,graphql}\"",
-    "lint": "eslint --fix ./src",
+    "lint": "tsc --noEmit && eslint --fix ./src",
     "test": "yarn test:domain && yarn test:backend",
     "test:domain": "yarn workspace domain-model test",
     "test:backend": "yarn workspace backend test",

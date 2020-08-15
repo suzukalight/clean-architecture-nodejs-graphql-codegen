@@ -8,9 +8,10 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import { User } from './User';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 import { Todo as TodoSchema, TodoStatus } from 'schema/types';
+
+import { User } from './User';
 
 @Entity('todos')
 export class Todo {
