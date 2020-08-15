@@ -1,12 +1,12 @@
-import { DoneTodoResponse, Maybe } from 'schema/types';
+import { DoneTodoResponse } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 
 import { DoneTodoPresenter as DoneTodoPresenterIF } from '../../usecase/todo/presenter.interface';
 
 export class DoneTodoPresenter implements DoneTodoPresenterIF {
-  private response: Maybe<DoneTodoResponse> = null;
+  private response: DoneTodoResponse;
 
-  public getResponse(): Maybe<DoneTodoResponse> {
+  public getResponse(): DoneTodoResponse {
     return this.response;
   }
 

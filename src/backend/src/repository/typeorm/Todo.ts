@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { CreateTodoRequest, Todo, TodoStatus } from 'schema/types';
+import { CreateTodoRequest, TodoStatus } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 
 import { TodoRepository as TodoRepositoryIF } from '../../usecase/todo/repository.interface';
