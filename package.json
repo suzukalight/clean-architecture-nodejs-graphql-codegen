@@ -21,7 +21,7 @@
     "dev:backend": "yarn workspace backend dev",
     "prettier": "prettier --config .prettierrc -l --write \"./src/**/*.{js,ts,graphql}\"",
     "lint": "tsc --noEmit && eslint --fix ./src",
-    "test": "yarn test:domain && yarn test:backend",
+    "test": "yarn test:domain",
     "test:domain": "yarn workspace domain-model test",
     "test:backend": "yarn workspace backend test",
     "codegen": "yarn codegen:schema",

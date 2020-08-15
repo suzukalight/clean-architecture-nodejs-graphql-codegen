@@ -1,14 +1,28 @@
+import { Maybe, CreateUserResponse } from 'schema/types';
 import { IllegalArgumentError } from 'common/error/IllegalArgument';
 
+import { UserEntity } from '../../../entity/user/UserEntity';
 import { CreateUserInteractor } from '../CreateUser';
-import { InMemoryUserRepository, createInMemoryStore } from '../../../repository/memory/user';
-import { CreateUserPresenter } from '../../../presenter/user/CreateUser';
+import { CreateUserPresenter } from '../interface/presenter';
+import { UserRepository, createInMemoryStore } from '../__mocks__/UserRepository';
+
+export class MockCreateUserPresenter implements CreateUserPresenter {
+  private response: Maybe<CreateUserResponse> = null;
+
+  public getResponse(): Maybe<CreateUserResponse> {
+    return this.response;
+  }
+
+  public async output(userEntity: Maybe<UserEntity>) {
+    this.response = { user: userEntity ? userEntity.toJSON() : null };
+  }
+}
 
 describe('CreateUserInteractor', () => {
   it('リクエストを処理し、新しいエンティティを生成できた', async () => {
     const store = createInMemoryStore();
-    const repository = new InMemoryUserRepository(store);
-    const presenter = new CreateUserPresenter();
+    const repository = new UserRepository(store);
+    const presenter = new MockCreateUserPresenter();
     const interactor = new CreateUserInteractor(repository, presenter);
     const request = { email: 'aaa@bbb.com' };
 
@@ -24,8 +38,8 @@ describe('CreateUserInteractor', () => {
 
   it('複数回のリクエストを処理できた', async () => {
     const store = createInMemoryStore();
-    const repository = new InMemoryUserRepository(store);
-    const presenter = new CreateUserPresenter();
+    const repository = new UserRepository(store);
+    const presenter = new MockCreateUserPresenter();
     const interactor = new CreateUserInteractor(repository, presenter);
 
     let i = 0;
@@ -45,8 +59,8 @@ describe('CreateUserInteractor', () => {
 
   it('不正なメールアドレスを指定したため、失敗した', async () => {
     const store = createInMemoryStore();
-    const repository = new InMemoryUserRepository(store);
-    const presenter = new CreateUserPresenter();
+    const repository = new UserRepository(store);
+    const presenter = new MockCreateUserPresenter();
     const interactor = new CreateUserInteractor(repository, presenter);
     const request = { email: 'hogehoge' };
 
