@@ -1,6 +1,6 @@
 import { CreateUserRequest } from 'schema/types';
 
-import { CreateUserUseCase } from '../../usecase/user/usecase.interface';
+import { CreateUserUseCase } from '../../usecase/user/interface/usecase';
 
 export class CreateUserController {
   private createUserUseCase: CreateUserUseCase;

@@ -1,6 +1,6 @@
 import { DoneTodoRequest } from 'schema/types';
 
-import { DoneTodoUseCase } from '../../usecase/todo/usecase.interface';
+import { DoneTodoUseCase } from '../../usecase/todo/interface/usecase';
 
 export class DoneTodoController {
   private doneTodoUseCase: DoneTodoUseCase;

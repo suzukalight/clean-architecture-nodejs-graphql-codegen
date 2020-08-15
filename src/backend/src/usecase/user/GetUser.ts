@@ -1,6 +1,6 @@
-import { UserRepository } from './repository.interface';
-import { GetUserUseCase } from './usecase.interface';
-import { GetUserPresenter } from './presenter.interface';
+import { UserRepository } from './interface/repository';
+import { GetUserUseCase } from './interface/usecase';
+import { GetUserPresenter } from './interface/presenter';
 
 export class GetUserInteractor implements GetUserUseCase {
   private repository: UserRepository;

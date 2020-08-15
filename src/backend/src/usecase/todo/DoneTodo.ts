@@ -2,9 +2,9 @@ import { DoneTodoRequest, TodoStatus } from 'schema/types';
 import { NotFoundError } from 'common/error/NotFound';
 import { ConflictError } from 'common/error/Conflict';
 
-import { TodoRepository } from './repository.interface';
-import { DoneTodoUseCase } from './usecase.interface';
-import { DoneTodoPresenter } from './presenter.interface';
+import { TodoRepository } from './interface/repository';
+import { DoneTodoUseCase } from './interface/usecase';
+import { DoneTodoPresenter } from './interface/presenter';
 
 export class DoneTodoInteractor implements DoneTodoUseCase {
   private repository: TodoRepository;

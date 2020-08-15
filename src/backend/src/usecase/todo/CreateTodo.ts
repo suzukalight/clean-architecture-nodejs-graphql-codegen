@@ -1,8 +1,8 @@
 import { CreateTodoRequest } from 'schema/types';
 
-import { TodoRepository } from './repository.interface';
-import { CreateTodoUseCase } from './usecase.interface';
-import { CreateTodoPresenter } from './presenter.interface';
+import { TodoRepository } from './interface/repository';
+import { CreateTodoUseCase } from './interface/usecase';
+import { CreateTodoPresenter } from './interface/presenter';
 
 export class CreateTodoInteractor implements CreateTodoUseCase {
   private repository: TodoRepository;

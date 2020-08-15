@@ -2,9 +2,9 @@ import { UndoneTodoRequest, TodoStatus } from 'schema/types';
 import { NotFoundError } from 'common/error/NotFound';
 import { ConflictError } from 'common/error/Conflict';
 
-import { TodoRepository } from './repository.interface';
-import { UndoneTodoUseCase } from './usecase.interface';
-import { UndoneTodoPresenter } from './presenter.interface';
+import { TodoRepository } from './interface/repository';
+import { UndoneTodoUseCase } from './interface/usecase';
+import { UndoneTodoPresenter } from './interface/presenter';
 
 export class UndoneTodoInteractor implements UndoneTodoUseCase {
   private repository: TodoRepository;

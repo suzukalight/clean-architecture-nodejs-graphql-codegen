@@ -1,7 +1,7 @@
 import { UndoneTodoResponse } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 
-import { UndoneTodoPresenter as UndoneTodoPresenterIF } from '../../usecase/todo/presenter.interface';
+import { UndoneTodoPresenter as UndoneTodoPresenterIF } from '../../usecase/todo/interface/presenter';
 
 export class UndoneTodoPresenter implements UndoneTodoPresenterIF {
   private response: UndoneTodoResponse;

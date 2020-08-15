@@ -2,7 +2,7 @@ import { Connection } from 'typeorm';
 import { CreateTodoRequest, TodoStatus } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/todo/TodoEntity';
 
-import { TodoRepository as TodoRepositoryIF } from '../../usecase/todo/repository.interface';
+import { TodoRepository as TodoRepositoryIF } from '../../usecase/todo/interface/repository';
 import { Todo as OrmTodo, OrmTodoFactory } from '../../infrastructure/typeorm/entity/Todo';
 
 export class TodoRepository implements TodoRepositoryIF {

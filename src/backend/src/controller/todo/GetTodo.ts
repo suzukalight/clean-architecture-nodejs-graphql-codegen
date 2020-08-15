@@ -1,4 +1,4 @@
-import { GetTodoUseCase } from '../../usecase/todo/usecase.interface';
+import { GetTodoUseCase } from '../../usecase/todo/interface/usecase';
 
 export class GetTodoController {
   private createTodoUseCase: GetTodoUseCase;

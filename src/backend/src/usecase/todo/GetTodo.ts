@@ -1,6 +1,6 @@
-import { TodoRepository } from './repository.interface';
-import { GetTodoUseCase } from './usecase.interface';
-import { GetTodoPresenter } from './presenter.interface';
+import { TodoRepository } from './interface/repository';
+import { GetTodoUseCase } from './interface/usecase';
+import { GetTodoPresenter } from './interface/presenter';
 
 export class GetTodoInteractor implements GetTodoUseCase {
   private repository: TodoRepository;

@@ -1,6 +1,6 @@
 import { CreateTodoRequest } from 'schema/types';
 
-import { CreateTodoUseCase } from '../../usecase/todo/usecase.interface';
+import { CreateTodoUseCase } from '../../usecase/todo/interface/usecase';
 
 export class CreateTodoController {
   private createTodoUseCase: CreateTodoUseCase;

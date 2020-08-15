@@ -1,8 +1,8 @@
 import { CreateUserRequest } from 'schema/types';
 
-import { UserRepository } from './repository.interface';
-import { CreateUserUseCase } from './usecase.interface';
-import { CreateUserPresenter } from './presenter.interface';
+import { UserRepository } from './interface/repository';
+import { CreateUserUseCase } from './interface/usecase';
+import { CreateUserPresenter } from './interface/presenter';
 
 export class CreateUserInteractor implements CreateUserUseCase {
   private repository: UserRepository;
