@@ -1,5 +1,6 @@
 import { TodoStatus, Todo } from 'schema/types';
 import { PropertyRequiredError } from 'common/error/PropertyRequired';
+import { ConflictError } from 'common/error/Conflict';
 
 import { ID } from '../common/ID';
 
@@ -64,10 +65,12 @@ export class TodoEntity {
   }
 
   undone() {
+    if (this.getStatus() === TodoStatus.Undone) throw new ConflictError('すでに未完了状態です');
     this.status = TodoStatus.Undone;
   }
 
   done() {
+    if (this.getStatus() === TodoStatus.Done) throw new ConflictError('すでに完了済みです');
     this.status = TodoStatus.Done;
   }
 
