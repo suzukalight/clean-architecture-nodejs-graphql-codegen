@@ -31,9 +31,6 @@ describe('CreateUserInteractor', () => {
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
     expect(response?.user?.email).toBe(request.email);
-
-    // repository にエンティティが書き込まれた
-    expect(store.entities.get('1')?.getEmail().toString()).toBe(request.email);
   });
 
   it('複数回のリクエストを処理できた', async () => {
@@ -52,9 +49,6 @@ describe('CreateUserInteractor', () => {
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
     expect(response?.user?.email).toBe(`aaa${i}@bbb.com`);
-
-    // repository にエンティティが書き込まれた
-    expect(store.entities.get(`${i}`)?.getEmail().toString()).toBe(`aaa${i}@bbb.com`);
   });
 
   it('不正なメールアドレスを指定したため、失敗した', async () => {
