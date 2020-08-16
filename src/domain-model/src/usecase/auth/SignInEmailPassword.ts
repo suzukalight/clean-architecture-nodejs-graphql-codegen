@@ -7,7 +7,7 @@ import { AuthenticationFailedError } from 'common/error/AuthenticationFailed';
 import { AuthEmailPasswordRepository } from './interface/repository';
 import { SignInEmailPasswordUseCase } from './interface/usecase';
 import { SignInEmailPasswordPresenter } from './interface/presenter';
-import { UserRepository } from '../user/__mocks__/UserRepository';
+import { UserRepository } from '../user/interface/repository';
 
 dotenv.config();
 
