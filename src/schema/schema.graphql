@@ -31,6 +31,37 @@ type User {
 
 scalar DateTime
 
+input SignUpEmailPasswordRequest {
+  email: String!
+  password: String!
+}
+
+type SignUpEmailPasswordResponse {
+  user: User!
+  token: String!
+}
+
+input SignInEmailPasswordRequest {
+  email: String!
+  password: String!
+}
+
+type SignInEmailPasswordResponse {
+  user: User!
+  token: String!
+}
+
+type Mutation {
+  createTodo(input: CreateTodoRequest): CreateTodoResponse
+  createUser(input: CreateUserRequest): CreateUserResponse
+  deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
+  doneTodo(input: DoneTodoRequest): DoneTodoResponse
+  signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
+  signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
+  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
+  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
+}
+
 input CreateTodoRequest {
   ownerId: ID!
   title: String!
@@ -63,15 +94,6 @@ input DeleteTodoRequest {
 
 type DeleteTodoResponse {
   todo: Todo!
-}
-
-type Mutation {
-  createTodo(input: CreateTodoRequest): CreateTodoResponse
-  createUser(input: CreateUserRequest): CreateUserResponse
-  deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
-  doneTodo(input: DoneTodoRequest): DoneTodoResponse
-  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
-  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
 }
 
 type Query {

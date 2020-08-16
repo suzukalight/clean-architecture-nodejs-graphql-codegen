@@ -46,6 +46,80 @@ export type User = {
 };
 
 
+export type SignUpEmailPasswordRequest = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type SignUpEmailPasswordResponse = {
+  __typename?: 'SignUpEmailPasswordResponse';
+  user: User;
+  token: Scalars['String'];
+};
+
+export type SignInEmailPasswordRequest = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type SignInEmailPasswordResponse = {
+  __typename?: 'SignInEmailPasswordResponse';
+  user: User;
+  token: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createTodo?: Maybe<CreateTodoResponse>;
+  createUser?: Maybe<CreateUserResponse>;
+  deleteTodo?: Maybe<DeleteTodoResponse>;
+  doneTodo?: Maybe<DoneTodoResponse>;
+  signInEmailPassword?: Maybe<SignInEmailPasswordResponse>;
+  signUpEmailPassword?: Maybe<SignUpEmailPasswordResponse>;
+  undoneTodo?: Maybe<UndoneTodoResponse>;
+  updateUserRoles?: Maybe<UpdateUserRolesResponse>;
+};
+
+
+export type MutationCreateTodoArgs = {
+  input?: Maybe<CreateTodoRequest>;
+};
+
+
+export type MutationCreateUserArgs = {
+  input?: Maybe<CreateUserRequest>;
+};
+
+
+export type MutationDeleteTodoArgs = {
+  input?: Maybe<DeleteTodoRequest>;
+};
+
+
+export type MutationDoneTodoArgs = {
+  input?: Maybe<DoneTodoRequest>;
+};
+
+
+export type MutationSignInEmailPasswordArgs = {
+  input?: Maybe<SignInEmailPasswordRequest>;
+};
+
+
+export type MutationSignUpEmailPasswordArgs = {
+  input?: Maybe<SignUpEmailPasswordRequest>;
+};
+
+
+export type MutationUndoneTodoArgs = {
+  input?: Maybe<UndoneTodoRequest>;
+};
+
+
+export type MutationUpdateUserRolesArgs = {
+  input?: Maybe<UpdateUserRolesRequest>;
+};
+
 export type CreateTodoRequest = {
   ownerId: Scalars['ID'];
   title: Scalars['String'];
@@ -82,46 +156,6 @@ export type DeleteTodoRequest = {
 export type DeleteTodoResponse = {
   __typename?: 'DeleteTodoResponse';
   todo: Todo;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  createTodo?: Maybe<CreateTodoResponse>;
-  createUser?: Maybe<CreateUserResponse>;
-  deleteTodo?: Maybe<DeleteTodoResponse>;
-  doneTodo?: Maybe<DoneTodoResponse>;
-  undoneTodo?: Maybe<UndoneTodoResponse>;
-  updateUserRoles?: Maybe<UpdateUserRolesResponse>;
-};
-
-
-export type MutationCreateTodoArgs = {
-  input?: Maybe<CreateTodoRequest>;
-};
-
-
-export type MutationCreateUserArgs = {
-  input?: Maybe<CreateUserRequest>;
-};
-
-
-export type MutationDeleteTodoArgs = {
-  input?: Maybe<DeleteTodoRequest>;
-};
-
-
-export type MutationDoneTodoArgs = {
-  input?: Maybe<DoneTodoRequest>;
-};
-
-
-export type MutationUndoneTodoArgs = {
-  input?: Maybe<UndoneTodoRequest>;
-};
-
-
-export type MutationUpdateUserRolesArgs = {
-  input?: Maybe<UpdateUserRolesRequest>;
 };
 
 export type Query = {
@@ -245,6 +279,11 @@ export type ResolversTypes = ResolversObject<{
   Role: Role;
   User: ResolverTypeWrapper<User>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  SignUpEmailPasswordRequest: SignUpEmailPasswordRequest;
+  SignUpEmailPasswordResponse: ResolverTypeWrapper<SignUpEmailPasswordResponse>;
+  SignInEmailPasswordRequest: SignInEmailPasswordRequest;
+  SignInEmailPasswordResponse: ResolverTypeWrapper<SignInEmailPasswordResponse>;
+  Mutation: ResolverTypeWrapper<{}>;
   CreateTodoRequest: CreateTodoRequest;
   CreateTodoResponse: ResolverTypeWrapper<CreateTodoResponse>;
   DoneTodoRequest: DoneTodoRequest;
@@ -253,7 +292,6 @@ export type ResolversTypes = ResolversObject<{
   UndoneTodoResponse: ResolverTypeWrapper<UndoneTodoResponse>;
   DeleteTodoRequest: DeleteTodoRequest;
   DeleteTodoResponse: ResolverTypeWrapper<DeleteTodoResponse>;
-  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: ResolverTypeWrapper<CreateUserResponse>;
@@ -269,6 +307,11 @@ export type ResolversParentTypes = ResolversObject<{
   String: Scalars['String'];
   User: User;
   DateTime: Scalars['DateTime'];
+  SignUpEmailPasswordRequest: SignUpEmailPasswordRequest;
+  SignUpEmailPasswordResponse: SignUpEmailPasswordResponse;
+  SignInEmailPasswordRequest: SignInEmailPasswordRequest;
+  SignInEmailPasswordResponse: SignInEmailPasswordResponse;
+  Mutation: {};
   CreateTodoRequest: CreateTodoRequest;
   CreateTodoResponse: CreateTodoResponse;
   DoneTodoRequest: DoneTodoRequest;
@@ -277,7 +320,6 @@ export type ResolversParentTypes = ResolversObject<{
   UndoneTodoResponse: UndoneTodoResponse;
   DeleteTodoRequest: DeleteTodoRequest;
   DeleteTodoResponse: DeleteTodoResponse;
-  Mutation: {};
   Query: {};
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: CreateUserResponse;
@@ -312,6 +354,29 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
   name: 'DateTime';
 }
 
+export type SignUpEmailPasswordResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignUpEmailPasswordResponse'] = ResolversParentTypes['SignUpEmailPasswordResponse']> = ResolversObject<{
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
+export type SignInEmailPasswordResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignInEmailPasswordResponse'] = ResolversParentTypes['SignInEmailPasswordResponse']> = ResolversObject<{
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createTodo?: Resolver<Maybe<ResolversTypes['CreateTodoResponse']>, ParentType, ContextType, RequireFields<MutationCreateTodoArgs, never>>;
+  createUser?: Resolver<Maybe<ResolversTypes['CreateUserResponse']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, never>>;
+  deleteTodo?: Resolver<Maybe<ResolversTypes['DeleteTodoResponse']>, ParentType, ContextType, RequireFields<MutationDeleteTodoArgs, never>>;
+  doneTodo?: Resolver<Maybe<ResolversTypes['DoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationDoneTodoArgs, never>>;
+  signInEmailPassword?: Resolver<Maybe<ResolversTypes['SignInEmailPasswordResponse']>, ParentType, ContextType, RequireFields<MutationSignInEmailPasswordArgs, never>>;
+  signUpEmailPassword?: Resolver<Maybe<ResolversTypes['SignUpEmailPasswordResponse']>, ParentType, ContextType, RequireFields<MutationSignUpEmailPasswordArgs, never>>;
+  undoneTodo?: Resolver<Maybe<ResolversTypes['UndoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationUndoneTodoArgs, never>>;
+  updateUserRoles?: Resolver<Maybe<ResolversTypes['UpdateUserRolesResponse']>, ParentType, ContextType, RequireFields<MutationUpdateUserRolesArgs, never>>;
+}>;
+
 export type CreateTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateTodoResponse'] = ResolversParentTypes['CreateTodoResponse']> = ResolversObject<{
   todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
@@ -330,15 +395,6 @@ export type UndoneTodoResponseResolvers<ContextType = any, ParentType extends Re
 export type DeleteTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteTodoResponse'] = ResolversParentTypes['DeleteTodoResponse']> = ResolversObject<{
   todo?: Resolver<ResolversTypes['Todo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
-}>;
-
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createTodo?: Resolver<Maybe<ResolversTypes['CreateTodoResponse']>, ParentType, ContextType, RequireFields<MutationCreateTodoArgs, never>>;
-  createUser?: Resolver<Maybe<ResolversTypes['CreateUserResponse']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, never>>;
-  deleteTodo?: Resolver<Maybe<ResolversTypes['DeleteTodoResponse']>, ParentType, ContextType, RequireFields<MutationDeleteTodoArgs, never>>;
-  doneTodo?: Resolver<Maybe<ResolversTypes['DoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationDoneTodoArgs, never>>;
-  undoneTodo?: Resolver<Maybe<ResolversTypes['UndoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationUndoneTodoArgs, never>>;
-  updateUserRoles?: Resolver<Maybe<ResolversTypes['UpdateUserRolesResponse']>, ParentType, ContextType, RequireFields<MutationUpdateUserRolesArgs, never>>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
@@ -360,11 +416,13 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   Todo?: TodoResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
+  SignUpEmailPasswordResponse?: SignUpEmailPasswordResponseResolvers<ContextType>;
+  SignInEmailPasswordResponse?: SignInEmailPasswordResponseResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   CreateTodoResponse?: CreateTodoResponseResolvers<ContextType>;
   DoneTodoResponse?: DoneTodoResponseResolvers<ContextType>;
   UndoneTodoResponse?: UndoneTodoResponseResolvers<ContextType>;
   DeleteTodoResponse?: DeleteTodoResponseResolvers<ContextType>;
-  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;
   UpdateUserRolesResponse?: UpdateUserRolesResponseResolvers<ContextType>;
