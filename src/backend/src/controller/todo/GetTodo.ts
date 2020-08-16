@@ -1,13 +1,13 @@
 import { GetTodoUseCase } from 'domain-model/src/usecase/todo/interface/usecase';
 
 export class GetTodoController {
-  private createTodoUseCase: GetTodoUseCase;
+  private usecase: GetTodoUseCase;
 
-  constructor(createTodoUseCase: GetTodoUseCase) {
-    this.createTodoUseCase = createTodoUseCase;
+  constructor(usecase: GetTodoUseCase) {
+    this.usecase = usecase;
   }
 
   public async handle(id: string) {
-    await this.createTodoUseCase.handle(id);
+    await this.usecase.handle(id);
   }
 }

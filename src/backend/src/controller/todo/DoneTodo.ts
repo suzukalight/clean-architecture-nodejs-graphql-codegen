@@ -2,13 +2,13 @@ import { DoneTodoRequest } from 'schema/types';
 import { DoneTodoUseCase } from 'domain-model/src/usecase/todo/interface/usecase';
 
 export class DoneTodoController {
-  private doneTodoUseCase: DoneTodoUseCase;
+  private usecase: DoneTodoUseCase;
 
-  constructor(doneTodoUseCase: DoneTodoUseCase) {
-    this.doneTodoUseCase = doneTodoUseCase;
+  constructor(usecase: DoneTodoUseCase) {
+    this.usecase = usecase;
   }
 
   public async handle(request: DoneTodoRequest) {
-    await this.doneTodoUseCase.handle(request);
+    await this.usecase.handle(request);
   }
 }

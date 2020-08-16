@@ -1,13 +1,13 @@
 import { GetUserUseCase } from 'domain-model/src/usecase/user/interface/usecase';
 
 export class GetUserController {
-  private createUserUseCase: GetUserUseCase;
+  private usecase: GetUserUseCase;
 
-  constructor(createUserUseCase: GetUserUseCase) {
-    this.createUserUseCase = createUserUseCase;
+  constructor(usecase: GetUserUseCase) {
+    this.usecase = usecase;
   }
 
   public async handle(id: string) {
-    await this.createUserUseCase.handle(id);
+    await this.usecase.handle(id);
   }
 }

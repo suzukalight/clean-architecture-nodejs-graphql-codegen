@@ -2,13 +2,13 @@ import { CreateUserRequest } from 'schema/types';
 import { CreateUserUseCase } from 'domain-model/src/usecase/user/interface/usecase';
 
 export class CreateUserController {
-  private createUserUseCase: CreateUserUseCase;
+  private usecase: CreateUserUseCase;
 
-  constructor(createUserUseCase: CreateUserUseCase) {
-    this.createUserUseCase = createUserUseCase;
+  constructor(usecase: CreateUserUseCase) {
+    this.usecase = usecase;
   }
 
   public async handle(request: CreateUserRequest) {
-    await this.createUserUseCase.handle(request);
+    await this.usecase.handle(request);
   }
 }

@@ -2,13 +2,13 @@ import { UndoneTodoRequest } from 'schema/types';
 import { UndoneTodoUseCase } from 'domain-model/src/usecase/todo/interface/usecase';
 
 export class UndoneTodoController {
-  private undoneTodoUseCase: UndoneTodoUseCase;
+  private usecase: UndoneTodoUseCase;
 
-  constructor(undoneTodoUseCase: UndoneTodoUseCase) {
-    this.undoneTodoUseCase = undoneTodoUseCase;
+  constructor(usecase: UndoneTodoUseCase) {
+    this.usecase = usecase;
   }
 
   public async handle(request: UndoneTodoRequest) {
-    await this.undoneTodoUseCase.handle(request);
+    await this.usecase.handle(request);
   }
 }

@@ -2,13 +2,13 @@ import { DeleteTodoRequest } from 'schema/types';
 import { DeleteTodoUseCase } from 'domain-model/src/usecase/todo/interface/usecase';
 
 export class DeleteTodoController {
-  private deleteTodoUseCase: DeleteTodoUseCase;
+  private usecase: DeleteTodoUseCase;
 
-  constructor(deleteTodoUseCase: DeleteTodoUseCase) {
-    this.deleteTodoUseCase = deleteTodoUseCase;
+  constructor(usecase: DeleteTodoUseCase) {
+    this.usecase = usecase;
   }
 
   public async handle(request: DeleteTodoRequest) {
-    await this.deleteTodoUseCase.handle(request);
+    await this.usecase.handle(request);
   }
 }
