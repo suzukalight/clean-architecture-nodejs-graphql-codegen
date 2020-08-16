@@ -9,8 +9,15 @@
     "test": "jest"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "common": "*",
-    "schema": "*",
-    "graphql-scalars": "^1.2.6"
+    "dotenv": "^8.2.0",
+    "graphql-scalars": "^1.2.6",
+    "jsonwebtoken": "^8.5.1",
+    "schema": "*"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/jsonwebtoken": "^8.5.0"
   }
 }
