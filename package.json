@@ -27,7 +27,8 @@
     "codegen": "yarn codegen:schema",
     "codegen:schema": "yarn workspace schema codegen",
     "docker": "yarn docker:backend",
-    "docker:backend": "yarn workspace backend docker"
+    "docker:backend": "yarn workspace backend docker",
+    "db:migrate": "yarn workspace backend db:migrate"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",

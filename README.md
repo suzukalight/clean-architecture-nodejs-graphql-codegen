@@ -14,6 +14,29 @@ Clean Architecture の学習を目的とした、Node.js(apollo-server-express) 
 
 具体例として TODO アプリのバックエンドを提供しています。
 
+# 動作確認
+
+## API サーバ
+
+docker-compose と node.js が必要です。スプリクト実行に yarn を使用しています。
+
+```
+yarn docker
+yarn db:migrate
+yarn dev:backend
+```
+
+http://localhost:3000/graphql  
+に GraphQL Playground が起動しますので、こちらで API の動作確認ができます。
+
+## テスト
+
+docker と db:migrate を使用した上で、下記のテストコマンドを実行；
+
+```
+yarn test
+```
+
 # プロジェクト構成
 
 Monorepo 構成になっており、役割ごとにプロジェクトを分けています。  
