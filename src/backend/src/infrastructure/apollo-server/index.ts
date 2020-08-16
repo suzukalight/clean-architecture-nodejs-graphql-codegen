@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import http from 'http';
 import path from 'path';
+import jwt from 'jsonwebtoken';
 import { ApolloServer } from 'apollo-server-express';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
@@ -10,10 +11,30 @@ import { addResolversToSchema } from '@graphql-tools/schema';
 import { Connection } from 'typeorm';
 
 import { resolvers } from './resolvers';
+import { User } from 'schema/types';
+import { UserRepository } from '../../repository/typeorm/User';
 
 dotenv.config();
 
 type CreateDbConnection = () => Promise<Connection>;
+
+const getContext = async (req: express.Request, dbConnection: Connection) => {
+  const token = req?.headers['x-authentication'] as string;
+  if (!token) return { dbConnection };
+
+  try {
+    const { JWT_SECRET } = process.env;
+    const user = jwt.verify(token, JWT_SECRET!) as User;
+
+    const repository = new UserRepository(dbConnection);
+    const userEntity = await repository.getById(user.id);
+
+    return { dbConnection, actor: userEntity };
+  } catch (e) {
+    console.error(e);
+    return { dbConnection };
+  }
+};
 
 export const createAndRunApolloServer = async (createDbConnection: CreateDbConnection) => {
   // Create DB connection
@@ -38,7 +59,7 @@ export const createAndRunApolloServer = async (createDbConnection: CreateDbConne
   // Create GraphQL Server and Apply to Express
   const server = new ApolloServer({
     schema: schemaWithResolvers,
-    context: () => ({ dbConnection }),
+    context: ({ req }) => getContext(req, dbConnection),
   });
   server.applyMiddleware({ app, path: '/graphql' });
   server.installSubscriptionHandlers(httpServer);
