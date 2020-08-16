@@ -1,8 +1,10 @@
-import { CreateUserRequest, Maybe } from 'schema/types';
-import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
+import { Maybe, CreateUserRequest } from 'schema/types';
+
+import { UserEntity } from '../../../entity/user/UserEntity';
 
 export interface UserRepository {
   getById(id: string): Promise<Maybe<UserEntity>>;
 
   create(input: CreateUserRequest): Promise<UserEntity>;
+  update(user: UserEntity): Promise<UserEntity>;
 }
