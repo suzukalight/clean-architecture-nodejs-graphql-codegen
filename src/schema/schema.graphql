@@ -14,9 +14,16 @@ type Todo {
   owner: User
 }
 
+enum Role {
+  ANONYMOUS
+  MEMBER
+  ADMIN
+}
+
 type User {
   id: ID!
   email: String!
+  roles: [Role!]!
   createdAt: DateTime
   updatedAt: DateTime
   todos: [Todo]
@@ -64,6 +71,7 @@ type Mutation {
   deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
   doneTodo(input: DoneTodoRequest): DoneTodoResponse
   undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
+  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
 }
 
 type Query {
@@ -77,4 +85,13 @@ input CreateUserRequest {
 
 type CreateUserResponse {
   user: User
+}
+
+input UpdateUserRolesRequest {
+  id: ID!
+  roles: [Role!]!
+}
+
+type UpdateUserRolesResponse {
+  user: User!
 }

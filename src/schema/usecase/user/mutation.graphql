@@ -6,6 +6,16 @@ type CreateUserResponse {
   user: User
 }
 
+input UpdateUserRolesRequest {
+  id: ID!
+  roles: [Role!]!
+}
+
+type UpdateUserRolesResponse {
+  user: User!
+}
+
 type Mutation {
   createUser(input: CreateUserRequest): CreateUserResponse
+  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
 }

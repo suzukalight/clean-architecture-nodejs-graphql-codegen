@@ -1,6 +1,14 @@
+enum Role {
+  ANONYMOUS
+  MEMBER
+  ADMIN
+}
+
 type User {
   id: ID!
   email: String!
+  roles: [Role!]!
+
   createdAt: DateTime
   updatedAt: DateTime
 
