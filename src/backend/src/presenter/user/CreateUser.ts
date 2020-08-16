@@ -10,6 +10,6 @@ export class CreateUserPresenter implements CreateUserPresenterIF {
   }
 
   public async output(userEntity: Maybe<UserEntity>) {
-    this.response = { user: userEntity ? userEntity.toJSON() : null };
+    this.response = userEntity ? { user: userEntity.toJSON() } : null;
   }
 }
