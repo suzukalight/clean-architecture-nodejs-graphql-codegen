@@ -20,13 +20,11 @@ export const createInMemoryStore = (
   };
 };
 
-const sharedStore = createInMemoryStore();
-
 export class UserRepository implements UserRepositoryIF {
   private store: InMemoryStore;
 
-  constructor(store?: InMemoryStore) {
-    this.store = store ?? sharedStore;
+  constructor() {
+    this.store = createInMemoryStore();
   }
 
   public async getById(id: string) {

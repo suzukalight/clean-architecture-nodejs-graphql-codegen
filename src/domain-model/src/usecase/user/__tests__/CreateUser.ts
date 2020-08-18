@@ -1,29 +1,23 @@
-import { Maybe, CreateUserResponse } from 'schema/types';
 import { IllegalArgumentError } from 'common/error/IllegalArgument';
 
-import { UserEntity } from '../../../entity/user/UserEntity';
 import { CreateUserInteractor } from '../CreateUser';
-import { CreateUserPresenter } from '../interface/presenter';
-import { UserRepository, createInMemoryStore } from '../__mocks__/UserRepository';
+import { UserRepository } from '../__mocks__/UserRepository';
+import { MockCreateUserPresenter } from '../__mocks__/MockUserPresenter';
 
-export class MockCreateUserPresenter implements CreateUserPresenter {
-  private response: Maybe<CreateUserResponse> = null;
+/**
+ * interactor を生成
+ */
+const setup = () => {
+  const repository = new UserRepository();
+  const presenter = new MockCreateUserPresenter();
+  const interactor = new CreateUserInteractor(repository, presenter);
 
-  public getResponse(): Maybe<CreateUserResponse> {
-    return this.response;
-  }
-
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = { user: userEntity ? userEntity.toJSON() : null };
-  }
-}
+  return { interactor, presenter };
+};
 
 describe('CreateUserInteractor', () => {
   it('リクエストを処理し、新しいエンティティを生成できた', async () => {
-    const store = createInMemoryStore();
-    const repository = new UserRepository(store);
-    const presenter = new MockCreateUserPresenter();
-    const interactor = new CreateUserInteractor(repository, presenter);
+    const { interactor, presenter } = setup();
     const request = { email: 'aaa@bbb.com' };
 
     await interactor.handle(request);
@@ -34,10 +28,7 @@ describe('CreateUserInteractor', () => {
   });
 
   it('複数回のリクエストを処理できた', async () => {
-    const store = createInMemoryStore();
-    const repository = new UserRepository(store);
-    const presenter = new MockCreateUserPresenter();
-    const interactor = new CreateUserInteractor(repository, presenter);
+    const { interactor, presenter } = setup();
 
     let i = 0;
     while (i <= 10) {
@@ -52,10 +43,7 @@ describe('CreateUserInteractor', () => {
   });
 
   it('不正なメールアドレスを指定したため、失敗した', async () => {
-    const store = createInMemoryStore();
-    const repository = new UserRepository(store);
-    const presenter = new MockCreateUserPresenter();
-    const interactor = new CreateUserInteractor(repository, presenter);
+    const { interactor } = setup();
     const request = { email: 'hogehoge' };
 
     try {
@@ -64,7 +52,6 @@ describe('CreateUserInteractor', () => {
       expect(e).toBeInstanceOf(IllegalArgumentError);
       return;
     }
-
     expect(true).toBeFalsy();
   });
 });

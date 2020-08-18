@@ -1,37 +1,32 @@
-import { Maybe, UpdateUserRolesResponse, UpdateUserRolesRequest } from 'schema/types';
+import { UpdateUserRolesRequest } from 'schema/types';
 import { IllegalArgumentError } from 'common/error/IllegalArgument';
 import { NotFoundError } from 'common/error/NotFound';
 
-import { UserEntity } from '../../../entity/user/UserEntity';
 import { UpdateUserRolesInteractor } from '../UpdateUserRoles';
-import { UpdateUserRolesPresenter } from '../interface/presenter';
-import { UserRepository, createInMemoryStore } from '../__mocks__/UserRepository';
+import { UserRepository } from '../__mocks__/UserRepository';
 import { RoleTypes } from '../../../entity/common/Role';
+import { MockUpdateUserRolesPresenter } from '../__mocks__/MockUserPresenter';
 
-export class MockUpdateUserRolesPresenter implements UpdateUserRolesPresenter {
-  private response: Maybe<UpdateUserRolesResponse> = null;
+/**
+ * ユーザを1名作成しておく
+ */
+const setup = async () => {
+  // repository
+  const repository = new UserRepository();
+  const userEntity = await repository.create({ email: 'target@email.com' });
+  const userId = userEntity.getID().toString();
 
-  public getResponse(): Maybe<UpdateUserRolesResponse> {
-    return this.response;
-  }
-
-  public async output(user: UserEntity) {
-    this.response = { user: user.toJSON() };
-  }
-}
-
-describe('UpdateUserRolesInteractor', () => {
-  const entities = new Map<string, UserEntity>();
-  const id = '1';
-  entities.set(id, new UserEntity({ id, email: 'target@email.com', roles: [RoleTypes.Anonymous] }));
-  const store = createInMemoryStore(1, entities);
-
-  const repository = new UserRepository(store);
+  // interactor
   const presenter = new MockUpdateUserRolesPresenter();
   const interactor = new UpdateUserRolesInteractor(repository, presenter);
 
+  return { userId, interactor, presenter };
+};
+
+describe('UpdateUserRolesInteractor', () => {
   test('リクエストを処理し、新しいロールを設定できた', async () => {
-    const request = { id, roles: [RoleTypes.Member] };
+    const { userId, interactor, presenter } = await setup();
+    const request = { id: userId, roles: [RoleTypes.Member] };
 
     await interactor.handle(request);
 
@@ -41,6 +36,7 @@ describe('UpdateUserRolesInteractor', () => {
   });
 
   test('存在しないIDを指定したため、失敗した', async () => {
+    const { interactor } = await setup();
     const request = { id: '255', roles: [RoleTypes.Member] };
 
     try {
@@ -49,12 +45,12 @@ describe('UpdateUserRolesInteractor', () => {
       expect(e).toBeInstanceOf(NotFoundError);
       return;
     }
-
     expect(true).toBeFalsy();
   });
 
   test('不正なロールを指定したため、失敗した', async () => {
-    const request = ({ id, roles: ['hogehoge'] } as unknown) as UpdateUserRolesRequest;
+    const { userId, interactor } = await setup();
+    const request = ({ id: userId, roles: ['hogehoge'] } as unknown) as UpdateUserRolesRequest;
 
     try {
       await interactor.handle(request);
@@ -62,7 +58,6 @@ describe('UpdateUserRolesInteractor', () => {
       expect(e).toBeInstanceOf(IllegalArgumentError);
       return;
     }
-
     expect(true).toBeFalsy();
   });
 });

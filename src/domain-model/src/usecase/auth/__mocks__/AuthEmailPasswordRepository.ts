@@ -1,11 +1,8 @@
-import { SignInEmailPasswordRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
-
-import { RoleTypes } from '../../../entity/common/Role';
-import { AuthEmailPasswordEntity } from '../../../entity/auth/AuthEmailPasswordEntity';
+import {
+  AuthEmailPasswordEntity,
+  AuthEmailPasswordDto,
+} from '../../../entity/auth/AuthEmailPasswordEntity';
 import { AuthEmailPasswordRepository as AuthEmailPasswordRepositoryIF } from '../interface/repository';
-import { Email } from '../../../entity/common/Email';
-import { encryptPassword } from '../../../entity/common/Password';
 
 type InMemoryStore = {
   idCounter: number;
@@ -22,13 +19,11 @@ export const createInMemoryStore = (
   };
 };
 
-const sharedStore = createInMemoryStore();
-
 export class AuthEmailPasswordRepository implements AuthEmailPasswordRepositoryIF {
   private store: InMemoryStore;
 
-  constructor(store?: InMemoryStore) {
-    this.store = store ?? sharedStore;
+  constructor() {
+    this.store = createInMemoryStore();
   }
 
   public async getByEmail(email: string) {
@@ -37,5 +32,13 @@ export class AuthEmailPasswordRepository implements AuthEmailPasswordRepositoryI
         (entity) => entity.getEmail().toString() === email,
       ) ?? null
     );
+  }
+
+  public async create(request: AuthEmailPasswordDto) {
+    const id = `${++this.store.idCounter}`;
+    const newEntity = new AuthEmailPasswordEntity(request);
+
+    this.store.entities.set(id, newEntity);
+    return newEntity;
   }
 }
