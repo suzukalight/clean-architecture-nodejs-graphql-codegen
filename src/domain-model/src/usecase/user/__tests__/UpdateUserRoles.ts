@@ -41,11 +41,10 @@ describe('UpdateUserRolesInteractor', () => {
 
     try {
       await interactor.handle(request);
+      expect(true).toBeFalsy();
     } catch (e) {
       expect(e).toBeInstanceOf(NotFoundError);
-      return;
     }
-    expect(true).toBeFalsy();
   });
 
   test('不正なロールを指定したため、失敗した', async () => {
@@ -54,10 +53,9 @@ describe('UpdateUserRolesInteractor', () => {
 
     try {
       await interactor.handle(request);
+      expect(true).toBeFalsy();
     } catch (e) {
       expect(e).toBeInstanceOf(IllegalArgumentError);
-      return;
     }
-    expect(true).toBeFalsy();
   });
 });

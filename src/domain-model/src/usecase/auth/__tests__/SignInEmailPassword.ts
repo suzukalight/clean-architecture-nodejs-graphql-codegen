@@ -49,12 +49,10 @@ describe('SignInEmailPasswordInteractor', () => {
 
     try {
       await interactor.handle(request);
+      expect(true).toBeFalsy();
     } catch (e) {
       expect(e).toBeInstanceOf(NotFoundError);
-      return;
     }
-
-    expect(true).toBeFalsy();
   });
 
   test('誤ったパスワードを指定したため、失敗した', async () => {
@@ -63,11 +61,9 @@ describe('SignInEmailPasswordInteractor', () => {
 
     try {
       await interactor.handle(request);
+      expect(true).toBeFalsy();
     } catch (e) {
       expect(e).toBeInstanceOf(AuthenticationFailedError);
-      return;
     }
-
-    expect(true).toBeFalsy();
   });
 });

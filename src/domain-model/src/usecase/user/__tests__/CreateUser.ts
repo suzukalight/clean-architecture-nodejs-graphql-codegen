@@ -48,10 +48,9 @@ describe('CreateUserInteractor', () => {
 
     try {
       await interactor.handle(request);
+      expect(true).toBeFalsy();
     } catch (e) {
       expect(e).toBeInstanceOf(IllegalArgumentError);
-      return;
     }
-    expect(true).toBeFalsy();
   });
 });
