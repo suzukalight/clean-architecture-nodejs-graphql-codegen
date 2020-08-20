@@ -3,8 +3,8 @@ import { IllegalArgumentError } from 'common/error/IllegalArgument';
 import { NotFoundError } from 'common/error/NotFound';
 
 import { UpdateUserRolesInteractor } from '../UpdateUserRoles';
-import { UserRepository } from '../__mocks__/UserRepository';
 import { RoleTypes } from '../../../entity/common/Role';
+import { MockUserRepository } from '../__mocks__/MockUserRepository';
 import { MockUpdateUserRolesPresenter } from '../__mocks__/MockUserPresenter';
 
 /**
@@ -12,7 +12,7 @@ import { MockUpdateUserRolesPresenter } from '../__mocks__/MockUserPresenter';
  */
 const setup = async () => {
   // repository
-  const repository = new UserRepository();
+  const repository = new MockUserRepository();
   const userEntity = await repository.create({ email: 'target@email.com' });
   const userId = userEntity.getID().toString();
 

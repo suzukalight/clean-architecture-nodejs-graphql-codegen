@@ -3,8 +3,8 @@ import { AuthenticationFailedError } from 'common/error/AuthenticationFailed';
 
 import { SignInEmailPasswordInteractor } from '../SignInEmailPassword';
 import { encryptPassword } from '../../../entity/common/Password';
-import { UserRepository } from '../../user/__mocks__/UserRepository';
-import { AuthEmailPasswordRepository } from '../__mocks__/AuthEmailPasswordRepository';
+import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
+import { MockAuthEmailPasswordRepository } from '../__mocks__/MockAuthEmailPasswordRepository';
 import { MockSignInEmailPasswordPresenter } from '../__mocks__/MockSignInEmailPasswordPresenter';
 
 /**
@@ -12,7 +12,7 @@ import { MockSignInEmailPasswordPresenter } from '../__mocks__/MockSignInEmailPa
  */
 const setup = async () => {
   // user repository
-  const userRepository = new UserRepository();
+  const userRepository = new MockUserRepository();
   const userEntity = await userRepository.create({ email: 'target@email.com' });
   const userId = userEntity.getID().toString();
 
@@ -20,7 +20,7 @@ const setup = async () => {
   const password = 'password1';
   const passwordEncrypted = await encryptPassword(password);
   const authData = { email: 'target@email.com', passwordEncrypted, userId };
-  const authRepository = new AuthEmailPasswordRepository();
+  const authRepository = new MockAuthEmailPasswordRepository();
   await authRepository.create(authData);
 
   // auth interactor

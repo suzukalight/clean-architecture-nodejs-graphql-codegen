@@ -1,5 +1,5 @@
 import { GetUserInteractor } from '../GetUser';
-import { UserRepository } from '../__mocks__/UserRepository';
+import { MockUserRepository } from '../__mocks__/MockUserRepository';
 import { MockGetUserPresenter } from '../__mocks__/MockUserPresenter';
 
 /**
@@ -7,7 +7,7 @@ import { MockGetUserPresenter } from '../__mocks__/MockUserPresenter';
  */
 const setup = async () => {
   // repository
-  const repository = new UserRepository();
+  const repository = new MockUserRepository();
   const userEntity = await repository.create({ email: 'target@email.com' });
   const userId = userEntity.getID().toString();
 

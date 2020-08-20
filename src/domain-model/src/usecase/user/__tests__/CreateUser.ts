@@ -1,14 +1,14 @@
 import { IllegalArgumentError } from 'common/error/IllegalArgument';
 
 import { CreateUserInteractor } from '../CreateUser';
-import { UserRepository } from '../__mocks__/UserRepository';
+import { MockUserRepository } from '../__mocks__/MockUserRepository';
 import { MockCreateUserPresenter } from '../__mocks__/MockUserPresenter';
 
 /**
  * interactor を生成
  */
 const setup = () => {
-  const repository = new UserRepository();
+  const repository = new MockUserRepository();
   const presenter = new MockCreateUserPresenter();
   const interactor = new CreateUserInteractor(repository, presenter);
 

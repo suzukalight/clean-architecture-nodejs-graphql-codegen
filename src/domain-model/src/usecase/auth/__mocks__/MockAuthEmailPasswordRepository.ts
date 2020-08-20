@@ -2,7 +2,7 @@ import {
   AuthEmailPasswordEntity,
   AuthEmailPasswordDto,
 } from '../../../entity/auth/AuthEmailPasswordEntity';
-import { AuthEmailPasswordRepository as AuthEmailPasswordRepositoryIF } from '../interface/repository';
+import { AuthEmailPasswordRepository } from '../interface/repository';
 
 type InMemoryStore = {
   idCounter: number;
@@ -19,7 +19,7 @@ export const createInMemoryStore = (
   };
 };
 
-export class AuthEmailPasswordRepository implements AuthEmailPasswordRepositoryIF {
+export class MockAuthEmailPasswordRepository implements AuthEmailPasswordRepository {
   private store: InMemoryStore;
 
   constructor() {

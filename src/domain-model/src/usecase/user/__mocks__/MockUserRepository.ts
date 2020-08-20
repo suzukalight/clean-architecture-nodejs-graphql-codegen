@@ -3,7 +3,7 @@ import { NotFoundError } from 'common/error/NotFound';
 
 import { RoleTypes } from '../../../entity/common/Role';
 import { UserEntity } from '../../../entity/user/UserEntity';
-import { UserRepository as UserRepositoryIF } from '../interface/repository';
+import { UserRepository } from '../interface/repository';
 
 type InMemoryStore = {
   idCounter: number;
@@ -20,7 +20,7 @@ export const createInMemoryStore = (
   };
 };
 
-export class UserRepository implements UserRepositoryIF {
+export class MockUserRepository implements UserRepository {
   private store: InMemoryStore;
 
   constructor() {
