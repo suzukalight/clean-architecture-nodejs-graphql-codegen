@@ -1,6 +1,8 @@
-import { GetTodoInteractor } from '../GetTodo';
+import { NotFoundError } from 'common/error/NotFound';
+
+import { DeleteTodoInteractor } from '../DeleteTodo';
 import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
-import { MockGetTodoPresenter } from '../__mocks__/MockTodoPresenter';
+import { MockDeleteTodoPresenter } from '../__mocks__/MockTodoPresenter';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 
 /**
@@ -18,30 +20,31 @@ const setup = async () => {
   const todoId = todoEntity.getId().toString();
 
   // interactor
-  const presenter = new MockGetTodoPresenter();
-  const interactor = new GetTodoInteractor(repository, presenter);
+  const presenter = new MockDeleteTodoPresenter();
+  const interactor = new DeleteTodoInteractor(repository, presenter);
 
   return { todoId, interactor, presenter };
 };
 
-describe('GetTodoInteractor', () => {
-  it('リクエストを処理し、エンティティを取得できた', async () => {
+describe('DeleteTodoInteractor', () => {
+  it('リクエストを処理し、エンティティを削除できた', async () => {
     const { todoId, interactor, presenter } = await setup();
 
-    await interactor.handle(todoId);
+    await interactor.handle({ id: todoId });
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.id).toBe(todoId);
+    expect(response?.todo.id).toBe(todoId);
   });
 
-  it('存在しないIDを指定したため、nullが返された', async () => {
-    const { interactor, presenter } = await setup();
+  it('存在しないIDを指定したため、エラーが返された', async () => {
+    const { interactor } = await setup();
 
-    await interactor.handle('99999');
-
-    // response として null が得られた
-    const response = presenter.getResponse();
-    expect(response).toBeNull();
+    try {
+      await interactor.handle({ id: '99999' });
+      expect(true).toBeFalsy();
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotFoundError);
+    }
   });
 });

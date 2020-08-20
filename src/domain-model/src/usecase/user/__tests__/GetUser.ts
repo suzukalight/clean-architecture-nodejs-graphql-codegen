@@ -19,7 +19,7 @@ const setup = async () => {
 };
 
 describe('GetUserInteractor', () => {
-  it('リクエストを処理し、ユーザを取得できた', async () => {
+  it('リクエストを処理し、エンティティを取得できた', async () => {
     const { userId, interactor, presenter } = await setup();
 
     await interactor.handle(userId);
