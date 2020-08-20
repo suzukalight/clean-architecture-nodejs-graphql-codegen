@@ -13,13 +13,15 @@ import { UndoneTodoPresenter } from '../../../../presenter/todo/UndoneTodo';
 import { UndoneTodoController } from '../../../../controller/todo/UndoneTodo';
 import { DeleteTodoPresenter } from '../../../../presenter/todo/DeleteTodo';
 import { DeleteTodoController } from '../../../../controller/todo/DeleteTodo';
+import { UserRepository } from '../../../../repository/typeorm/User';
 
 export const Mutation: MutationResolvers = {
   createTodo: async (_parent, args, ctx) => {
     const { dbConnection } = ctx;
-    const repository = new TodoRepository(dbConnection);
+    const userRepository = new UserRepository(dbConnection);
+    const todoRepository = new TodoRepository(dbConnection);
     const presenter = new CreateTodoPresenter();
-    const usecase = new CreateTodoInteractor(repository, presenter);
+    const usecase = new CreateTodoInteractor(todoRepository, userRepository, presenter);
     const controller = new CreateTodoController(usecase);
 
     await controller.handle(args.input!);
