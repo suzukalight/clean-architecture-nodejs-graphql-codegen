@@ -9,7 +9,7 @@ describe('UserEntity', () => {
   it('エンティティを生成できた', () => {
     const user = { id: '1', email: 'aaa@bbb.com', roles: [RoleTypes.Member] };
     const user1 = new UserEntity(user);
-    expect(user1.getID().toString()).toBe(user.id);
+    expect(user1.getId().toString()).toBe(user.id);
     expect(user1.getEmail().toString()).toBe(user.email);
   });
 

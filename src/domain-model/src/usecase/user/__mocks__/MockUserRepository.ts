@@ -44,7 +44,7 @@ export class MockUserRepository implements UserRepository {
   }
 
   public async update(user: UserEntity) {
-    const id = user.getID().toString();
+    const id = user.getId().toString();
     const targetEntity = this.store.entities.get(id);
     if (!targetEntity) throw new NotFoundError();
 

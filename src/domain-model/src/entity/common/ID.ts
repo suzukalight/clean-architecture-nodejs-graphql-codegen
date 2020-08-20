@@ -13,7 +13,7 @@ export class ID {
     this.id = id;
   }
 
-  getID() {
+  getId() {
     return this.id;
   }
 

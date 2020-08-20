@@ -35,7 +35,7 @@ export class UserEntity {
     this.roles = user.roles.map((role) => new Role(role));
   }
 
-  getID() {
+  getId() {
     return this.id;
   }
 

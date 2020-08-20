@@ -14,7 +14,7 @@ const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
   const userEntity = await userRepository.create({ email: 'target@email.com' });
-  const userId = userEntity.getID().toString();
+  const userId = userEntity.getId().toString();
 
   // auth repository
   const password = 'password1';

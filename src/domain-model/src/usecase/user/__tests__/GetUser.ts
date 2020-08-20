@@ -9,7 +9,7 @@ const setup = async () => {
   // repository
   const repository = new MockUserRepository();
   const userEntity = await repository.create({ email: 'target@email.com' });
-  const userId = userEntity.getID().toString();
+  const userId = userEntity.getId().toString();
 
   // interactor
   const presenter = new MockGetUserPresenter();
