@@ -27,24 +27,21 @@ const setup = async () => {
 };
 
 describe('DeleteTodoInteractor', () => {
-  it('リクエストを処理し、エンティティを削除できた', async () => {
+  test('リクエストを処理し、エンティティを削除できた', async () => {
     const { todoId, interactor, presenter } = await setup();
+    const request = { id: todoId };
 
-    await interactor.handle({ id: todoId });
+    await interactor.handle(request);
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
     expect(response?.todo.id).toBe(todoId);
   });
 
-  it('存在しないIDを指定したため、エラーが返された', async () => {
+  test('存在しないIDを指定したため、エラーが返された', async () => {
     const { interactor } = await setup();
+    const request = { id: '99999' };
 
-    try {
-      await interactor.handle({ id: '99999' });
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundError);
-    }
+    await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
   });
 });

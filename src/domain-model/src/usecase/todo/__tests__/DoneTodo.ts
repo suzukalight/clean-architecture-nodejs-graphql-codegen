@@ -29,39 +29,32 @@ const setup = async () => {
 };
 
 describe('DoneTodoInteractor', () => {
-  it('リクエストを処理し、TODOをDoneにできた', async () => {
+  test('リクエストを処理し、TODOをDoneにできた', async () => {
     const { todoId, interactor, presenter } = await setup();
+    const request = { id: todoId };
 
-    await interactor.handle({ id: todoId });
+    await interactor.handle(request);
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
     expect(response?.todo.status).toBe(TodoStatus.Done);
   });
 
-  it('すでにDONEにしているTODOを指定したため、エラーが返された', async () => {
+  test('すでにDONEにしているTODOを指定したため、エラーが返された', async () => {
     const { todoId, interactor } = await setup();
+    const request = { id: todoId };
 
     // 一度DONEにする
-    await interactor.handle({ id: todoId });
+    await interactor.handle(request);
 
-    try {
-      // もう一度DONEにはできない
-      await interactor.handle({ id: todoId });
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(ConflictError);
-    }
+    // もう一度DONEにはできない
+    await expect(interactor.handle(request)).rejects.toThrow(ConflictError);
   });
 
-  it('存在しないIDを指定したため、エラーが返された', async () => {
+  test('存在しないIDを指定したため、エラーが返された', async () => {
     const { interactor } = await setup();
+    const request = { id: '99999' };
 
-    try {
-      await interactor.handle({ id: '99999' });
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundError);
-    }
+    await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
   });
 });

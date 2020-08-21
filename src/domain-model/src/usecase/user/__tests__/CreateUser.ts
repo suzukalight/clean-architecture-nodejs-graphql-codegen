@@ -16,7 +16,7 @@ const setup = () => {
 };
 
 describe('CreateUserInteractor', () => {
-  it('リクエストを処理し、新しいエンティティを生成できた', async () => {
+  test('リクエストを処理し、新しいエンティティを生成できた', async () => {
     const { interactor, presenter } = setup();
     const request = { email: 'aaa@bbb.com' };
 
@@ -27,7 +27,7 @@ describe('CreateUserInteractor', () => {
     expect(response?.user?.email).toBe(request.email);
   });
 
-  it('複数回のリクエストを処理できた', async () => {
+  test('複数回のリクエストを処理できた', async () => {
     const { interactor, presenter } = setup();
 
     let i = 0;
@@ -42,7 +42,7 @@ describe('CreateUserInteractor', () => {
     expect(response?.user?.email).toBe(`aaa${i}@bbb.com`);
   });
 
-  it('不正なメールアドレスを指定したため、失敗した', async () => {
+  test('不正なメールアドレスを指定したため、失敗した', async () => {
     const { interactor } = setup();
     const request = { email: 'hogehoge' };
 

@@ -47,23 +47,13 @@ describe('SignInEmailPasswordInteractor', () => {
     const { password, interactor } = await setup();
     const request = { email: 'not_existed@email.com', password };
 
-    try {
-      await interactor.handle(request);
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundError);
-    }
+    await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
   });
 
   test('誤ったパスワードを指定したため、失敗した', async () => {
     const { authData, interactor } = await setup();
     const request = { email: authData.email!, password: 'invalidpassword' };
 
-    try {
-      await interactor.handle(request);
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(AuthenticationFailedError);
-    }
+    await expect(interactor.handle(request)).rejects.toThrow(AuthenticationFailedError);
   });
 });

@@ -23,7 +23,7 @@ const setup = async () => {
 };
 
 describe('CreateTodoInteractor', () => {
-  it('リクエストを処理し、新しいエンティティを生成できた', async () => {
+  test('リクエストを処理し、新しいエンティティを生成できた', async () => {
     const { ownerId, interactor, presenter } = await setup();
     const request = { ownerId, title: 'todo #1' };
 
@@ -35,15 +35,10 @@ describe('CreateTodoInteractor', () => {
     expect(response?.todo?.title).toBe(request.title);
   });
 
-  it('存在しないオーナーを指定したため、失敗した', async () => {
+  test('存在しないオーナーを指定したため、失敗した', async () => {
     const { interactor } = await setup();
     const request = { ownerId: '99999', title: 'todo #1' };
 
-    try {
-      await interactor.handle(request);
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundError);
-    }
+    await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
   });
 });

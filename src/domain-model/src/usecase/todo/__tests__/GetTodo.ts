@@ -25,7 +25,7 @@ const setup = async () => {
 };
 
 describe('GetTodoInteractor', () => {
-  it('リクエストを処理し、エンティティを取得できた', async () => {
+  test('リクエストを処理し、エンティティを取得できた', async () => {
     const { todoId, interactor, presenter } = await setup();
 
     await interactor.handle(todoId);
@@ -35,7 +35,7 @@ describe('GetTodoInteractor', () => {
     expect(response?.id).toBe(todoId);
   });
 
-  it('存在しないIDを指定したため、nullが返された', async () => {
+  test('存在しないIDを指定したため、nullが返された', async () => {
     const { interactor, presenter } = await setup();
 
     await interactor.handle('99999');

@@ -35,40 +35,31 @@ const setup = async () => {
 };
 
 describe('UndoneTodoInteractor', () => {
-  it('リクエストを処理し、TODOをUndoneにできた', async () => {
+  test('リクエストを処理し、TODOをUndoneにできた', async () => {
     const { todoId, undoneInteractor, undonePresenter, doneInteractor } = await setup();
+    const request = { id: todoId };
+    await doneInteractor.handle(request); // いちどDONEにする
 
-    // いちどDONEにする
-    await doneInteractor.handle({ id: todoId });
-
-    // UNDONEにする
-    await undoneInteractor.handle({ id: todoId });
+    // UNDONEにできる
+    await undoneInteractor.handle(request);
 
     // response として request で指定したデータが得られた
     const response = undonePresenter.getResponse();
     expect(response?.todo.status).toBe(TodoStatus.Undone);
   });
 
-  it('すでにUNDONEにしているTODOを指定したため、エラーが返された', async () => {
+  test('すでにUNDONEにしているTODOを指定したため、エラーが返された', async () => {
     const { todoId, undoneInteractor } = await setup();
+    const request = { id: todoId };
 
-    try {
-      // DONEにせずに、UNDONEにする
-      await undoneInteractor.handle({ id: todoId });
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(ConflictError);
-    }
+    // DONEにせずに、UNDONEにすることはできない
+    await expect(undoneInteractor.handle(request)).rejects.toThrow(ConflictError);
   });
 
-  it('存在しないIDを指定したため、エラーが返された', async () => {
+  test('存在しないIDを指定したため、エラーが返された', async () => {
     const { undoneInteractor } = await setup();
+    const request = { id: '99999' };
 
-    try {
-      await undoneInteractor.handle({ id: '99999' });
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundError);
-    }
+    await expect(undoneInteractor.handle(request)).rejects.toThrow(NotFoundError);
   });
 });

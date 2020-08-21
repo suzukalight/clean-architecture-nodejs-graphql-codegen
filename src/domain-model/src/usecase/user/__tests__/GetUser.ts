@@ -19,7 +19,7 @@ const setup = async () => {
 };
 
 describe('GetUserInteractor', () => {
-  it('リクエストを処理し、エンティティを取得できた', async () => {
+  test('リクエストを処理し、エンティティを取得できた', async () => {
     const { userId, interactor, presenter } = await setup();
 
     await interactor.handle(userId);
@@ -29,7 +29,7 @@ describe('GetUserInteractor', () => {
     expect(response?.id).toBe(userId);
   });
 
-  it('存在しないIDを指定したため、nullが返された', async () => {
+  test('存在しないIDを指定したため、nullが返された', async () => {
     const { interactor, presenter } = await setup();
 
     await interactor.handle('99999');
