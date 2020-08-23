@@ -24,4 +24,12 @@ export class Email {
   toString() {
     return this.email;
   }
+
+  isEqual(email: Email): boolean;
+  isEqual(email: string): boolean;
+  isEqual(email: unknown): boolean {
+    if (email instanceof Email) return (email as Email).toString() === this.getEmail();
+    if (typeof email === 'string') return email === this.getEmail();
+    throw new IllegalArgumentError('比較可能なemailではありません');
+  }
 }

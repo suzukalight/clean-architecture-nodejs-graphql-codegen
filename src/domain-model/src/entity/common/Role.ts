@@ -32,13 +32,9 @@ export class Role {
   isEqual(role: Role): boolean;
   isEqual(role: RoleSchema): boolean;
   isEqual(role: unknown): boolean {
-    if (role instanceof Role) {
-      return this.role === role.toString();
-    }
-    if (typeof role === 'string') {
-      return this.role === role;
-    }
-    throw new IllegalArgumentError('比較可能なRoleではありません');
+    if (role instanceof Role) return this.role === role.toString();
+    if (typeof role === 'string') return this.role === role;
+    throw new IllegalArgumentError('比較可能なroleではありません');
   }
 }
 

@@ -23,6 +23,15 @@ export class Password {
     return this.passwordEncrypted;
   }
 
+  isEqual(password: Password): boolean;
+  isEqual(password: string): boolean;
+  isEqual(password: unknown): boolean {
+    if (password instanceof Password)
+      return (password as Password).toString() === this.getPasswordEncrypted();
+    if (typeof password === 'string') return password === this.getPasswordEncrypted();
+    throw new IllegalArgumentError('比較可能なpasswordではありません');
+  }
+
   async compareWith(plainPassword: string) {
     return await bcrypt.compare(plainPassword, this.passwordEncrypted);
   }
@@ -43,10 +52,3 @@ export const encryptPassword = async (plainText: string, saltRounds = 10) => {
   isValidPlainPassword(plainText);
   return await bcrypt.hash(plainText, saltRounds);
 };
-
-export class PasswordFactory {
-  public static async fromPlainText(plainText: string) {
-    const passwordEncrypted = await encryptPassword(plainText);
-    return new Password(passwordEncrypted);
-  }
-}
