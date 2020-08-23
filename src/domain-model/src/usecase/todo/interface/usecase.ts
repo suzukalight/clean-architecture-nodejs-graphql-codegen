@@ -3,10 +3,12 @@ import {
   DoneTodoRequest,
   UndoneTodoRequest,
   DeleteTodoRequest,
+  Maybe,
 } from 'schema/types';
+import { UserEntity } from '../../../entity/user/UserEntity';
 
 interface TodoUseCase<Request> {
-  handle(request: Request): void;
+  handle(request: Request, actor: Maybe<UserEntity>): void;
 }
 
 export type GetTodoUseCase = TodoUseCase<string>;

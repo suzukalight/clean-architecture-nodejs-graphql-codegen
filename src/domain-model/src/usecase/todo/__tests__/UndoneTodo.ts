@@ -15,11 +15,11 @@ import { DoneTodoInteractor } from '../DoneTodo';
 const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
-  const userEntity = await userRepository.create({ email: 'target@email.com' });
-  const ownerId = userEntity.getId().toString();
+  const actor = await userRepository.create({ email: 'target@email.com' });
 
   // create todo
   const repository = new MockTodoRepository();
+  const ownerId = actor.getId().toString();
   const todoEntity = await repository.create({ ownerId, title: 'todo #1' });
   const todoId = todoEntity.getId().toString();
 
@@ -31,14 +31,14 @@ const setup = async () => {
   const donePresenter = new MockDoneTodoPresenter();
   const doneInteractor = new DoneTodoInteractor(repository, donePresenter);
 
-  return { todoId, undoneInteractor, undonePresenter, doneInteractor };
+  return { todoId, actor, undoneInteractor, undonePresenter, doneInteractor };
 };
 
 describe('UndoneTodoInteractor', () => {
   test('リクエストを処理し、TODOをUndoneにできた', async () => {
-    const { todoId, undoneInteractor, undonePresenter, doneInteractor } = await setup();
+    const { todoId, actor, undoneInteractor, undonePresenter, doneInteractor } = await setup();
     const request = { id: todoId };
-    await doneInteractor.handle(request); // いちどDONEにする
+    await doneInteractor.handle(request, actor); // いちどDONEにする
 
     // UNDONEにできる
     await undoneInteractor.handle(request);

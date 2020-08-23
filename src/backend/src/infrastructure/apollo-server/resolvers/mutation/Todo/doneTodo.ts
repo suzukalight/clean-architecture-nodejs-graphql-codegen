@@ -14,7 +14,7 @@ export const doneTodo: MutationResolvers<ApolloServerContext> = {
     const presenter = new DoneTodoPresenter();
     const usecase = new DoneTodoInteractor(repository, presenter);
 
-    await usecase.handle(args.input!);
+    await usecase.handle(args.input!, actor);
 
     return presenter.getResponse()!;
   },
