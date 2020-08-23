@@ -1,7 +1,7 @@
 import { MutationResolvers } from 'schema/types';
 import { DoneTodoInteractor } from 'domain-model/src/usecase/todo/DoneTodo';
 
-import { ApolloServerContext } from '../../../type';
+import { ApolloServerContext } from '../../../types';
 import { TodoRepository } from '../../../../../repository/typeorm/Todo';
 import { DoneTodoPresenter } from '../../../../../presenter/todo/DoneTodo';
 import { allowWhenActorHasMemberRole } from '../../../authority/policy';

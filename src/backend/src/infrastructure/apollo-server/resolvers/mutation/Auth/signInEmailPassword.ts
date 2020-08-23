@@ -1,7 +1,7 @@
 import { MutationResolvers } from 'schema/types';
 import { SignInEmailPasswordInteractor } from 'domain-model/src/usecase/auth/SignInEmailPassword';
 
-import { ApolloServerContext } from '../../../type';
+import { ApolloServerContext } from '../../../types';
 import { UserRepository } from '../../../../../repository/typeorm/User';
 import { AuthEmailPasswordRepository } from '../../../../../repository/typeorm/auth/AuthEmailPassword';
 import { SignInEmailPasswordPresenter } from '../../../../../presenter/auth/SignInEmailPassword';

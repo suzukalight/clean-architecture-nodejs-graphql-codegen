@@ -1,7 +1,7 @@
 import { MutationResolvers } from 'schema/types';
 import { CreateTodoInteractor } from 'domain-model/src/usecase/todo/CreateTodo';
 
-import { ApolloServerContext } from '../../../type';
+import { ApolloServerContext } from '../../../types';
 import { TodoRepository } from '../../../../../repository/typeorm/Todo';
 import { CreateTodoPresenter } from '../../../../../presenter/todo/CreateTodo';
 import { UserRepository } from '../../../../../repository/typeorm/User';

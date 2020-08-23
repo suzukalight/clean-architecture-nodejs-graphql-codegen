@@ -1,7 +1,7 @@
 import { MutationResolvers } from 'schema/types';
 import { UpdateUserRolesInteractor } from 'domain-model/src/usecase/user/UpdateUserRoles';
 
-import { ApolloServerContext } from '../../../type';
+import { ApolloServerContext } from '../../../types';
 import { UserRepository } from '../../../../../repository/typeorm/User';
 import { UpdateUserRolesPresenter } from '../../../../../presenter/user/UpdateUserRoles';
 import { allowWhenActorHasMemberRole } from '../../../authority/policy';
