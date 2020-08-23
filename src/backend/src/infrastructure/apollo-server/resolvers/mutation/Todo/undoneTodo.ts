@@ -14,7 +14,7 @@ export const undoneTodo: MutationResolvers<ApolloServerContext> = {
     const presenter = new UndoneTodoPresenter();
     const usecase = new UndoneTodoInteractor(repository, presenter);
 
-    await usecase.handle(args.input!);
+    await usecase.handle(args.input!, actor);
 
     return presenter.getResponse()!;
   },

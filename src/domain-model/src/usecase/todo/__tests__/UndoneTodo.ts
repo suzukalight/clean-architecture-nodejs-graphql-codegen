@@ -1,12 +1,14 @@
+import { TodoStatus } from 'schema/types';
 import { NotFoundError } from 'common/error/NotFound';
 import { ConflictError } from 'common/error/Conflict';
-import { TodoStatus } from 'schema/types';
+import { UnauthorizedError } from 'common/error/Unauthorized';
 
 import { UndoneTodoInteractor } from '../UndoneTodo';
 import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
 import { MockUndoneTodoPresenter, MockDoneTodoPresenter } from '../__mocks__/MockTodoPresenter';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 import { DoneTodoInteractor } from '../DoneTodo';
+import { ID } from '../../../entity/common/ID';
 
 /**
  * TODOを1つ作成しておく。
@@ -41,7 +43,7 @@ describe('UndoneTodoInteractor', () => {
     await doneInteractor.handle(request, actor); // いちどDONEにする
 
     // UNDONEにできる
-    await undoneInteractor.handle(request);
+    await undoneInteractor.handle(request, actor);
 
     // response として request で指定したデータが得られた
     const response = undonePresenter.getResponse();
@@ -49,17 +51,26 @@ describe('UndoneTodoInteractor', () => {
   });
 
   test('すでにUNDONEにしているTODOを指定したため、エラーが返された', async () => {
-    const { todoId, undoneInteractor } = await setup();
+    const { todoId, actor, undoneInteractor } = await setup();
     const request = { id: todoId };
 
     // DONEにせずに、UNDONEにすることはできない
-    await expect(undoneInteractor.handle(request)).rejects.toThrow(ConflictError);
+    await expect(undoneInteractor.handle(request, actor)).rejects.toThrow(ConflictError);
   });
 
   test('存在しないIDを指定したため、エラーが返された', async () => {
-    const { undoneInteractor } = await setup();
+    const { actor, undoneInteractor } = await setup();
     const request = { id: '99999' };
 
-    await expect(undoneInteractor.handle(request)).rejects.toThrow(NotFoundError);
+    await expect(undoneInteractor.handle(request, actor)).rejects.toThrow(NotFoundError);
+  });
+
+  test('作成した本人以外が操作したため、エラーが返された', async () => {
+    const { todoId, actor, undoneInteractor } = await setup();
+    const request = { id: todoId };
+
+    actor.setId(new ID('99999'));
+
+    await expect(undoneInteractor.handle(request, actor)).rejects.toThrow(UnauthorizedError);
   });
 });

@@ -1,9 +1,10 @@
-import { UndoneTodoRequest } from 'schema/types';
+import { Maybe, UndoneTodoRequest } from 'schema/types';
 import { NotFoundError } from 'common/error/NotFound';
 
 import { TodoRepository } from './interface/repository';
 import { UndoneTodoUseCase } from './interface/usecase';
 import { UndoneTodoPresenter } from './interface/presenter';
+import { UserEntity } from '../../entity/user/UserEntity';
 
 export class UndoneTodoInteractor implements UndoneTodoUseCase {
   private repository: TodoRepository;
@@ -14,11 +15,11 @@ export class UndoneTodoInteractor implements UndoneTodoUseCase {
     this.presenter = presenter;
   }
 
-  public async handle(request: UndoneTodoRequest) {
+  public async handle(request: UndoneTodoRequest, actor: Maybe<UserEntity>) {
     const todoEntity = await this.repository.getById(request.id);
     if (!todoEntity) throw new NotFoundError();
 
-    todoEntity.undone();
+    todoEntity.undone(actor);
 
     await this.repository.update(todoEntity);
 

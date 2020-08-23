@@ -61,7 +61,7 @@ describe('DoneTodoInteractor', () => {
   });
 
   test('作成した本人以外が操作したため、エラーが返された', async () => {
-    const { todoId, actor, interactor, presenter } = await setup();
+    const { todoId, actor, interactor } = await setup();
     const request = { id: todoId };
 
     actor.setId(new ID('99999'));
