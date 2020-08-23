@@ -1,28 +1,27 @@
 import dotenv from 'dotenv';
-import express from 'express';
-import cors from 'cors';
-import http from 'http';
+import { Express, Request } from 'express';
 import path from 'path';
 import jwt from 'jsonwebtoken';
+import { Server } from 'http';
 import { ApolloServer } from 'apollo-server-express';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { Connection } from 'typeorm';
-
-import { resolvers } from './resolvers';
 import { User } from 'schema/types';
+
+import { ApolloServerContext } from './types';
+import { resolvers } from './resolvers';
 import { UserRepository } from '../../repository/typeorm/User';
-import { ApolloServerContext } from './type';
 
 dotenv.config();
 
-type CreateDbConnection = () => Promise<Connection>;
-
-const getContext = async (
-  req: express.Request,
-  dbConnection: Connection,
-): Promise<ApolloServerContext> => {
+/**
+ * リクエストごとのコンテキスト情報を生成
+ * @param req Express Request
+ * @param dbConnection TypeORM Connection
+ */
+const getContext = async (req: Request, dbConnection: Connection): Promise<ApolloServerContext> => {
   const token = req?.headers['authorized'] as string;
   if (!token) return { dbConnection };
 
@@ -35,22 +34,23 @@ const getContext = async (
 
     return { dbConnection, actor: userEntity };
   } catch (e) {
+    // NOTE: context 生成系でエラーをcatchしなかった場合、サーバ全体がダウンしてしまう
     console.error(e);
     return { dbConnection };
   }
 };
 
-export const createAndRunApolloServer = async (createDbConnection: CreateDbConnection) => {
-  // Create DB connection
-  const dbConnection = await createDbConnection();
-
-  // Configure Express App
-  const app = express();
-  app.use(cors());
-
-  // Create HTTP Server
-  const httpServer = http.createServer(app);
-
+/**
+ * サーバをセットアップ
+ * @param dbConnection TypeORM Connection
+ * @param expressApp Express app instance
+ * @param httpServer http.Server instance
+ */
+export const createApolloServer = async (
+  dbConnection: Connection,
+  expressApp: Express,
+  httpServer: Server,
+): Promise<ApolloServer> => {
   // Configure GraphQL Server
   const schema = loadSchemaSync(path.join(__dirname, '../../../../schema/schema.graphql'), {
     loaders: [new GraphQLFileLoader()],
@@ -65,12 +65,8 @@ export const createAndRunApolloServer = async (createDbConnection: CreateDbConne
     schema: schemaWithResolvers,
     context: ({ req }) => getContext(req, dbConnection),
   });
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app: expressApp, path: '/graphql' });
   server.installSubscriptionHandlers(httpServer);
 
-  // Run server
-  const port = 3000;
-  httpServer.listen({ port }, () => {
-    console.log(`Apollo Server on http://localhost:${port}/graphql`);
-  });
+  return server;
 };
