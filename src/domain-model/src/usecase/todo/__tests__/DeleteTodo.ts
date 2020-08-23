@@ -1,9 +1,11 @@
 import { NotFoundError } from 'common/error/NotFound';
+import { UnauthorizedError } from 'common/error/Unauthorized';
 
 import { DeleteTodoInteractor } from '../DeleteTodo';
 import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
 import { MockDeleteTodoPresenter } from '../__mocks__/MockTodoPresenter';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
+import { ID } from '../../../entity/common/ID';
 
 /**
  * TODOを1つ作成しておく
@@ -11,11 +13,11 @@ import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
-  const userEntity = await userRepository.create({ email: 'target@email.com' });
-  const ownerId = userEntity.getId().toString();
+  const actor = await userRepository.create({ email: 'target@email.com' });
 
   // create todo
   const repository = new MockTodoRepository();
+  const ownerId = actor.getId().toString();
   const todoEntity = await repository.create({ ownerId, title: 'todo #1' });
   const todoId = todoEntity.getId().toString();
 
@@ -23,15 +25,15 @@ const setup = async () => {
   const presenter = new MockDeleteTodoPresenter();
   const interactor = new DeleteTodoInteractor(repository, presenter);
 
-  return { todoId, interactor, presenter };
+  return { todoId, actor, interactor, presenter };
 };
 
 describe('DeleteTodoInteractor', () => {
   test('リクエストを処理し、エンティティを削除できた', async () => {
-    const { todoId, interactor, presenter } = await setup();
+    const { todoId, actor, interactor, presenter } = await setup();
     const request = { id: todoId };
 
-    await interactor.handle(request);
+    await interactor.handle(request, actor);
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
@@ -39,9 +41,18 @@ describe('DeleteTodoInteractor', () => {
   });
 
   test('存在しないIDを指定したため、エラーが返された', async () => {
-    const { interactor } = await setup();
+    const { actor, interactor } = await setup();
     const request = { id: '99999' };
 
-    await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
+    await expect(interactor.handle(request, actor)).rejects.toThrow(NotFoundError);
+  });
+
+  test('作成した本人以外が操作したため、エラーが返された', async () => {
+    const { todoId, actor, interactor } = await setup();
+    const request = { id: todoId };
+
+    actor.setId(new ID('99999'));
+
+    await expect(interactor.handle(request, actor)).rejects.toThrow(UnauthorizedError);
   });
 });

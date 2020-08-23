@@ -1,10 +1,8 @@
-import { TodoStatus, Todo, Maybe } from 'schema/types';
+import { TodoStatus, Todo } from 'schema/types';
 import { PropertyRequiredError } from 'common/error/PropertyRequired';
 import { ConflictError } from 'common/error/Conflict';
 
 import { ID } from '../common/ID';
-import { denyWhenActorIsNotOwner } from './policy';
-import { UserEntity } from '../user/UserEntity';
 
 export const isValidArguments = (todo: Todo) => {
   if (!todo) throw new PropertyRequiredError('todo');
@@ -66,16 +64,12 @@ export class TodoEntity {
     this.isValid();
   }
 
-  undone(actor: Maybe<UserEntity>) {
-    denyWhenActorIsNotOwner(this.ownerId, actor);
-
+  undone() {
     if (this.getStatus() === TodoStatus.Undone) throw new ConflictError('すでに未完了状態です');
     this.status = TodoStatus.Undone;
   }
 
-  done(actor: Maybe<UserEntity>) {
-    denyWhenActorIsNotOwner(this.ownerId, actor);
-
+  done() {
     if (this.getStatus() === TodoStatus.Done) throw new ConflictError('すでに完了済みです');
     this.status = TodoStatus.Done;
   }

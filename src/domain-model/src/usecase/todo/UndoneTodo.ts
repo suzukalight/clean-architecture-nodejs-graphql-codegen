@@ -5,6 +5,7 @@ import { TodoRepository } from './interface/repository';
 import { UndoneTodoUseCase } from './interface/usecase';
 import { UndoneTodoPresenter } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
+import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
 
 export class UndoneTodoInteractor implements UndoneTodoUseCase {
   private repository: TodoRepository;
@@ -19,7 +20,9 @@ export class UndoneTodoInteractor implements UndoneTodoUseCase {
     const todoEntity = await this.repository.getById(request.id);
     if (!todoEntity) throw new NotFoundError();
 
-    todoEntity.undone(actor);
+    allowOnlyWhenActorIsOwner(todoEntity.getOwnerId(), actor);
+
+    todoEntity.undone();
 
     await this.repository.update(todoEntity);
 
