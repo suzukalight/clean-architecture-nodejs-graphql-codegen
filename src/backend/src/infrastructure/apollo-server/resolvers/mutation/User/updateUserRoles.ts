@@ -14,7 +14,7 @@ export const updateUserRoles: MutationResolvers<ApolloServerContext> = {
     const presenter = new UpdateUserRolesPresenter();
     const usecase = new UpdateUserRolesInteractor(repository, presenter);
 
-    await usecase.handle(args.input!);
+    await usecase.handle(args.input!, actor);
 
     return presenter.getResponse()!;
   },

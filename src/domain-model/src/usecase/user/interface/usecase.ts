@@ -1,7 +1,8 @@
-import { CreateUserRequest, UpdateUserRolesRequest } from 'schema/types';
+import { CreateUserRequest, UpdateUserRolesRequest, Maybe } from 'schema/types';
+import { UserEntity } from '../../../entity/user/UserEntity';
 
 interface UserUseCase<Request> {
-  handle(request: Request): void;
+  handle(request: Request, actor: Maybe<UserEntity>): void;
 }
 
 export type GetUserUseCase = UserUseCase<string>;

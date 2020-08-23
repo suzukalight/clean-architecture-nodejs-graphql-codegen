@@ -8,6 +8,7 @@ import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
 import { MockDoneTodoPresenter } from '../__mocks__/MockTodoPresenter';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 import { ID } from '../../../entity/common/ID';
+import { UserEntity } from '../../../entity/user/UserEntity';
 
 /**
  * TODOを1つ作成しておく
@@ -64,8 +65,9 @@ describe('DoneTodoInteractor', () => {
     const { todoId, actor, interactor } = await setup();
     const request = { id: todoId };
 
-    actor.setId(new ID('99999'));
+    const others = new UserEntity(actor.toJSON());
+    others.setId(new ID('99999'));
 
-    await expect(interactor.handle(request, actor)).rejects.toThrow(UnauthorizedError);
+    await expect(interactor.handle(request, others)).rejects.toThrow(UnauthorizedError);
   });
 });
