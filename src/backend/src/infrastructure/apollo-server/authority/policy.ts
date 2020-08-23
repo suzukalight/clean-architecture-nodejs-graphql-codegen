@@ -4,7 +4,7 @@ import { Maybe, Role } from 'schema/types';
 import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 export const denyUnauthorized = (actor?: Maybe<UserEntity>) => {
-  if (!actor) throw new UnauthorizedError();
+  if (!actor) throw new AuthenticationFailedError();
 };
 
 export const denyWhenActorHasOnlyAnonymousRole = (actor?: Maybe<UserEntity>) => {
@@ -12,7 +12,7 @@ export const denyWhenActorHasOnlyAnonymousRole = (actor?: Maybe<UserEntity>) => 
 
   // anonumous ではないロールを1つも持っていない
   if (!actor?.getRoles().some((role) => !role.isEqual(Role.Anonymous))) {
-    throw new AuthenticationFailedError();
+    throw new UnauthorizedError();
   }
 };
 
@@ -20,6 +20,6 @@ export const allowWhenActorHasMemberRole = (actor?: Maybe<UserEntity>) => {
   denyUnauthorized(actor);
 
   if (!actor?.getRoles().some((role) => role.isEqual(Role.Member))) {
-    throw new AuthenticationFailedError();
+    throw new UnauthorizedError();
   }
 };
