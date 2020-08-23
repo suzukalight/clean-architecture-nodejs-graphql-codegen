@@ -29,8 +29,16 @@ export class Role {
     return this.role;
   }
 
-  isEqual(role: Role) {
-    return this.role === role.toString();
+  isEqual(role: Role): boolean;
+  isEqual(role: RoleSchema): boolean;
+  isEqual(role: any) {
+    if (role instanceof Role) {
+      return this.role === role.toString();
+    }
+    if (typeof role === 'string') {
+      return this.role === role;
+    }
+    throw new IllegalArgumentError('比較可能なRoleではありません');
   }
 }
 
