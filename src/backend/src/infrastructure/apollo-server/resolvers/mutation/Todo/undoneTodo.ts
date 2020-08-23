@@ -1,7 +1,7 @@
 import { MutationResolvers } from 'schema/types';
 import { UndoneTodoInteractor } from 'domain-model/src/usecase/todo/UndoneTodo';
 
-import { ApolloServerContext } from '../../type';
+import { ApolloServerContext } from '../../../type';
 import { TodoRepository } from '../../../../../repository/typeorm/Todo';
 import { UndoneTodoPresenter } from '../../../../../presenter/todo/UndoneTodo';
 

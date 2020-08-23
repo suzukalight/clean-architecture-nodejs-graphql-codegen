@@ -1,7 +1,7 @@
 import { QueryResolvers } from 'schema/types';
 import { GetUserInteractor } from 'domain-model/src/usecase/user/GetUser';
 
-import { ApolloServerContext } from '../../type';
+import { ApolloServerContext } from '../../../type';
 import { GetUserPresenter } from '../../../../../presenter/user/GetUser';
 import { UserRepository } from '../../../../../repository/typeorm/User';
 

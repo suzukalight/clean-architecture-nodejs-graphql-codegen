@@ -1,7 +1,7 @@
 import { QueryResolvers } from 'schema/types';
 import { GetTodoInteractor } from 'domain-model/src/usecase/todo/GetTodo';
 
-import { ApolloServerContext } from '../../type';
+import { ApolloServerContext } from '../../../type';
 import { GetTodoPresenter } from '../../../../../presenter/todo/GetTodo';
 import { TodoRepository } from '../../../../../repository/typeorm/Todo';
 
