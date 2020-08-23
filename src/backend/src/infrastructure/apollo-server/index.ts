@@ -13,13 +13,17 @@ import { Connection } from 'typeorm';
 import { resolvers } from './resolvers';
 import { User } from 'schema/types';
 import { UserRepository } from '../../repository/typeorm/User';
+import { ApolloServerContext } from './type';
 
 dotenv.config();
 
 type CreateDbConnection = () => Promise<Connection>;
 
-const getContext = async (req: express.Request, dbConnection: Connection) => {
-  const token = req?.headers['x-authentication'] as string;
+const getContext = async (
+  req: express.Request,
+  dbConnection: Connection,
+): Promise<ApolloServerContext> => {
+  const token = req?.headers['authorized'] as string;
   if (!token) return { dbConnection };
 
   try {
