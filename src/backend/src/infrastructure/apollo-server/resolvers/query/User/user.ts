@@ -4,9 +4,12 @@ import { GetUserInteractor } from 'domain-model/src/usecase/user/GetUser';
 import { ApolloServerContext } from '../../../type';
 import { GetUserPresenter } from '../../../../../presenter/user/GetUser';
 import { UserRepository } from '../../../../../repository/typeorm/User';
+import { allowWhenActorHasMemberRole } from '../../../authority/policy';
 
 export const user: QueryResolvers<ApolloServerContext> = {
-  user: async (_parent, args, { dbConnection }) => {
+  user: async (_parent, args, { dbConnection, actor }) => {
+    allowWhenActorHasMemberRole(actor);
+
     const repository = new UserRepository(dbConnection);
     const presenter = new GetUserPresenter();
     const usecase = new GetUserInteractor(repository, presenter);
