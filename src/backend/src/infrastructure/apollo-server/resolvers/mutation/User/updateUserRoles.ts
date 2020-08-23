@@ -4,9 +4,12 @@ import { UpdateUserRolesInteractor } from 'domain-model/src/usecase/user/UpdateU
 import { ApolloServerContext } from '../../../type';
 import { UserRepository } from '../../../../../repository/typeorm/User';
 import { UpdateUserRolesPresenter } from '../../../../../presenter/user/UpdateUserRoles';
+import { allowWhenActorHasMemberRole } from '../../../authority/policy';
 
 export const updateUserRoles: MutationResolvers<ApolloServerContext> = {
-  updateUserRoles: async (_parent, args, { dbConnection }) => {
+  updateUserRoles: async (_parent, args, { dbConnection, actor }) => {
+    allowWhenActorHasMemberRole(actor);
+
     const repository = new UserRepository(dbConnection);
     const presenter = new UpdateUserRolesPresenter();
     const usecase = new UpdateUserRolesInteractor(repository, presenter);
