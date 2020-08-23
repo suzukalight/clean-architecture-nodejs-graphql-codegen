@@ -11,7 +11,7 @@ export class ID {
 
   constructor(id: string) {
     isValid(id);
-    this.id = id;
+    this.id = `${id}`;
   }
 
   getId() {
