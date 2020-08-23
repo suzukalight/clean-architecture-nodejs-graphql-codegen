@@ -4,5 +4,5 @@ import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 export interface ApolloServerContext {
   dbConnection: Connection;
-  actor?: Maybe<UserEntity>;
+  actor: Maybe<UserEntity>;
 }

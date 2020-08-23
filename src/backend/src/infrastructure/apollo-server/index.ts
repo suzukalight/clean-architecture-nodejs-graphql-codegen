@@ -22,8 +22,8 @@ dotenv.config();
  * @param dbConnection TypeORM Connection
  */
 const getContext = async (req: Request, dbConnection: Connection): Promise<ApolloServerContext> => {
-  const token = req?.headers['authorized'] as string;
-  if (!token) return { dbConnection };
+  const token = req?.headers['x-auth-actor'] as string;
+  if (!token) return { dbConnection, actor: null };
 
   try {
     const { JWT_SECRET } = process.env;
@@ -36,7 +36,7 @@ const getContext = async (req: Request, dbConnection: Connection): Promise<Apoll
   } catch (e) {
     // NOTE: context 生成系でエラーをcatchしなかった場合、サーバ全体がダウンしてしまう
     console.error(e);
-    return { dbConnection };
+    return { dbConnection, actor: null };
   }
 };
 
