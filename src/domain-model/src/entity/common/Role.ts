@@ -31,7 +31,7 @@ export class Role {
 
   isEqual(role: Role): boolean;
   isEqual(role: RoleSchema): boolean;
-  isEqual(role: any) {
+  isEqual(role: unknown): boolean {
     if (role instanceof Role) {
       return this.role === role.toString();
     }
