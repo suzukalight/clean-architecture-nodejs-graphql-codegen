@@ -38,6 +38,12 @@ export class AuthEmailPassword {
 
   @UpdateDateColumn()
   readonly updatedAt?: Date;
+
+  constructor(userId: number, email: string, passwordEncrypted: string) {
+    this.userId = userId;
+    this.email = email;
+    this.passwordEncrypted = passwordEncrypted;
+  }
 }
 
 export class OrmAuthEmailPasswordFactory {
