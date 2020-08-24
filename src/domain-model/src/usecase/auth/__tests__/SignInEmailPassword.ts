@@ -5,7 +5,7 @@ import { SignInEmailPasswordInteractor } from '../SignInEmailPassword';
 import { encryptPassword } from '../../../entity/common/Password';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 import { MockAuthEmailPasswordRepository } from '../__mocks__/MockAuthEmailPasswordRepository';
-import { MockSignInEmailPasswordPresenter } from '../__mocks__/MockSignInEmailPasswordPresenter';
+import { MockSignInEmailPasswordPresenter } from '../__mocks__/MockAuthPresenter';
 
 /**
  * 認証済みのユーザを1名作成しておく
