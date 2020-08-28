@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 import { User as UserSchema } from 'schema/types';
-import { Todo } from './Todo';
+import { Todo } from '../../todo/entity/Todo';
 import { RoleType } from 'domain-model/src/entity/common/Role';
 import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 

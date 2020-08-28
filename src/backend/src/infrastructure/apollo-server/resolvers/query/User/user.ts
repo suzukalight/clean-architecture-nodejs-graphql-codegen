@@ -4,7 +4,7 @@ import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decisio
 
 import { ApolloServerContext } from '../../../types';
 import { GetUserPresenter } from '../../../../../presenter/user/GetUser';
-import { UserRepository } from '../../../../../repository/typeorm/User';
+import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';
 
 export const user: QueryResolvers<ApolloServerContext> = {
   user: async (_parent, args, { dbConnection, actor }) => {

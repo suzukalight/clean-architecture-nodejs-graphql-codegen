@@ -3,7 +3,7 @@ import { UpdateUserRolesInteractor } from 'domain-model/src/usecase/user/UpdateU
 import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
 
 import { ApolloServerContext } from '../../../types';
-import { UserRepository } from '../../../../../repository/typeorm/User';
+import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';
 import { UpdateUserRolesPresenter } from '../../../../../presenter/user/UpdateUserRoles';
 
 export const updateUserRoles: MutationResolvers<ApolloServerContext> = {

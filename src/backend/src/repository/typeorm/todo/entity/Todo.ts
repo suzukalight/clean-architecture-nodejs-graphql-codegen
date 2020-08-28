@@ -11,7 +11,7 @@ import {
 import { Todo as TodoSchema, TodoStatus } from 'schema/types';
 import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
 
-import { User } from './User';
+import { User } from '../../user/entity/User';
 
 @Entity('todos')
 export class Todo {

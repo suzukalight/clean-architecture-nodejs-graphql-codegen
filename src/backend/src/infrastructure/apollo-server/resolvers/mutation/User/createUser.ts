@@ -2,7 +2,7 @@ import { MutationResolvers } from 'schema/types';
 import { CreateUserInteractor } from 'domain-model/src/usecase/user/CreateUser';
 
 import { ApolloServerContext } from '../../../types';
-import { UserRepository } from '../../../../../repository/typeorm/User';
+import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';
 import { CreateUserPresenter } from '../../../../../presenter/user/CreateUser';
 
 export const createUser: MutationResolvers<ApolloServerContext> = {

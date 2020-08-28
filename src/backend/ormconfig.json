@@ -7,7 +7,7 @@
   "database": "graphql_clean_dev",
   "synchronize": false,
   "logging": false,
-  "entities": ["src/infrastructure/typeorm/entity/**/*.ts"],
+  "entities": ["src/repository/typeorm/**/entity/*.ts"],
   "migrations": ["src/infrastructure/typeorm/migration/**/*.ts"],
   "subscribers": ["src/infrastructure/typeorm/subscriber/**/*.ts"],
   "cli": {

@@ -12,7 +12,7 @@ import { User } from 'schema/types';
 
 import { ApolloServerContext } from './types';
 import { resolvers } from './resolvers';
-import { UserRepository } from '../../repository/typeorm/User';
+import { UserRepository } from '../../repository/typeorm/user/repository/User';
 
 dotenv.config();
 

@@ -3,7 +3,7 @@ import { DoneTodoInteractor } from 'domain-model/src/usecase/todo/DoneTodo';
 import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
 
 import { ApolloServerContext } from '../../../types';
-import { TodoRepository } from '../../../../../repository/typeorm/Todo';
+import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
 import { DoneTodoPresenter } from '../../../../../presenter/todo/DoneTodo';
 
 export const doneTodo: MutationResolvers<ApolloServerContext> = {

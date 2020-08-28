@@ -4,7 +4,7 @@ import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 import { RoleTypes } from 'domain-model/src/entity/common/Role';
 import { UserRepository as UserRepositoryIF } from 'domain-model/src/usecase/user/interface/repository';
 
-import { User as OrmUser, OrmUserFactory } from '../../infrastructure/typeorm/entity/User';
+import { User as OrmUser, OrmUserFactory } from '../entity/User';
 
 export class UserRepository implements UserRepositoryIF {
   private dbConnection: Connection;

@@ -1,5 +1,5 @@
 import { TodoResolvers } from 'schema/types';
-import { UserRepository } from '../../../../repository/typeorm/User';
+import { UserRepository } from '../../../../repository/typeorm/user/repository/User';
 
 export const Todo: TodoResolvers = {
   owner: async (parent, args, ctx) => {

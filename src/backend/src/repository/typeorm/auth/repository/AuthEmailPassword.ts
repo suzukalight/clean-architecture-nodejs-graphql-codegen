@@ -5,7 +5,7 @@ import { AuthEmailPasswordDto } from 'domain-model/src/entity/auth/AuthEmailPass
 import {
   AuthEmailPassword as OrmAuthEmailPassword,
   OrmAuthEmailPasswordFactory,
-} from '../../../infrastructure/typeorm/entity/auth/EmailPassword';
+} from '../entity/AuthEmailPassword';
 
 export class AuthEmailPasswordRepository implements AuthEmailPasswordRepositoryIF {
   private dbConnection: Connection;

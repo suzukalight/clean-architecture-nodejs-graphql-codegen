@@ -3,7 +3,7 @@ import { UndoneTodoInteractor } from 'domain-model/src/usecase/todo/UndoneTodo';
 import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
 
 import { ApolloServerContext } from '../../../types';
-import { TodoRepository } from '../../../../../repository/typeorm/Todo';
+import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
 import { UndoneTodoPresenter } from '../../../../../presenter/todo/UndoneTodo';
 
 export const undoneTodo: MutationResolvers<ApolloServerContext> = {

@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
-import { User } from './entity/User';
-import { Todo } from './entity/Todo';
-import { AuthEmailPassword } from './entity/auth/EmailPassword';
+import { User } from '../../repository/typeorm/user/entity/User';
+import { Todo } from '../../repository/typeorm/todo/entity/Todo';
+import { AuthEmailPassword } from '../../repository/typeorm/auth/entity/AuthEmailPassword';
 
 export const createDbConnection = async () => {
   return createConnection({

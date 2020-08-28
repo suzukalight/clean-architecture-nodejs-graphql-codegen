@@ -4,7 +4,7 @@ import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decisio
 
 import { ApolloServerContext } from '../../../types';
 import { GetTodoPresenter } from '../../../../../presenter/todo/GetTodo';
-import { TodoRepository } from '../../../../../repository/typeorm/Todo';
+import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
 
 export const todo: QueryResolvers<ApolloServerContext> = {
   todo: async (_parent, args, { dbConnection, actor }) => {

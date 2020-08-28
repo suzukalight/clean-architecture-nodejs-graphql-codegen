@@ -2,8 +2,8 @@ import { MutationResolvers } from 'schema/types';
 import { SignUpEmailPasswordInteractor } from 'domain-model/src/usecase/auth/SignUpEmailPassword';
 
 import { ApolloServerContext } from '../../../types';
-import { UserRepository } from '../../../../../repository/typeorm/User';
-import { AuthEmailPasswordRepository } from '../../../../../repository/typeorm/auth/AuthEmailPassword';
+import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';
+import { AuthEmailPasswordRepository } from '../../../../../repository/typeorm/auth/repository/AuthEmailPassword';
 import { SignUpEmailPasswordPresenter } from '../../../../../presenter/auth/SignUpEmailPassword';
 
 export const signUpEmailPassword: MutationResolvers<ApolloServerContext> = {

@@ -3,9 +3,9 @@ import { CreateTodoInteractor } from 'domain-model/src/usecase/todo/CreateTodo';
 import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
 
 import { ApolloServerContext } from '../../../types';
-import { TodoRepository } from '../../../../../repository/typeorm/Todo';
+import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
 import { CreateTodoPresenter } from '../../../../../presenter/todo/CreateTodo';
-import { UserRepository } from '../../../../../repository/typeorm/User';
+import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';
 
 export const createTodo: MutationResolvers<ApolloServerContext> = {
   createTodo: async (_parent, args, { dbConnection, actor }) => {

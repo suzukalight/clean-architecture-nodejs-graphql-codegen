@@ -13,7 +13,7 @@ import {
   AuthEmailPasswordDto,
 } from 'domain-model/src/entity/auth/AuthEmailPasswordEntity';
 
-import { User } from '../User';
+import { User } from '../../user/entity/User';
 
 @Entity('authEmailPasswords')
 export class AuthEmailPassword {
