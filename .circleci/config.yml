@@ -1,0 +1,43 @@
+version: 2.1
+
+defaults: &defaults
+  parameters:
+    cache-key:
+      type: string
+      default: yarn.lock
+    cache-version:
+      type: string
+      default: v1.0.0
+
+node: &node
+  working_directory: ~/repo
+  executor:
+    name: 'node/default'
+    tag: '14.4.0'
+
+orbs:
+  node: circleci/node@1.1.6
+
+jobs:
+  test:
+    <<: *defaults
+    <<: *node
+    steps:
+      - checkout
+      - node/install-yarn:
+          version: '1.22.2'
+      - restore_cache:
+          keys:
+            - dpendencies-<< parameters.cache-version >>-{{ checksum "<< parameters.cache-key >>" }}
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
+      - save_cache:
+          paths:
+            - node_modules
+          key: dpendencies-<< parameters.cache-version >>-{{ checksum "<< parameters.cache-key >>" }}
+
+workflows:
+  lint-feature-workflow:
+    jobs:
+      - test
