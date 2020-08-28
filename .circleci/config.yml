@@ -38,6 +38,6 @@ jobs:
           key: dpendencies-<< parameters.cache-version >>-{{ checksum "<< parameters.cache-key >>" }}
 
 workflows:
-  lint-feature-workflow:
+  testing-workflow:
     jobs:
       - test
