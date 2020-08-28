@@ -10,7 +10,7 @@ import { AuthEmailPasswordRepository } from '../../../repository/typeorm/auth/re
 
 /**
  * ユーザを3名作成（Admin, Member, Anonymous）
- * @param dbConnection 
+ * @param dbConnection
  */
 const seedUsers = async (dbConnection: Connection) => {
   const repository = new UserRepository(dbConnection);
@@ -36,8 +36,8 @@ const seedUsers = async (dbConnection: Connection) => {
 
 /**
  * 指定されたユーザのEmail認証を作成
- * @param dbConnection 
- * @param user 
+ * @param dbConnection
+ * @param user
  */
 const seedAuth = async (dbConnection: Connection, user: UserEntity) => {
   const repository = new AuthEmailPasswordRepository(dbConnection);
@@ -52,9 +52,9 @@ const seedAuth = async (dbConnection: Connection, user: UserEntity) => {
 
 /**
  * 指定されたユーザのTODOアイテムを作成
- * @param dbConnection 
- * @param user 
- * @param title 
+ * @param dbConnection
+ * @param user
+ * @param title
  */
 const seedTodo = async (dbConnection: Connection, user: UserEntity, title?: string) => {
   const repository = new TodoRepository(dbConnection);
