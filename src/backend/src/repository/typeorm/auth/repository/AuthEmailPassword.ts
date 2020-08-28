@@ -30,7 +30,6 @@ export class AuthEmailPasswordRepository implements AuthEmailPasswordRepositoryI
       request.passwordEncrypted,
     );
     const result = await this.repository.save(auth);
-    console.log('AuthEmailPasswordRepository', request, result);
     if (!result) return null;
 
     return OrmAuthEmailPasswordFactory.toEntity(result);
