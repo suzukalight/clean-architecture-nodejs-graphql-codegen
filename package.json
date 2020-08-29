@@ -8,13 +8,6 @@
   "workspaces": {
     "packages": [
       "src/*"
-    ],
-    "nohoist": [
-      "**/react-scripts",
-      "**/react-scripts/**",
-      "**/@zeit/**",
-      "**/@generated",
-      "**/@generated/**"
     ]
   },
   "scripts": {
@@ -29,12 +22,12 @@
     "lint": "tsc --noEmit && eslint --fix ./src",
     "test": "yarn test:domain",
     "test:domain": "yarn workspace domain-model test",
-    "test:backend": "yarn workspace backend test",
     "codegen": "yarn codegen:schema",
     "codegen:schema": "yarn workspace schema codegen",
     "docker": "yarn docker:backend",
     "docker:backend": "yarn workspace backend docker",
-    "db:migrate": "yarn workspace backend db:migrate"
+    "db:migrate": "yarn workspace backend db:migrate",
+    "db:seed": "yarn workspace backend db:seed"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
