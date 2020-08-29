@@ -16,13 +16,21 @@ Clean Architecture の学習を目的とした、Node.js(apollo-server-express) 
 
 # 動作確認
 
-## API サーバ
+## セットアップ
 
-docker-compose と node.js が必要です。スプリクト実行に yarn を使用しています。
+docker-compose と node.js が必要です。スプリクト実行に yarn を使用しています。依存関係にあるファイルは予めビルドする必要があるため、ビルドも一度行います。
 
 ```
+yarn
+yarn build
 yarn docker
 yarn db:migrate
+yarn db:seed
+```
+
+## ts-node-dev による実行（開発時）
+
+```
 yarn dev:backend
 ```
 
@@ -31,11 +39,16 @@ http://localhost:3000/graphql
 
 ## テスト
 
-docker と db:migrate を使用した上で、下記のテストコマンドを実行；
-
 ```
 yarn test
 ```
+
+## ビルド
+
+```
+yarn build
+```
+
 
 # プロジェクト構成
 
