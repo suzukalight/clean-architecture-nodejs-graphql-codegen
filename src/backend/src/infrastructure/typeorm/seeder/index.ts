@@ -1,7 +1,5 @@
 import { Connection } from 'typeorm';
-import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
-import { RoleTypes, Role } from 'domain-model/src/entity/common/Role';
-import { encryptPassword } from 'domain-model/src/entity/common/Password';
+import { UserEntity, RoleTypes, Role, encryptPassword } from 'domain-model';
 
 import { createDbConnection } from '../connection';
 import { UserRepository } from '../../../repository/typeorm/user/repository/User';

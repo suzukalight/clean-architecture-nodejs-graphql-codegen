@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { SignUpEmailPasswordRequest } from 'schema/types';
-import { ConflictError } from 'common/error/Conflict';
+import { SignUpEmailPasswordRequest } from 'schema';
+import { ConflictError } from 'common';
 
 import { AuthEmailPasswordRepository } from './interface/repository';
 import { SignUpEmailPasswordUseCase } from './interface/usecase';

@@ -1,6 +1,5 @@
-import { DoneTodoResponse } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
-import { DoneTodoPresenter as DoneTodoPresenterIF } from 'domain-model/src/usecase/todo/interface/presenter';
+import { DoneTodoResponse } from 'schema';
+import { TodoEntity, DoneTodoPresenter as DoneTodoPresenterIF } from 'domain-model';
 
 export class DoneTodoPresenter implements DoneTodoPresenterIF {
   private response: DoneTodoResponse;

@@ -1,4 +1,4 @@
-import { CreateUserRequest, UpdateUserRolesRequest, Maybe } from 'schema/types';
+import { CreateUserRequest, UpdateUserRolesRequest, Maybe } from 'schema';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
 interface UserUseCase<Request> {

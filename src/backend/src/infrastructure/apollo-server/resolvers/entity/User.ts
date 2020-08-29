@@ -1,4 +1,5 @@
-import { UserResolvers } from 'schema/types';
+import { UserResolvers } from 'schema';
+
 import { TodoRepository } from '../../../../repository/typeorm/todo/repository/Todo';
 
 export const User: UserResolvers = {

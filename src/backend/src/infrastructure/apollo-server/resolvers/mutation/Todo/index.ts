@@ -1,4 +1,4 @@
-import { MutationResolvers } from 'schema/types';
+import { MutationResolvers } from 'schema';
 
 import { ApolloServerContext } from '../../../types';
 import { createTodo } from './createTodo';

@@ -1,2 +1,4 @@
+build/
 docker/db/data
 .env
+tsconfig.tsbuildinfo

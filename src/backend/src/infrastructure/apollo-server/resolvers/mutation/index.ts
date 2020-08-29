@@ -1,4 +1,4 @@
-import { MutationResolvers } from 'schema/types';
+import { MutationResolvers } from 'schema';
 
 import { User } from './User';
 import { Todo } from './Todo';

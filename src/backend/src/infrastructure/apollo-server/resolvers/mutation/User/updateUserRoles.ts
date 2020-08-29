@@ -1,6 +1,5 @@
-import { MutationResolvers } from 'schema/types';
-import { UpdateUserRolesInteractor } from 'domain-model/src/usecase/user/UpdateUserRoles';
-import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
+import { MutationResolvers } from 'schema';
+import { UpdateUserRolesInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
 import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';

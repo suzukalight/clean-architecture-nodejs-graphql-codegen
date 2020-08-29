@@ -1,6 +1,5 @@
-import { UpdateUserRolesResponse, Maybe } from 'schema/types';
-import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
-import { UpdateUserRolesPresenter as UpdateUserRolesPresenterIF } from 'domain-model/src/usecase/user/interface/presenter';
+import { UpdateUserRolesResponse, Maybe } from 'schema';
+import { UserEntity, UpdateUserRolesPresenter as UpdateUserRolesPresenterIF } from 'domain-model';
 
 export class UpdateUserRolesPresenter implements UpdateUserRolesPresenterIF {
   private response: Maybe<UpdateUserRolesResponse> = null;

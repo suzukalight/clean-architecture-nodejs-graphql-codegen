@@ -4,7 +4,7 @@ import {
   UndoneTodoRequest,
   DeleteTodoRequest,
   Maybe,
-} from 'schema/types';
+} from 'schema';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
 interface TodoUseCase<Request> {

@@ -1,5 +1,5 @@
-import { Maybe, DoneTodoRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
+import { Maybe, DoneTodoRequest } from 'schema';
+import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { DoneTodoUseCase } from './interface/usecase';

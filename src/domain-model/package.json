@@ -1,20 +1,22 @@
 {
   "name": "domain-model",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "yarn clean && tsc -b",
+    "clean": "rimraf lib *.tsbuildinfo",
     "test": "env-cmd -f .env.default jest"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "common": "*",
+    "common": "file:../common",
     "dotenv": "^8.2.0",
     "graphql-scalars": "^1.2.6",
     "jsonwebtoken": "^8.5.1",
-    "schema": "*"
+    "schema": "file:../schema"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

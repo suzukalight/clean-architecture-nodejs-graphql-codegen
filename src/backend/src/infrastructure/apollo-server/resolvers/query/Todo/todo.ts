@@ -1,6 +1,5 @@
-import { QueryResolvers } from 'schema/types';
-import { GetTodoInteractor } from 'domain-model/src/usecase/todo/GetTodo';
-import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
+import { QueryResolvers } from 'schema';
+import { GetTodoInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
 import { GetTodoPresenter } from '../../../../../presenter/todo/GetTodo';

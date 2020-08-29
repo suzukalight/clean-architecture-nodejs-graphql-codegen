@@ -1,21 +1,19 @@
-import { User } from 'schema/types';
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
-import { ValidationError } from 'common/error/Validation';
+import { User } from 'schema';
+import { PropertyRequiredError, IllegalArgumentError, ValidationError } from 'common';
 
 import { ID } from '../common/ID';
 import { Email } from '../common/Email';
 import { Role, RoleTypes, RoleType } from '../common/Role';
-import { ConflictError } from 'common/error/Conflict';
+import { ConflictError } from 'common';
 
-export const isValidRoles = (roles: RoleType[]) => {
+const isValidRoles = (roles: RoleType[]) => {
   if (!roles) throw new PropertyRequiredError('roles');
   if (!roles.length) throw new IllegalArgumentError('1つ以上のロールが必要です');
   roles.forEach((role) => new Role(role));
   return true;
 };
 
-export const isValidArguments = (user: User) => {
+const isValidArguments = (user: User) => {
   if (!user) throw new PropertyRequiredError('user');
   if (!user.id) throw new PropertyRequiredError('id');
   if (!user.email) throw new PropertyRequiredError('email');

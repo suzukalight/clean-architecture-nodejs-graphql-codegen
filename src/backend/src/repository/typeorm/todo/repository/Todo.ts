@@ -1,8 +1,7 @@
 import { Connection, Repository } from 'typeorm';
-import { NotFoundError } from 'common/error/NotFound';
-import { CreateTodoRequest, TodoStatus, DeleteTodoRequest } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
-import { TodoRepository as TodoRepositoryIF } from 'domain-model/src/usecase/todo/interface/repository';
+import { NotFoundError } from 'common';
+import { CreateTodoRequest, TodoStatus, DeleteTodoRequest } from 'schema';
+import { TodoEntity, TodoRepository as TodoRepositoryIF } from 'domain-model';
 
 import { Todo as OrmTodo, OrmTodoFactory } from '../entity/Todo';
 

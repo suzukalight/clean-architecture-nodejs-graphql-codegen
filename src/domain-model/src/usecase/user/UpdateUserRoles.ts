@@ -1,5 +1,5 @@
-import { Maybe, UpdateUserRolesRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
+import { Maybe, UpdateUserRolesRequest } from 'schema';
+import { NotFoundError } from 'common';
 
 import { UserRepository } from './interface/repository';
 import { UpdateUserRolesUseCase } from './interface/usecase';

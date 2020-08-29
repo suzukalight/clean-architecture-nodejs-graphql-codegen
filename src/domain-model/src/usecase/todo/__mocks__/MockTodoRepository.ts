@@ -1,5 +1,5 @@
-import { CreateTodoRequest, TodoStatus, DeleteTodoRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
+import { CreateTodoRequest, TodoStatus, DeleteTodoRequest } from 'schema';
+import { NotFoundError } from 'common';
 
 import { TodoEntity } from '../../../entity/todo/TodoEntity';
 import { TodoRepository } from '../interface/repository';

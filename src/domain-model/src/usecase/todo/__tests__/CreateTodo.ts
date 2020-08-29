@@ -1,4 +1,4 @@
-import { NotFoundError } from 'common/error/NotFound';
+import { NotFoundError } from 'common';
 
 import { CreateTodoInteractor } from '../CreateTodo';
 import { MockTodoRepository } from '../__mocks__/MockTodoRepository';

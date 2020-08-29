@@ -1,5 +1,5 @@
-import { CreateUserRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
+import { CreateUserRequest } from 'schema';
+import { NotFoundError } from 'common';
 
 import { RoleTypes } from '../../../entity/common/Role';
 import { UserEntity } from '../../../entity/user/UserEntity';

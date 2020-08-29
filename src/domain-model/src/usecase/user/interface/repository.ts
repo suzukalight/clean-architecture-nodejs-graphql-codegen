@@ -1,4 +1,4 @@
-import { Maybe, CreateUserRequest } from 'schema/types';
+import { Maybe, CreateUserRequest } from 'schema';
 
 import { UserEntity } from '../../../entity/user/UserEntity';
 

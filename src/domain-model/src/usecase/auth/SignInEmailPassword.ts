@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { SignInEmailPasswordRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
-import { AuthenticationFailedError } from 'common/error/AuthenticationFailed';
+import { SignInEmailPasswordRequest } from 'schema';
+import { NotFoundError, AuthenticationFailedError } from 'common';
 
 import { AuthEmailPasswordRepository } from './interface/repository';
 import { SignInEmailPasswordUseCase } from './interface/usecase';

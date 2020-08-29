@@ -1,4 +1,4 @@
-import { Maybe, CreateTodoRequest, DeleteTodoRequest } from 'schema/types';
+import { Maybe, CreateTodoRequest, DeleteTodoRequest } from 'schema';
 
 import { TodoEntity } from '../../../entity/todo/TodoEntity';
 

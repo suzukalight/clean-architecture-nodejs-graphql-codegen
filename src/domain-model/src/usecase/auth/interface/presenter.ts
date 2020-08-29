@@ -1,4 +1,4 @@
-import { Maybe, SignInEmailPasswordResponse, SignUpEmailPasswordResponse } from 'schema/types';
+import { Maybe, SignInEmailPasswordResponse, SignUpEmailPasswordResponse } from 'schema';
 
 import { UserEntity } from '../../../entity/user/UserEntity';
 

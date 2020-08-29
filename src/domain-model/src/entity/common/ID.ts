@@ -1,5 +1,4 @@
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
+import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 const isValid = (id: string) => {
   if (!id) throw new PropertyRequiredError('id');

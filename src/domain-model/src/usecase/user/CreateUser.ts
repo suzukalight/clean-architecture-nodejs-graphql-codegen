@@ -1,4 +1,4 @@
-import { CreateUserRequest } from 'schema/types';
+import { CreateUserRequest } from 'schema';
 
 import { UserRepository } from './interface/repository';
 import { CreateUserUseCase } from './interface/usecase';

@@ -1,6 +1,5 @@
-import { MutationResolvers } from 'schema/types';
-import { DeleteTodoInteractor } from 'domain-model/src/usecase/todo/DeleteTodo';
-import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
+import { MutationResolvers } from 'schema';
+import { DeleteTodoInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
 import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';

@@ -5,7 +5,7 @@ import {
   DoneTodoResponse,
   UndoneTodoResponse,
   DeleteTodoResponse,
-} from 'schema/types';
+} from 'schema';
 
 import { TodoEntity } from '../../../entity/todo/TodoEntity';
 

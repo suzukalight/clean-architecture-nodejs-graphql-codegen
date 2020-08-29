@@ -1,6 +1,5 @@
-import { Maybe, Role } from 'schema/types';
-import { AuthenticationFailedError } from 'common/error/AuthenticationFailed';
-import { UnauthorizedError } from 'common/error/Unauthorized';
+import { Maybe, Role } from 'schema';
+import { AuthenticationFailedError, UnauthorizedError } from 'common';
 
 import { ID } from '../../entity/common/ID';
 import { UserEntity } from '../../entity/user/UserEntity';

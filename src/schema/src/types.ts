@@ -1,7 +1,8 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } &
+  { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -14,7 +15,7 @@ export type Scalars = {
 
 export enum TodoStatus {
   Undone = 'UNDONE',
-  Done = 'DONE'
+  Done = 'DONE',
 }
 
 export type Todo = {
@@ -32,7 +33,7 @@ export type Todo = {
 export enum Role {
   Anonymous = 'ANONYMOUS',
   Member = 'MEMBER',
-  Admin = 'ADMIN'
+  Admin = 'ADMIN',
 }
 
 export type User = {
@@ -44,7 +45,6 @@ export type User = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   todos?: Maybe<Array<Maybe<Todo>>>;
 };
-
 
 export type SignUpEmailPasswordRequest = {
   email: Scalars['String'];
@@ -80,41 +80,33 @@ export type Mutation = {
   updateUserRoles?: Maybe<UpdateUserRolesResponse>;
 };
 
-
 export type MutationCreateTodoArgs = {
   input?: Maybe<CreateTodoRequest>;
 };
-
 
 export type MutationCreateUserArgs = {
   input?: Maybe<CreateUserRequest>;
 };
 
-
 export type MutationDeleteTodoArgs = {
   input?: Maybe<DeleteTodoRequest>;
 };
-
 
 export type MutationDoneTodoArgs = {
   input?: Maybe<DoneTodoRequest>;
 };
 
-
 export type MutationSignInEmailPasswordArgs = {
   input?: Maybe<SignInEmailPasswordRequest>;
 };
-
 
 export type MutationSignUpEmailPasswordArgs = {
   input?: Maybe<SignUpEmailPasswordRequest>;
 };
 
-
 export type MutationUndoneTodoArgs = {
   input?: Maybe<UndoneTodoRequest>;
 };
-
 
 export type MutationUpdateUserRolesArgs = {
   input?: Maybe<UpdateUserRolesRequest>;
@@ -164,11 +156,9 @@ export type Query = {
   user?: Maybe<User>;
 };
 
-
 export type QueryTodoArgs = {
   id: Scalars['ID'];
 };
-
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
@@ -198,7 +188,6 @@ export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-
 export type LegacyStitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
@@ -208,7 +197,9 @@ export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
   selectionSet: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type StitchingResolver<TResult, TParent, TContext, TArgs> = LegacyStitchingResolver<TResult, TParent, TContext, TArgs> | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
+export type StitchingResolver<TResult, TParent, TContext, TArgs> =
+  | LegacyStitchingResolver<TResult, TParent, TContext, TArgs>
+  | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | StitchingResolver<TResult, TParent, TContext, TArgs>;
@@ -217,24 +208,30 @@ export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => AsyncIterator<TResult> | Promise<AsyncIterator<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
-export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
+export interface SubscriptionSubscriberObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs
+> {
   subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>;
   resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>;
 }
@@ -248,17 +245,26 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
+export type SubscriptionResolver<
+  TResult,
+  TKey extends string,
+  TParent = {},
+  TContext = {},
+  TArgs = {}
+> =
   | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}> = (obj: T, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}> = (
+  obj: T,
+  info: GraphQLResolveInfo,
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -267,7 +273,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
@@ -328,7 +334,10 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
 }>;
 
-export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = ResolversObject<{
+export type TodoResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   ownerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -340,7 +349,10 @@ export type TodoResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+export type UserResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
+> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   roles?: Resolver<Array<ResolversTypes['Role']>, ParentType, ContextType>;
@@ -350,64 +362,145 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+export interface DateTimeScalarConfig
+  extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
 }
 
-export type SignUpEmailPasswordResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignUpEmailPasswordResponse'] = ResolversParentTypes['SignUpEmailPasswordResponse']> = ResolversObject<{
+export type SignUpEmailPasswordResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['SignUpEmailPasswordResponse'] = ResolversParentTypes['SignUpEmailPasswordResponse']
+> = ResolversObject<{
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type SignInEmailPasswordResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignInEmailPasswordResponse'] = ResolversParentTypes['SignInEmailPasswordResponse']> = ResolversObject<{
+export type SignInEmailPasswordResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['SignInEmailPasswordResponse'] = ResolversParentTypes['SignInEmailPasswordResponse']
+> = ResolversObject<{
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createTodo?: Resolver<Maybe<ResolversTypes['CreateTodoResponse']>, ParentType, ContextType, RequireFields<MutationCreateTodoArgs, never>>;
-  createUser?: Resolver<Maybe<ResolversTypes['CreateUserResponse']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, never>>;
-  deleteTodo?: Resolver<Maybe<ResolversTypes['DeleteTodoResponse']>, ParentType, ContextType, RequireFields<MutationDeleteTodoArgs, never>>;
-  doneTodo?: Resolver<Maybe<ResolversTypes['DoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationDoneTodoArgs, never>>;
-  signInEmailPassword?: Resolver<Maybe<ResolversTypes['SignInEmailPasswordResponse']>, ParentType, ContextType, RequireFields<MutationSignInEmailPasswordArgs, never>>;
-  signUpEmailPassword?: Resolver<Maybe<ResolversTypes['SignUpEmailPasswordResponse']>, ParentType, ContextType, RequireFields<MutationSignUpEmailPasswordArgs, never>>;
-  undoneTodo?: Resolver<Maybe<ResolversTypes['UndoneTodoResponse']>, ParentType, ContextType, RequireFields<MutationUndoneTodoArgs, never>>;
-  updateUserRoles?: Resolver<Maybe<ResolversTypes['UpdateUserRolesResponse']>, ParentType, ContextType, RequireFields<MutationUpdateUserRolesArgs, never>>;
+export type MutationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
+> = ResolversObject<{
+  createTodo?: Resolver<
+    Maybe<ResolversTypes['CreateTodoResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateTodoArgs, never>
+  >;
+  createUser?: Resolver<
+    Maybe<ResolversTypes['CreateUserResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateUserArgs, never>
+  >;
+  deleteTodo?: Resolver<
+    Maybe<ResolversTypes['DeleteTodoResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDeleteTodoArgs, never>
+  >;
+  doneTodo?: Resolver<
+    Maybe<ResolversTypes['DoneTodoResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationDoneTodoArgs, never>
+  >;
+  signInEmailPassword?: Resolver<
+    Maybe<ResolversTypes['SignInEmailPasswordResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationSignInEmailPasswordArgs, never>
+  >;
+  signUpEmailPassword?: Resolver<
+    Maybe<ResolversTypes['SignUpEmailPasswordResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationSignUpEmailPasswordArgs, never>
+  >;
+  undoneTodo?: Resolver<
+    Maybe<ResolversTypes['UndoneTodoResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUndoneTodoArgs, never>
+  >;
+  updateUserRoles?: Resolver<
+    Maybe<ResolversTypes['UpdateUserRolesResponse']>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateUserRolesArgs, never>
+  >;
 }>;
 
-export type CreateTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateTodoResponse'] = ResolversParentTypes['CreateTodoResponse']> = ResolversObject<{
+export type CreateTodoResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['CreateTodoResponse'] = ResolversParentTypes['CreateTodoResponse']
+> = ResolversObject<{
   todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type DoneTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DoneTodoResponse'] = ResolversParentTypes['DoneTodoResponse']> = ResolversObject<{
+export type DoneTodoResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['DoneTodoResponse'] = ResolversParentTypes['DoneTodoResponse']
+> = ResolversObject<{
   todo?: Resolver<ResolversTypes['Todo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type UndoneTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UndoneTodoResponse'] = ResolversParentTypes['UndoneTodoResponse']> = ResolversObject<{
+export type UndoneTodoResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['UndoneTodoResponse'] = ResolversParentTypes['UndoneTodoResponse']
+> = ResolversObject<{
   todo?: Resolver<ResolversTypes['Todo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type DeleteTodoResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteTodoResponse'] = ResolversParentTypes['DeleteTodoResponse']> = ResolversObject<{
+export type DeleteTodoResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['DeleteTodoResponse'] = ResolversParentTypes['DeleteTodoResponse']
+> = ResolversObject<{
   todo?: Resolver<ResolversTypes['Todo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QueryTodoArgs, 'id'>>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+export type QueryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
+> = ResolversObject<{
+  todo?: Resolver<
+    Maybe<ResolversTypes['Todo']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryTodoArgs, 'id'>
+  >;
+  user?: Resolver<
+    Maybe<ResolversTypes['User']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryUserArgs, 'id'>
+  >;
 }>;
 
-export type CreateUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateUserResponse'] = ResolversParentTypes['CreateUserResponse']> = ResolversObject<{
+export type CreateUserResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['CreateUserResponse'] = ResolversParentTypes['CreateUserResponse']
+> = ResolversObject<{
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type UpdateUserRolesResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateUserRolesResponse'] = ResolversParentTypes['UpdateUserRolesResponse']> = ResolversObject<{
+export type UpdateUserRolesResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['UpdateUserRolesResponse'] = ResolversParentTypes['UpdateUserRolesResponse']
+> = ResolversObject<{
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
@@ -427,7 +520,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;
   UpdateUserRolesResponse?: UpdateUserRolesResponseResolvers<ContextType>;
 }>;
-
 
 /**
  * @deprecated

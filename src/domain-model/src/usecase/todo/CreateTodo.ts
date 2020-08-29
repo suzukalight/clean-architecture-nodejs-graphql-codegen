@@ -1,5 +1,5 @@
-import { CreateTodoRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
+import { CreateTodoRequest } from 'schema';
+import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { CreateTodoUseCase } from './interface/usecase';

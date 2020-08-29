@@ -1,5 +1,4 @@
-import { NotFoundError } from 'common/error/NotFound';
-import { UnauthorizedError } from 'common/error/Unauthorized';
+import { NotFoundError, UnauthorizedError } from 'common';
 
 import { DeleteTodoInteractor } from '../DeleteTodo';
 import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
