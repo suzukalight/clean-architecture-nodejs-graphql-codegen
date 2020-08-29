@@ -1,2 +1,6 @@
-src/schema/types.ts
+node_modules/**
+**/node_modules/**
+src/schema/src/types.ts
 **/migration/*
+**/lib/*
+**/build/*
