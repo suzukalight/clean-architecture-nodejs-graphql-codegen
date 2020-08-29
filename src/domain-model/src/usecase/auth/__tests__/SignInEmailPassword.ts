@@ -1,5 +1,4 @@
-import { NotFoundError } from 'common/error/NotFound';
-import { AuthenticationFailedError } from 'common/error/AuthenticationFailed';
+import { NotFoundError, AuthenticationFailedError } from 'common';
 
 import { SignInEmailPasswordInteractor } from '../SignInEmailPassword';
 import { encryptPassword } from '../../../entity/common/Password';

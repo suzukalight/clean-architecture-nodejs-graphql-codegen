@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
+import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 const isValid = (passwordEncrypted: string) => {
   if (!passwordEncrypted) throw new PropertyRequiredError('passwordEncrypted');

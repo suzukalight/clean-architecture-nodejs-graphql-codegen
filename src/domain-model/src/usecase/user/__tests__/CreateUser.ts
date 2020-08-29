@@ -1,4 +1,4 @@
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
+import { IllegalArgumentError } from 'common';
 
 import { CreateUserInteractor } from '../CreateUser';
 import { MockUserRepository } from '../__mocks__/MockUserRepository';

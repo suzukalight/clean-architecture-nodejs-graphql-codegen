@@ -1,4 +1,4 @@
-import { SignInEmailPasswordRequest, SignUpEmailPasswordRequest } from 'schema/types';
+import { SignInEmailPasswordRequest, SignUpEmailPasswordRequest } from 'schema';
 
 interface AuthUseCase<Request> {
   handle(request: Request): void;

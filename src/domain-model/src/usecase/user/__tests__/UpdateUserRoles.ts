@@ -1,7 +1,5 @@
-import { UpdateUserRolesRequest } from 'schema/types';
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
-import { NotFoundError } from 'common/error/NotFound';
-import { UnauthorizedError } from 'common/error/Unauthorized';
+import { UpdateUserRolesRequest } from 'schema';
+import { IllegalArgumentError, NotFoundError, UnauthorizedError } from 'common';
 
 import { UpdateUserRolesInteractor } from '../UpdateUserRoles';
 import { RoleTypes } from '../../../entity/common/Role';

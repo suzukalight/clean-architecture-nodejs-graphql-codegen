@@ -1,4 +1,4 @@
-import { Maybe } from 'schema/types';
+import { Maybe } from 'schema';
 import {
   AuthEmailPasswordEntity,
   AuthEmailPasswordDto,

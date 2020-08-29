@@ -1,7 +1,5 @@
-import { TodoStatus } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
-import { ConflictError } from 'common/error/Conflict';
-import { UnauthorizedError } from 'common/error/Unauthorized';
+import { TodoStatus } from 'schema';
+import { NotFoundError, ConflictError, UnauthorizedError } from 'common';
 
 import { UndoneTodoInteractor } from '../UndoneTodo';
 import { MockTodoRepository } from '../__mocks__/MockTodoRepository';

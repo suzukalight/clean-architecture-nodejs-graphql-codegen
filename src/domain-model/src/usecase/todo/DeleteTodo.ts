@@ -1,5 +1,5 @@
-import { Maybe, DeleteTodoRequest } from 'schema/types';
-import { NotFoundError } from 'common/error/NotFound';
+import { Maybe, DeleteTodoRequest } from 'schema';
+import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { DeleteTodoUseCase } from './interface/usecase';

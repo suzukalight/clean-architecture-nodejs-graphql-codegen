@@ -5,7 +5,7 @@ import {
   DeleteTodoResponse,
   DoneTodoResponse,
   UndoneTodoResponse,
-} from 'schema/types';
+} from 'schema';
 
 import {
   GetTodoPresenter,

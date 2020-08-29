@@ -1,6 +1,5 @@
-import { Role as RoleSchema } from 'schema/types';
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
+import { Role as RoleSchema } from 'schema';
+import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 const validRoles = [RoleSchema.Anonymous, RoleSchema.Member, RoleSchema.Admin];
 

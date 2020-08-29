@@ -1,6 +1,5 @@
-import { User } from 'schema/types';
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { IllegalArgumentError } from 'common/error/IllegalArgument';
+import { User } from 'schema';
+import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 import { UserEntity } from '../UserEntity';
 import { RoleTypes } from '../../common/Role';

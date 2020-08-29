@@ -1,10 +1,9 @@
-import { TodoStatus, Todo } from 'schema/types';
-import { PropertyRequiredError } from 'common/error/PropertyRequired';
-import { ConflictError } from 'common/error/Conflict';
+import { TodoStatus, Todo } from 'schema';
+import { PropertyRequiredError, ConflictError } from 'common';
 
 import { ID } from '../common/ID';
 
-export const isValidArguments = (todo: Todo) => {
+const isValidArguments = (todo: Todo) => {
   if (!todo) throw new PropertyRequiredError('todo');
   if (!todo.id) throw new PropertyRequiredError('id');
   if (!todo.ownerId) throw new PropertyRequiredError('ownerId');
