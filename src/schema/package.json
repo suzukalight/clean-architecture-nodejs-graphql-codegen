@@ -1,10 +1,13 @@
 {
   "name": "schema",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
   "scripts": {
+    "build": "yarn clean && tsc -b",
+    "clean": "rimraf lib *.tsbuildinfo",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
