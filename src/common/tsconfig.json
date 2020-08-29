@@ -1,14 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    /* Basic Options */
+    "target": "ES2019",
+    "module": "commonjs",
+    "allowJs": true,
+    // "checkJs": true,
+    // "sourceMap": true,
+    "rootDir": "./src",
+    "outDir": "./lib",
+
+    /* Strict Type-Checking Options */
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+
+    /* Module Resolution Options */
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    /* Advanced Options */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.js"]
+  "exclude": ["node_modules", "lib", "**/__mocks__/*", "**/__tests__/*"],
+  "include": ["src/**/*"]
 }
