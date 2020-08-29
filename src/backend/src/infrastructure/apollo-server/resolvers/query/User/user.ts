@@ -1,6 +1,5 @@
-import { QueryResolvers } from 'schema/types';
-import { GetUserInteractor } from 'domain-model/src/usecase/user/GetUser';
-import { allowOnlyWhenActorHasMemberRole } from 'domain-model/src/policy/decision/common';
+import { QueryResolvers } from 'schema';
+import { GetUserInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
 import { GetUserPresenter } from '../../../../../presenter/user/GetUser';

@@ -6,11 +6,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { User as UserSchema } from 'schema';
+import { RoleType, UserEntity } from 'domain-model';
 
-import { User as UserSchema } from 'schema/types';
 import { Todo } from '../../todo/entity/Todo';
-import { RoleType } from 'domain-model/src/entity/common/Role';
-import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
 
 @Entity('users')
 export class User {

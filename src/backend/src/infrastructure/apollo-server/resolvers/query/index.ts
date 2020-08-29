@@ -1,4 +1,4 @@
-import { QueryResolvers } from 'schema/types';
+import { QueryResolvers } from 'schema';
 
 import { User } from './User';
 import { Todo } from './Todo';

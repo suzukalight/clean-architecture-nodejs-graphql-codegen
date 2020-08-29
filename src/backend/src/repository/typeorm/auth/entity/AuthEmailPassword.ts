@@ -7,11 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-
-import {
-  AuthEmailPasswordEntity,
-  AuthEmailPasswordDto,
-} from 'domain-model/src/entity/auth/AuthEmailPasswordEntity';
+import { AuthEmailPasswordEntity, AuthEmailPasswordDto } from 'domain-model';
 
 import { User } from '../../user/entity/User';
 

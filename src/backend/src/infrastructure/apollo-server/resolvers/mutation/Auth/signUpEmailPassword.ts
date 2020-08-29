@@ -1,5 +1,5 @@
-import { MutationResolvers } from 'schema/types';
-import { SignUpEmailPasswordInteractor } from 'domain-model/src/usecase/auth/SignUpEmailPassword';
+import { MutationResolvers } from 'schema';
+import { SignUpEmailPasswordInteractor } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
 import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';

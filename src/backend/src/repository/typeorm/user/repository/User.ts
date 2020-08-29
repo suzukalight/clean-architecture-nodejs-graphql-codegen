@@ -1,8 +1,6 @@
 import { Connection, Repository } from 'typeorm';
-import { User, CreateUserRequest } from 'schema/types';
-import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
-import { RoleTypes } from 'domain-model/src/entity/common/Role';
-import { UserRepository as UserRepositoryIF } from 'domain-model/src/usecase/user/interface/repository';
+import { User, CreateUserRequest } from 'schema';
+import { UserEntity, RoleTypes, UserRepository as UserRepositoryIF } from 'domain-model';
 
 import { User as OrmUser, OrmUserFactory } from '../entity/User';
 

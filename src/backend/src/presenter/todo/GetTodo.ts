@@ -1,7 +1,5 @@
-import { Maybe, Todo } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
-
-import { GetTodoPresenter as GetTodoPresenterIF } from 'domain-model/src/usecase/todo/interface/presenter';
+import { Maybe, Todo } from 'schema';
+import { TodoEntity, GetTodoPresenter as GetTodoPresenterIF } from 'domain-model';
 
 export class GetTodoPresenter implements GetTodoPresenterIF {
   private response: Maybe<Todo> = null;

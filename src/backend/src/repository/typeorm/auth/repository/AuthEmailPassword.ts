@@ -1,6 +1,8 @@
 import { Connection, Repository } from 'typeorm';
-import { AuthEmailPasswordRepository as AuthEmailPasswordRepositoryIF } from 'domain-model/src/usecase/auth/interface/repository';
-import { AuthEmailPasswordDto } from 'domain-model/src/entity/auth/AuthEmailPasswordEntity';
+import {
+  AuthEmailPasswordRepository as AuthEmailPasswordRepositoryIF,
+  AuthEmailPasswordDto,
+} from 'domain-model';
 
 import {
   AuthEmailPassword as OrmAuthEmailPassword,

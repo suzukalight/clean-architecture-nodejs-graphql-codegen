@@ -1,6 +1,8 @@
-import { Maybe, SignInEmailPasswordResponse } from 'schema/types';
-import { UserEntity } from 'domain-model/src/entity/user/UserEntity';
-import { SignInEmailPasswordPresenter as SignInEmailPasswordPresenterIF } from 'domain-model/src/usecase/auth/interface/presenter';
+import { Maybe, SignInEmailPasswordResponse } from 'schema';
+import {
+  UserEntity,
+  SignInEmailPasswordPresenter as SignInEmailPasswordPresenterIF,
+} from 'domain-model';
 
 export class SignInEmailPasswordPresenter implements SignInEmailPasswordPresenterIF {
   private response: Maybe<SignInEmailPasswordResponse> = null;

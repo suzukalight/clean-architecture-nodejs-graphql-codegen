@@ -1,5 +1,5 @@
-import { MutationResolvers } from 'schema/types';
-import { CreateUserInteractor } from 'domain-model/src/usecase/user/CreateUser';
+import { MutationResolvers } from 'schema';
+import { CreateUserInteractor } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
 import { UserRepository } from '../../../../../repository/typeorm/user/repository/User';

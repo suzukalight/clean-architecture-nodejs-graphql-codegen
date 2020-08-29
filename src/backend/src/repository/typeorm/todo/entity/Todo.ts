@@ -7,9 +7,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-
-import { Todo as TodoSchema, TodoStatus } from 'schema/types';
-import { TodoEntity } from 'domain-model/src/entity/todo/TodoEntity';
+import { Todo as TodoSchema, TodoStatus } from 'schema';
+import { TodoEntity } from 'domain-model';
 
 import { User } from '../../user/entity/User';
 
