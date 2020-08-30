@@ -2,7 +2,9 @@ import * as React from 'react';
 import { AppProps } from 'next/app';
 import { createTheme, Customizer, Fabric, initializeIcons } from '@fluentui/react';
 
-import { ResetStyle, GlobalStyle } from './styled';
+import './styled.scss';
+import '@fluentui/react/dist/css/fabric.css';
+import styles from './_app.module.scss';
 
 initializeIcons();
 
@@ -16,9 +18,9 @@ const theme = createTheme({
 const App = ({ Component, pageProps }: AppProps) => (
   <Customizer settings={{ theme }}>
     <Fabric applyTheme>
-      <ResetStyle />
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <div className={styles.wrap}>
+        <Component {...pageProps} />
+      </div>
     </Fabric>
   </Customizer>
 );

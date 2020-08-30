@@ -1,24 +1,26 @@
-import { GetServerSideProps } from 'next';
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { Stylesheet, InjectionMode, resetIds } from '@fluentui/react';
 
 type Props = {
   styleTags: string;
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const stylesheet = Stylesheet.getInstance();
-  stylesheet.setConfig({
-    injectionMode: InjectionMode.none,
-    namespace: 'server',
-  });
-  stylesheet.reset();
-  resetIds();
-
-  return { props: { styleTags: stylesheet.getRules(true) } };
-};
-
 class Document extends NextDocument<Props> {
+  static async getInitialProps(ctx: DocumentContext) {
+    // Fluent UI
+    const stylesheet = Stylesheet.getInstance();
+    stylesheet.setConfig({
+      injectionMode: InjectionMode.none,
+      namespace: 'server',
+    });
+    stylesheet.reset();
+    resetIds();
+
+    const page = ctx.renderPage((App) => (props) => <App {...props} />);
+
+    return { ...page, styleTags: stylesheet.getRules(true) };
+  }
+
   render() {
     return (
       <Html lang="ja">
