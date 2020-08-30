@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Nav, INavLinkGroup } from '@fluentui/react';
+import { Nav, INavLinkGroup, Stack, Persona, Separator } from '@fluentui/react';
 
 import styles from './index.module.scss';
 
@@ -7,71 +7,45 @@ const navLinkGroups: INavLinkGroup[] = [
   {
     links: [
       {
-        name: 'Home',
-        url: 'http://example.com',
-        expandAriaLabel: 'Expand Home section',
-        collapseAriaLabel: 'Collapse Home section',
-        links: [
-          {
-            name: 'Activity',
-            url: 'http://msn.com',
-            key: 'key1',
-            target: '_blank',
-          },
-          {
-            name: 'MSN',
-            url: 'http://msn.com',
-            disabled: true,
-            key: 'key2',
-            target: '_blank',
-          },
-        ],
-        isExpanded: true,
+        name: 'All Todos',
+        url: '?q=all',
+        key: 'alltodos',
+        icon: 'AllApps',
       },
       {
-        name: 'Documents',
-        url: 'http://example.com',
-        key: 'key3',
-        isExpanded: true,
-        target: '_blank',
+        name: 'Favorites',
+        url: '?q=favorites',
+        key: 'favorites',
+        icon: 'FavoriteStar',
       },
       {
-        name: 'Pages',
-        url: 'http://msn.com',
-        key: 'key4',
-        target: '_blank',
+        name: 'Deadlines',
+        url: '?q=deadlines',
+        key: 'deadlines',
+        icon: 'AlertSolid',
       },
       {
-        name: 'Notebook',
-        url: 'http://msn.com',
-        key: 'key5',
-        disabled: true,
-      },
-      {
-        name: 'Communication and Media',
-        url: 'http://msn.com',
-        key: 'key6',
-        target: '_blank',
-      },
-      {
-        name: 'News',
-        url: 'http://cnn.com',
-        icon: 'News',
-        key: 'key7',
-        target: '_blank',
+        name: 'SignOut',
+        url: '/signOut',
+        key: 'signout',
+        icon: 'SignOut',
       },
     ],
   },
 ];
 
 export const LeftNav: React.FC = () => (
-  <Nav
-    className={styles.root}
-    onLinkClick={() => {}}
-    selectedKey="key3"
-    ariaLabel="Nav basic example"
-    groups={navLinkGroups}
-  />
+  <Stack className={styles.root}>
+    <Persona imageInitials="MK" text="Masahiko Kubara" secondaryText="Engineer" />
+    <Separator />
+    <Nav
+      onLinkClick={() => {}}
+      selectedKey="key3"
+      ariaLabel="Nav basic example"
+      groups={navLinkGroups}
+    />
+    <Separator />
+  </Stack>
 );
 
 export default LeftNav;
