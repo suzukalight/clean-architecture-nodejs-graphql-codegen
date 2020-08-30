@@ -7,7 +7,7 @@ export type AddTodoProps = {
 
 const AddTodo: React.FC<AddTodoProps> = ({ onSubmit }) => (
   <Stack>
-    <Stack horizontal>
+    <Stack horizontal tokens={{ padding: 12 }}>
       <Stack.Item grow>
         <TextField placeholder="Add new item" />
       </Stack.Item>
