@@ -38,12 +38,7 @@ export const LeftNav: React.FC = () => (
   <Stack className={styles.root}>
     <Persona imageInitials="MK" text="Masahiko Kubara" secondaryText="Engineer" />
     <Separator />
-    <Nav
-      onLinkClick={() => {}}
-      selectedKey="key3"
-      ariaLabel="Nav basic example"
-      groups={navLinkGroups}
-    />
+    <Nav selectedKey="key3" ariaLabel="Nav basic example" groups={navLinkGroups} />
     <Separator />
   </Stack>
 );

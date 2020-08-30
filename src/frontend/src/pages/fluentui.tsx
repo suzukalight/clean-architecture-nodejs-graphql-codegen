@@ -1,28 +1,15 @@
 import * as React from 'react';
-import {
-  Checkbox,
-  IRenderFunction,
-  ICheckboxProps,
-  PrimaryButton,
-  Slider,
-  TextField,
-  Toggle,
-} from '@fluentui/react';
 
 import LeftNav from '../components/LeftNav';
-
-import styles from './fluentui.module.scss';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
+
+import styles from './fluentui.module.scss';
 
 const LeftPane = () => (
   <div className={styles.left}>
     <LeftNav />
   </div>
-);
-
-const CheckBoxLabelRenderer: IRenderFunction<{}> = (props: ICheckboxProps) => (
-  <div>'Helllllloooooo'</div>
 );
 
 const MainPane = () => (

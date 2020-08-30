@@ -1,3 +1,4 @@
+import * as React from 'react';
 import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { Stylesheet, InjectionMode, resetIds } from '@fluentui/react';
 
@@ -16,7 +17,7 @@ class Document extends NextDocument<Props> {
     stylesheet.reset();
     resetIds();
 
-    const page = ctx.renderPage((App) => (props) => <App {...props} />);
+    const page = ctx.renderPage((App) => (props) => <App {...props} />); // eslint-disable-line react/display-name
 
     return { ...page, styleTags: stylesheet.getRules(true) };
   }
