@@ -1,0 +1,12 @@
+query Todo($id: ID!) {
+  todo(id: $id) {
+    id
+    owner {
+      id
+      email
+    }
+    title
+    status
+    dueDate
+  }
+}
