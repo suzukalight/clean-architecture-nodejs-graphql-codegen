@@ -5,15 +5,20 @@
   "scripts": {
     "dev": "next dev -p 7777",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.1.4",
+    "@apollo/react-hooks": "^4.0.0",
     "@fluentui/react": "^7.133.0",
+    "graphql": "^15.3.0",
     "next": "9.3.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "sass": "^1.26.10",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "unfetch": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^14.6.2",
