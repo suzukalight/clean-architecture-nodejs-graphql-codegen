@@ -14,7 +14,7 @@ export type Scalars = {
 
 export enum TodoStatus {
   Undone = 'UNDONE',
-  Done = 'DONE'
+  Done = 'DONE',
 }
 
 export type Todo = {
@@ -32,7 +32,7 @@ export type Todo = {
 export enum Role {
   Anonymous = 'ANONYMOUS',
   Member = 'MEMBER',
-  Admin = 'ADMIN'
+  Admin = 'ADMIN',
 }
 
 export type User = {
@@ -44,7 +44,6 @@ export type User = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   todos?: Maybe<Array<Maybe<Todo>>>;
 };
-
 
 export type SignUpEmailPasswordRequest = {
   email: Scalars['String'];
@@ -80,41 +79,33 @@ export type Mutation = {
   updateUserRoles?: Maybe<UpdateUserRolesResponse>;
 };
 
-
 export type MutationCreateTodoArgs = {
   input?: Maybe<CreateTodoRequest>;
 };
-
 
 export type MutationCreateUserArgs = {
   input?: Maybe<CreateUserRequest>;
 };
 
-
 export type MutationDeleteTodoArgs = {
   input?: Maybe<DeleteTodoRequest>;
 };
-
 
 export type MutationDoneTodoArgs = {
   input?: Maybe<DoneTodoRequest>;
 };
 
-
 export type MutationSignInEmailPasswordArgs = {
   input?: Maybe<SignInEmailPasswordRequest>;
 };
-
 
 export type MutationSignUpEmailPasswordArgs = {
   input?: Maybe<SignUpEmailPasswordRequest>;
 };
 
-
 export type MutationUndoneTodoArgs = {
   input?: Maybe<UndoneTodoRequest>;
 };
-
 
 export type MutationUpdateUserRolesArgs = {
   input?: Maybe<UpdateUserRolesRequest>;
@@ -164,11 +155,9 @@ export type Query = {
   user?: Maybe<User>;
 };
 
-
 export type QueryTodoArgs = {
   id: Scalars['ID'];
 };
-
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
@@ -197,55 +186,49 @@ export type TodoQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-
-export type TodoQuery = (
-  { __typename?: 'Query' }
-  & { todo?: Maybe<(
-    { __typename?: 'Todo' }
-    & Pick<Todo, 'id' | 'title' | 'status' | 'dueDate'>
-    & { owner?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'email'>
-    )> }
-  )> }
-);
+export type TodoQuery = { __typename?: 'Query' } & {
+  todo?: Maybe<
+    { __typename?: 'Todo' } & Pick<Todo, 'id' | 'title' | 'status' | 'dueDate'> & {
+        owner?: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'email'>>;
+      }
+  >;
+};
 
 export type GetUserTodosQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-
-export type GetUserTodosQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'roles'>
-    & { todos?: Maybe<Array<Maybe<(
-      { __typename?: 'Todo' }
-      & Pick<Todo, 'id' | 'ownerId' | 'title' | 'status' | 'dueDate'>
-      & { owner?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'email'>
-      )> }
-    )>>> }
-  )> }
-);
-
+export type GetUserTodosQuery = { __typename?: 'Query' } & {
+  user?: Maybe<
+    { __typename?: 'User' } & Pick<User, 'id' | 'email' | 'roles'> & {
+        todos?: Maybe<
+          Array<
+            Maybe<
+              { __typename?: 'Todo' } & Pick<
+                Todo,
+                'id' | 'ownerId' | 'title' | 'status' | 'dueDate'
+              > & { owner?: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'email'>> }
+            >
+          >
+        >;
+      }
+  >;
+};
 
 export const TodoDocument = gql`
-    query Todo($id: ID!) {
-  todo(id: $id) {
-    id
-    owner {
+  query Todo($id: ID!) {
+    todo(id: $id) {
       id
-      email
+      owner {
+        id
+        email
+      }
+      title
+      status
+      dueDate
     }
-    title
-    status
-    dueDate
   }
-}
-    `;
+`;
 
 /**
  * __useTodoQuery__
@@ -264,34 +247,36 @@ export const TodoDocument = gql`
  * });
  */
 export function useTodoQuery(baseOptions?: Apollo.QueryHookOptions<TodoQuery, TodoQueryVariables>) {
-        return Apollo.useQuery<TodoQuery, TodoQueryVariables>(TodoDocument, baseOptions);
-      }
-export function useTodoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TodoQuery, TodoQueryVariables>) {
-          return Apollo.useLazyQuery<TodoQuery, TodoQueryVariables>(TodoDocument, baseOptions);
-        }
+  return Apollo.useQuery<TodoQuery, TodoQueryVariables>(TodoDocument, baseOptions);
+}
+export function useTodoLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<TodoQuery, TodoQueryVariables>,
+) {
+  return Apollo.useLazyQuery<TodoQuery, TodoQueryVariables>(TodoDocument, baseOptions);
+}
 export type TodoQueryHookResult = ReturnType<typeof useTodoQuery>;
 export type TodoLazyQueryHookResult = ReturnType<typeof useTodoLazyQuery>;
 export type TodoQueryResult = Apollo.QueryResult<TodoQuery, TodoQueryVariables>;
 export const GetUserTodosDocument = gql`
-    query GetUserTodos($id: ID!) {
-  user(id: $id) {
-    id
-    email
-    roles
-    todos {
+  query GetUserTodos($id: ID!) {
+    user(id: $id) {
       id
-      ownerId
-      owner {
+      email
+      roles
+      todos {
         id
-        email
+        ownerId
+        owner {
+          id
+          email
+        }
+        title
+        status
+        dueDate
       }
-      title
-      status
-      dueDate
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetUserTodosQuery__
@@ -309,12 +294,25 @@ export const GetUserTodosDocument = gql`
  *   },
  * });
  */
-export function useGetUserTodosQuery(baseOptions?: Apollo.QueryHookOptions<GetUserTodosQuery, GetUserTodosQueryVariables>) {
-        return Apollo.useQuery<GetUserTodosQuery, GetUserTodosQueryVariables>(GetUserTodosDocument, baseOptions);
-      }
-export function useGetUserTodosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserTodosQuery, GetUserTodosQueryVariables>) {
-          return Apollo.useLazyQuery<GetUserTodosQuery, GetUserTodosQueryVariables>(GetUserTodosDocument, baseOptions);
-        }
+export function useGetUserTodosQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetUserTodosQuery, GetUserTodosQueryVariables>,
+) {
+  return Apollo.useQuery<GetUserTodosQuery, GetUserTodosQueryVariables>(
+    GetUserTodosDocument,
+    baseOptions,
+  );
+}
+export function useGetUserTodosLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserTodosQuery, GetUserTodosQueryVariables>,
+) {
+  return Apollo.useLazyQuery<GetUserTodosQuery, GetUserTodosQueryVariables>(
+    GetUserTodosDocument,
+    baseOptions,
+  );
+}
 export type GetUserTodosQueryHookResult = ReturnType<typeof useGetUserTodosQuery>;
 export type GetUserTodosLazyQueryHookResult = ReturnType<typeof useGetUserTodosLazyQuery>;
-export type GetUserTodosQueryResult = Apollo.QueryResult<GetUserTodosQuery, GetUserTodosQueryVariables>;
+export type GetUserTodosQueryResult = Apollo.QueryResult<
+  GetUserTodosQuery,
+  GetUserTodosQueryVariables
+>;

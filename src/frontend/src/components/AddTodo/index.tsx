@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Stack, Checkbox, ICheckboxProps, Text, TextField, PrimaryButton } from '@fluentui/react';
+import { Stack, Checkbox, ICheckboxProps, TextField } from '@fluentui/react';
 
 import styles from './index.module.scss';
 
 export type AddTodoProps = {
-  onSubmit: (title: string) => void;
+  onSubmit?: (title: string) => void;
 };
 
-const LabelRenderer = (props?: ICheckboxProps) => (
+const LabelRenderer = () => (
   <TextField className={styles.textField} borderless placeholder="Add new item" />
 );
 
-const AddTodo: React.FC<AddTodoProps> = ({ onSubmit }) => (
+const AddTodo: React.FC<AddTodoProps> = () => (
   <Stack>
     <Stack className={styles.cell}>
       <Stack horizontal verticalAlign="center" horizontalAlign="space-between">

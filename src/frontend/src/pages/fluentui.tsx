@@ -45,11 +45,13 @@ const Index: React.FC<IndexProps> = ({ todos }) => (
 
 const IndexPage: React.FC = () => {
   const data = useGetUserTodosQuery({ variables: { id: '1' } });
+  if (!data) return null;
 
-  const { user } = data?.data || {};
-  if (!user) return null;
+  const { todos } = data?.data?.user || {};
+  if (!todos) return null;
 
-  return <Index todos={user?.todos} />;
+  const _todos = (todos || []).filter((t) => !!t) as Todo[];
+  return <Index todos={_todos} />;
 };
 
 export default IndexPage;
