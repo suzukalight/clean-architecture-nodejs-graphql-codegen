@@ -2,9 +2,12 @@ import * as React from 'react';
 import { AppProps } from 'next/app';
 import { createTheme, Customizer, Fabric, initializeIcons } from '@fluentui/react';
 
+import { client } from '../libraries/apollo-client';
+
 import './styled.scss';
 import '@fluentui/react/dist/css/fabric.css';
 import styles from './_app.module.scss';
+import { ApolloProvider } from '@apollo/client';
 
 initializeIcons();
 
@@ -26,9 +29,11 @@ const theme = createTheme({
 const App = ({ Component, pageProps }: AppProps) => (
   <Customizer settings={{ theme }}>
     <Fabric applyTheme>
-      <div className={styles.wrap}>
-        <Component {...pageProps} />
-      </div>
+      <ApolloProvider client={client}>
+        <div className={styles.wrap}>
+          <Component {...pageProps} />
+        </div>
+      </ApolloProvider>
     </Fabric>
   </Customizer>
 );
