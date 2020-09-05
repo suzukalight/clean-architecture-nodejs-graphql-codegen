@@ -11,7 +11,15 @@ initializeIcons();
 // Go to aka.ms/themedesigner for more control over theme.
 const theme = createTheme({
   palette: {
-    themePrimary: '#0078d4',
+    themePrimary: '#323130',
+    themeLighterAlt: '#e7e6e5',
+    themeLighter: '#d0cfce',
+    themeLight: '#bab8b7',
+    themeTertiary: '#a3a2a0',
+    themeSecondary: '#8d8b8a',
+    themeDarkAlt: '#767573',
+    themeDark: '#605e5d',
+    themeDarker: '#494847',
   },
 });
 

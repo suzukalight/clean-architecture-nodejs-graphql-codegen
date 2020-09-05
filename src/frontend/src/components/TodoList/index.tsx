@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Stack, Label, Checkbox, List, ICheckboxProps } from '@fluentui/react';
+import { Stack, Text, Checkbox, List, ICheckboxProps } from '@fluentui/react';
 
 import styles from './index.module.scss';
 
 const LabelRenderer = (props?: ICheckboxProps) => (
-  <Label className={styles.itemLabel}>{props?.label || ''}</Label>
+  <Text className={styles.label} variant="mediumPlus">
+    {props?.label || ''}
+  </Text>
 );
 
 export type TodoItemProps = {
@@ -12,7 +14,7 @@ export type TodoItemProps = {
 };
 
 export const TodoItem = (item?: string): JSX.Element => (
-  <Stack className={styles.itemCell}>
+  <Stack className={styles.cell}>
     <Stack horizontal verticalAlign="center" horizontalAlign="space-between">
       <Checkbox label={item} onRenderLabel={LabelRenderer} />
     </Stack>
@@ -25,7 +27,13 @@ export type TodoListProps = {
 
 export const TodoList: React.FC<TodoListProps> = ({ todos }) => (
   <Stack>
-    <List items={todos} onRenderCell={TodoItem} />
+    <Stack>
+      <Text variant="xLarge">Tasks</Text>
+    </Stack>
+
+    <Stack className={styles.list}>
+      <List items={todos} onRenderCell={TodoItem} />
+    </Stack>
   </Stack>
 );
 

@@ -1,13 +1,13 @@
-.itemCell {
-  display: flex;
-  min-height: 48px;
-  margin-bottom: 4px;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  padding: 12px;
-  background: white;
+.list {
+  padding-top: 32px;
 }
 
-.itemLabel {
-  margin: 0 8px;
+.cell {
+  display: flex;
+  min-height: 40px;
+  margin-bottom: 4px;
+}
+
+.label {
+  margin: 0 1rem;
 }
