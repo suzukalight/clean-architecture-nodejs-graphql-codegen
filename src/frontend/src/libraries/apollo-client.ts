@@ -4,6 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 import fetch from 'unfetch';
 
 import introspectionResult from '../generated/introspection-result';
+import { getToken } from './auth-token';
 
 const cache = new InMemoryCache({ possibleTypes: introspectionResult.possibleTypes });
 
@@ -34,9 +35,7 @@ type AuthHeader = {
 };
 
 const authLink = setContext((_operation, prevContext: AuthHeader) => {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlcyI6WyJBRE1JTiIsIk1FTUJFUiIsIkFOT05ZTU9VUyJdLCJpYXQiOjE1OTkyOTE3NjksImV4cCI6MTU5OTg5NjU2OX0.5Er0pc5Z-Dp6EUjsEgiqy6NhQnYGYSh-eBgEoEAxrPs';
-
+  const token = getToken();
   return {
     headers: {
       ...prevContext.headers,

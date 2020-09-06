@@ -193,20 +193,20 @@ export type UpdateUserRolesResponse = {
   user: User;
 };
 
-export type TodoQueryVariables = Exact<{
-  id: Scalars['ID'];
+export type SignInEmailPasswordMutationVariables = Exact<{
+  input?: Maybe<SignInEmailPasswordRequest>;
 }>;
 
 
-export type TodoQuery = (
-  { __typename?: 'Query' }
-  & { todo?: Maybe<(
-    { __typename?: 'Todo' }
-    & Pick<Todo, 'id' | 'title' | 'status' | 'dueDate'>
-    & { owner?: Maybe<(
+export type SignInEmailPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { signInEmailPassword?: Maybe<(
+    { __typename?: 'SignInEmailPasswordResponse' }
+    & Pick<SignInEmailPasswordResponse, 'token'>
+    & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'email'>
-    )> }
+      & Pick<User, 'id' | 'email' | 'roles'>
+    ) }
   )> }
 );
 
@@ -231,64 +231,44 @@ export type GetUserTodosQuery = (
   )> }
 );
 
-export type SignInEmailPasswordMutationVariables = Exact<{
-  input?: Maybe<SignInEmailPasswordRequest>;
-}>;
 
-
-export type SignInEmailPasswordMutation = (
-  { __typename?: 'Mutation' }
-  & { signInEmailPassword?: Maybe<(
-    { __typename?: 'SignInEmailPasswordResponse' }
-    & Pick<SignInEmailPasswordResponse, 'token'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'roles'>
-    ) }
-  )> }
-);
-
-
-export const TodoDocument = gql`
-    query Todo($id: ID!) {
-  todo(id: $id) {
-    id
-    owner {
+export const SignInEmailPasswordDocument = gql`
+    mutation SignInEmailPassword($input: SignInEmailPasswordRequest) {
+  signInEmailPassword(input: $input) {
+    user {
       id
       email
+      roles
     }
-    title
-    status
-    dueDate
+    token
   }
 }
     `;
+export type SignInEmailPasswordMutationFn = Apollo.MutationFunction<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>;
 
 /**
- * __useTodoQuery__
+ * __useSignInEmailPasswordMutation__
  *
- * To run a query within a React component, call `useTodoQuery` and pass it any options that fit your needs.
- * When your component renders, `useTodoQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
+ * To run a mutation, you first call `useSignInEmailPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignInEmailPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const { data, loading, error } = useTodoQuery({
+ * const [signInEmailPasswordMutation, { data, loading, error }] = useSignInEmailPasswordMutation({
  *   variables: {
- *      id: // value for 'id'
+ *      input: // value for 'input'
  *   },
  * });
  */
-export function useTodoQuery(baseOptions?: Apollo.QueryHookOptions<TodoQuery, TodoQueryVariables>) {
-        return Apollo.useQuery<TodoQuery, TodoQueryVariables>(TodoDocument, baseOptions);
+export function useSignInEmailPasswordMutation(baseOptions?: Apollo.MutationHookOptions<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>) {
+        return Apollo.useMutation<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>(SignInEmailPasswordDocument, baseOptions);
       }
-export function useTodoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TodoQuery, TodoQueryVariables>) {
-          return Apollo.useLazyQuery<TodoQuery, TodoQueryVariables>(TodoDocument, baseOptions);
-        }
-export type TodoQueryHookResult = ReturnType<typeof useTodoQuery>;
-export type TodoLazyQueryHookResult = ReturnType<typeof useTodoLazyQuery>;
-export type TodoQueryResult = Apollo.QueryResult<TodoQuery, TodoQueryVariables>;
+export type SignInEmailPasswordMutationHookResult = ReturnType<typeof useSignInEmailPasswordMutation>;
+export type SignInEmailPasswordMutationResult = Apollo.MutationResult<SignInEmailPasswordMutation>;
+export type SignInEmailPasswordMutationOptions = Apollo.BaseMutationOptions<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>;
 export const GetUserTodosDocument = gql`
     query GetUserTodos($id: ID!) {
   user(id: $id) {
@@ -335,40 +315,3 @@ export function useGetUserTodosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetUserTodosQueryHookResult = ReturnType<typeof useGetUserTodosQuery>;
 export type GetUserTodosLazyQueryHookResult = ReturnType<typeof useGetUserTodosLazyQuery>;
 export type GetUserTodosQueryResult = Apollo.QueryResult<GetUserTodosQuery, GetUserTodosQueryVariables>;
-export const SignInEmailPasswordDocument = gql`
-    mutation SignInEmailPassword($input: SignInEmailPasswordRequest) {
-  signInEmailPassword(input: $input) {
-    user {
-      id
-      email
-      roles
-    }
-    token
-  }
-}
-    `;
-export type SignInEmailPasswordMutationFn = Apollo.MutationFunction<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>;
-
-/**
- * __useSignInEmailPasswordMutation__
- *
- * To run a mutation, you first call `useSignInEmailPasswordMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSignInEmailPasswordMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [signInEmailPasswordMutation, { data, loading, error }] = useSignInEmailPasswordMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useSignInEmailPasswordMutation(baseOptions?: Apollo.MutationHookOptions<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>) {
-        return Apollo.useMutation<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>(SignInEmailPasswordDocument, baseOptions);
-      }
-export type SignInEmailPasswordMutationHookResult = ReturnType<typeof useSignInEmailPasswordMutation>;
-export type SignInEmailPasswordMutationResult = Apollo.MutationResult<SignInEmailPasswordMutation>;
-export type SignInEmailPasswordMutationOptions = Apollo.BaseMutationOptions<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>;
