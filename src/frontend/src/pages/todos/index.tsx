@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import LeftNav from '../components/LeftNav';
-import AddTodo from '../components/AddTodo';
-import TodoList from '../components/TodoList';
+import LeftNav from '../../components/LeftNav';
+import AddTodo from '../../components/AddTodo';
+import TodoList from '../../components/TodoList';
 
-import styles from './fluentui.module.scss';
-import { useGetUserTodosQuery, Todo } from '../generated/graphql-client';
+import styles from './index.module.scss';
+import { useGetUserTodosQuery, Todo } from '../../generated/graphql-client';
 
 const LeftPane = () => (
   <div className={styles.left}>

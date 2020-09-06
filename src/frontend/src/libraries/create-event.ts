@@ -1,4 +1,4 @@
-export function createEvent(eventName: string) {
+export function createEvent(eventName: string): Event | null {
   // polyfill
   if (typeof Event === 'function') {
     return new Event(eventName);

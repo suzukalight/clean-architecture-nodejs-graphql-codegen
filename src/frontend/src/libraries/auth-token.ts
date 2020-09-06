@@ -34,7 +34,9 @@ export function setToken(token: string) {
     // secure: true,
   });
 
-  global?.document?.dispatchEvent(tokenChangedEvent);
+  if (tokenChangedEvent) {
+    global?.document?.dispatchEvent(tokenChangedEvent);
+  }
 }
 
 /**
@@ -42,5 +44,8 @@ export function setToken(token: string) {
  */
 export function resetToken() {
   removeItem(KEY_AUTH_TOKEN);
-  global?.document?.dispatchEvent(tokenChangedEvent);
+
+  if (tokenChangedEvent) {
+    global?.document?.dispatchEvent(tokenChangedEvent);
+  }
 }
