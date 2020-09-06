@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Stack, Checkbox, ICheckboxProps, TextField } from '@fluentui/react';
+import { Stack, Checkbox, TextField } from '@fluentui/react';
 
 import styles from './index.module.scss';
 
