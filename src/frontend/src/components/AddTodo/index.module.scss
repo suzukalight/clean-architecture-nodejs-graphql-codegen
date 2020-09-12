@@ -1,0 +1,17 @@
+.cell {
+  display: flex;
+  min-height: 40px;
+  margin-bottom: 4px;
+}
+
+.textField {
+  margin: 0 1rem;
+
+  div {
+    background-color: transparent;
+  }
+
+  input {
+    padding: 0;
+  }
+}

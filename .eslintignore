@@ -4,3 +4,4 @@ src/schema/src/types.ts
 **/migration/*
 **/lib/*
 **/build/*
+**/generated/*

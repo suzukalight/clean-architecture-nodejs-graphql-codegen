@@ -21,6 +21,7 @@
     /* Advanced Options */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
 
     /* TypeORM */
     "emitDecoratorMetadata": true,

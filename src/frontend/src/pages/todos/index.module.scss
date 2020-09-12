@@ -1,0 +1,24 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 32px auto;
+  padding: 8px;
+}
+
+.left {
+  display: block;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: white;
+}
+
+.main {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
