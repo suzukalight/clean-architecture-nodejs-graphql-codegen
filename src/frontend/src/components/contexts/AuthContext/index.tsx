@@ -24,7 +24,7 @@ type AuthContext = {
 
 export const AuthContext = createContext<AuthContext>({
   actor: null,
-  login: async (_input) => {
+  login: async () => {
     //
   },
   logout: () => {
@@ -42,7 +42,7 @@ export const AuthProvider: FC = ({ children }) => {
     fetchPolicy: 'network-only',
     onCompleted: (data) => {
       if (data) {
-        setActor(data.user);
+        setActor(data.user || null);
       }
     },
   });
@@ -65,9 +65,10 @@ export const AuthProvider: FC = ({ children }) => {
   const login = useCallback<SubmitFunction>(
     async (input) => {
       const result = await signInEmailPasswordMutation({ variables: { input } });
+      const { token, user } = result.data?.signInEmailPassword || {};
 
-      setToken(result.data?.signInEmailPassword?.token);
-      setActor(result.data?.signInEmailPassword?.user);
+      if (token) setToken(token);
+      if (user) setActor(user);
     },
     [signInEmailPasswordMutation],
   );

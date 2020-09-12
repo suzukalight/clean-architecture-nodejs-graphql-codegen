@@ -17,7 +17,7 @@ const MemberOnly: FC = ({ children }) => {
 
   useEffect(() => {
     redirectToLogin();
- 
+
     document.addEventListener(AUTH_TOKEN_EVENT, () => redirectToLogin());
 
     return document.removeEventListener(AUTH_TOKEN_EVENT, () => {

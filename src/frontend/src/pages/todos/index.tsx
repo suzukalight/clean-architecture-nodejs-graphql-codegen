@@ -47,7 +47,9 @@ const Index: React.FC<IndexProps> = ({ todos }) => (
 
 const IndexPage: React.FC = () => {
   const { actor } = useContext(AuthContext);
-  const data = useGetUserTodosQuery({ variables: { id: actor.id } });
+  const id = actor?.id || '';
+
+  const data = useGetUserTodosQuery({ variables: { id }, skip: !id });
   if (!data) return null;
 
   const { todos } = data?.data?.user || {};
@@ -57,8 +59,10 @@ const IndexPage: React.FC = () => {
   return <Index todos={_todos} />;
 };
 
-export default () => (
+const IndexPageWrap: React.FC = () => (
   <MemberOnly>
     <IndexPage />
   </MemberOnly>
 );
+
+export default IndexPageWrap;

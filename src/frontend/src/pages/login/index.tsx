@@ -67,7 +67,7 @@ const Login = () => {
         await login(input);
         router.push('/todos');
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     },
     [signInEmailPasswordMutation],
