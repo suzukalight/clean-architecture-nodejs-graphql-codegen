@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Stack, PrimaryButton, Text, IStackTokens } from '@fluentui/react';
 import { Formik, Form, Field } from 'formik';
 import { useRouter } from 'next/router';
@@ -7,11 +7,11 @@ import {
   useSignInEmailPasswordMutation,
   SignInEmailPasswordRequest,
 } from '../../generated/graphql-client';
-import { FormikTextField } from '../../components/_formik/TextField';
 import { loginValidationSchema } from './validation';
+import { FormikTextField } from '../../components/_formik/TextField';
+import { AuthContext } from '../../components/contexts/AuthContext';
 
 import styles from './index.module.scss';
-import { setToken } from '../../libraries/auth-token';
 
 const spacingToken: IStackTokens = {
   childrenGap: 's1',
@@ -58,20 +58,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ initialValues, onSubmit }) => (
 
 const Login = () => {
   const router = useRouter();
+  const { login } = useContext(AuthContext);
   const [signInEmailPasswordMutation] = useSignInEmailPasswordMutation();
 
   const handleSubmit = useCallback<SubmitFunction>(
     async (input) => {
-      const result = await signInEmailPasswordMutation({ variables: { input } }).catch(() => {
-        // nothing
-      });
-      console.log(result);
-      if (!result) return;
-
-      const token = result.data?.signInEmailPassword?.token ?? '';
-      setToken(token);
-
-      router.push('/todos');
+      try {
+        await login(input);
+        router.push('/todos');
+      } catch (e) {
+        console.error(e)
+      }
     },
     [signInEmailPasswordMutation],
   );
