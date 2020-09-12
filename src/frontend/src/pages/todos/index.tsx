@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 
 import LeftNav from '../../components/LeftNav';
 import AddTodo from '../../components/AddTodo';
@@ -6,6 +6,8 @@ import TodoList from '../../components/TodoList';
 
 import styles from './index.module.scss';
 import { useGetUserTodosQuery, Todo } from '../../generated/graphql-client';
+import MemberOnly from '../../components/contexts/AuthContext/MemberOnly';
+import { AuthContext } from '../../components/contexts/AuthContext';
 
 const LeftPane = () => (
   <div className={styles.left}>
@@ -44,7 +46,8 @@ const Index: React.FC<IndexProps> = ({ todos }) => (
 );
 
 const IndexPage: React.FC = () => {
-  const data = useGetUserTodosQuery({ variables: { id: '1' } });
+  const { actor } = useContext(AuthContext);
+  const data = useGetUserTodosQuery({ variables: { id: actor.id } });
   if (!data) return null;
 
   const { todos } = data?.data?.user || {};
@@ -54,4 +57,8 @@ const IndexPage: React.FC = () => {
   return <Index todos={_todos} />;
 };
 
-export default IndexPage;
+export default () => (
+  <MemberOnly>
+    <IndexPage />
+  </MemberOnly>
+);
