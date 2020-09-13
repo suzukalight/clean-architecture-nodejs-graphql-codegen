@@ -223,6 +223,22 @@ export type SignInEmailPasswordMutation = (
   )> }
 );
 
+export type DoneTodoMutationVariables = Exact<{
+  input?: Maybe<DoneTodoRequest>;
+}>;
+
+
+export type DoneTodoMutation = (
+  { __typename?: 'Mutation' }
+  & { doneTodo?: Maybe<(
+    { __typename?: 'DoneTodoResponse' }
+    & { todo: (
+      { __typename?: 'Todo' }
+      & Pick<Todo, 'id' | 'ownerId' | 'title' | 'status' | 'dueDate'>
+    ) }
+  )> }
+);
+
 export type GetUserTodosQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -241,6 +257,22 @@ export type GetUserTodosQuery = (
         & Pick<User, 'id' | 'email'>
       )> }
     )>>> }
+  )> }
+);
+
+export type UndoneTodoMutationVariables = Exact<{
+  input?: Maybe<UndoneTodoRequest>;
+}>;
+
+
+export type UndoneTodoMutation = (
+  { __typename?: 'Mutation' }
+  & { undoneTodo?: Maybe<(
+    { __typename?: 'UndoneTodoResponse' }
+    & { todo: (
+      { __typename?: 'Todo' }
+      & Pick<Todo, 'id' | 'ownerId' | 'title' | 'status' | 'dueDate'>
+    ) }
   )> }
 );
 
@@ -317,6 +349,44 @@ export function useSignInEmailPasswordMutation(baseOptions?: Apollo.MutationHook
 export type SignInEmailPasswordMutationHookResult = ReturnType<typeof useSignInEmailPasswordMutation>;
 export type SignInEmailPasswordMutationResult = Apollo.MutationResult<SignInEmailPasswordMutation>;
 export type SignInEmailPasswordMutationOptions = Apollo.BaseMutationOptions<SignInEmailPasswordMutation, SignInEmailPasswordMutationVariables>;
+export const DoneTodoDocument = gql`
+    mutation DoneTodo($input: DoneTodoRequest) {
+  doneTodo(input: $input) {
+    todo {
+      id
+      ownerId
+      title
+      status
+      dueDate
+    }
+  }
+}
+    `;
+export type DoneTodoMutationFn = Apollo.MutationFunction<DoneTodoMutation, DoneTodoMutationVariables>;
+
+/**
+ * __useDoneTodoMutation__
+ *
+ * To run a mutation, you first call `useDoneTodoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDoneTodoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [doneTodoMutation, { data, loading, error }] = useDoneTodoMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDoneTodoMutation(baseOptions?: Apollo.MutationHookOptions<DoneTodoMutation, DoneTodoMutationVariables>) {
+        return Apollo.useMutation<DoneTodoMutation, DoneTodoMutationVariables>(DoneTodoDocument, baseOptions);
+      }
+export type DoneTodoMutationHookResult = ReturnType<typeof useDoneTodoMutation>;
+export type DoneTodoMutationResult = Apollo.MutationResult<DoneTodoMutation>;
+export type DoneTodoMutationOptions = Apollo.BaseMutationOptions<DoneTodoMutation, DoneTodoMutationVariables>;
 export const GetUserTodosDocument = gql`
     query GetUserTodos($id: ID!) {
   user(id: $id) {
@@ -363,3 +433,41 @@ export function useGetUserTodosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetUserTodosQueryHookResult = ReturnType<typeof useGetUserTodosQuery>;
 export type GetUserTodosLazyQueryHookResult = ReturnType<typeof useGetUserTodosLazyQuery>;
 export type GetUserTodosQueryResult = Apollo.QueryResult<GetUserTodosQuery, GetUserTodosQueryVariables>;
+export const UndoneTodoDocument = gql`
+    mutation UndoneTodo($input: UndoneTodoRequest) {
+  undoneTodo(input: $input) {
+    todo {
+      id
+      ownerId
+      title
+      status
+      dueDate
+    }
+  }
+}
+    `;
+export type UndoneTodoMutationFn = Apollo.MutationFunction<UndoneTodoMutation, UndoneTodoMutationVariables>;
+
+/**
+ * __useUndoneTodoMutation__
+ *
+ * To run a mutation, you first call `useUndoneTodoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUndoneTodoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [undoneTodoMutation, { data, loading, error }] = useUndoneTodoMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUndoneTodoMutation(baseOptions?: Apollo.MutationHookOptions<UndoneTodoMutation, UndoneTodoMutationVariables>) {
+        return Apollo.useMutation<UndoneTodoMutation, UndoneTodoMutationVariables>(UndoneTodoDocument, baseOptions);
+      }
+export type UndoneTodoMutationHookResult = ReturnType<typeof useUndoneTodoMutation>;
+export type UndoneTodoMutationResult = Apollo.MutationResult<UndoneTodoMutation>;
+export type UndoneTodoMutationOptions = Apollo.BaseMutationOptions<UndoneTodoMutation, UndoneTodoMutationVariables>;

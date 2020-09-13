@@ -1,0 +1,12 @@
+# Write your query or mutation here
+mutation UndoneTodo($input: UndoneTodoRequest) {
+  undoneTodo(input: $input) {
+    todo {
+      id
+      ownerId
+      title
+      status
+      dueDate
+    }
+  }
+}
