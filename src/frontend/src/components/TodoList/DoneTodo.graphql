@@ -1,0 +1,11 @@
+mutation DoneTodo($input: DoneTodoRequest) {
+  doneTodo(input: $input) {
+    todo {
+      id
+      ownerId
+      title
+      status
+      dueDate
+    }
+  }
+}
