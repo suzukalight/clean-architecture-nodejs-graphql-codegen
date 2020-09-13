@@ -23,7 +23,7 @@ const MainPane: React.FC<MainPaneProps> = ({ todos }) => (
   <div className={styles.main}>
     <div className={styles.wrap}>
       <TodoList todos={todos} />
-      <AddTodo onSubmit={(title) => alert(title)} />
+      <AddTodo />
     </div>
   </div>
 );
