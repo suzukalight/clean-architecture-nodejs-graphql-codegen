@@ -67,9 +67,11 @@ const TodoList: FC<TodoListProps> = ({ todos, onClickDone, onClickUndone }) => (
     <Stack className={styles.list}>
       <List
         items={todos}
-        onRenderCell={(item) => (
-          <TodoItem todo={item} onClickDone={onClickDone} onClickUndone={onClickUndone} />
-        )}
+        onRenderCell={(item) =>
+          !item ? null : (
+            <TodoItem todo={item} onClickDone={onClickDone} onClickUndone={onClickUndone} />
+          )
+        }
       />
     </Stack>
   </Stack>
