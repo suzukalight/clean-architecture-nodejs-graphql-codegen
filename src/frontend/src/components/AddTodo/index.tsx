@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useContext } from 'react';
 import { Stack, Checkbox } from '@fluentui/react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikHelpers } from 'formik';
 
 import { useCreateTodoMutation, CreateTodoRequest } from '../../generated/graphql-client';
 import { FormikTextField } from '../../components/_formik/TextField';
@@ -9,7 +9,10 @@ import { createTodoValidationSchema } from './validation';
 import styles from './index.module.scss';
 import { AuthContext } from '../contexts/AuthContext';
 
-type CreateTodoFunction = (input: CreateTodoRequest) => void;
+type CreateTodoFunction = (
+  input: CreateTodoRequest,
+  formikHelpers: FormikHelpers<CreateTodoRequest>,
+) => void;
 type CreateTodoFormProps = {
   initialValues: CreateTodoRequest;
   onSubmit: CreateTodoFunction;
@@ -55,12 +58,15 @@ const AddTodo: FC<AddTodoProps> = ({ initialValues, onSubmit }) => (
 
 const AddTodoContainer: FC = () => {
   const { actor } = useContext(AuthContext);
-  const [createTodo] = useCreateTodoMutation();
+  const [createTodo] = useCreateTodoMutation({
+    refetchQueries: ['GetUserTodos'],
+  });
 
   const handleSubmit = useCallback<CreateTodoFunction>(
-    async (input) => {
+    async (input, { resetForm }) => {
       try {
         await createTodo({ variables: { input } });
+        resetForm();
       } catch (e) {
         console.error(e);
       }
