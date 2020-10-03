@@ -10,15 +10,18 @@ Clean Architecture の学習を目的とした、Node.js(apollo-server-express) 
 - [Apollo Server (w/Express)](https://www.apollographql.com/docs/apollo-server/)
 - [TypeORM](https://typeorm.io/#/)
 - Docker (MySQL)
-- Jest + ESLint + Prettier
+- Next.js, formik, yup
+- Jest, ESLint, Prettier
 
-具体例として TODO アプリのバックエンドを提供しています。
+具体例として TODO アプリを提供しています。
 
 # 動作確認
 
 ## セットアップ
 
-docker-compose と node.js が必要です。スプリクト実行に yarn を使用しています。依存関係にあるファイルは予めビルドする必要があるため、ビルドも一度行います。
+- docker-compose と node.js が必要です
+- yarn を使用しています
+- 依存関係にあるファイルを予めビルドする必要があるため、ビルドも一度行います
 
 ```
 yarn
@@ -28,18 +31,20 @@ yarn db:migrate
 yarn db:seed
 ```
 
-## ts-node-dev による実行（開発時）
+## 実行（開発時）
 
 ```
-yarn dev:backend
+yarn dev
 ```
 
-http://localhost:3000/graphql  
-に GraphQL Playground が起動しますので、こちらで API の動作確認ができます。
+- http://localhost:3000/graphql GraphQL Playground
+- http://localhost:7777/login Next.js frontend
 
 ## テスト
 
 ```
+yarn format
+yarn lint
 yarn test
 ```
 
@@ -49,12 +54,22 @@ yarn test
 yarn build
 ```
 
+## 実行（本番用）
+
+```
+yarn start
+```
+
+- http://localhost:3000/graphql GraphQL Playground
+- http://localhost:8888/login Next.js frontend
 
 # プロジェクト構成
 
 Monorepo 構成になっており、役割ごとにプロジェクトを分けています。  
 明示的にプロジェクトを分けることによって、Clean Architecture を強制する意味合いを持たせています。
 
+- common
+  - カスタムエラーオブジェクトなど、全プロジェクトから共通で利用されるもの
 - schema
   - .graphql ファイルにて、プロジェクト全体のスキーマおよび API 構成を記述
   - graphql-codegen によって、graphql ファイルから DTO, schema, resolver の型情報を自動生成
@@ -65,9 +80,8 @@ Monorepo 構成になっており、役割ごとにプロジェクトを分け�
   - interface 層と infrastructure 層を実装
   - 永続化層の操作に TypeORM を使用、Web サーバとして GraphQL API を提供
 - frontend (WIP)
-  - React 系のフロントエンドを実装予定
-- common
-  - カスタムエラーオブジェクトなど、全プロジェクトから共通で利用されるもの
+  - React(Next.js) でフロントエンドを実装しています
+  - 現在、login/logout・Done/Undone・CreateTodo のユースケースのみをサポートしています
 
 # 特徴
 

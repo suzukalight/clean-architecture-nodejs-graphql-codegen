@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 7777",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8888",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
