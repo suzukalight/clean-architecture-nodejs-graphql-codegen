@@ -31,6 +31,7 @@ jobs:
             - dpendencies-<< parameters.cache-version >>-{{ checksum "<< parameters.cache-key >>" }}
       - run: yarn install
       - run: yarn build
+      - run: yarn typecheck
       - run: yarn lint
       - run: yarn test
       - save_cache:
