@@ -8,7 +8,10 @@
   "scripts": {
     "build": "yarn clean && tsc -b",
     "clean": "rimraf lib *.tsbuildinfo",
-    "test": "env-cmd -f .env.default jest"
+    "test": "env-cmd -f .env.default jest",
+    "test:cov": "run-s test:cov:run test:cov:open",
+    "test:cov:run": "yarn test --coverage",
+    "test:cov:open": "npx http-server -o ./coverage/lcov-report"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

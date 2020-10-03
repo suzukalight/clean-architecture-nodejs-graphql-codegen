@@ -6,3 +6,4 @@ src/schema/src/types.ts
 **/build/*
 **/.next/*
 **/generated/*
+**/coverage/*
