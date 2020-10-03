@@ -8,7 +8,7 @@ import {
   useUndoneTodoMutation,
   DoneTodoRequest,
   UndoneTodoRequest,
-} from '../../generated/graphql-client';
+} from '../../../generated/graphql-client';
 
 import styles from './index.module.scss';
 

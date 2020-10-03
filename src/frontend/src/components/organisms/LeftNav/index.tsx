@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { Nav, INavLinkGroup, Stack, Persona, Separator } from '@fluentui/react';
 import { useRouter } from 'next/router';
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './index.module.scss';
 

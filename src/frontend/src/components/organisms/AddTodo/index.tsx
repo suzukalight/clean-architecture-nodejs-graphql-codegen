@@ -2,12 +2,13 @@ import React, { FC, useCallback, useContext } from 'react';
 import { Stack, Checkbox } from '@fluentui/react';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 
-import { useCreateTodoMutation, CreateTodoRequest } from '../../generated/graphql-client';
-import { FormikTextField } from '../../components/_formik/TextField';
+import { FormikTextField } from '../../_formik/TextField';
+import { AuthContext } from '../../contexts/AuthContext';
+
+import { useCreateTodoMutation, CreateTodoRequest } from '../../../generated/graphql-client';
 import { createTodoValidationSchema } from './validation';
 
 import styles from './index.module.scss';
-import { AuthContext } from '../contexts/AuthContext';
 
 type CreateTodoFunction = (
   input: CreateTodoRequest,
