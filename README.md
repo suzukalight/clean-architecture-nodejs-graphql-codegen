@@ -1,6 +1,6 @@
 # clean-architecture-nodejs-graphql-codegen
 
-Clean Architecture の学習を目的とした、Node.js(apollo-server-express) と TypeORM による バックエンドの実装例です。
+Clean Architecture の学習を目的とした、Node.js による バックエンドの実装例です。
 
 # 概要
 
@@ -10,14 +10,14 @@ Clean Architecture の学習を目的とした、Node.js(apollo-server-express) 
 - [Apollo Server (w/Express)](https://www.apollographql.com/docs/apollo-server/)
 - [TypeORM](https://typeorm.io/#/)
 - Docker (MySQL)
-- Next.js, formik, yup
+- React.js, [Next.js](https://nextjs.org/), [Fluent UI React](https://developer.microsoft.com/ja-JP/fluentui#/), [formik](https://formik.org/), yup
 - Jest, ESLint, Prettier
 
 具体例として TODO アプリを提供しています。
 
 # 動作確認
 
-## セットアップ
+## setup
 
 - docker-compose と node.js が必要です
 - yarn を使用しています
@@ -31,37 +31,34 @@ yarn db:migrate
 yarn db:seed
 ```
 
-## 実行（開発時）
+## development
 
 ```
 yarn dev
 ```
 
-- http://localhost:3000/graphql GraphQL Playground
-- http://localhost:7777/login Next.js frontend
+- http://localhost:3000/graphql - backend (GraphQL Playground)
+- http://localhost:7777/login - frontend (Next.js)
 
-## テスト
+## test
 
 ```
-yarn format
-yarn lint
+yarn fix
 yarn test
 ```
 
-## ビルド
+- fix = typecheck(tsc) + lint(eslint) + format(prettier)
+- test = jest(ts-jest)
+
+## production
 
 ```
 yarn build
-```
-
-## 実行（本番用）
-
-```
 yarn start
 ```
 
-- http://localhost:3000/graphql GraphQL Playground
-- http://localhost:8888/login Next.js frontend
+- http://localhost:3000/graphql - backend (GraphQL Playground)
+- http://localhost:8888/login - frontend (Next.js)
 
 # プロジェクト構成
 
