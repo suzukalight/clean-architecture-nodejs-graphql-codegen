@@ -1,5 +1,5 @@
-!*.js
-!*.ts
+/.eslintrc.js
+/.prettierrc.js
 node_modules/**
 **/node_modules/**
 src/schema/src/types.ts
