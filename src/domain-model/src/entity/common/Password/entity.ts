@@ -1,7 +1,7 @@
-import bcrypt from 'bcrypt';
+import { compare } from 'bcrypt';
 import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
-const isValid = (passwordEncrypted: string) => {
+export const denyIllegalPassword = (passwordEncrypted: string) => {
   if (!passwordEncrypted) throw new PropertyRequiredError('passwordEncrypted');
   return true;
 };
@@ -10,7 +10,7 @@ export class Password {
   private passwordEncrypted: string;
 
   constructor(passwordEncrypted: string) {
-    isValid(passwordEncrypted);
+    denyIllegalPassword(passwordEncrypted);
     this.passwordEncrypted = passwordEncrypted;
   }
 
@@ -32,22 +32,6 @@ export class Password {
   }
 
   async compareWith(plainPassword: string) {
-    return await bcrypt.compare(plainPassword, this.passwordEncrypted);
+    return await compare(plainPassword, this.passwordEncrypted);
   }
 }
-
-const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
-
-const isValidPlainPassword = (passwordPlainText: string) => {
-  if (!passwordPlainText) throw new PropertyRequiredError('passwordPlainText');
-  if (!regex.test(passwordPlainText))
-    throw new IllegalArgumentError(
-      'パスワードは半角英字と半角数字を1つ以上含む、8文字以上100文字以下で入力してください',
-    );
-  return true;
-};
-
-export const encryptPassword = async (plainText: string, saltRounds = 10) => {
-  isValidPlainPassword(plainText);
-  return await bcrypt.hash(plainText, saltRounds);
-};

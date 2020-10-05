@@ -1,22 +1,25 @@
-import { Role as RoleSchema } from 'schema';
 import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
-const validRoles = [RoleSchema.Anonymous, RoleSchema.Member, RoleSchema.Admin];
+export enum RoleEnum {
+  Anonymous = 'ANONYMOUS',
+  Member = 'MEMBER',
+  Admin = 'ADMIN',
+}
+export type RoleType = RoleEnum;
+export const RoleTypes = RoleEnum;
 
-const isValid = (role: RoleSchema) => {
+const RoleStrings = Object.values(RoleEnum) as string[];
+
+const denyIllegalRole = (role: string) => {
   if (!role) throw new PropertyRequiredError('role');
-  if (!validRoles.includes(role)) throw new IllegalArgumentError(`${role} はロールではありません`);
-  return true;
+  if (!RoleStrings.includes(role)) throw new IllegalArgumentError(`${role} はロールではありません`);
 };
-
-export type RoleType = RoleSchema;
-export const RoleTypes = RoleSchema;
 
 export class Role {
   private role: RoleType;
 
   constructor(role: RoleType) {
-    isValid(role);
+    denyIllegalRole(role);
     this.role = role;
   }
 
@@ -29,20 +32,10 @@ export class Role {
   }
 
   isEqual(role: Role): boolean;
-  isEqual(role: RoleSchema): boolean;
+  isEqual(role: string): boolean;
   isEqual(role: unknown): boolean {
     if (role instanceof Role) return this.role === role.toString();
     if (typeof role === 'string') return this.role === role;
     throw new IllegalArgumentError('比較可能なroleではありません');
-  }
-}
-
-export class RoleFactory {
-  public static fromSchema(role: RoleSchema) {
-    return new Role(role);
-  }
-
-  public static fromSchemaArray(roles: RoleSchema[]) {
-    return roles.map((role) => new Role(role));
   }
 }

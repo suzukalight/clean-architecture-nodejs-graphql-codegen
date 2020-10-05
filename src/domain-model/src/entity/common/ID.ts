@@ -1,6 +1,6 @@
 import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
-const isValid = (id: string) => {
+export const denyIllegalId = (id: string) => {
   if (!id) throw new PropertyRequiredError('id');
   return true;
 };
@@ -9,7 +9,7 @@ export class ID {
   private id: string;
 
   constructor(id: string) {
-    isValid(id);
+    denyIllegalId(id);
     this.id = `${id}`;
   }
 
