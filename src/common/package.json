@@ -6,8 +6,11 @@
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn clean && tsc -b",
-    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc -b",
+    "rebuild": "run-s clean build",
+    "clean": "run-p clean:*",
+    "clean:lib": "rimraf lib *.tsbuildinfo",
+    "clean:modules": "rimraf node_modules && yarn install",
     "test": "env-cmd -f .env.default jest"
   }
 }

@@ -6,8 +6,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
-    "clean": "rimraf build",
-    "build": "yarn clean && tsc -b",
+    "build": "tsc -b",
+    "rebuild": "run-s clean build",
+    "clean": "run-p clean:*",
+    "clean:lib": "rimraf build",
+    "clean:modules": "rimraf node_modules && yarn install",
     "start": "node build/index.js",
     "test": "jest",
     "docker": "docker-compose up",
