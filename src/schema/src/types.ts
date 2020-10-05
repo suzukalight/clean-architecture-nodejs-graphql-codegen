@@ -53,7 +53,7 @@ export type SignUpEmailPasswordRequest = {
 
 export type SignUpEmailPasswordResponse = {
   __typename?: 'SignUpEmailPasswordResponse';
-  user: User;
+  user?: Maybe<User>;
   token: Scalars['String'];
 };
 
@@ -64,7 +64,7 @@ export type SignInEmailPasswordRequest = {
 
 export type SignInEmailPasswordResponse = {
   __typename?: 'SignInEmailPasswordResponse';
-  user: User;
+  user?: Maybe<User>;
   token: Scalars['String'];
 };
 
@@ -355,13 +355,13 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type SignUpEmailPasswordResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignUpEmailPasswordResponse'] = ResolversParentTypes['SignUpEmailPasswordResponse']> = ResolversObject<{
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export type SignInEmailPasswordResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignInEmailPasswordResponse'] = ResolversParentTypes['SignInEmailPasswordResponse']> = ResolversObject<{
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;

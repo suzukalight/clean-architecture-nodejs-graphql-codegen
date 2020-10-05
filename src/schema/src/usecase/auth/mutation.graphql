@@ -4,7 +4,7 @@ input SignUpEmailPasswordRequest {
 }
 
 type SignUpEmailPasswordResponse {
-  user: User!
+  user: User
   token: String!
 }
 
@@ -14,7 +14,7 @@ input SignInEmailPasswordRequest {
 }
 
 type SignInEmailPasswordResponse {
-  user: User!
+  user: User
   token: String!
 }
 
