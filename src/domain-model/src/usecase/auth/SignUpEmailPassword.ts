@@ -1,10 +1,9 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import { SignUpEmailPasswordRequest } from 'schema';
+import * as jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
 import { ConflictError } from 'common';
 
 import { AuthEmailPasswordRepository } from './interface/repository';
-import { SignUpEmailPasswordUseCase } from './interface/usecase';
+import { SignUpEmailPasswordInputData, SignUpEmailPasswordUseCase } from './interface/usecase';
 import { SignUpEmailPasswordPresenter } from './interface/presenter';
 import { UserRepository } from '../user/interface/repository';
 import { encryptPassword } from '../../entity/common/Password';
@@ -26,7 +25,7 @@ export class SignUpEmailPasswordInteractor implements SignUpEmailPasswordUseCase
     this.presenter = presenter;
   }
 
-  public async handle(request: SignUpEmailPasswordRequest) {
+  public async handle(request: SignUpEmailPasswordInputData) {
     // すでに登録されているメールアドレスでは登録できない
     const existedAuthEntity = await this.authRepository.getByEmail(request.email);
     if (existedAuthEntity) throw new ConflictError('そのメールアドレスはすでに登録されています');

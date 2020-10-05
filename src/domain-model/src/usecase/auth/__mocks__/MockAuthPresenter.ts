@@ -1,26 +1,30 @@
-import { Maybe, SignInEmailPasswordResponse, SignUpEmailPasswordResponse } from 'schema';
-
-import { AuthPresenter } from '../interface/presenter';
+import {
+  SignInEmailPasswordPresenter,
+  SignInEmailPassworOutputData,
+  SignUpEmailPasswordPresenter,
+  SignUpEmailPasswordOutputData,
+} from '../interface/presenter';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
-abstract class M<Response> implements AuthPresenter<Response> {
-  protected response: Maybe<Response> = null;
+export class MockSignInEmailPasswordPresenter implements SignInEmailPasswordPresenter {
+  protected response: SignInEmailPassworOutputData | null = null;
 
-  public getResponse(): Maybe<Response> {
+  public getResponse() {
     return this.response;
   }
 
-  public abstract output(token: string, user: UserEntity): void;
-}
-
-export class MockSignInEmailPasswordPresenter extends M<SignInEmailPasswordResponse> {
   public output(token: string, user: UserEntity) {
-    this.response = { token, user: user.toJSON() };
+    this.response = { token, user: user.toDto() };
   }
 }
 
-export class MockSignUpEmailPasswordPresenter extends M<SignUpEmailPasswordResponse> {
+export class MockSignUpEmailPasswordPresenter implements SignUpEmailPasswordPresenter {
+  protected response: SignUpEmailPasswordOutputData | null = null;
+
+  public getResponse() {
+    return this.response;
+  }
   public output(token: string, user: UserEntity) {
-    this.response = { token, user: user.toJSON() };
+    this.response = { token, user: user.toDto() };
   }
 }

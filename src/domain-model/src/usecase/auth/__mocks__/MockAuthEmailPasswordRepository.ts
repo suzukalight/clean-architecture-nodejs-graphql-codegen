@@ -1,7 +1,4 @@
-import {
-  AuthEmailPasswordEntity,
-  AuthEmailPasswordDto,
-} from '../../../entity/auth/AuthEmailPasswordEntity';
+import { AuthEmailPasswordEntity, AuthEmailPasswordDto } from '../../../entity/auth';
 import { AuthEmailPasswordRepository } from '../interface/repository';
 
 type InMemoryStore = {

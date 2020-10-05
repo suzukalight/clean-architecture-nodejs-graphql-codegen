@@ -1,10 +1,9 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import { SignInEmailPasswordRequest } from 'schema';
+import * as jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
 import { NotFoundError, AuthenticationFailedError } from 'common';
 
 import { AuthEmailPasswordRepository } from './interface/repository';
-import { SignInEmailPasswordUseCase } from './interface/usecase';
+import { SignInEmailPasswordInputData, SignInEmailPasswordUseCase } from './interface/usecase';
 import { SignInEmailPasswordPresenter } from './interface/presenter';
 import { UserRepository } from '../user/interface/repository';
 
@@ -25,7 +24,7 @@ export class SignInEmailPasswordInteractor implements SignInEmailPasswordUseCase
     this.presenter = presenter;
   }
 
-  public async handle(request: SignInEmailPasswordRequest) {
+  public async handle(request: SignInEmailPasswordInputData) {
     const authEntity = await this.authRepository.getByEmail(request.email);
     if (!authEntity) throw new NotFoundError('そのメールアドレスは登録されていません');
 

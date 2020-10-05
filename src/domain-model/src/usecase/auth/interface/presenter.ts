@@ -1,11 +1,22 @@
-import { Maybe, SignInEmailPasswordResponse, SignUpEmailPasswordResponse } from 'schema';
-
+import { UserDto } from '../../../entity/user/UserDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
-export interface AuthPresenter<Response> {
+export type SignInEmailPassworOutputData = {
+  user: UserDto;
+  token: string;
+};
+
+export interface SignInEmailPasswordPresenter {
   output(token: string, user: UserEntity): void;
-  getResponse(): Maybe<Response>;
+  getResponse(): SignInEmailPassworOutputData;
 }
 
-export type SignInEmailPasswordPresenter = AuthPresenter<SignInEmailPasswordResponse>;
-export type SignUpEmailPasswordPresenter = AuthPresenter<SignUpEmailPasswordResponse>;
+export type SignUpEmailPasswordOutputData = {
+  user: UserDto;
+  token: string;
+};
+
+export interface SignUpEmailPasswordPresenter {
+  output(token: string, user: UserEntity): void;
+  getResponse(): SignUpEmailPasswordOutputData;
+}

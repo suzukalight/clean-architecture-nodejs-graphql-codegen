@@ -1,8 +1,17 @@
-import { SignInEmailPasswordRequest, SignUpEmailPasswordRequest } from 'schema';
+export type SignInEmailPasswordInputData = {
+  email: string;
+  password: string;
+};
 
-interface AuthUseCase<Request> {
-  handle(request: Request): void;
+export interface SignInEmailPasswordUseCase {
+  handle(request: SignInEmailPasswordInputData): void;
 }
 
-export type SignInEmailPasswordUseCase = AuthUseCase<SignInEmailPasswordRequest>;
-export type SignUpEmailPasswordUseCase = AuthUseCase<SignUpEmailPasswordRequest>;
+export type SignUpEmailPasswordInputData = {
+  email: string;
+  password: string;
+};
+
+export interface SignUpEmailPasswordUseCase {
+  handle(request: SignUpEmailPasswordInputData): void;
+}
