@@ -7,8 +7,8 @@ export type SignInEmailPassworOutputData = {
 };
 
 export interface SignInEmailPasswordPresenter {
-  output(token: string, user: UserEntity): void;
-  getResponse(): SignInEmailPassworOutputData;
+  output(token: string, user: UserEntity | null): void;
+  getResponse(): SignInEmailPassworOutputData | null;
 }
 
 export type SignUpEmailPasswordOutputData = {
@@ -17,6 +17,6 @@ export type SignUpEmailPasswordOutputData = {
 };
 
 export interface SignUpEmailPasswordPresenter {
-  output(token: string, user: UserEntity): void;
-  getResponse(): SignUpEmailPasswordOutputData;
+  output(token: string, user: UserEntity | null): void;
+  getResponse(): SignUpEmailPasswordOutputData | null;
 }
