@@ -1,11 +1,27 @@
-import { CreateUserRequest, UpdateUserRolesRequest, Maybe } from 'schema';
-import { UserEntity } from '../../../entity/user/UserEntity';
+import { UserEntity } from '../../../entity';
+import { RoleType } from '../../../entity/common/Role';
 
-interface UserUseCase<Request> {
-  handle(request: Request, actor: Maybe<UserEntity>): void;
+export type GetUserInputData = {
+  id: string;
+};
+
+export interface GetUserUseCase {
+  handle(request: GetUserInputData): void;
 }
 
-export type GetUserUseCase = UserUseCase<string>;
+export type CreateUserInputData = {
+  email: string;
+};
 
-export type CreateUserUseCase = UserUseCase<CreateUserRequest>;
-export type UpdateUserRolesUseCase = UserUseCase<UpdateUserRolesRequest>;
+export interface CreateUserUseCase {
+  handle(request: CreateUserInputData): void;
+}
+
+export type UpdateUserRolesInputData = {
+  id: string;
+  roles: string[];
+};
+
+export interface UpdateUserRolesUseCase {
+  handle(request: UpdateUserRolesInputData, actor: UserEntity): void;
+}

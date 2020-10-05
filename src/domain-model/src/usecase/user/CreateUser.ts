@@ -1,7 +1,5 @@
-import { CreateUserRequest } from 'schema';
-
 import { UserRepository } from './interface/repository';
-import { CreateUserUseCase } from './interface/usecase';
+import { CreateUserInputData, CreateUserUseCase } from './interface/usecase';
 import { CreateUserPresenter } from './interface/presenter';
 
 export class CreateUserInteractor implements CreateUserUseCase {
@@ -13,7 +11,7 @@ export class CreateUserInteractor implements CreateUserUseCase {
     this.presenter = presenter;
   }
 
-  public async handle(request: CreateUserRequest) {
+  public async handle(request: CreateUserInputData) {
     const userEntity = await this.repository.create(request);
 
     this.presenter.output(userEntity);

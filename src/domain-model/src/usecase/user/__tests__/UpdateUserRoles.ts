@@ -1,4 +1,3 @@
-import { UpdateUserRolesRequest } from 'schema';
 import { IllegalArgumentError, NotFoundError, UnauthorizedError } from 'common';
 
 import { UpdateUserRolesInteractor } from '../UpdateUserRoles';
@@ -7,6 +6,7 @@ import { MockUserRepository } from '../__mocks__/MockUserRepository';
 import { MockUpdateUserRolesPresenter } from '../__mocks__/MockUserPresenter';
 import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
+import { UpdateUserRolesInputData } from '../interface/usecase';
 
 /**
  * ユーザを1名作成しておく
@@ -52,7 +52,7 @@ describe('UpdateUserRolesInteractor', () => {
     const request = ({
       id: actor.getId().toString(),
       roles: ['hogehoge'],
-    } as unknown) as UpdateUserRolesRequest;
+    } as unknown) as UpdateUserRolesInputData;
 
     try {
       await interactor.handle(request, actor);
@@ -66,7 +66,7 @@ describe('UpdateUserRolesInteractor', () => {
     const { actor, interactor } = await setup();
     const request = { id: actor.getId().toString(), roles: [RoleTypes.Member] };
 
-    const others = new UserEntity(actor.toJSON());
+    const others = new UserEntity(actor.toDto());
     others.setId(new ID('99999'));
 
     await expect(interactor.handle(request, others)).rejects.toThrow(UnauthorizedError);
