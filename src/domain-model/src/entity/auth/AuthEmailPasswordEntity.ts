@@ -1,12 +1,7 @@
+import { AuthEmailPasswordDto } from './AuthEmailPasswordDto';
 import { Email } from '../common/Email';
 import { Password } from '../common/Password';
 import { ID } from '../common/ID';
-
-export type AuthEmailPasswordDto = {
-  email: string;
-  passwordEncrypted: string;
-  userId: string;
-};
 
 export class AuthEmailPasswordEntity {
   private email: Email;
