@@ -1,8 +1,7 @@
-import { CreateTodoRequest } from 'schema';
 import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
-import { CreateTodoUseCase } from './interface/usecase';
+import { CreateTodoInputData, CreateTodoUseCase } from './interface/usecase';
 import { CreateTodoPresenter } from './interface/presenter';
 import { UserRepository } from '../user/interface/repository';
 
@@ -21,7 +20,7 @@ export class CreateTodoInteractor implements CreateTodoUseCase {
     this.presenter = presenter;
   }
 
-  public async handle(request: CreateTodoRequest) {
+  public async handle(request: CreateTodoInputData) {
     // 対応する user エンティティを取得
     const userEntity = await this.userRepository.getById(request.ownerId);
     if (!userEntity) throw new NotFoundError('指定したオーナーが見つかりません');

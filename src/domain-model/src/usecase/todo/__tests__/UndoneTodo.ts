@@ -68,7 +68,7 @@ describe('UndoneTodoInteractor', () => {
     const { todoId, actor, undoneInteractor } = await setup();
     const request = { id: todoId };
 
-    const others = new UserEntity(actor.toJSON());
+    const others = new UserEntity(actor.toDto());
     others.setId(new ID('99999'));
 
     await expect(undoneInteractor.handle(request, others)).rejects.toThrow(UnauthorizedError);

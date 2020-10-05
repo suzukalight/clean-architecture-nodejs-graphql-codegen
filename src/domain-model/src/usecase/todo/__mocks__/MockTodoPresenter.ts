@@ -1,77 +1,73 @@
 import {
-  Maybe,
-  Todo,
-  CreateTodoResponse,
-  DeleteTodoResponse,
-  DoneTodoResponse,
-  UndoneTodoResponse,
-} from 'schema';
-
-import {
   GetTodoPresenter,
+  GetTodoOutputData,
   CreateTodoPresenter,
+  CreateTodoOutputData,
   DeleteTodoPresenter,
+  DeleteTodoOutputData,
   DoneTodoPresenter,
+  DoneTodoOutputData,
   UndoneTodoPresenter,
+  UndoneTodoOutputData,
 } from '../interface/presenter';
 import { TodoEntity } from '../../../entity/todo/TodoEntity';
 
 export class MockGetTodoPresenter implements GetTodoPresenter {
-  private response: Maybe<Todo> = null;
+  private response: GetTodoOutputData | null = null;
 
-  public getResponse(): Maybe<Todo> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? todoEntity.toJSON() : null;
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }
 
 export class MockCreateTodoPresenter implements CreateTodoPresenter {
-  private response: Maybe<CreateTodoResponse> = null;
+  private response: CreateTodoOutputData | null = null;
 
-  public getResponse(): Maybe<CreateTodoResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? { todo: todoEntity.toJSON() } : null;
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }
 
 export class MockDeleteTodoPresenter implements DeleteTodoPresenter {
-  private response: Maybe<DeleteTodoResponse> = null;
+  private response: DeleteTodoOutputData | null = null;
 
-  public getResponse(): Maybe<DeleteTodoResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? { todo: todoEntity.toJSON() } : null;
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }
 
 export class MockDoneTodoPresenter implements DoneTodoPresenter {
-  private response: Maybe<DoneTodoResponse> = null;
+  private response: DoneTodoOutputData | null = null;
 
-  public getResponse(): Maybe<DoneTodoResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? { todo: todoEntity.toJSON() } : null;
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }
 
 export class MockUndoneTodoPresenter implements UndoneTodoPresenter {
-  private response: Maybe<UndoneTodoResponse> = null;
+  private response: UndoneTodoOutputData | null = null;
 
-  public getResponse(): Maybe<UndoneTodoResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? { todo: todoEntity.toJSON() } : null;
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }

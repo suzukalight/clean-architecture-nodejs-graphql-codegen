@@ -28,17 +28,17 @@ describe('GetTodoInteractor', () => {
   test('リクエストを処理し、エンティティを取得できた', async () => {
     const { todoId, interactor, presenter } = await setup();
 
-    await interactor.handle(todoId);
+    await interactor.handle({ id: todoId });
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.id).toBe(todoId);
+    expect(response?.todo?.id).toBe(todoId);
   });
 
   test('存在しないIDを指定したため、nullが返された', async () => {
     const { interactor, presenter } = await setup();
 
-    await interactor.handle('99999');
+    await interactor.handle({ id: '99999' });
 
     // response として null が得られた
     const response = presenter.getResponse();

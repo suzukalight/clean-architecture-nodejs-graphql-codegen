@@ -1,17 +1,17 @@
 import { IllegalArgumentError, PropertyRequiredError } from 'common';
 
-export type TodoDto = {
-  id: string;
-  ownerId: string;
-  title: string;
-  status: string;
-  dueDate: Date | null | undefined;
-};
-
 export enum TodoStatus {
   Undone = 'UNDONE',
   Done = 'DONE',
 }
+
+export type TodoDto = {
+  id: string;
+  ownerId: string;
+  title: string;
+  status: TodoStatus;
+  dueDate?: Date | null;
+};
 
 const TodoStatusStrings = Object.values(TodoStatus) as string[];
 
@@ -21,7 +21,7 @@ export const denyIllegalTodoStatus = (status: string) => {
   }
 };
 
-export const denyIllegalTodoDto = (todo: any) => {
+export const denyIllegalTodoDto = (todo: TodoDto) => {
   if (!todo) throw new PropertyRequiredError('todo');
   if (!todo.id) throw new PropertyRequiredError('id');
   if (!todo.ownerId) throw new PropertyRequiredError('ownerId');
