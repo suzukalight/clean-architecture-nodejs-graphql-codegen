@@ -1,9 +1,9 @@
-import { CreateUserRequest } from 'schema';
 import { NotFoundError } from 'common';
 
 import { RoleTypes } from '../../../entity/common/Role';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { UserRepository } from '../interface/repository';
+import { CreateUserInputData } from '../interface/usecase';
 
 type InMemoryStore = {
   idCounter: number;
@@ -31,7 +31,7 @@ export class MockUserRepository implements UserRepository {
     return this.store.entities.get(id) ?? null;
   }
 
-  public async create(user: CreateUserRequest) {
+  public async create(user: CreateUserInputData) {
     const id = `${++this.store.idCounter}`;
     const newEntity = new UserEntity({
       id,

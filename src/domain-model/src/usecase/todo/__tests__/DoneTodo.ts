@@ -1,4 +1,3 @@
-import { TodoStatus } from 'schema';
 import { NotFoundError, ConflictError, UnauthorizedError } from 'common';
 
 import { DoneTodoInteractor } from '../DoneTodo';
@@ -7,6 +6,7 @@ import { MockDoneTodoPresenter } from '../__mocks__/MockTodoPresenter';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
+import { TodoStatus } from '../../../entity/todo/TodoDto';
 
 /**
  * TODOを1つ作成しておく
