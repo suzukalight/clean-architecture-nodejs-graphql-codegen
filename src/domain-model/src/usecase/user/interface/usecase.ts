@@ -1,5 +1,4 @@
 import { UserEntity } from '../../../entity';
-import { RoleType } from '../../../entity/common/Role';
 
 export type GetUserInputData = {
   id: string;

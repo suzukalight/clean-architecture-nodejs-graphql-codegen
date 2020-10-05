@@ -17,7 +17,7 @@ export const denyIllegalRoles = (roles: string[]) => {
   roles.forEach((role) => new Role(role as RoleType));
 };
 
-export const denyIllegalUserDto = (user: any) => {
+export const denyIllegalUserDto = (user: UserDto) => {
   if (!user) throw new PropertyRequiredError('user');
   if (!user.id) throw new PropertyRequiredError('id');
   if (!user.email) throw new PropertyRequiredError('email');

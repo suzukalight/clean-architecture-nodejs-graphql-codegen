@@ -9,12 +9,12 @@ export type AuthEmailPasswordDto = {
   userId: string;
 };
 
-export const denyIllegalAuthEmailPasswordDto = (user: any) => {
-  if (!user) throw new PropertyRequiredError('user');
-  if (!user.email) throw new PropertyRequiredError('email');
-  if (!user.passwordEncrypted) throw new PropertyRequiredError('passwordEncrypted');
-  if (!user.userId) throw new PropertyRequiredError('userId');
+export const denyIllegalAuthEmailPasswordDto = (auth: AuthEmailPasswordDto) => {
+  if (!auth) throw new PropertyRequiredError('user');
+  if (!auth.email) throw new PropertyRequiredError('email');
+  if (!auth.passwordEncrypted) throw new PropertyRequiredError('passwordEncrypted');
+  if (!auth.userId) throw new PropertyRequiredError('userId');
 
-  denyIllegalEmail(user.email);
-  denyIllegalPassword(user.passwordEncrypted);
+  denyIllegalEmail(auth.email);
+  denyIllegalPassword(auth.passwordEncrypted);
 };
