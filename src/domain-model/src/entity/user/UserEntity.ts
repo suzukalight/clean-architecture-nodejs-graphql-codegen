@@ -1,36 +1,20 @@
-import { User } from 'schema';
-import { PropertyRequiredError, IllegalArgumentError, ValidationError } from 'common';
+import { ValidationError, ConflictError } from 'common';
 
+import { UserDto, denyIllegalUserDto } from './UserDto';
 import { ID } from '../common/ID';
 import { Email } from '../common/Email';
 import { Role, RoleTypes, RoleType } from '../common/Role';
-import { ConflictError } from 'common';
-
-const isValidRoles = (roles: RoleType[]) => {
-  if (!roles) throw new PropertyRequiredError('roles');
-  if (!roles.length) throw new IllegalArgumentError('1つ以上のロールが必要です');
-  roles.forEach((role) => new Role(role));
-  return true;
-};
-
-const isValidArguments = (user: User) => {
-  if (!user) throw new PropertyRequiredError('user');
-  if (!user.id) throw new PropertyRequiredError('id');
-  if (!user.email) throw new PropertyRequiredError('email');
-  isValidRoles(user.roles);
-  return true;
-};
 
 export class UserEntity {
   private id: ID;
   private email: Email;
   private roles: Role[] = [new Role(RoleTypes.Anonymous)];
 
-  constructor(user: User) {
-    isValidArguments(user);
+  constructor(user: UserDto) {
+    denyIllegalUserDto(user);
     this.id = new ID(user.id);
     this.email = new Email(user.email);
-    this.roles = user.roles.map((role) => new Role(role));
+    this.roles = user.roles.map((role) => new Role(role as RoleType));
   }
 
   getId() {
@@ -77,7 +61,7 @@ export class UserEntity {
     this.updateRoles(newRoles);
   }
 
-  toJSON(): User {
+  toDto(): UserDto {
     return {
       id: this.id.toString(),
       email: this.email.toString(),
@@ -86,6 +70,11 @@ export class UserEntity {
   }
 
   isValid(): boolean {
-    return isValidArguments(this.toJSON());
+    try {
+      denyIllegalUserDto(this.toDto());
+    } catch {
+      return false;
+    }
+    return true;
   }
 }
