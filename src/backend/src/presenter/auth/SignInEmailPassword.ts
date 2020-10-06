@@ -1,17 +1,17 @@
-import { Maybe, SignInEmailPasswordResponse } from 'schema';
 import {
   UserEntity,
   SignInEmailPasswordPresenter as SignInEmailPasswordPresenterIF,
+  SignInEmailPassworOutputData,
 } from 'domain-model';
 
 export class SignInEmailPasswordPresenter implements SignInEmailPasswordPresenterIF {
-  private response: Maybe<SignInEmailPasswordResponse> = null;
+  private response: SignInEmailPassworOutputData | null = null;
 
-  public getResponse(): Maybe<SignInEmailPasswordResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(token: string, user: UserEntity) {
-    this.response = { token, user: user.toJSON() };
+  public async output(token: string, user: UserEntity | null) {
+    this.response = { token, user: user?.toDto() ?? null };
   }
 }
