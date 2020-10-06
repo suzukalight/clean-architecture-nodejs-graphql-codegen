@@ -1,15 +1,12 @@
 import { Connection, Repository } from 'typeorm';
-import {
-  AuthEmailPasswordRepository as AuthEmailPasswordRepositoryIF,
-  AuthEmailPasswordDto,
-} from 'domain-model';
+import { AuthEmailPasswordRepository, AuthEmailPasswordDto } from 'domain-model';
 
 import {
   AuthEmailPassword as OrmAuthEmailPassword,
   OrmAuthEmailPasswordFactory,
 } from '../entity/AuthEmailPassword';
 
-export class AuthEmailPasswordRepository implements AuthEmailPasswordRepositoryIF {
+export class GqlAuthEmailPasswordRepository implements AuthEmailPasswordRepository {
   private dbConnection: Connection;
   private repository: Repository<OrmAuthEmailPassword>;
 

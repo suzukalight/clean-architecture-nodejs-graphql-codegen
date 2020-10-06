@@ -12,7 +12,7 @@ import { User } from 'schema';
 
 import { ApolloServerContext } from './types';
 import { resolvers } from './resolvers';
-import { UserRepository } from '../../repository/typeorm/user/repository/User';
+import { GqlUserRepository } from '../../repository/typeorm/user/repository/User';
 
 dotenv.config();
 
@@ -29,7 +29,7 @@ const getContext = async (req: Request, dbConnection: Connection): Promise<Apoll
     const { JWT_SECRET } = process.env;
     const user = jwt.verify(token, JWT_SECRET!) as User;
 
-    const repository = new UserRepository(dbConnection);
+    const repository = new GqlUserRepository(dbConnection);
     const userEntity = await repository.getById(user.id);
 
     return { dbConnection, actor: userEntity };

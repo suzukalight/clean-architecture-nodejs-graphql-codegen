@@ -1,11 +1,11 @@
 import { Connection, Repository } from 'typeorm';
 import { NotFoundError } from 'common';
 import { CreateTodoRequest, TodoStatus } from 'schema';
-import { TodoEntity, TodoRepository as TodoRepositoryIF } from 'domain-model';
+import { TodoEntity, TodoRepository } from 'domain-model';
 
 import { Todo as OrmTodo, OrmTodoFactory } from '../entity/Todo';
 
-export class TodoRepository implements TodoRepositoryIF {
+export class GqlTodoRepository implements TodoRepository {
   private dbConnection: Connection;
   private repository: Repository<OrmTodo>;
 

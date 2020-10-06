@@ -1,10 +1,10 @@
 import { Connection, Repository } from 'typeorm';
 import { CreateUserRequest } from 'schema';
-import { UserEntity, RoleTypes, UserRepository as UserRepositoryIF, UserDto } from 'domain-model';
+import { UserEntity, RoleTypes, UserRepository } from 'domain-model';
 
 import { User as OrmUser, OrmUserFactory } from '../entity/User';
 
-export class UserRepository implements UserRepositoryIF {
+export class GqlUserRepository implements UserRepository {
   private dbConnection: Connection;
   private repository: Repository<OrmUser>;
 
