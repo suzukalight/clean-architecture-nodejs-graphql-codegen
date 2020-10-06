@@ -1,17 +1,16 @@
-import {
-  UserEntity,
-  GetUserPresenter as GetUserPresenterIF,
-  GetUserOutputData,
-} from 'domain-model';
+import { User } from 'schema';
+import { GetUserPresenter, GetUserOutputData } from 'domain-model';
 
-export class GetUserPresenter implements GetUserPresenterIF {
-  private response: GetUserOutputData | null = null;
+import { toGqlUser } from '../utils/converter/user';
+
+export class GqlGetUserPresenter implements GetUserPresenter {
+  private response: User | null = null;
 
   public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: UserEntity | null) {
-    this.response = userEntity ? { user: userEntity.toDto() } : null;
+  public async output(response: GetUserOutputData) {
+    this.response = toGqlUser(response?.user);
   }
 }

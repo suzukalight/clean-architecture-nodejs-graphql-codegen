@@ -1,17 +1,16 @@
-import {
-  UserEntity,
-  UpdateUserRolesPresenter as UpdateUserRolesPresenterIF,
-  UpdateUserRolesOutputData,
-} from 'domain-model';
+import { UpdateUserRolesResponse } from 'schema';
+import { UpdateUserRolesPresenter, UpdateUserRolesOutputData } from 'domain-model';
 
-export class UpdateUserRolesPresenter implements UpdateUserRolesPresenterIF {
-  private response: UpdateUserRolesOutputData | null = null;
+import { toGqlUser } from '../utils/converter/user';
+
+export class GqlUpdateUserRolesPresenter implements UpdateUserRolesPresenter {
+  private response: UpdateUserRolesResponse | null = null;
 
   public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: UserEntity | null) {
-    this.response = userEntity ? { user: userEntity.toDto() } : null;
+  public async output(response: UpdateUserRolesOutputData) {
+    this.response = { user: toGqlUser(response.user)! };
   }
 }
