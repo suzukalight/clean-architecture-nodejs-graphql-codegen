@@ -1,15 +1,13 @@
 import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 import { Role, RoleType } from '../common/Role';
+import { TimeStampTypes, denyDoesNotHaveRequiredProperties } from '../utils';
 
 export type UserDto = {
   id: string;
   email: string;
   roles: RoleType[];
-
-  createdAt?: Date;
-  updatedAt?: Date;
-};
+} & TimeStampTypes;
 
 export const denyIllegalRoles = (roles: string[]) => {
   if (!roles) throw new PropertyRequiredError('roles');
@@ -19,8 +17,6 @@ export const denyIllegalRoles = (roles: string[]) => {
 
 export const denyIllegalUserDto = (user: UserDto) => {
   if (!user) throw new PropertyRequiredError('user');
-  if (!user.id) throw new PropertyRequiredError('id');
-  if (!user.email) throw new PropertyRequiredError('email');
-
+  denyDoesNotHaveRequiredProperties(user, ['id', 'email', 'roles']);
   denyIllegalRoles(user.roles);
 };

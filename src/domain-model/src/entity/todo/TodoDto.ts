@@ -1,5 +1,7 @@
 import { IllegalArgumentError, PropertyRequiredError } from 'common';
 
+import { TimeStampTypes, denyDoesNotHaveRequiredProperties } from '../utils';
+
 export enum TodoStatus {
   Undone = 'UNDONE',
   Done = 'DONE',
@@ -11,7 +13,7 @@ export type TodoDto = {
   title: string;
   status: TodoStatus;
   dueDate?: Date | null;
-};
+} & TimeStampTypes;
 
 const TodoStatusStrings = Object.values(TodoStatus) as string[];
 
@@ -23,9 +25,6 @@ export const denyIllegalTodoStatus = (status: string) => {
 
 export const denyIllegalTodoDto = (todo: TodoDto) => {
   if (!todo) throw new PropertyRequiredError('todo');
-  if (!todo.id) throw new PropertyRequiredError('id');
-  if (!todo.ownerId) throw new PropertyRequiredError('ownerId');
-  if (!todo.title) throw new PropertyRequiredError('title');
-  if (!todo.status) throw new PropertyRequiredError('status');
+  denyDoesNotHaveRequiredProperties(todo, ['id', 'ownerId', 'title', 'status']);
   denyIllegalTodoStatus(todo.status);
 };
