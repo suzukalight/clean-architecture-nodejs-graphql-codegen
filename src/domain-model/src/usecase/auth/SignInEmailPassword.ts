@@ -4,7 +4,7 @@ import { NotFoundError, AuthenticationFailedError } from 'common';
 
 import { AuthEmailPasswordRepository } from './interface/repository';
 import { SignInEmailPasswordInputData, SignInEmailPasswordUseCase } from './interface/usecase';
-import { SignInEmailPasswordPresenter } from './interface/presenter';
+import { SignInEmailPassworOutputData, SignInEmailPasswordPresenter } from './interface/presenter';
 import { UserRepository } from '../user/interface/repository';
 
 dotenv.config();
@@ -45,8 +45,10 @@ export class SignInEmailPasswordInteractor implements SignInEmailPasswordUseCase
     const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
     const token = jwt.sign(tokenPayload, JWT_SECRET!, { expiresIn: JWT_EXPIRES_IN });
 
-    // TODO: ログイン履歴とか
-
-    this.presenter.output(token, userEntity);
+    const outputData: SignInEmailPassworOutputData = {
+      token,
+      user: userEntity.toDto(),
+    };
+    this.presenter.output(outputData);
   }
 }

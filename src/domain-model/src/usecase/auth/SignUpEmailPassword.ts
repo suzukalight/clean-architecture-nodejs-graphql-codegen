@@ -4,7 +4,7 @@ import { ConflictError } from 'common';
 
 import { AuthEmailPasswordRepository } from './interface/repository';
 import { SignUpEmailPasswordInputData, SignUpEmailPasswordUseCase } from './interface/usecase';
-import { SignUpEmailPasswordPresenter } from './interface/presenter';
+import { SignUpEmailPasswordOutputData, SignUpEmailPasswordPresenter } from './interface/presenter';
 import { UserRepository } from '../user/interface/repository';
 import { encryptPassword } from '../../entity/common/Password';
 
@@ -52,9 +52,11 @@ export class SignUpEmailPasswordInteractor implements SignUpEmailPasswordUseCase
     const { JWT_SECRET, JWT_EXPIRES_IN } = process.env;
     const token = jwt.sign(tokenPayload, JWT_SECRET!, { expiresIn: JWT_EXPIRES_IN });
 
-    // TODO: ログイン履歴とか
-
     // JWTトークンとサインアップ済みユーザを返す
-    this.presenter.output(token, userEntity);
+    const outputData: SignUpEmailPasswordOutputData = {
+      token,
+      user: userEntity.toDto(),
+    };
+    this.presenter.output(outputData);
   }
 }

@@ -1,22 +1,19 @@
 import { UserDto } from '../../../entity/user/UserDto';
-import { UserEntity } from '../../../entity/user/UserEntity';
 
 export type SignInEmailPassworOutputData = {
   user: UserDto | null;
-  token: string;
+  token: string | null;
 };
 
 export interface SignInEmailPasswordPresenter {
-  output(token: string, user: UserEntity | null): void;
-  getResponse(): SignInEmailPassworOutputData | null;
+  output(response: SignInEmailPassworOutputData): void;
 }
 
 export type SignUpEmailPasswordOutputData = {
   user: UserDto | null;
-  token: string;
+  token: string | null;
 };
 
 export interface SignUpEmailPasswordPresenter {
-  output(token: string, user: UserEntity | null): void;
-  getResponse(): SignUpEmailPasswordOutputData | null;
+  output(response: SignInEmailPassworOutputData): void;
 }

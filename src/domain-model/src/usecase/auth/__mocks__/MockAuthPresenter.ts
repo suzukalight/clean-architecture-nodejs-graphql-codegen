@@ -4,7 +4,6 @@ import {
   SignUpEmailPasswordPresenter,
   SignUpEmailPasswordOutputData,
 } from '../interface/presenter';
-import { UserEntity } from '../../../entity/user/UserEntity';
 
 export class MockSignInEmailPasswordPresenter implements SignInEmailPasswordPresenter {
   protected response: SignInEmailPassworOutputData | null = null;
@@ -13,8 +12,8 @@ export class MockSignInEmailPasswordPresenter implements SignInEmailPasswordPres
     return this.response;
   }
 
-  public output(token: string, user: UserEntity) {
-    this.response = { token, user: user.toDto() };
+  public output(response: SignInEmailPassworOutputData) {
+    this.response = response;
   }
 }
 
@@ -24,7 +23,8 @@ export class MockSignUpEmailPasswordPresenter implements SignUpEmailPasswordPres
   public getResponse() {
     return this.response;
   }
-  public output(token: string, user: UserEntity) {
-    this.response = { token, user: user.toDto() };
+
+  public output(response: SignUpEmailPasswordOutputData) {
+    this.response = response;
   }
 }
