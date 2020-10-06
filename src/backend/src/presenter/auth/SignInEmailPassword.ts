@@ -1,5 +1,5 @@
 import { SignInEmailPasswordResponse } from 'schema';
-import { SignInEmailPasswordPresenter, SignInEmailPassworOutputData } from 'domain-model';
+import { SignInEmailPasswordPresenter, SignInEmailPasswordOutputData } from 'domain-model';
 
 import { toGqlUser } from '../utils/converter/user';
 
@@ -10,7 +10,7 @@ export class GqlSignInEmailPasswordPresenter implements SignInEmailPasswordPrese
     return this.response;
   }
 
-  public async output(response: SignInEmailPassworOutputData) {
+  public async output(response: SignInEmailPasswordOutputData) {
     this.response = {
       token: response.token!,
       user: toGqlUser(response.user),

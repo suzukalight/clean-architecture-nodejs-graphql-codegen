@@ -1,18 +1,18 @@
 import {
   SignInEmailPasswordPresenter,
-  SignInEmailPassworOutputData,
+  SignInEmailPasswordOutputData,
   SignUpEmailPasswordPresenter,
   SignUpEmailPasswordOutputData,
 } from '../interface/presenter';
 
 export class MockSignInEmailPasswordPresenter implements SignInEmailPasswordPresenter {
-  protected response: SignInEmailPassworOutputData | null = null;
+  protected response: SignInEmailPasswordOutputData | null = null;
 
   public getResponse() {
     return this.response;
   }
 
-  public output(response: SignInEmailPassworOutputData) {
+  public output(response: SignInEmailPasswordOutputData) {
     this.response = response;
   }
 }

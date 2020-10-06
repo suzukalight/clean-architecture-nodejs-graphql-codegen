@@ -1,12 +1,12 @@
 import { UserDto } from '../../../entity/user/UserDto';
 
-export type SignInEmailPassworOutputData = {
+export type SignInEmailPasswordOutputData = {
   user: UserDto | null;
   token: string | null;
 };
 
 export interface SignInEmailPasswordPresenter {
-  output(response: SignInEmailPassworOutputData): void;
+  output(response: SignInEmailPasswordOutputData): void;
 }
 
 export type SignUpEmailPasswordOutputData = {
@@ -15,5 +15,5 @@ export type SignUpEmailPasswordOutputData = {
 };
 
 export interface SignUpEmailPasswordPresenter {
-  output(response: SignInEmailPassworOutputData): void;
+  output(response: SignUpEmailPasswordOutputData): void;
 }
