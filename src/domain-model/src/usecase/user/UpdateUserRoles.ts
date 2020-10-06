@@ -22,7 +22,7 @@ export class UpdateUserRolesInteractor implements UpdateUserRolesUseCase {
 
     allowOnlyWhenActorIsOwner(userEntity.getId(), actor);
 
-    const roles = request.roles.map((role) => new Role((role as unknown) as RoleType));
+    const roles = request.roles.map((role) => new Role(role as RoleType));
     userEntity.updateRoles(roles);
 
     await this.repository.update(userEntity);
