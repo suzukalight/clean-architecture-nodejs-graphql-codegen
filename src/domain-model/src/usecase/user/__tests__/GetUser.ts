@@ -36,6 +36,6 @@ describe('GetUserInteractor', () => {
 
     // response として null が得られた
     const response = presenter.getResponse();
-    expect(response).toBeNull();
+    expect(response?.user).toBeNull();
   });
 });
