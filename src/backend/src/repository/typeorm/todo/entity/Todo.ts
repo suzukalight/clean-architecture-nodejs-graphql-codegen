@@ -47,7 +47,7 @@ export class Todo {
 }
 
 export class OrmTodoFactory {
-  public static fromSchema(todo: TodoSchema): Todo {
+  public static fromDto(todo: TodoSchema): Todo {
     return {
       id: +todo.id,
       ownerId: +todo.ownerId,
@@ -60,11 +60,11 @@ export class OrmTodoFactory {
   }
 
   public static fromEntity(todoEntity: TodoEntity) {
-    const todoSchema = todoEntity.toJSON();
-    return OrmTodoFactory.fromSchema(todoSchema);
+    const todoSchema = todoEntity.toDto();
+    return OrmTodoFactory.fromDto(todoSchema);
   }
 
-  public static toSchema(todo: Todo): TodoSchema {
+  public static toDto(todo: Todo): TodoSchema {
     return {
       id: `${todo.id}`,
       ownerId: `${todo.ownerId}`,
@@ -77,7 +77,7 @@ export class OrmTodoFactory {
   }
 
   public static toEntity(todo: Todo): TodoEntity {
-    const schema = OrmTodoFactory.toSchema(todo);
+    const schema = OrmTodoFactory.toDto(todo);
     return new TodoEntity(schema);
   }
 }
