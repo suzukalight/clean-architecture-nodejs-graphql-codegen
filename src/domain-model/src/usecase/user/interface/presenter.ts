@@ -1,29 +1,25 @@
 import { UserDto } from '../../../entity/user/UserDto';
-import { UserEntity } from '../../../entity/user/UserEntity';
 
 export type GetUserOutputData = {
-  user: UserDto;
+  user: UserDto | null;
 };
 
 export interface GetUserPresenter {
-  output(user: UserEntity | null): void;
-  getResponse(): GetUserOutputData | null;
+  output(response: GetUserOutputData): void;
 }
 
 export type CreateUserOutputData = {
-  user: UserDto;
+  user: UserDto | null;
 };
 
 export interface CreateUserPresenter {
-  output(user: UserEntity | null): void;
-  getResponse(): CreateUserOutputData | null;
+  output(response: CreateUserOutputData): void;
 }
 
 export type UpdateUserRolesOutputData = {
-  user: UserDto;
+  user: UserDto | null;
 };
 
 export interface UpdateUserRolesPresenter {
-  output(user: UserEntity | null): void;
-  getResponse(): UpdateUserRolesOutputData | null;
+  output(response: UpdateUserRolesOutputData): void;
 }

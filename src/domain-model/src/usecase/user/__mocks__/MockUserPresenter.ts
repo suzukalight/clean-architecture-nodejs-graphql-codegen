@@ -6,7 +6,6 @@ import {
   GetUserOutputData,
   CreateUserOutputData,
 } from '../interface/presenter';
-import { UserEntity } from '../../../entity/user/UserEntity';
 
 export class MockGetUserPresenter implements GetUserPresenter {
   private response: GetUserOutputData | null = null;
@@ -15,8 +14,8 @@ export class MockGetUserPresenter implements GetUserPresenter {
     return this.response;
   }
 
-  public async output(userEntity: UserEntity | null) {
-    this.response = userEntity ? { user: userEntity.toDto() } : null;
+  public async output(response: GetUserOutputData) {
+    this.response = response;
   }
 }
 
@@ -27,8 +26,8 @@ export class MockCreateUserPresenter implements CreateUserPresenter {
     return this.response;
   }
 
-  public async output(userEntity: UserEntity | null) {
-    this.response = userEntity ? { user: userEntity.toDto() } : null;
+  public async output(response: CreateUserOutputData) {
+    this.response = response;
   }
 }
 
@@ -39,7 +38,7 @@ export class MockUpdateUserRolesPresenter implements UpdateUserRolesPresenter {
     return this.response;
   }
 
-  public async output(userEntity: UserEntity | null) {
-    this.response = userEntity ? { user: userEntity.toDto() } : null;
+  public async output(response: UpdateUserRolesOutputData) {
+    this.response = response;
   }
 }

@@ -1,6 +1,6 @@
 import { UserRepository } from './interface/repository';
 import { CreateUserInputData, CreateUserUseCase } from './interface/usecase';
-import { CreateUserPresenter } from './interface/presenter';
+import { CreateUserOutputData, CreateUserPresenter } from './interface/presenter';
 
 export class CreateUserInteractor implements CreateUserUseCase {
   private repository: UserRepository;
@@ -14,6 +14,7 @@ export class CreateUserInteractor implements CreateUserUseCase {
   public async handle(request: CreateUserInputData) {
     const userEntity = await this.repository.create(request);
 
-    this.presenter.output(userEntity);
+    const outputData: CreateUserOutputData = { user: userEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }

@@ -2,7 +2,7 @@ import { NotFoundError } from 'common';
 
 import { UserRepository } from './interface/repository';
 import { UpdateUserRolesInputData, UpdateUserRolesUseCase } from './interface/usecase';
-import { UpdateUserRolesPresenter } from './interface/presenter';
+import { UpdateUserRolesOutputData, UpdateUserRolesPresenter } from './interface/presenter';
 import { Role, RoleType } from '../../entity/common/Role';
 import { UserEntity } from '../../entity/user/UserEntity';
 import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
@@ -27,6 +27,7 @@ export class UpdateUserRolesInteractor implements UpdateUserRolesUseCase {
 
     await this.repository.update(userEntity);
 
-    this.presenter.output(userEntity);
+    const outputData: UpdateUserRolesOutputData = { user: userEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }
