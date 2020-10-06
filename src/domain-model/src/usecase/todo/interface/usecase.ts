@@ -1,18 +1,43 @@
-import {
-  CreateTodoRequest,
-  DoneTodoRequest,
-  UndoneTodoRequest,
-  DeleteTodoRequest,
-  Maybe,
-} from 'schema';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
-interface TodoUseCase<Request> {
-  handle(request: Request, actor: Maybe<UserEntity>): void;
+export type GetTodoInputData = {
+  id: string;
+};
+
+export interface GetTodoUseCase {
+  handle(request: GetTodoInputData, actor: UserEntity): void;
 }
 
-export type GetTodoUseCase = TodoUseCase<string>;
-export type CreateTodoUseCase = TodoUseCase<CreateTodoRequest>;
-export type DoneTodoUseCase = TodoUseCase<DoneTodoRequest>;
-export type UndoneTodoUseCase = TodoUseCase<UndoneTodoRequest>;
-export type DeleteTodoUseCase = TodoUseCase<DeleteTodoRequest>;
+export type CreateTodoInputData = {
+  ownerId: string;
+  title: string;
+  dueDate?: Date | null;
+};
+
+export interface CreateTodoUseCase {
+  handle(request: CreateTodoInputData, actor: UserEntity): void;
+}
+
+export type DoneTodoInputData = {
+  id: string;
+};
+
+export interface DoneTodoUseCase {
+  handle(request: DoneTodoInputData, actor: UserEntity): void;
+}
+
+export type UndoneTodoInputData = {
+  id: string;
+};
+
+export interface UndoneTodoUseCase {
+  handle(request: UndoneTodoInputData, actor: UserEntity): void;
+}
+
+export type DeleteTodoInputData = {
+  id: string;
+};
+
+export interface DeleteTodoUseCase {
+  handle(request: DeleteTodoInputData, actor: UserEntity): void;
+}

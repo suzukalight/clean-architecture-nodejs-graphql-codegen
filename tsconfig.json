@@ -28,5 +28,6 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "/*.js"],
+  "exclude": ["node_modules", "**/node_modules/*", "generated"]
 }

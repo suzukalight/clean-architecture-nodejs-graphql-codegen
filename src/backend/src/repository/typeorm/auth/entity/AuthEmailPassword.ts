@@ -43,7 +43,7 @@ export class AuthEmailPassword {
 }
 
 export class OrmAuthEmailPasswordFactory {
-  public static toSchema(auth: AuthEmailPassword): AuthEmailPasswordDto {
+  public static toDto(auth: AuthEmailPassword): AuthEmailPasswordDto {
     return {
       email: auth.email,
       passwordEncrypted: auth.passwordEncrypted,
@@ -52,7 +52,7 @@ export class OrmAuthEmailPasswordFactory {
   }
 
   public static toEntity(auth: AuthEmailPassword): AuthEmailPasswordEntity {
-    const schema = OrmAuthEmailPasswordFactory.toSchema(auth);
+    const schema = OrmAuthEmailPasswordFactory.toDto(auth);
     return new AuthEmailPasswordEntity(schema);
   }
 }

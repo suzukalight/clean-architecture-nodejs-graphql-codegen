@@ -6,8 +6,11 @@
   "author": "suzukalight <mail@mkubara.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn clean && tsc -b",
-    "clean": "rimraf lib *.tsbuildinfo",
+    "build": "tsc -b",
+    "rebuild": "run-s clean build",
+    "clean": "run-p clean:*",
+    "clean:lib": "rimraf lib *.tsbuildinfo",
+    "clean:modules": "rimraf node_modules && yarn install",
     "test": "env-cmd -f .env.default jest",
     "test:cov": "run-s test:cov:run test:cov:open",
     "test:cov:run": "yarn test --coverage",
@@ -18,8 +21,7 @@
     "common": "file:../common",
     "dotenv": "^8.2.0",
     "graphql-scalars": "^1.2.6",
-    "jsonwebtoken": "^8.5.1",
-    "schema": "file:../schema"
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

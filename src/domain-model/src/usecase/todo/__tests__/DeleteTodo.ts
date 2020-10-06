@@ -37,7 +37,7 @@ describe('DeleteTodoInteractor', () => {
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.todo.id).toBe(todoId);
+    expect(response?.todo?.id).toBe(todoId);
   });
 
   test('存在しないIDを指定したため、エラーが返された', async () => {
@@ -51,7 +51,7 @@ describe('DeleteTodoInteractor', () => {
     const { todoId, actor, interactor } = await setup();
     const request = { id: todoId };
 
-    const others = new UserEntity(actor.toJSON());
+    const others = new UserEntity(actor.toDto());
     others.setId(new ID('99999'));
 
     await expect(interactor.handle(request, others)).rejects.toThrow(UnauthorizedError);

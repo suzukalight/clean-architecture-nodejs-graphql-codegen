@@ -1,6 +1,6 @@
 import { TodoRepository } from './interface/repository';
-import { GetTodoUseCase } from './interface/usecase';
-import { GetTodoPresenter } from './interface/presenter';
+import { GetTodoInputData, GetTodoUseCase } from './interface/usecase';
+import { GetTodoOutputData, GetTodoPresenter } from './interface/presenter';
 
 export class GetTodoInteractor implements GetTodoUseCase {
   private repository: TodoRepository;
@@ -11,9 +11,10 @@ export class GetTodoInteractor implements GetTodoUseCase {
     this.presenter = presenter;
   }
 
-  public async handle(id: string) {
-    const todoEntity = await this.repository.getById(id);
+  public async handle(request: GetTodoInputData) {
+    const todoEntity = await this.repository.getById(request?.id);
 
-    this.presenter.output(todoEntity);
+    const outputData: GetTodoOutputData = { todo: todoEntity?.toDto() ?? null };
+    this.presenter.output(outputData);
   }
 }

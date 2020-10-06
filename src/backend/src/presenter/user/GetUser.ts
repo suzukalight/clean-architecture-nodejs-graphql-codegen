@@ -1,14 +1,16 @@
-import { Maybe, User } from 'schema';
-import { UserEntity, GetUserPresenter as GetUserPresenterIF } from 'domain-model';
+import { User } from 'schema';
+import { GetUserPresenter, GetUserOutputData } from 'domain-model';
 
-export class GetUserPresenter implements GetUserPresenterIF {
-  private response: Maybe<User> = null;
+import { toGqlUser } from '../utils/converter/user';
 
-  public getResponse(): Maybe<User> {
+export class GqlGetUserPresenter implements GetUserPresenter {
+  private response: User | null = null;
+
+  public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = userEntity ? userEntity.toJSON() : null;
+  public async output(response: GetUserOutputData) {
+    this.response = toGqlUser(response?.user);
   }
 }

@@ -1,4 +1,3 @@
-import { TodoStatus } from 'schema';
 import { NotFoundError, ConflictError, UnauthorizedError } from 'common';
 
 import { DoneTodoInteractor } from '../DoneTodo';
@@ -7,6 +6,7 @@ import { MockDoneTodoPresenter } from '../__mocks__/MockTodoPresenter';
 import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
 import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
+import { TodoStatus } from '../../../entity/todo/TodoDto';
 
 /**
  * TODOを1つ作成しておく
@@ -38,7 +38,7 @@ describe('DoneTodoInteractor', () => {
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.todo.status).toBe(TodoStatus.Done);
+    expect(response?.todo?.status).toBe(TodoStatus.Done);
   });
 
   test('すでにDONEにしているTODOを指定したため、エラーが返された', async () => {
@@ -63,7 +63,7 @@ describe('DoneTodoInteractor', () => {
     const { todoId, actor, interactor } = await setup();
     const request = { id: todoId };
 
-    const others = new UserEntity(actor.toJSON());
+    const others = new UserEntity(actor.toDto());
     others.setId(new ID('99999'));
 
     await expect(interactor.handle(request, others)).rejects.toThrow(UnauthorizedError);

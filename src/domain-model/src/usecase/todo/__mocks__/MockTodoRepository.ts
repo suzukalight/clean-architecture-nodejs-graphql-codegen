@@ -1,8 +1,8 @@
-import { CreateTodoRequest, TodoStatus, DeleteTodoRequest } from 'schema';
 import { NotFoundError } from 'common';
 
-import { TodoEntity } from '../../../entity/todo/TodoEntity';
+import { TodoEntity, TodoStatus } from '../../../entity/todo';
 import { TodoRepository } from '../interface/repository';
+import { CreateTodoInputData } from '../interface/usecase';
 
 type InMemoryStore = {
   idCounter: number;
@@ -30,7 +30,7 @@ export class MockTodoRepository implements TodoRepository {
     return this.store.entities.get(id) ?? null;
   }
 
-  public async create(todo: CreateTodoRequest) {
+  public async create(todo: CreateTodoInputData) {
     const id = `${++this.store.idCounter}`;
     const newEntity = new TodoEntity({
       id,
@@ -52,8 +52,7 @@ export class MockTodoRepository implements TodoRepository {
     return todo;
   }
 
-  public async delete(request: DeleteTodoRequest) {
-    const { id } = request;
+  public async delete(id: string) {
     const targetEntity = this.store.entities.get(id);
     if (!targetEntity) throw new NotFoundError();
 

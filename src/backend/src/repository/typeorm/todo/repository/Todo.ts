@@ -1,11 +1,10 @@
 import { Connection, Repository } from 'typeorm';
 import { NotFoundError } from 'common';
-import { CreateTodoRequest, TodoStatus, DeleteTodoRequest } from 'schema';
-import { TodoEntity, TodoRepository as TodoRepositoryIF } from 'domain-model';
+import { CreateTodoInputData, TodoEntity, TodoStatus, TodoRepository } from 'domain-model';
 
 import { Todo as OrmTodo, OrmTodoFactory } from '../entity/Todo';
 
-export class TodoRepository implements TodoRepositoryIF {
+export class GqlTodoRepository implements TodoRepository {
   private dbConnection: Connection;
   private repository: Repository<OrmTodo>;
 
@@ -29,7 +28,7 @@ export class TodoRepository implements TodoRepositoryIF {
     return entities;
   }
 
-  public async create(request: CreateTodoRequest) {
+  public async create(request: CreateTodoInputData) {
     const todo = new OrmTodo(+request.ownerId, request.title, TodoStatus.Undone);
     if (request.dueDate) todo.dueDate = request.dueDate;
 
@@ -45,11 +44,11 @@ export class TodoRepository implements TodoRepositoryIF {
     return OrmTodoFactory.toEntity(saved);
   }
 
-  public async delete(request: DeleteTodoRequest) {
-    const todo = await this.repository.findOne(request.id);
+  public async delete(id: string) {
+    const todo = await this.repository.findOne(id);
     if (!todo) throw new NotFoundError();
 
-    await this.repository.delete(request.id);
+    await this.repository.delete(id);
 
     return OrmTodoFactory.toEntity(todo);
   }

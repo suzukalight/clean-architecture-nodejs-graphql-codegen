@@ -1,14 +1,16 @@
-import { UpdateUserRolesResponse, Maybe } from 'schema';
-import { UserEntity, UpdateUserRolesPresenter as UpdateUserRolesPresenterIF } from 'domain-model';
+import { UpdateUserRolesResponse } from 'schema';
+import { UpdateUserRolesPresenter, UpdateUserRolesOutputData } from 'domain-model';
 
-export class UpdateUserRolesPresenter implements UpdateUserRolesPresenterIF {
-  private response: Maybe<UpdateUserRolesResponse> = null;
+import { toGqlUser } from '../utils/converter/user';
 
-  public getResponse(): Maybe<UpdateUserRolesResponse> {
+export class GqlUpdateUserRolesPresenter implements UpdateUserRolesPresenter {
+  private response: UpdateUserRolesResponse | null = null;
+
+  public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = userEntity ? { user: userEntity.toJSON() } : null;
+  public async output(response: UpdateUserRolesOutputData) {
+    this.response = { user: toGqlUser(response.user)! };
   }
 }

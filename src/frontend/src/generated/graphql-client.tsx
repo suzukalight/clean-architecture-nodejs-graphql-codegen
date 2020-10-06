@@ -53,7 +53,7 @@ export type SignUpEmailPasswordRequest = {
 
 export type SignUpEmailPasswordResponse = {
   __typename?: 'SignUpEmailPasswordResponse';
-  user: User;
+  user?: Maybe<User>;
   token: Scalars['String'];
 };
 
@@ -64,7 +64,7 @@ export type SignInEmailPasswordRequest = {
 
 export type SignInEmailPasswordResponse = {
   __typename?: 'SignInEmailPasswordResponse';
-  user: User;
+  user?: Maybe<User>;
   token: Scalars['String'];
 };
 
@@ -193,6 +193,19 @@ export type UpdateUserRolesResponse = {
   user: User;
 };
 
+export type GetUserQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetUserQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'roles'>
+  )> }
+);
+
 export type CreateTodoMutationVariables = Exact<{
   input?: Maybe<CreateTodoRequest>;
 }>;
@@ -241,19 +254,6 @@ export type UndoneTodoMutation = (
   )> }
 );
 
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'roles'>
-  )> }
-);
-
 export type SignInEmailPasswordMutationVariables = Exact<{
   input?: Maybe<SignInEmailPasswordRequest>;
 }>;
@@ -264,10 +264,10 @@ export type SignInEmailPasswordMutation = (
   & { signInEmailPassword?: Maybe<(
     { __typename?: 'SignInEmailPasswordResponse' }
     & Pick<SignInEmailPasswordResponse, 'token'>
-    & { user: (
+    & { user?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'email' | 'roles'>
-    ) }
+    )> }
   )> }
 );
 
@@ -293,6 +293,41 @@ export type GetUserTodosQuery = (
 );
 
 
+export const GetUserDocument = gql`
+    query GetUser($id: ID!) {
+  user(id: $id) {
+    id
+    email
+    roles
+  }
+}
+    `;
+
+/**
+ * __useGetUserQuery__
+ *
+ * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetUserQuery(baseOptions?: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
+        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
+      }
+export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
+          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
+        }
+export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
+export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
+export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const CreateTodoDocument = gql`
     mutation CreateTodo($input: CreateTodoRequest) {
   createTodo(input: $input) {
@@ -407,41 +442,6 @@ export function useUndoneTodoMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UndoneTodoMutationHookResult = ReturnType<typeof useUndoneTodoMutation>;
 export type UndoneTodoMutationResult = Apollo.MutationResult<UndoneTodoMutation>;
 export type UndoneTodoMutationOptions = Apollo.BaseMutationOptions<UndoneTodoMutation, UndoneTodoMutationVariables>;
-export const GetUserDocument = gql`
-    query GetUser($id: ID!) {
-  user(id: $id) {
-    id
-    email
-    roles
-  }
-}
-    `;
-
-/**
- * __useGetUserQuery__
- *
- * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetUserQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetUserQuery(baseOptions?: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-      }
-export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, baseOptions);
-        }
-export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
-export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
-export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const SignInEmailPasswordDocument = gql`
     mutation SignInEmailPassword($input: SignInEmailPasswordRequest) {
   signInEmailPassword(input: $input) {

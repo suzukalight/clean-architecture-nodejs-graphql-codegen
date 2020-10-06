@@ -22,20 +22,20 @@ describe('GetUserInteractor', () => {
   test('リクエストを処理し、エンティティを取得できた', async () => {
     const { userId, interactor, presenter } = await setup();
 
-    await interactor.handle(userId);
+    await interactor.handle({ id: userId });
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.id).toBe(userId);
+    expect(response?.user?.id).toBe(userId);
   });
 
   test('存在しないIDを指定したため、nullが返された', async () => {
     const { interactor, presenter } = await setup();
 
-    await interactor.handle('99999');
+    await interactor.handle({ id: '99999' });
 
     // response として null が得られた
     const response = presenter.getResponse();
-    expect(response).toBeNull();
+    expect(response?.user).toBeNull();
   });
 });

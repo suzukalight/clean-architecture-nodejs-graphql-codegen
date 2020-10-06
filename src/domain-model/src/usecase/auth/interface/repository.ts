@@ -1,11 +1,7 @@
-import { Maybe } from 'schema';
-import {
-  AuthEmailPasswordEntity,
-  AuthEmailPasswordDto,
-} from '../../../entity/auth/AuthEmailPasswordEntity';
+import { AuthEmailPasswordEntity, AuthEmailPasswordDto } from '../../../entity/auth';
 
 export interface AuthEmailPasswordRepository {
-  getByEmail(email: string): Promise<Maybe<AuthEmailPasswordEntity>>;
+  getByEmail(email: string): Promise<AuthEmailPasswordEntity | null>;
 
-  create(input: AuthEmailPasswordDto): Promise<Maybe<AuthEmailPasswordEntity>>;
+  create(input: AuthEmailPasswordDto): Promise<AuthEmailPasswordEntity | null>;
 }

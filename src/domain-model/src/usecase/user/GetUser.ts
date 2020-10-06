@@ -1,6 +1,6 @@
 import { UserRepository } from './interface/repository';
-import { GetUserUseCase } from './interface/usecase';
-import { GetUserPresenter } from './interface/presenter';
+import { GetUserInputData, GetUserUseCase } from './interface/usecase';
+import { GetUserOutputData, GetUserPresenter } from './interface/presenter';
 
 export class GetUserInteractor implements GetUserUseCase {
   private repository: UserRepository;
@@ -11,9 +11,10 @@ export class GetUserInteractor implements GetUserUseCase {
     this.presenter = presenter;
   }
 
-  public async handle(id: string) {
-    const userEntity = await this.repository.getById(id);
+  public async handle(request: GetUserInputData) {
+    const userEntity = await this.repository.getById(request.id);
 
-    this.presenter.output(userEntity);
+    const outputData: GetUserOutputData = { user: userEntity?.toDto() ?? null };
+    this.presenter.output(outputData);
   }
 }

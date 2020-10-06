@@ -2,7 +2,7 @@ import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 const regex = /[^\s]+@[^\s]+/;
 
-const isValid = (email: string) => {
+export const denyIllegalEmail = (email: string) => {
   if (!email) throw new PropertyRequiredError('email');
   if (!regex.test(email)) throw new IllegalArgumentError('正しいメールアドレスを指定してください');
   return true;
@@ -12,7 +12,7 @@ export class Email {
   private email: string;
 
   constructor(email: string) {
-    isValid(email);
+    denyIllegalEmail(email);
     this.email = email;
   }
 

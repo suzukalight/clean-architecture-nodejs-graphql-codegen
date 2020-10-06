@@ -2,16 +2,16 @@ import { Connection } from 'typeorm';
 import { UserEntity, RoleTypes, Role, encryptPassword } from 'domain-model';
 
 import { createDbConnection } from '../connection';
-import { UserRepository } from '../../../repository/typeorm/user/repository/User';
-import { TodoRepository } from '../../../repository/typeorm/todo/repository/Todo';
-import { AuthEmailPasswordRepository } from '../../../repository/typeorm/auth/repository/AuthEmailPassword';
+import { GqlUserRepository } from '../../../repository/typeorm/user/repository/User';
+import { GqlTodoRepository } from '../../../repository/typeorm/todo/repository/Todo';
+import { GqlAuthEmailPasswordRepository } from '../../../repository/typeorm/auth/repository/AuthEmailPassword';
 
 /**
  * ユーザを3名作成（Admin, Member, Anonymous）
  * @param dbConnection
  */
 const seedUsers = async (dbConnection: Connection) => {
-  const repository = new UserRepository(dbConnection);
+  const repository = new GqlUserRepository(dbConnection);
 
   const admin = { email: 'admin@email.com' };
   const adminEntity = await repository.create(admin);
@@ -38,7 +38,7 @@ const seedUsers = async (dbConnection: Connection) => {
  * @param user
  */
 const seedAuth = async (dbConnection: Connection, user: UserEntity) => {
-  const repository = new AuthEmailPasswordRepository(dbConnection);
+  const repository = new GqlAuthEmailPasswordRepository(dbConnection);
 
   const auth = {
     userId: user.getId().toString(),
@@ -55,7 +55,7 @@ const seedAuth = async (dbConnection: Connection, user: UserEntity) => {
  * @param title
  */
 const seedTodo = async (dbConnection: Connection, user: UserEntity, title?: string) => {
-  const repository = new TodoRepository(dbConnection);
+  const repository = new GqlTodoRepository(dbConnection);
 
   const todo = { ownerId: user.getId().toString(), title: title || `todo` };
 

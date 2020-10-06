@@ -1,44 +1,44 @@
-import { Maybe, User, CreateUserResponse, UpdateUserRolesResponse } from 'schema';
-
 import {
   GetUserPresenter,
   CreateUserPresenter,
   UpdateUserRolesPresenter,
+  UpdateUserRolesOutputData,
+  GetUserOutputData,
+  CreateUserOutputData,
 } from '../interface/presenter';
-import { UserEntity } from '../../../entity/user/UserEntity';
 
 export class MockGetUserPresenter implements GetUserPresenter {
-  private response: Maybe<User> = null;
+  private response: GetUserOutputData | null = null;
 
-  public getResponse(): Maybe<User> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = userEntity ? userEntity.toJSON() : null;
+  public async output(response: GetUserOutputData) {
+    this.response = response;
   }
 }
 
 export class MockCreateUserPresenter implements CreateUserPresenter {
-  private response: Maybe<CreateUserResponse> = null;
+  private response: CreateUserOutputData | null = null;
 
-  public getResponse(): Maybe<CreateUserResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = { user: userEntity ? userEntity.toJSON() : null };
+  public async output(response: CreateUserOutputData) {
+    this.response = response;
   }
 }
 
 export class MockUpdateUserRolesPresenter implements UpdateUserRolesPresenter {
-  private response: Maybe<UpdateUserRolesResponse> = null;
+  private response: UpdateUserRolesOutputData | null = null;
 
-  public getResponse(): Maybe<UpdateUserRolesResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(user: UserEntity) {
-    this.response = { user: user.toJSON() };
+  public async output(response: UpdateUserRolesOutputData) {
+    this.response = response;
   }
 }

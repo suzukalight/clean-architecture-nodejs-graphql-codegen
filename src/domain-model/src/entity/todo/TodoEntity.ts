@@ -1,16 +1,7 @@
-import { TodoStatus, Todo } from 'schema';
-import { PropertyRequiredError, ConflictError } from 'common';
+import { ConflictError } from 'common';
 
+import { TodoDto, TodoStatus, denyIllegalTodoDto } from './TodoDto';
 import { ID } from '../common/ID';
-
-const isValidArguments = (todo: Todo) => {
-  if (!todo) throw new PropertyRequiredError('todo');
-  if (!todo.id) throw new PropertyRequiredError('id');
-  if (!todo.ownerId) throw new PropertyRequiredError('ownerId');
-  if (!todo.title) throw new PropertyRequiredError('title');
-  if (!todo.status) throw new PropertyRequiredError('status');
-  return true;
-};
 
 export class TodoEntity {
   private id: ID;
@@ -19,12 +10,12 @@ export class TodoEntity {
   private status: TodoStatus;
   private dueDate: Date | null | undefined;
 
-  constructor(todo: Todo) {
-    isValidArguments(todo);
+  constructor(todo: TodoDto) {
+    denyIllegalTodoDto(todo);
     this.id = new ID(todo.id);
     this.ownerId = new ID(todo.ownerId);
     this.title = todo.title;
-    this.status = todo.status;
+    this.status = todo.status as TodoStatus;
     this.dueDate = todo.dueDate;
   }
 
@@ -78,7 +69,7 @@ export class TodoEntity {
     this.isValid();
   }
 
-  toJSON(): Todo {
+  toDto(): TodoDto {
     return {
       id: this.id.toString(),
       ownerId: this.ownerId.toString(),
@@ -89,6 +80,11 @@ export class TodoEntity {
   }
 
   isValid() {
-    return isValidArguments(this.toJSON());
+    try {
+      denyIllegalTodoDto(this.toDto());
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }

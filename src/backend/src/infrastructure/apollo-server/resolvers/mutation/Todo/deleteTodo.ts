@@ -2,19 +2,19 @@ import { MutationResolvers } from 'schema';
 import { DeleteTodoInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
-import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
-import { DeleteTodoPresenter } from '../../../../../presenter/todo/DeleteTodo';
+import { GqlTodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
+import { GqlDeleteTodoPresenter } from '../../../../../presenter/todo/DeleteTodo';
 
 export const deleteTodo: MutationResolvers<ApolloServerContext> = {
   deleteTodo: async (_parent, args, { dbConnection, actor }) => {
     allowOnlyWhenActorHasMemberRole(actor);
 
-    const repository = new TodoRepository(dbConnection);
-    const presenter = new DeleteTodoPresenter();
+    const repository = new GqlTodoRepository(dbConnection);
+    const presenter = new GqlDeleteTodoPresenter();
     const usecase = new DeleteTodoInteractor(repository, presenter);
 
-    await usecase.handle(args.input!, actor);
+    await usecase.handle(args.input!, actor!);
 
-    return presenter.getResponse()!;
+    return presenter.getResponse();
   },
 };

@@ -1,9 +1,8 @@
-import { Maybe, DoneTodoRequest } from 'schema';
 import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
-import { DoneTodoUseCase } from './interface/usecase';
-import { DoneTodoPresenter } from './interface/presenter';
+import { DoneTodoInputData, DoneTodoUseCase } from './interface/usecase';
+import { DoneTodoOutputData, DoneTodoPresenter } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
 import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
 
@@ -16,7 +15,7 @@ export class DoneTodoInteractor implements DoneTodoUseCase {
     this.presenter = presenter;
   }
 
-  public async handle(request: DoneTodoRequest, actor: Maybe<UserEntity>) {
+  public async handle(request: DoneTodoInputData, actor: UserEntity) {
     const todoEntity = await this.repository.getById(request.id);
     if (!todoEntity) throw new NotFoundError();
 
@@ -26,6 +25,7 @@ export class DoneTodoInteractor implements DoneTodoUseCase {
 
     await this.repository.update(todoEntity);
 
-    this.presenter.output(todoEntity);
+    const outputData: DoneTodoOutputData = { todo: todoEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }

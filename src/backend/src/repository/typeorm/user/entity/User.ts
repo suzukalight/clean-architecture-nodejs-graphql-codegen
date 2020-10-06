@@ -6,8 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { User as UserSchema } from 'schema';
-import { RoleType, UserEntity } from 'domain-model';
+import { RoleType, UserDto, UserEntity } from 'domain-model';
 
 import { Todo } from '../../todo/entity/Todo';
 
@@ -38,7 +37,7 @@ export class User {
 }
 
 export class OrmUserFactory {
-  public static fromSchema(user: UserSchema): User {
+  public static fromDto(user: UserDto): User {
     return {
       id: +user.id,
       email: user.email,
@@ -49,11 +48,11 @@ export class OrmUserFactory {
   }
 
   public static fromEntity(userEntity: UserEntity) {
-    const userSchema = userEntity.toJSON();
-    return OrmUserFactory.fromSchema(userSchema);
+    const userSchema = userEntity.toDto();
+    return OrmUserFactory.fromDto(userSchema);
   }
 
-  public static toSchema(user: User): UserSchema {
+  public static toDto(user: User): UserDto {
     return {
       id: `${user.id}`,
       email: user.email,
@@ -64,7 +63,7 @@ export class OrmUserFactory {
   }
 
   public static toEntity(user: User): UserEntity {
-    const schema = OrmUserFactory.toSchema(user);
+    const schema = OrmUserFactory.toDto(user);
     return new UserEntity(schema);
   }
 }

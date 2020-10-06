@@ -1,10 +1,9 @@
 import { Connection, Repository } from 'typeorm';
-import { User, CreateUserRequest } from 'schema';
-import { UserEntity, RoleTypes, UserRepository as UserRepositoryIF } from 'domain-model';
+import { UserEntity, RoleTypes, UserRepository, CreateUserInputData } from 'domain-model';
 
 import { User as OrmUser, OrmUserFactory } from '../entity/User';
 
-export class UserRepository implements UserRepositoryIF {
+export class GqlUserRepository implements UserRepository {
   private dbConnection: Connection;
   private repository: Repository<OrmUser>;
 
@@ -17,17 +16,15 @@ export class UserRepository implements UserRepositoryIF {
     const result = await this.repository.findOne(id);
     if (!result) return null;
 
-    const entity = new UserEntity((result as unknown) as User);
-    return entity;
+    return OrmUserFactory.toEntity(result);
   }
 
-  public async create(request: CreateUserRequest) {
+  public async create(request: CreateUserInputData) {
     const user = new OrmUser(request.email, [RoleTypes.Anonymous]);
     const repository = this.dbConnection.getRepository(OrmUser);
     const result = await repository.save(user);
 
-    const entity = new UserEntity((result as unknown) as User);
-    return entity;
+    return OrmUserFactory.toEntity(result);
   }
 
   public async update(userEntity: UserEntity) {

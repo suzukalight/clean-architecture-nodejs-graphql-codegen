@@ -1,14 +1,16 @@
 import { UndoneTodoResponse } from 'schema';
-import { TodoEntity, UndoneTodoPresenter as UndoneTodoPresenterIF } from 'domain-model';
+import { UndoneTodoOutputData, UndoneTodoPresenter } from 'domain-model';
 
-export class UndoneTodoPresenter implements UndoneTodoPresenterIF {
-  private response: UndoneTodoResponse;
+import { toGqlTodo } from '../utils/converter/todo';
 
-  public getResponse(): UndoneTodoResponse {
+export class GqlUndoneTodoPresenter implements UndoneTodoPresenter {
+  private response: UndoneTodoResponse | null;
+
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity) {
-    this.response = { todo: todoEntity.toJSON() };
+  public async output(response: UndoneTodoOutputData) {
+    this.response = { todo: toGqlTodo(response.todo)! };
   }
 }

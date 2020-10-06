@@ -1,17 +1,19 @@
-import { Maybe, SignUpEmailPasswordResponse } from 'schema';
-import {
-  UserEntity,
-  SignUpEmailPasswordPresenter as SignUpEmailPasswordPresenterIF,
-} from 'domain-model';
+import { SignUpEmailPasswordResponse } from 'schema';
+import { SignUpEmailPasswordPresenter, SignUpEmailPasswordOutputData } from 'domain-model';
 
-export class SignUpEmailPasswordPresenter implements SignUpEmailPasswordPresenterIF {
-  private response: Maybe<SignUpEmailPasswordResponse> = null;
+import { toGqlUser } from '../utils/converter/user';
 
-  public getResponse(): Maybe<SignUpEmailPasswordResponse> {
+export class GqlSignUpEmailPasswordPresenter implements SignUpEmailPasswordPresenter {
+  private response: SignUpEmailPasswordResponse | null = null;
+
+  public getResponse() {
     return this.response;
   }
 
-  public async output(token: string, user: UserEntity) {
-    this.response = { token, user: user.toJSON() };
+  public async output(response: SignUpEmailPasswordOutputData) {
+    this.response = {
+      token: response.token!,
+      user: toGqlUser(response.user),
+    };
   }
 }

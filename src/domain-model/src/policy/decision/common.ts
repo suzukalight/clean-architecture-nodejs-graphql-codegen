@@ -1,33 +1,33 @@
-import { Maybe, Role } from 'schema';
 import { AuthenticationFailedError, UnauthorizedError } from 'common';
 
 import { ID } from '../../entity/common/ID';
+import { RoleTypes } from '../../entity/common/Role';
 import { UserEntity } from '../../entity/user/UserEntity';
 
-export const denyUnauthenticated = (actor: Maybe<UserEntity>, message?: string) => {
+export const denyUnauthenticated = (actor: UserEntity | null, message?: string) => {
   if (!actor) throw new AuthenticationFailedError(message);
 };
 
-export const denyWhenActorHasOnlyAnonymousRole = (actor: Maybe<UserEntity>, message?: string) => {
+export const denyWhenActorHasOnlyAnonymousRole = (actor: UserEntity | null, message?: string) => {
   denyUnauthenticated(actor);
 
   // anonumous ではないロールを1つも持っていない
-  if (!actor?.getRoles().some((role) => !role.isEqual(Role.Anonymous))) {
+  if (!actor?.getRoles().some((role) => !role.isEqual(RoleTypes.Anonymous))) {
     throw new UnauthorizedError(message);
   }
 };
 
-export const allowOnlyWhenActorHasMemberRole = (actor: Maybe<UserEntity>, message?: string) => {
+export const allowOnlyWhenActorHasMemberRole = (actor: UserEntity | null, message?: string) => {
   denyUnauthenticated(actor);
 
-  if (!actor?.getRoles().some((role) => role.isEqual(Role.Member))) {
+  if (!actor?.getRoles().some((role) => role.isEqual(RoleTypes.Member))) {
     throw new UnauthorizedError(message);
   }
 };
 
 export const allowOnlyWhenActorIsOwner = (
   ownerId: ID,
-  actor: Maybe<UserEntity>,
+  actor: UserEntity | null,
   message?: string,
 ) => {
   denyUnauthenticated(actor);

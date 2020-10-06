@@ -1,22 +1,41 @@
-import {
-  Todo,
-  Maybe,
-  CreateTodoResponse,
-  DoneTodoResponse,
-  UndoneTodoResponse,
-  DeleteTodoResponse,
-} from 'schema';
+import { TodoDto } from '../../../entity';
 
-import { TodoEntity } from '../../../entity/todo/TodoEntity';
+export type GetTodoOutputData = {
+  todo: TodoDto | null;
+};
 
-interface TodoPresenter<Response> {
-  output(TodoEntity: Maybe<TodoEntity>): void;
-  getResponse(): Maybe<Response>;
+export interface GetTodoPresenter {
+  output(response: GetTodoOutputData): void;
 }
 
-export type GetTodoPresenter = TodoPresenter<Maybe<Todo>>;
+export type CreateTodoOutputData = {
+  todo: TodoDto | null;
+};
 
-export type CreateTodoPresenter = TodoPresenter<CreateTodoResponse>;
-export type DoneTodoPresenter = TodoPresenter<DoneTodoResponse>;
-export type UndoneTodoPresenter = TodoPresenter<UndoneTodoResponse>;
-export type DeleteTodoPresenter = TodoPresenter<DeleteTodoResponse>;
+export interface CreateTodoPresenter {
+  output(response: CreateTodoOutputData): void;
+}
+
+export type DoneTodoOutputData = {
+  todo: TodoDto | null;
+};
+
+export interface DoneTodoPresenter {
+  output(response: DoneTodoOutputData): void;
+}
+
+export type UndoneTodoOutputData = {
+  todo: TodoDto | null;
+};
+
+export interface UndoneTodoPresenter {
+  output(response: UndoneTodoOutputData): void;
+}
+
+export type DeleteTodoOutputData = {
+  todo: TodoDto | null;
+};
+
+export interface DeleteTodoPresenter {
+  output(response: DeleteTodoOutputData): void;
+}

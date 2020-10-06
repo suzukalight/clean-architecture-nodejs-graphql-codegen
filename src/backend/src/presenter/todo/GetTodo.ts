@@ -1,14 +1,16 @@
-import { Maybe, Todo } from 'schema';
-import { TodoEntity, GetTodoPresenter as GetTodoPresenterIF } from 'domain-model';
+import { Todo } from 'schema';
+import { GetTodoPresenter, GetTodoOutputData } from 'domain-model';
 
-export class GetTodoPresenter implements GetTodoPresenterIF {
-  private response: Maybe<Todo> = null;
+import { toGqlTodo } from '../utils/converter/todo';
 
-  public getResponse(): Maybe<Todo> {
+export class GqlGetTodoPresenter implements GetTodoPresenter {
+  private response: Todo | null = null;
+
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? todoEntity.toJSON() : null;
+  public async output(response: GetTodoOutputData) {
+    this.response = toGqlTodo(response.todo);
   }
 }

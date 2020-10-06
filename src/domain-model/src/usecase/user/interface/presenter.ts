@@ -1,13 +1,25 @@
-import { Maybe, User, CreateUserResponse, UpdateUserRolesResponse } from 'schema';
+import { UserDto } from '../../../entity/user/UserDto';
 
-import { UserEntity } from '../../../entity/user/UserEntity';
+export type GetUserOutputData = {
+  user: UserDto | null;
+};
 
-export interface UserPresenter<Response> {
-  output(userEntity: Maybe<UserEntity>): void;
-  getResponse(): Maybe<Response>;
+export interface GetUserPresenter {
+  output(response: GetUserOutputData): void;
 }
 
-export type GetUserPresenter = UserPresenter<Maybe<User>>;
+export type CreateUserOutputData = {
+  user: UserDto | null;
+};
 
-export type CreateUserPresenter = UserPresenter<CreateUserResponse>;
-export type UpdateUserRolesPresenter = UserPresenter<UpdateUserRolesResponse>;
+export interface CreateUserPresenter {
+  output(response: CreateUserOutputData): void;
+}
+
+export type UpdateUserRolesOutputData = {
+  user: UserDto | null;
+};
+
+export interface UpdateUserRolesPresenter {
+  output(response: UpdateUserRolesOutputData): void;
+}
