@@ -2,19 +2,19 @@ import { MutationResolvers } from 'schema';
 import { UndoneTodoInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
-import { TodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
-import { UndoneTodoPresenter } from '../../../../../presenter/todo/UndoneTodo';
+import { GqlTodoRepository } from '../../../../../repository/typeorm/todo/repository/Todo';
+import { GqlUndoneTodoPresenter } from '../../../../../presenter/todo/UndoneTodo';
 
 export const undoneTodo: MutationResolvers<ApolloServerContext> = {
   undoneTodo: async (_parent, args, { dbConnection, actor }) => {
     allowOnlyWhenActorHasMemberRole(actor);
 
-    const repository = new TodoRepository(dbConnection);
-    const presenter = new UndoneTodoPresenter();
+    const repository = new GqlTodoRepository(dbConnection);
+    const presenter = new GqlUndoneTodoPresenter();
     const usecase = new UndoneTodoInteractor(repository, presenter);
 
-    await usecase.handle(args.input!, actor);
+    await usecase.handle(args.input!, actor!);
 
-    return presenter.getResponse()!;
+    return presenter.getResponse();
   },
 };
