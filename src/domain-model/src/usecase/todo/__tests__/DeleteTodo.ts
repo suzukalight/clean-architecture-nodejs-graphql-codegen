@@ -37,7 +37,7 @@ describe('DeleteTodoInteractor', () => {
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.todo.id).toBe(todoId);
+    expect(response?.todo?.id).toBe(todoId);
   });
 
   test('存在しないIDを指定したため、エラーが返された', async () => {

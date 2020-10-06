@@ -46,7 +46,7 @@ describe('UndoneTodoInteractor', () => {
 
     // response として request で指定したデータが得られた
     const response = undonePresenter.getResponse();
-    expect(response?.todo.status).toBe(TodoStatus.Undone);
+    expect(response?.todo?.status).toBe(TodoStatus.Undone);
   });
 
   test('すでにUNDONEにしているTODOを指定したため、エラーが返された', async () => {

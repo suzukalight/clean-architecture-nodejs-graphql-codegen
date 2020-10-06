@@ -38,7 +38,7 @@ describe('DoneTodoInteractor', () => {
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.todo.status).toBe(TodoStatus.Done);
+    expect(response?.todo?.status).toBe(TodoStatus.Done);
   });
 
   test('すでにDONEにしているTODOを指定したため、エラーが返された', async () => {
