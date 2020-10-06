@@ -1,17 +1,16 @@
-import {
-  TodoEntity,
-  CreateTodoPresenter as CreateTodoPresenterIF,
-  CreateTodoOutputData,
-} from 'domain-model';
+import { CreateTodoResponse } from 'schema';
+import { CreateTodoPresenter, CreateTodoOutputData } from 'domain-model';
 
-export class CreateTodoPresenter implements CreateTodoPresenterIF {
-  private response: CreateTodoOutputData | null;
+import { toGqlTodo } from '../utils/converter/todo';
+
+export class GqlCreateTodoPresenter implements CreateTodoPresenter {
+  private response: CreateTodoResponse | null;
 
   public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity | null) {
-    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
+  public async output(response: CreateTodoOutputData) {
+    this.response = { todo: toGqlTodo(response.todo) };
   }
 }
