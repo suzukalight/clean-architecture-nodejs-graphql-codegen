@@ -1,14 +1,17 @@
-import { UpdateUserRolesResponse, Maybe } from 'schema';
-import { UserEntity, UpdateUserRolesPresenter as UpdateUserRolesPresenterIF } from 'domain-model';
+import {
+  UserEntity,
+  UpdateUserRolesPresenter as UpdateUserRolesPresenterIF,
+  UpdateUserRolesOutputData,
+} from 'domain-model';
 
 export class UpdateUserRolesPresenter implements UpdateUserRolesPresenterIF {
-  private response: Maybe<UpdateUserRolesResponse> = null;
+  private response: UpdateUserRolesOutputData | null = null;
 
-  public getResponse(): Maybe<UpdateUserRolesResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = userEntity ? { user: userEntity.toJSON() } : null;
+  public async output(userEntity: UserEntity | null) {
+    this.response = userEntity ? { user: userEntity.toDto() } : null;
   }
 }

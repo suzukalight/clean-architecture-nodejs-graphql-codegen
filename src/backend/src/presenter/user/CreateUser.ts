@@ -1,14 +1,17 @@
-import { CreateUserResponse, Maybe } from 'schema';
-import { UserEntity, CreateUserPresenter as CreateUserPresenterIF } from 'domain-model';
+import {
+  UserEntity,
+  CreateUserPresenter as CreateUserPresenterIF,
+  CreateUserOutputData,
+} from 'domain-model';
 
 export class CreateUserPresenter implements CreateUserPresenterIF {
-  private response: Maybe<CreateUserResponse> = null;
+  private response: CreateUserOutputData | null = null;
 
-  public getResponse(): Maybe<CreateUserResponse> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(userEntity: Maybe<UserEntity>) {
-    this.response = userEntity ? { user: userEntity.toJSON() } : null;
+  public async output(userEntity: UserEntity | null) {
+    this.response = userEntity ? { user: userEntity.toDto() } : null;
   }
 }

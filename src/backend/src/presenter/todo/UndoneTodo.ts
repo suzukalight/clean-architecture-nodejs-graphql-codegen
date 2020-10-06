@@ -1,14 +1,17 @@
-import { UndoneTodoResponse } from 'schema';
-import { TodoEntity, UndoneTodoPresenter as UndoneTodoPresenterIF } from 'domain-model';
+import {
+  TodoEntity,
+  UndoneTodoOutputData,
+  UndoneTodoPresenter as UndoneTodoPresenterIF,
+} from 'domain-model';
 
 export class UndoneTodoPresenter implements UndoneTodoPresenterIF {
-  private response: UndoneTodoResponse;
+  private response: UndoneTodoOutputData | null;
 
-  public getResponse(): UndoneTodoResponse {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity) {
-    this.response = { todo: todoEntity.toJSON() };
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }
