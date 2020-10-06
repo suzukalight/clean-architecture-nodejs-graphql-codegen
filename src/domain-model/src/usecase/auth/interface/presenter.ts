@@ -2,7 +2,7 @@ import { UserDto } from '../../../entity/user/UserDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
 export type SignInEmailPassworOutputData = {
-  user: UserDto;
+  user: UserDto | null;
   token: string;
 };
 
@@ -12,7 +12,7 @@ export interface SignInEmailPasswordPresenter {
 }
 
 export type SignUpEmailPasswordOutputData = {
-  user: UserDto;
+  user: UserDto | null;
   token: string;
 };
 

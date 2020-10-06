@@ -1,5 +1,7 @@
 /.eslintrc.js
 /.prettierrc.js
+/jest.config.js
+/lint-staged.config.js
 node_modules/**
 **/node_modules/**
 src/schema/src/types.ts
