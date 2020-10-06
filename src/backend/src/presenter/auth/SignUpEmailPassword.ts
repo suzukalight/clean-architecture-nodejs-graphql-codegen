@@ -1,17 +1,19 @@
-import {
-  UserEntity,
-  SignUpEmailPasswordPresenter as SignUpEmailPasswordPresenterIF,
-  SignUpEmailPasswordOutputData,
-} from 'domain-model';
+import { SignUpEmailPasswordResponse } from 'schema';
+import { SignUpEmailPasswordPresenter, SignUpEmailPasswordOutputData } from 'domain-model';
 
-export class SignUpEmailPasswordPresenter implements SignUpEmailPasswordPresenterIF {
-  private response: SignUpEmailPasswordOutputData | null = null;
+import { toGqlUser } from '../utils/converter/user';
+
+export class GqlSignUpEmailPasswordPresenter implements SignUpEmailPasswordPresenter {
+  private response: SignUpEmailPasswordResponse | null = null;
 
   public getResponse() {
     return this.response;
   }
 
-  public async output(token: string, user: UserEntity | null) {
-    this.response = { token, user: user?.toDto() ?? null };
+  public async output(response: SignUpEmailPasswordOutputData) {
+    this.response = {
+      token: response.token!,
+      user: toGqlUser(response.user),
+    };
   }
 }
