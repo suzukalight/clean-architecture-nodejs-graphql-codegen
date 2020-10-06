@@ -1,7 +1,6 @@
 import { Connection, Repository } from 'typeorm';
 import { NotFoundError } from 'common';
-import { CreateTodoRequest, TodoStatus } from 'schema';
-import { TodoEntity, TodoRepository } from 'domain-model';
+import { CreateTodoInputData, TodoEntity, TodoStatus, TodoRepository } from 'domain-model';
 
 import { Todo as OrmTodo, OrmTodoFactory } from '../entity/Todo';
 
@@ -29,7 +28,7 @@ export class GqlTodoRepository implements TodoRepository {
     return entities;
   }
 
-  public async create(request: CreateTodoRequest) {
+  public async create(request: CreateTodoInputData) {
     const todo = new OrmTodo(+request.ownerId, request.title, TodoStatus.Undone);
     if (request.dueDate) todo.dueDate = request.dueDate;
 

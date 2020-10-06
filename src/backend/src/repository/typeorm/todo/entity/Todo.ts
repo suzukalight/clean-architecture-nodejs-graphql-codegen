@@ -7,8 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Todo as TodoSchema, TodoStatus } from 'schema';
-import { TodoEntity } from 'domain-model';
+import { TodoEntity, TodoDto, TodoStatus } from 'domain-model';
 
 import { User } from '../../user/entity/User';
 
@@ -47,7 +46,7 @@ export class Todo {
 }
 
 export class OrmTodoFactory {
-  public static fromDto(todo: TodoSchema): Todo {
+  public static fromDto(todo: TodoDto): Todo {
     return {
       id: +todo.id,
       ownerId: +todo.ownerId,
@@ -64,7 +63,7 @@ export class OrmTodoFactory {
     return OrmTodoFactory.fromDto(todoSchema);
   }
 
-  public static toDto(todo: Todo): TodoSchema {
+  public static toDto(todo: Todo): TodoDto {
     return {
       id: `${todo.id}`,
       ownerId: `${todo.ownerId}`,

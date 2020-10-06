@@ -1,6 +1,5 @@
 import { Connection, Repository } from 'typeorm';
-import { CreateUserRequest } from 'schema';
-import { UserEntity, RoleTypes, UserRepository } from 'domain-model';
+import { UserEntity, RoleTypes, UserRepository, CreateUserInputData } from 'domain-model';
 
 import { User as OrmUser, OrmUserFactory } from '../entity/User';
 
@@ -20,7 +19,7 @@ export class GqlUserRepository implements UserRepository {
     return OrmUserFactory.toEntity(result);
   }
 
-  public async create(request: CreateUserRequest) {
+  public async create(request: CreateUserInputData) {
     const user = new OrmUser(request.email, [RoleTypes.Anonymous]);
     const repository = this.dbConnection.getRepository(OrmUser);
     const result = await repository.save(user);
