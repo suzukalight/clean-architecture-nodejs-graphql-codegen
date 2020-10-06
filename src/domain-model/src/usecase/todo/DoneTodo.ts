@@ -2,7 +2,7 @@ import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { DoneTodoInputData, DoneTodoUseCase } from './interface/usecase';
-import { DoneTodoPresenter } from './interface/presenter';
+import { DoneTodoOutputData, DoneTodoPresenter } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
 import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
 
@@ -25,6 +25,7 @@ export class DoneTodoInteractor implements DoneTodoUseCase {
 
     await this.repository.update(todoEntity);
 
-    this.presenter.output(todoEntity);
+    const outputData: DoneTodoOutputData = { todo: todoEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }

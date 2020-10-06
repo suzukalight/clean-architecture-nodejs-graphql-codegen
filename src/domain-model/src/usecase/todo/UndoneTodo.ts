@@ -2,7 +2,7 @@ import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { UndoneTodoInputData, UndoneTodoUseCase } from './interface/usecase';
-import { UndoneTodoPresenter } from './interface/presenter';
+import { UndoneTodoOutputData, UndoneTodoPresenter } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
 import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
 
@@ -25,6 +25,7 @@ export class UndoneTodoInteractor implements UndoneTodoUseCase {
 
     await this.repository.update(todoEntity);
 
-    this.presenter.output(todoEntity);
+    const outputData: UndoneTodoOutputData = { todo: todoEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }

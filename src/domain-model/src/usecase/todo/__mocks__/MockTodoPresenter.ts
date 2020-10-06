@@ -10,7 +10,6 @@ import {
   UndoneTodoPresenter,
   UndoneTodoOutputData,
 } from '../interface/presenter';
-import { TodoEntity } from '../../../entity/todo/TodoEntity';
 
 export class MockGetTodoPresenter implements GetTodoPresenter {
   private response: GetTodoOutputData | null = null;
@@ -19,8 +18,8 @@ export class MockGetTodoPresenter implements GetTodoPresenter {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity | null) {
-    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
+  public async output(response: GetTodoOutputData) {
+    this.response = response;
   }
 }
 
@@ -31,8 +30,8 @@ export class MockCreateTodoPresenter implements CreateTodoPresenter {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity | null) {
-    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
+  public async output(response: CreateTodoOutputData) {
+    this.response = response;
   }
 }
 
@@ -43,8 +42,8 @@ export class MockDeleteTodoPresenter implements DeleteTodoPresenter {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity | null) {
-    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
+  public async output(response: DeleteTodoOutputData) {
+    this.response = response;
   }
 }
 
@@ -55,8 +54,8 @@ export class MockDoneTodoPresenter implements DoneTodoPresenter {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity | null) {
-    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
+  public async output(response: DoneTodoOutputData) {
+    this.response = response;
   }
 }
 
@@ -67,7 +66,7 @@ export class MockUndoneTodoPresenter implements UndoneTodoPresenter {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity | null) {
-    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
+  public async output(response: UndoneTodoOutputData) {
+    this.response = response;
   }
 }

@@ -1,47 +1,41 @@
 import { TodoDto } from '../../../entity';
-import { TodoEntity } from '../../../entity/todo/TodoEntity';
 
 export type GetTodoOutputData = {
-  todo: TodoDto;
+  todo: TodoDto | null;
 };
 
 export interface GetTodoPresenter {
-  output(todo: TodoEntity | null): void;
-  getResponse(): GetTodoOutputData | null;
+  output(response: GetTodoOutputData): void;
 }
 
 export type CreateTodoOutputData = {
-  todo: TodoDto;
+  todo: TodoDto | null;
 };
 
 export interface CreateTodoPresenter {
-  output(todo: TodoEntity | null): void;
-  getResponse(): CreateTodoOutputData | null;
+  output(response: CreateTodoOutputData): void;
 }
 
 export type DoneTodoOutputData = {
-  todo: TodoDto;
+  todo: TodoDto | null;
 };
 
 export interface DoneTodoPresenter {
-  output(todo: TodoEntity | null): void;
-  getResponse(): DoneTodoOutputData | null;
+  output(response: DoneTodoOutputData): void;
 }
 
 export type UndoneTodoOutputData = {
-  todo: TodoDto;
+  todo: TodoDto | null;
 };
 
 export interface UndoneTodoPresenter {
-  output(todo: TodoEntity | null): void;
-  getResponse(): UndoneTodoOutputData | null;
+  output(response: UndoneTodoOutputData): void;
 }
 
 export type DeleteTodoOutputData = {
-  todo: TodoDto;
+  todo: TodoDto | null;
 };
 
 export interface DeleteTodoPresenter {
-  output(todo: TodoEntity | null): void;
-  getResponse(): DeleteTodoOutputData | null;
+  output(response: DeleteTodoOutputData): void;
 }

@@ -2,7 +2,7 @@ import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { DeleteTodoInputData, DeleteTodoUseCase } from './interface/usecase';
-import { DeleteTodoPresenter } from './interface/presenter';
+import { DeleteTodoOutputData, DeleteTodoPresenter } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
 import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
 
@@ -24,6 +24,7 @@ export class DeleteTodoInteractor implements DeleteTodoUseCase {
 
     const deletedEntity = await this.repository.delete(request?.id);
 
-    this.presenter.output(deletedEntity);
+    const outputData: DeleteTodoOutputData = { todo: deletedEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }

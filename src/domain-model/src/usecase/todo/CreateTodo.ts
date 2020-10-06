@@ -2,7 +2,7 @@ import { NotFoundError } from 'common';
 
 import { TodoRepository } from './interface/repository';
 import { CreateTodoInputData, CreateTodoUseCase } from './interface/usecase';
-import { CreateTodoPresenter } from './interface/presenter';
+import { CreateTodoOutputData, CreateTodoPresenter } from './interface/presenter';
 import { UserRepository } from '../user/interface/repository';
 
 export class CreateTodoInteractor implements CreateTodoUseCase {
@@ -28,6 +28,7 @@ export class CreateTodoInteractor implements CreateTodoUseCase {
     // 新しい TODO を生成
     const todoEntity = await this.todoRepository.create(request);
 
-    this.presenter.output(todoEntity);
+    const outputData: CreateTodoOutputData = { todo: todoEntity.toDto() };
+    this.presenter.output(outputData);
   }
 }
