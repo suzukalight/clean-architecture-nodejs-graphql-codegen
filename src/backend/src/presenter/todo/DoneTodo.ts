@@ -1,14 +1,17 @@
-import { DoneTodoResponse } from 'schema';
-import { TodoEntity, DoneTodoPresenter as DoneTodoPresenterIF } from 'domain-model';
+import {
+  TodoEntity,
+  DoneTodoPresenter as DoneTodoPresenterIF,
+  DoneTodoOutputData,
+} from 'domain-model';
 
 export class DoneTodoPresenter implements DoneTodoPresenterIF {
-  private response: DoneTodoResponse;
+  private response: DoneTodoOutputData | null;
 
-  public getResponse(): DoneTodoResponse {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity) {
-    this.response = { todo: todoEntity.toJSON() };
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }

@@ -1,14 +1,17 @@
-import { Maybe, Todo } from 'schema';
-import { TodoEntity, GetTodoPresenter as GetTodoPresenterIF } from 'domain-model';
+import {
+  TodoEntity,
+  GetTodoPresenter as GetTodoPresenterIF,
+  GetTodoOutputData,
+} from 'domain-model';
 
 export class GetTodoPresenter implements GetTodoPresenterIF {
-  private response: Maybe<Todo> = null;
+  private response: GetTodoOutputData | null = null;
 
-  public getResponse(): Maybe<Todo> {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: Maybe<TodoEntity>) {
-    this.response = todoEntity ? todoEntity.toJSON() : null;
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }

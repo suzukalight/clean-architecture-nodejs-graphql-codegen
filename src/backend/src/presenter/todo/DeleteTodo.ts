@@ -1,14 +1,17 @@
-import { DeleteTodoResponse } from 'schema';
-import { TodoEntity, DeleteTodoPresenter as DeleteTodoPresenterIF } from 'domain-model';
+import {
+  TodoEntity,
+  DeleteTodoPresenter as DeleteTodoPresenterIF,
+  DeleteTodoOutputData,
+} from 'domain-model';
 
 export class DeleteTodoPresenter implements DeleteTodoPresenterIF {
-  private response: DeleteTodoResponse;
+  private response: DeleteTodoOutputData | null;
 
-  public getResponse(): DeleteTodoResponse {
+  public getResponse() {
     return this.response;
   }
 
-  public async output(todoEntity: TodoEntity) {
-    this.response = { todo: todoEntity.toJSON() };
+  public async output(todoEntity: TodoEntity | null) {
+    this.response = todoEntity ? { todo: todoEntity.toDto() } : null;
   }
 }
