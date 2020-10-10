@@ -18,7 +18,8 @@
     "db:migrate": "yarn typeorm migration:run",
     "db:migrate:revert": "yarn typeorm migration:revert",
     "db:migration:generate": "yarn typeorm migration:generate -n",
-    "db:seed": "ts-node ./src/infrastructure/typeorm/seeder/index.ts"
+    "db:seed": "ts-node ./src/infrastructure/typeorm/seeder/index.ts",
+    "setup": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\""
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^6.0.16",

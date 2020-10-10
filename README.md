@@ -19,12 +19,12 @@ Clean Architecture の学習を目的とした、Node.js による バックエ�
 
 ## setup
 
-- docker-compose と node.js が必要です
 - yarn を使用しています
-- 依存関係にあるファイルを予めビルドする必要があるため、ビルドも一度行います
+- docker-compose と node.js が必要です
 
 ```
 yarn
+yarn setup
 yarn build
 yarn docker
 yarn db:migrate

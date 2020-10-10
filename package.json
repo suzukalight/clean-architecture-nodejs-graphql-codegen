@@ -41,7 +41,10 @@
     "docker": "run-p docker:*",
     "docker:backend": "yarn workspace backend docker",
     "db:migrate": "yarn workspace backend db:migrate",
-    "db:seed": "yarn workspace backend db:seed"
+    "db:seed": "yarn workspace backend db:seed",
+    "setup": "run-p setup:*",
+    "setup:domain-model": "yarn workspace domain-model setup",
+    "setup:backend": "yarn workspace backend setup"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.17.7",
