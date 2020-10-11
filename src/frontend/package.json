@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev -p 7777",
     "build": "next build",
-    "rebuild": "run-s clean build",
+    "rebuild": "run-s clean reinstall build",
     "clean": "run-p clean:*",
-    "clean:lib": "rimraf .next",
-    "clean:modules": "rimraf node_modules && yarn install",
+    "clean:next": "rimraf .next",
+    "clean:modules": "rimraf node_modules",
+    "reinstall": "yarn install",
     "start": "next start -p 8888",
     "codegen": "graphql-codegen --config codegen.yml"
   },
