@@ -25,7 +25,7 @@ Clean Architecture の学習を目的とした、Node.js による バックエ�
 ```
 yarn
 yarn setup
-yarn build
+yarn rebuild
 yarn docker
 yarn db:migrate
 yarn db:seed
@@ -53,7 +53,7 @@ yarn test
 ## production
 
 ```
-yarn build
+yarn rebuild
 yarn start
 ```
 
