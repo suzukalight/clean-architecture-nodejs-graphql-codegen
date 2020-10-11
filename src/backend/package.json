@@ -7,19 +7,23 @@
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
     "build": "tsc -b",
-    "rebuild": "run-s clean build",
+    "rebuild": "run-s clean reinstall build",
     "clean": "run-p clean:*",
-    "clean:lib": "rimraf build",
-    "clean:modules": "rimraf node_modules && yarn install",
+    "clean:build": "rimraf build",
+    "clean:modules": "rimraf node_modules",
+    "reinstall": "yarn install",
     "start": "node build/index.js",
     "test": "jest",
-    "docker": "docker-compose up",
+    "docker:up": "docker-compose up",
+    "docker:upd": "docker-compose up -d",
+    "docker:down": "docker-compose down",
     "typeorm": "node --require ts-node/register ../../node_modules/typeorm/cli.js",
     "db:migrate": "yarn typeorm migration:run",
     "db:migrate:revert": "yarn typeorm migration:revert",
     "db:migration:generate": "yarn typeorm migration:generate -n",
     "db:seed": "ts-node ./src/infrastructure/typeorm/seeder/index.ts",
-    "setup": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\""
+    "setup": "run-s setup:env docker:upd db:migrate db:seed docker:down",
+    "setup:env": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\""
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^6.0.16",
