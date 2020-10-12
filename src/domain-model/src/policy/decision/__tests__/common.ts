@@ -12,16 +12,16 @@ import {
 
 describe('PolicyDecisionCommon', () => {
   describe('denyUnauthenticated', () => {
-    test('成功：actorが設定されている', async () => {
+    test('成功：actorが設定されている', () => {
       const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
       denyUnauthenticated(actor);
     });
 
-    test('失敗：actorが設定されていない', async () => {
+    test('失敗：actorが設定されていない', () => {
       expect(() => denyUnauthenticated(null)).toThrow(AuthenticationFailedError);
     });
 
-    test('失敗：actorが設定されていない（メッセージつき）', async () => {
+    test('失敗：actorが設定されていない（メッセージつき）', () => {
       expect(() => denyUnauthenticated(null, 'ログインしてください')).toThrow(
         /ログインしてください/,
       );
@@ -29,30 +29,30 @@ describe('PolicyDecisionCommon', () => {
   });
 
   describe('denyWhenActorHasOnlyAnonymousRole', () => {
-    test('成功：Memberロールが設定されている', async () => {
+    test('成功：Memberロールが設定されている', () => {
       const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
       denyWhenActorHasOnlyAnonymousRole(actor);
     });
 
-    test('成功：Anonymous+Member', async () => {
+    test('成功：Anonymous+Member', () => {
       const actor = new UserEntity({
         id: '1',
         email: 'aaa@bb.com',
         roles: [RoleTypes.Anonymous, RoleTypes.Member],
       });
-      expect(() => denyWhenActorHasOnlyAnonymousRole(null)).toThrow(AuthenticationFailedError);
+      denyWhenActorHasOnlyAnonymousRole(actor);
     });
 
-    test('失敗：Anonymousロールしか持っていない', async () => {
+    test('失敗：Anonymousロールしか持っていない', () => {
       const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Anonymous] });
+      expect(() => denyWhenActorHasOnlyAnonymousRole(actor)).toThrow(UnauthorizedError);
+    });
+
+    test('失敗：actorが設定されていない', () => {
       expect(() => denyWhenActorHasOnlyAnonymousRole(null)).toThrow(AuthenticationFailedError);
     });
 
-    test('失敗：actorが設定されていない', async () => {
-      expect(() => denyWhenActorHasOnlyAnonymousRole(null)).toThrow(AuthenticationFailedError);
-    });
-
-    test('失敗：actorが設定されていない（メッセージつき）', async () => {
+    test('失敗：actorが設定されていない（メッセージつき）', () => {
       expect(() => denyWhenActorHasOnlyAnonymousRole(null, 'メンバー権限をつけてください')).toThrow(
         /メンバー権限をつけてください/,
       );
@@ -60,44 +60,44 @@ describe('PolicyDecisionCommon', () => {
   });
 
   describe('allowOnlyWhenActorHasMemberRole', () => {
-    test('成功：Memberロールが設定されている', async () => {
+    test('成功：Memberロールが設定されている', () => {
       const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
       allowOnlyWhenActorHasMemberRole(actor);
     });
 
-    test('成功：Anonymous+Member', async () => {
+    test('成功：Anonymous+Member', () => {
       const actor = new UserEntity({
         id: '1',
         email: 'aaa@bb.com',
         roles: [RoleTypes.Anonymous, RoleTypes.Member],
       });
-      expect(() => allowOnlyWhenActorHasMemberRole(null)).toThrow(AuthenticationFailedError);
+      denyWhenActorHasOnlyAnonymousRole(actor);
     });
 
-    test('失敗：Anonymousロールしか持っていない', async () => {
+    test('失敗：Anonymousロールしか持っていない', () => {
       const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Anonymous] });
-      expect(() => allowOnlyWhenActorHasMemberRole(null)).toThrow(AuthenticationFailedError);
+      expect(() => allowOnlyWhenActorHasMemberRole(actor)).toThrow(UnauthorizedError);
     });
 
-    test('失敗：Adminロールしか持っていない', async () => {
+    test('失敗：Adminロールしか持っていない', () => {
       const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Admin] });
-      expect(() => allowOnlyWhenActorHasMemberRole(null)).toThrow(AuthenticationFailedError);
+      expect(() => allowOnlyWhenActorHasMemberRole(actor)).toThrow(UnauthorizedError);
     });
 
-    test('失敗：Anonymous+Admin', async () => {
+    test('失敗：Anonymous+Admin', () => {
       const actor = new UserEntity({
         id: '1',
         email: 'aaa@bb.com',
         roles: [RoleTypes.Anonymous, RoleTypes.Admin],
       });
+      expect(() => allowOnlyWhenActorHasMemberRole(actor)).toThrow(UnauthorizedError);
+    });
+
+    test('失敗：actorが設定されていない', () => {
       expect(() => allowOnlyWhenActorHasMemberRole(null)).toThrow(AuthenticationFailedError);
     });
 
-    test('失敗：actorが設定されていない', async () => {
-      expect(() => allowOnlyWhenActorHasMemberRole(null)).toThrow(AuthenticationFailedError);
-    });
-
-    test('失敗：actorが設定されていない（メッセージつき）', async () => {
+    test('失敗：actorが設定されていない（メッセージつき）', () => {
       expect(() => allowOnlyWhenActorHasMemberRole(null, 'メンバー権限をつけてください')).toThrow(
         /メンバー権限をつけてください/,
       );
@@ -105,7 +105,7 @@ describe('PolicyDecisionCommon', () => {
   });
 
   describe('allowOnlyWhenActorIsOwner', () => {
-    test('成功：同じownerId', async () => {
+    test('成功：同じownerId', () => {
       const ownerId = new ID('1');
       const actor = new UserEntity({
         id: ownerId.getId(),
@@ -115,18 +115,18 @@ describe('PolicyDecisionCommon', () => {
       allowOnlyWhenActorIsOwner(ownerId, actor);
     });
 
-    test('失敗：異なるownerId', async () => {
+    test('失敗：異なるownerId', () => {
       const ownerId = new ID('1');
       const actor = new UserEntity({ id: '2', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
       expect(() => allowOnlyWhenActorIsOwner(ownerId, actor)).toThrow(UnauthorizedError);
     });
 
-    test('失敗：actorが設定されていない', async () => {
+    test('失敗：actorが設定されていない', () => {
       const ownerId = new ID('1');
       expect(() => allowOnlyWhenActorIsOwner(ownerId, null)).toThrow(AuthenticationFailedError);
     });
 
-    test('失敗：actorが設定されていない（メッセージつき）', async () => {
+    test('失敗：actorが設定されていない（メッセージつき）', () => {
       const ownerId = new ID('1');
       expect(() => allowOnlyWhenActorIsOwner(ownerId, null, 'オーナーが違います')).toThrow(
         /オーナーが違います/,
