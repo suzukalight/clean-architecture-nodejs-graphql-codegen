@@ -14,9 +14,11 @@
     "clean:coverage": "rimraf coverage",
     "reinstall": "yarn install",
     "test": "env-cmd -f .env.default jest",
+    "test:watch": "yarn test --watch",
     "test:cov": "run-s test:cov:run test:cov:open",
     "test:cov:run": "yarn test --coverage",
     "test:cov:open": "npx http-server -o ./coverage/lcov-report",
+    "test:cov:watch": "yarn test --coverage --watch",
     "setup": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\""
   },
   "dependencies": {
