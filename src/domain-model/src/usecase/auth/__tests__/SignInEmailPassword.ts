@@ -30,7 +30,7 @@ const setup = async () => {
 };
 
 describe('SignInEmailPasswordInteractor', () => {
-  test('リクエストを処理し、ログインユーザとtokenを取得できた', async () => {
+  test('成功：リクエストを処理し、ログインユーザとtokenを取得できた', async () => {
     const { authData, password, interactor, presenter } = await setup();
     const request = { email: authData.email!, password };
 
@@ -42,14 +42,14 @@ describe('SignInEmailPasswordInteractor', () => {
     expect(response?.token).toBeDefined();
   });
 
-  test('存在しないemailを指定したため、失敗した', async () => {
+  test('失敗：存在しないemailを指定した', async () => {
     const { password, interactor } = await setup();
     const request = { email: 'not_existed@email.com', password };
 
     await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
   });
 
-  test('誤ったパスワードを指定したため、失敗した', async () => {
+  test('失敗：誤ったパスワードを指定した', async () => {
     const { authData, interactor } = await setup();
     const request = { email: authData.email!, password: 'invalidpassword' };
 
