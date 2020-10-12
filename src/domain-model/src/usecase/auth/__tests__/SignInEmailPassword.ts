@@ -26,7 +26,7 @@ const setup = async () => {
   const presenter = new MockSignInEmailPasswordPresenter();
   const interactor = new SignInEmailPasswordInteractor(authRepository, userRepository, presenter);
 
-  return { authData, password, interactor, presenter };
+  return { authData, password, interactor, presenter, userRepository };
 };
 
 describe('SignInEmailPasswordInteractor', () => {
@@ -54,5 +54,15 @@ describe('SignInEmailPasswordInteractor', () => {
     const request = { email: authData.email!, password: 'invalidpassword' };
 
     await expect(interactor.handle(request)).rejects.toThrow(AuthenticationFailedError);
+  });
+
+  test('失敗：存在しないユーザを指定した', async () => {
+    const { password, interactor, authData, userRepository } = await setup();
+    const request = { email: authData.email!, password };
+
+    // ユーザを削除
+    await userRepository.delete(authData.userId);
+
+    await expect(interactor.handle(request)).rejects.toThrow(NotFoundError);
   });
 });
