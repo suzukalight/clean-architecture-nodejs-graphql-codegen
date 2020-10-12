@@ -39,7 +39,7 @@ export class GqlUserRepository implements UserRepository {
     const todo = await this.repository.findOne(id);
     if (!todo) throw new NotFoundError();
 
-    await this.repository.delete(id);
+    await this.repository.softDelete(id);
 
     return OrmUserFactory.toEntity(todo);
   }
