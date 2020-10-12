@@ -39,12 +39,7 @@ describe('UpdateUserRolesInteractor', () => {
     const { actor, interactor } = await setup();
     const request = { id: '255', roles: [RoleTypes.Member] };
 
-    try {
-      await interactor.handle(request, actor);
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundError);
-    }
+    await expect(interactor.handle(request, actor)).rejects.toThrow(NotFoundError);
   });
 
   test('不正なロールを指定したため、失敗した', async () => {
