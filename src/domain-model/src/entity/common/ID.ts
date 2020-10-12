@@ -22,7 +22,7 @@ export class ID {
   }
 
   isEqual(id: ID): boolean;
-  isEqual(id: string): boolean;
+  isEqual(id: string | null | undefined): boolean;
   isEqual(id: unknown): boolean {
     if (id instanceof ID) return (id as ID).toString() === this.getId();
     if (typeof id === 'string') return id === this.getId();
