@@ -1,11 +1,13 @@
-import { AuthenticationFailedError } from 'common';
+import { AuthenticationFailedError, UnauthorizedError } from 'common';
 
 import { RoleTypes } from '../../../entity/common/Role';
+import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import {
   denyUnauthenticated,
   denyWhenActorHasOnlyAnonymousRole,
   allowOnlyWhenActorHasMemberRole,
+  allowOnlyWhenActorIsOwner,
 } from '../common';
 
 describe('PolicyDecisionCommon', () => {
@@ -98,6 +100,36 @@ describe('PolicyDecisionCommon', () => {
     test('失敗：actorが設定されていない（メッセージつき）', async () => {
       expect(() => allowOnlyWhenActorHasMemberRole(null, 'メンバー権限をつけてください')).toThrow(
         /メンバー権限をつけてください/,
+      );
+    });
+  });
+
+  describe('allowOnlyWhenActorIsOwner', () => {
+    test('成功：同じownerId', async () => {
+      const ownerId = new ID('1');
+      const actor = new UserEntity({
+        id: ownerId.getId(),
+        email: 'aaa@bb.com',
+        roles: [RoleTypes.Member],
+      });
+      allowOnlyWhenActorIsOwner(ownerId, actor);
+    });
+
+    test('失敗：異なるownerId', async () => {
+      const ownerId = new ID('1');
+      const actor = new UserEntity({ id: '2', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
+      expect(() => allowOnlyWhenActorIsOwner(ownerId, actor)).toThrow(UnauthorizedError);
+    });
+
+    test('失敗：actorが設定されていない', async () => {
+      const ownerId = new ID('1');
+      expect(() => allowOnlyWhenActorIsOwner(ownerId, null)).toThrow(AuthenticationFailedError);
+    });
+
+    test('失敗：actorが設定されていない（メッセージつき）', async () => {
+      const ownerId = new ID('1');
+      expect(() => allowOnlyWhenActorIsOwner(ownerId, null, 'オーナーが違います')).toThrow(
+        /オーナーが違います/,
       );
     });
   });
