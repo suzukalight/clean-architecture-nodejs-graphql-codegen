@@ -1,10 +1,12 @@
 import {
   GetUserPresenter,
+  GetUserOutputData,
   CreateUserPresenter,
+  CreateUserOutputData,
   UpdateUserRolesPresenter,
   UpdateUserRolesOutputData,
-  GetUserOutputData,
-  CreateUserOutputData,
+  DeleteUserPresenter,
+  DeleteUserOutputData,
 } from '../interface/presenter';
 
 export class MockGetUserPresenter implements GetUserPresenter {
@@ -39,6 +41,18 @@ export class MockUpdateUserRolesPresenter implements UpdateUserRolesPresenter {
   }
 
   public async output(response: UpdateUserRolesOutputData) {
+    this.response = response;
+  }
+}
+
+export class MockDeleteUserPresenter implements DeleteUserPresenter {
+  private response: DeleteUserOutputData | null = null;
+
+  public getResponse() {
+    return this.response;
+  }
+
+  public async output(response: DeleteUserOutputData) {
     this.response = response;
   }
 }

@@ -52,4 +52,13 @@ export class MockUserRepository implements UserRepository {
 
     return user;
   }
+
+  public async delete(id: string) {
+    const targetEntity = this.store.entities.get(id);
+    if (!targetEntity) throw new NotFoundError();
+
+    this.store.entities.delete(id);
+
+    return targetEntity;
+  }
 }
