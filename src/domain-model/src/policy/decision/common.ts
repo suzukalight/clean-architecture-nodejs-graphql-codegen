@@ -9,7 +9,7 @@ export const denyUnauthenticated = (actor: UserEntity | null, message?: string) 
 };
 
 export const denyWhenActorHasOnlyAnonymousRole = (actor: UserEntity | null, message?: string) => {
-  denyUnauthenticated(actor);
+  denyUnauthenticated(actor, message);
 
   // anonumous ではないロールを1つも持っていない
   if (!actor?.getRoles().some((role) => !role.isEqual(RoleTypes.Anonymous))) {
@@ -18,7 +18,7 @@ export const denyWhenActorHasOnlyAnonymousRole = (actor: UserEntity | null, mess
 };
 
 export const allowOnlyWhenActorHasMemberRole = (actor: UserEntity | null, message?: string) => {
-  denyUnauthenticated(actor);
+  denyUnauthenticated(actor, message);
 
   if (!actor?.getRoles().some((role) => role.isEqual(RoleTypes.Member))) {
     throw new UnauthorizedError(message);
@@ -30,7 +30,7 @@ export const allowOnlyWhenActorIsOwner = (
   actor: UserEntity | null,
   message?: string,
 ) => {
-  denyUnauthenticated(actor);
+  denyUnauthenticated(actor, message);
 
   if (!actor?.getId().isEqual(ownerId))
     throw new UnauthorizedError(message ?? '作成した本人しか操作することはできません');

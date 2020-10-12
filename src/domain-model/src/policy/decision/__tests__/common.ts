@@ -21,4 +21,35 @@ describe('PolicyDecisionCommon', () => {
       );
     });
   });
+
+  describe('denyWhenActorHasOnlyAnonymousRole', () => {
+    test('actorが設定されていればOK', async () => {
+      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
+      denyWhenActorHasOnlyAnonymousRole(actor);
+    });
+
+    test('Anonymous+Memberは成功', async () => {
+      const actor = new UserEntity({
+        id: '1',
+        email: 'aaa@bb.com',
+        roles: [RoleTypes.Anonymous, RoleTypes.Member],
+      });
+      expect(() => denyWhenActorHasOnlyAnonymousRole(null)).toThrow(AuthenticationFailedError);
+    });
+
+    test('Anonymousロールしか持っていないため、失敗した', async () => {
+      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Anonymous] });
+      expect(() => denyWhenActorHasOnlyAnonymousRole(null)).toThrow(AuthenticationFailedError);
+    });
+
+    test('actorが設定されていないため、失敗した', async () => {
+      expect(() => denyWhenActorHasOnlyAnonymousRole(null)).toThrow(AuthenticationFailedError);
+    });
+
+    test('actorが設定されていないため、失敗した。（メッセージつき）', async () => {
+      expect(() => denyWhenActorHasOnlyAnonymousRole(null, 'メンバー権限をつけてください')).toThrow(
+        /メンバー権限をつけてください/,
+      );
+    });
+  });
 });
