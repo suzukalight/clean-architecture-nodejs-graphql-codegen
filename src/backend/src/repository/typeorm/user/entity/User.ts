@@ -5,6 +5,7 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 import { RoleType, UserDto, UserEntity } from 'domain-model';
 
@@ -29,6 +30,9 @@ export class User {
 
   @UpdateDateColumn()
   readonly updatedAt?: Date;
+
+  @DeleteDateColumn()
+  readonly deletedAt?: Date;
 
   constructor(email: string, roles: RoleType[]) {
     this.email = email;
