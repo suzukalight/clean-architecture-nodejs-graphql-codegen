@@ -55,6 +55,7 @@ type Mutation {
   createTodo(input: CreateTodoRequest): CreateTodoResponse
   createUser(input: CreateUserRequest): CreateUserResponse
   deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
+  deleteUser(input: DeleteUserRequest): DeleteUserResponse
   doneTodo(input: DoneTodoRequest): DoneTodoResponse
   signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
   signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
@@ -115,5 +116,13 @@ input UpdateUserRolesRequest {
 }
 
 type UpdateUserRolesResponse {
+  user: User!
+}
+
+input DeleteUserRequest {
+  id: ID!
+}
+
+type DeleteUserResponse {
   user: User!
 }

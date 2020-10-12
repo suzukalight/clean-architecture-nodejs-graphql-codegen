@@ -73,6 +73,7 @@ export type Mutation = {
   createTodo?: Maybe<CreateTodoResponse>;
   createUser?: Maybe<CreateUserResponse>;
   deleteTodo?: Maybe<DeleteTodoResponse>;
+  deleteUser?: Maybe<DeleteUserResponse>;
   doneTodo?: Maybe<DoneTodoResponse>;
   signInEmailPassword?: Maybe<SignInEmailPasswordResponse>;
   signUpEmailPassword?: Maybe<SignUpEmailPasswordResponse>;
@@ -93,6 +94,11 @@ export type MutationCreateUserArgs = {
 
 export type MutationDeleteTodoArgs = {
   input?: Maybe<DeleteTodoRequest>;
+};
+
+
+export type MutationDeleteUserArgs = {
+  input?: Maybe<DeleteUserRequest>;
 };
 
 
@@ -190,6 +196,15 @@ export type UpdateUserRolesRequest = {
 
 export type UpdateUserRolesResponse = {
   __typename?: 'UpdateUserRolesResponse';
+  user: User;
+};
+
+export type DeleteUserRequest = {
+  id: Scalars['ID'];
+};
+
+export type DeleteUserResponse = {
+  __typename?: 'DeleteUserResponse';
   user: User;
 };
 
