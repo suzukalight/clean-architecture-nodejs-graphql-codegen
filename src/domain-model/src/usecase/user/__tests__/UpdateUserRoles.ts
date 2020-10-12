@@ -54,12 +54,7 @@ describe('UpdateUserRolesInteractor', () => {
       roles: ['hogehoge'],
     } as unknown) as UpdateUserRolesInputData;
 
-    try {
-      await interactor.handle(request, actor);
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(IllegalArgumentError);
-    }
+    await expect(interactor.handle(request, actor)).rejects.toThrow(IllegalArgumentError);
   });
 
   test('本人以外が操作したため、エラーが返された', async () => {

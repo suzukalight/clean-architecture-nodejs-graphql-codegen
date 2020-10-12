@@ -46,11 +46,6 @@ describe('CreateUserInteractor', () => {
     const { interactor } = setup();
     const request = { email: 'hogehoge' };
 
-    try {
-      await interactor.handle(request);
-      expect(true).toBeFalsy();
-    } catch (e) {
-      expect(e).toBeInstanceOf(IllegalArgumentError);
-    }
+    await expect(interactor.handle(request)).rejects.toThrow(IllegalArgumentError);
   });
 });
