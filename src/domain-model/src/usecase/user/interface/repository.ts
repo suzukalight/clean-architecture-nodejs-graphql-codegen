@@ -6,4 +6,5 @@ export interface UserRepository {
 
   create(input: CreateUserInputData): Promise<UserEntity>;
   update(user: UserEntity): Promise<UserEntity>;
+  delete(id: string): Promise<UserEntity>;
 }

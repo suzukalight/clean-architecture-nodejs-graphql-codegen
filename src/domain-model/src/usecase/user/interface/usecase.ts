@@ -24,3 +24,11 @@ export type UpdateUserRolesInputData = {
 export interface UpdateUserRolesUseCase {
   handle(request: UpdateUserRolesInputData, actor: UserEntity): void;
 }
+
+export type DeleteUserInputData = {
+  id: string;
+};
+
+export interface DeleteUserUseCase {
+  handle(request: DeleteUserInputData, actor: UserEntity): void;
+}

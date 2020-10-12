@@ -23,3 +23,11 @@ export type UpdateUserRolesOutputData = {
 export interface UpdateUserRolesPresenter {
   output(response: UpdateUserRolesOutputData): void;
 }
+
+export type DeleteUserOutputData = {
+  user: UserDto | null;
+};
+
+export interface DeleteUserPresenter {
+  output(response: DeleteUserOutputData): void;
+}
