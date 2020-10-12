@@ -1,4 +1,5 @@
 import { Connection, Repository } from 'typeorm';
+import { NotFoundError } from 'common';
 import { UserEntity, RoleTypes, UserRepository, CreateUserInputData } from 'domain-model';
 
 import { User as OrmUser, OrmUserFactory } from '../entity/User';
@@ -32,5 +33,14 @@ export class GqlUserRepository implements UserRepository {
     const saved = await this.repository.save(todo);
 
     return OrmUserFactory.toEntity(saved);
+  }
+
+  public async delete(id: string) {
+    const todo = await this.repository.findOne(id);
+    if (!todo) throw new NotFoundError();
+
+    await this.repository.delete(id);
+
+    return OrmUserFactory.toEntity(todo);
   }
 }
