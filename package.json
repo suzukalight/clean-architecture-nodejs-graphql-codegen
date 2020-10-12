@@ -48,8 +48,9 @@
     "docker": "run-p docker:*",
     "docker:backend": "yarn workspace backend docker:upd",
     "db:migrate": "yarn workspace backend db:migrate",
+    "db:migration:generate": "yarn workspace backend db:migration:generate",
     "db:seed": "yarn workspace backend db:seed",
-    "setup": "run-s build setup:domain-model setup:backend",
+    "setup": "run-s setup:domain-model setup:backend",
     "setup:domain-model": "yarn workspace domain-model setup",
     "setup:backend": "yarn workspace backend setup"
   },

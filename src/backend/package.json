@@ -22,7 +22,7 @@
     "db:migrate:revert": "yarn typeorm migration:revert",
     "db:migration:generate": "yarn typeorm migration:generate -n",
     "db:seed": "ts-node ./src/infrastructure/typeorm/seeder/index.ts",
-    "setup": "run-s setup:env docker:upd db:migrate db:seed docker:down",
+    "setup": "run-s setup:env",
     "setup:env": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\""
   },
   "dependencies": {
