@@ -3,7 +3,7 @@ import { PropertyRequiredError, IllegalArgumentError } from 'common';
 
 const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
 
-export const denyIllegalPlainPassword = (passwordPlainText: string) => {
+const denyIllegalPlainPassword = (passwordPlainText: string) => {
   if (!passwordPlainText) throw new PropertyRequiredError('passwordPlainText');
   if (!regex.test(passwordPlainText))
     throw new IllegalArgumentError(
