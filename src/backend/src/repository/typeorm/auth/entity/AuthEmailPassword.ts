@@ -19,7 +19,6 @@ export class AuthEmailPassword {
   @Column()
   userId: number;
 
-  @ManyToOne(() => User, (user) => user.todos)
   @JoinColumn({ name: 'userId' })
   user?: User;
 
