@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
   JoinColumn,
 } from 'typeorm';
 import { AuthEmailPasswordEntity, AuthEmailPasswordDto } from 'domain-model';
