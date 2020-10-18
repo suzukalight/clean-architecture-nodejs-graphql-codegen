@@ -35,7 +35,7 @@ describe('PasswordEntity', () => {
       expect(password.isEqual(new Password('anotherEncryptedData'))).toBeFalsy();
     });
     test('NG: !== isEqual(unknown)', () => {
-      expect(() => password.isEqual({} as any)).toThrow(IllegalArgumentError);
+      expect(() => password.isEqual({} as any)).toThrow(IllegalArgumentError); // eslint-disable-line @typescript-eslint/no-explicit-any
     });
   });
 

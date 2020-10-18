@@ -49,7 +49,7 @@ describe('EmailEntity', () => {
       expect(emailEntity.isEqual(new Email('another-address@email.com'))).toBeFalsy();
     });
     test('NG: !== isEqual(unknown)', () => {
-      expect(() => emailEntity.isEqual({} as any)).toThrow(IllegalArgumentError);
+      expect(() => emailEntity.isEqual({} as any)).toThrow(IllegalArgumentError); // eslint-disable-line @typescript-eslint/no-explicit-any
     });
   });
 });

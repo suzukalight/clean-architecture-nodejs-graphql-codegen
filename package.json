@@ -42,6 +42,7 @@
     "format": "prettier --write -l \"./src/**/*.{js,ts,graphql}\"",
     "test": "run-p test:*",
     "test:domain": "yarn workspace domain-model test",
+    "test:backend": "yarn workspace backend test",
     "codegen": "run-s codegen:schema codegen:frontend",
     "codegen:schema": "yarn workspace schema codegen",
     "codegen:frontend": "yarn workspace frontend codegen",
