@@ -24,6 +24,7 @@ jobs:
     <<: *node
     steps:
       - checkout
+      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
       - node/install-yarn:
           version: '1.22.2'
       - restore_cache:
