@@ -34,6 +34,9 @@ yarn fix
 yarn test
 ```
 
+- fix = typecheck(tsc) + lint(eslint) + format(prettier)
+- test = all UnitTests + IntegrationTests
+
 ## development
 
 ```
@@ -43,9 +46,6 @@ yarn dev
 
 - http://localhost:3000/graphql - backend (GraphQL Playground)
 - http://localhost:7777/login - frontend (Next.js)
-
-- fix = typecheck(tsc) + lint(eslint) + format(prettier)
-- test = jest(ts-jest)
 
 ## production
 
