@@ -40,7 +40,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint --fix ./src",
     "format": "prettier --write -l \"./src/**/*.{js,ts,graphql}\"",
-    "test": "run-p test:*",
+    "test": "run-s test:*",
     "test:domain": "yarn workspace domain-model test",
     "test:backend": "yarn workspace backend test",
     "codegen": "run-s codegen:schema codegen:frontend",
