@@ -11,6 +11,7 @@
     "clean": "run-p clean:*",
     "clean:build": "rimraf build",
     "clean:modules": "rimraf node_modules",
+    "clean:test_db": "rimraf test_db",
     "reinstall": "yarn install",
     "start": "node build/index.js",
     "test": "env-cmd -f .env.default jest",
@@ -22,13 +23,15 @@
     "docker:up": "docker-compose up",
     "docker:upd": "docker-compose up -d",
     "docker:down": "docker-compose down",
+    "docker:down:rmi": "docker-compose down --rmi all --volumes --remove-orphans",
     "typeorm": "node --require ts-node/register ../../node_modules/typeorm/cli.js",
     "db:migrate": "yarn typeorm migration:run",
     "db:migrate:revert": "yarn typeorm migration:revert",
     "db:migration:generate": "yarn typeorm migration:generate -n",
     "db:seed": "ts-node ./src/infrastructure/typeorm/seeder/index.ts",
-    "setup": "run-s setup:env",
-    "setup:env": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\""
+    "setup": "run-s setup:env docker:upd setup:wait:mysql db:migrate db:seed",
+    "setup:env": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\"",
+    "setup:wait:mysql": "node --require ts-node/register ./docker/wait-mysql.ts"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^6.0.16",
