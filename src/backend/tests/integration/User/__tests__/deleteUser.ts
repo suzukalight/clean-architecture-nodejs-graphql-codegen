@@ -43,7 +43,6 @@ describe('deleteUser', () => {
         },
       });
 
-      console.log('test', result);
       const { user } = result?.data?.deleteUser ?? {};
       expect(user?.email).toBe('anonymous@email.com');
     });
