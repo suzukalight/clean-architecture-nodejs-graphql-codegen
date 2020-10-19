@@ -24,13 +24,15 @@ jobs:
     <<: *node
     steps:
       - checkout
+      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
       - node/install-yarn:
           version: '1.22.2'
       - restore_cache:
           keys:
             - dpendencies-<< parameters.cache-version >>-{{ checksum "<< parameters.cache-key >>" }}
       - run: yarn install
-      - run: yarn build
+      - run: yarn setup
+      - run: yarn rebuild
       - run: yarn typecheck
       - run: yarn lint
       - run: yarn test
