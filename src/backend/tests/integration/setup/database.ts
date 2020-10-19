@@ -13,6 +13,7 @@ export const getRandomDbPath = () => `./test_db/${uuidv4()}.sqlite`;
 export const createDbConnection = async (randomDbPath: string) =>
   createConnection({
     type: 'sqlite',
+    name: randomDbPath,
     database: randomDbPath,
     entities: [User, Todo, AuthEmailPassword],
     synchronize: true,
