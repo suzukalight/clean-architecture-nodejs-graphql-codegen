@@ -1,10 +1,8 @@
-import { Connection } from 'typeorm';
 import { ApolloServerTestClient } from 'apollo-server-testing';
 import { gql } from 'apollo-server-express';
 
-import { createDbConnection } from '../../setup/database';
+import { SqliteDbConnection } from '../../setup/database';
 import { createApolloServerForTesting } from '../../setup/apollo-server';
-import { seedAll } from '../../../../src/infrastructure/typeorm/seeder/seedAll';
 
 const SIGN_IN_EMAIL_PASSWORD = gql`
   mutation SignInEmailPassword($input: SignInEmailPasswordRequest) {
@@ -20,17 +18,18 @@ const SIGN_IN_EMAIL_PASSWORD = gql`
 `;
 
 describe('signInEmailPassword', () => {
-  let dbConnection: Connection | undefined;
+  const sqliteDbConnection = new SqliteDbConnection();
   let testClient: ApolloServerTestClient | undefined;
 
   beforeAll(async () => {
-    dbConnection = await createDbConnection();
-    testClient = await createApolloServerForTesting(dbConnection);
-    await seedAll(dbConnection);
+    const connection = await sqliteDbConnection.connect();
+
+    testClient = await createApolloServerForTesting(connection);
+    await sqliteDbConnection.seedAll();
   });
 
   afterAll(async () => {
-    dbConnection?.close();
+    await sqliteDbConnection.dispose();
   });
 
   test('OK: 登録済みのメールアドレスとパスワードを指定した', async () => {
