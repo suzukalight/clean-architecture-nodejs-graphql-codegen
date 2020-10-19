@@ -4,7 +4,7 @@ services:
   # MySQL
   db:
     image: mysql:5.7
-    container_name: mysql_host
+    container_name: graphql_clean_dev_mysql_host
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: graphql_clean_dev
@@ -13,8 +13,12 @@ services:
       TZ: 'Asia/Tokyo'
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - ./docker/db/data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
+
+volumes:
+  mysql-data:
+    driver: local
