@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 
 import { SqliteDbConnection } from '../../setup/database';
 import { createApolloServerForTesting } from '../../setup/apollo-server';
-import { RoleTypes, UserEntity } from 'domain-model';
+import { RoleTypes } from 'domain-model';
 
 const DELETE_USER = gql`
   # Write your query or mutation here
