@@ -2,3 +2,4 @@ build/
 docker/db/data
 .env
 tsconfig.tsbuildinfo
+test_db/
