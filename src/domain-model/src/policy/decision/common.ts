@@ -25,6 +25,18 @@ export const allowOnlyWhenActorHasMemberRole = (actor: UserEntity | null, messag
   }
 };
 
+export const allowOnlyWhenActorHasAdminOrMemberRole = (
+  actor: UserEntity | null,
+  message?: string,
+) => {
+  denyUnauthenticated(actor, message);
+
+  if (actor?.getRoles().some((role) => role.isEqual(RoleTypes.Admin))) return;
+  if (actor?.getRoles().some((role) => role.isEqual(RoleTypes.Member))) return;
+
+  throw new UnauthorizedError(message);
+};
+
 export const allowOnlyWhenActorIsOwner = (
   ownerId: ID,
   actor: UserEntity | null,
