@@ -25,20 +25,7 @@ Clean Architecture の学習を目的とした、Node.js による バックエ�
 ```
 yarn
 yarn setup
-yarn rebuild
-yarn docker
-yarn db:migrate
-yarn db:seed
 ```
-
-## development
-
-```
-yarn dev
-```
-
-- http://localhost:3000/graphql - backend (GraphQL Playground)
-- http://localhost:7777/login - frontend (Next.js)
 
 ## test
 
@@ -47,6 +34,16 @@ yarn fix
 yarn test
 ```
 
+## development
+
+```
+yarn docker:upd
+yarn dev
+```
+
+- http://localhost:3000/graphql - backend (GraphQL Playground)
+- http://localhost:7777/login - frontend (Next.js)
+
 - fix = typecheck(tsc) + lint(eslint) + format(prettier)
 - test = jest(ts-jest)
 
@@ -54,6 +51,7 @@ yarn test
 
 ```
 yarn rebuild
+yarn docker:upd
 yarn start
 ```
 
