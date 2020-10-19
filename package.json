@@ -55,7 +55,10 @@
     "db:seed": "yarn workspace backend db:seed",
     "setup": "run-s rebuild setup:domain-model setup:backend",
     "setup:domain-model": "yarn workspace domain-model setup",
-    "setup:backend": "yarn workspace backend setup"
+    "setup:backend": "yarn workspace backend setup",
+    "setup:env": "run-p setup:env:domain-model setup:env:backend",
+    "setup:env:domain-model": "yarn workspace domain-model setup:env",
+    "setup:env:backend": "yarn workspace backend setup:env"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.17.7",
