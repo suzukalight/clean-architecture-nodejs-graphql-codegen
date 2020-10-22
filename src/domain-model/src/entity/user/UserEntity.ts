@@ -53,7 +53,11 @@ export class UserEntity {
   }
 
   removeRole(targetRole: Role) {
-    const newRoles = this.roles?.filter((role) => role.isEqual(targetRole));
+    if (!this.roles.some((role) => role.isEqual(targetRole))) {
+      throw new ConflictError('そのロールを持っていません');
+    }
+
+    const newRoles = this.roles?.filter((role) => !role.isEqual(targetRole));
     if (!newRoles.length) {
       throw new ValidationError('すべてのロールを削除することになる操作はできません');
     }
