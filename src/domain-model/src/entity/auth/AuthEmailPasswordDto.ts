@@ -11,7 +11,7 @@ export type AuthEmailPasswordDto = {
 } & TimeStampTypes;
 
 export const denyIllegalAuthEmailPasswordDto = (auth: AuthEmailPasswordDto) => {
-  if (!auth) throw new PropertyRequiredError('user');
+  if (!auth) throw new PropertyRequiredError('authEmailPassword');
   denyDoesNotHaveRequiredProperties(auth, ['email', 'passwordEncrypted', 'userId']);
   denyIllegalEmail(auth.email);
   denyIllegalPassword(auth.passwordEncrypted);

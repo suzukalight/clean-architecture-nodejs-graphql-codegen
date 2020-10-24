@@ -1,4 +1,4 @@
-import { AuthEmailPasswordDto } from './AuthEmailPasswordDto';
+import { AuthEmailPasswordDto, denyIllegalAuthEmailPasswordDto } from './AuthEmailPasswordDto';
 import { Email } from '../common/Email';
 import { Password } from '../common/Password';
 import { ID } from '../common/ID';
@@ -8,10 +8,11 @@ export class AuthEmailPasswordEntity {
   private passwordEncrypted: Password;
   private userId: ID;
 
-  constructor({ email, passwordEncrypted, userId }: AuthEmailPasswordDto) {
-    this.email = new Email(email);
-    this.passwordEncrypted = new Password(passwordEncrypted);
-    this.userId = new ID(userId);
+  constructor(dto: AuthEmailPasswordDto) {
+    denyIllegalAuthEmailPasswordDto(dto);
+    this.email = new Email(dto.email);
+    this.passwordEncrypted = new Password(dto.passwordEncrypted);
+    this.userId = new ID(dto.userId);
   }
 
   getEmail() {
