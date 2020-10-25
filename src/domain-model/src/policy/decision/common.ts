@@ -1,8 +1,25 @@
-import { AuthenticationFailedError, UnauthorizedError } from 'common';
+import {
+  AuthenticationFailedError,
+  IllegalArgumentError,
+  PropertyRequiredError,
+  UnauthorizedError,
+} from 'common';
 
 import { ID } from '../../entity/common/ID';
 import { RoleTypes } from '../../entity/common/Role';
 import { UserEntity } from '../../entity/user/UserEntity';
+
+export const denyIfNotSet = (
+  target: unknown | null | undefined,
+  keys: string[],
+  message?: string,
+) => {
+  if (target === undefined || target === null) throw new IllegalArgumentError(message);
+  if (typeof target !== 'object') throw new IllegalArgumentError(message);
+  keys.forEach((key) => {
+    if (!(key in target!)) throw new PropertyRequiredError(key);
+  });
+};
 
 export const denyUnauthenticated = (actor: UserEntity | null, message?: string) => {
   if (!actor) throw new AuthenticationFailedError(message);
