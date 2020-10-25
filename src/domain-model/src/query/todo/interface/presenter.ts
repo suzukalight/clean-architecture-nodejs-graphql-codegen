@@ -1,4 +1,4 @@
-import { PageInfo } from '../../type';
+import { Nullable, PageInfo } from '../../type';
 import { TodoDto } from '../../../entity';
 
 export type TodoEdge = {
@@ -7,7 +7,7 @@ export type TodoEdge = {
 };
 
 export type AllTodosOutputData = {
-  edges: TodoEdge[] | null;
+  edges: Nullable<TodoEdge[]>;
   pageInfo?: PageInfo;
 };
 
