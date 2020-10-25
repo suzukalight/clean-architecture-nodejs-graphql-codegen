@@ -1,10 +1,12 @@
-import { Connection, Repository } from 'typeorm';
+import { Connection, LessThanOrEqual, Repository } from 'typeorm';
 import {
   TodoQueryService,
   DeadlineNearingTodosQuery,
   DeadlineNearingTodosQueryResult,
   AllTodosQuery,
+  denyIfNotSet,
 } from 'domain-model';
+import addDays from 'date-fns/addDays';
 
 import { Todo as OrmTodo, OrmTodoFactory } from '../entity/Todo';
 
@@ -22,11 +24,23 @@ export class GqlTodoQueryService implements TodoQueryService {
     return { todos: null };
   }
 
-  public async allDeadlineNearingTodos(_query: DeadlineNearingTodosQuery) {
-    // TODO: queryを検査
+  public async allDeadlineNearingTodos(query: DeadlineNearingTodosQuery) {
+    // how:
+    // 1. deadlineを決める。dueDateのdaysBeforeWarning日後を警告日とする。これより古いTODOを探す
+    // 2. findする。deadlineより前のdueDateになっているTODOを探す。dueDateを過ぎたものも含む
+    // note:
+    // dueDateは0:00:00で格納されているものとし、<=演算子でdBWを含める
 
-    // FIXME: conditionを正しく設定
-    const result = await this.repository.find({});
+    denyIfNotSet(query, ['dueDate', 'daysBeforeWarning']);
+
+    // FIXME: actorによるownerIdの制限
+    const deadlineDate = addDays(query.dueDate, query.daysBeforeWarning);
+    const result = await this.repository.find({
+      relations: ['owner'], // eager loading で resolver の負荷を下げる
+      where: {
+        dueDate: LessThanOrEqual(deadlineDate),
+      },
+    });
     if (!result) return { todos: null };
 
     const res: DeadlineNearingTodosQueryResult = {
