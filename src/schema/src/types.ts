@@ -164,10 +164,33 @@ export type DeleteTodoResponse = {
   todo: Todo;
 };
 
+export type TodoEdge = {
+  __typename?: 'TodoEdge';
+  todo?: Maybe<Todo>;
+  cursor?: Maybe<Scalars['String']>;
+};
+
+export type DeadlineNearingTodosRequest = {
+  dueDate: Scalars['DateTime'];
+  paging?: Maybe<PagingInput>;
+};
+
+export type DeadlineNearingTodosResponse = {
+  __typename?: 'DeadlineNearingTodosResponse';
+  edges?: Maybe<Array<Maybe<TodoEdge>>>;
+  pageInfo?: Maybe<PageInfo>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  allDeadlineNearingTodos?: Maybe<DeadlineNearingTodosResponse>;
   todo?: Maybe<Todo>;
   user?: Maybe<User>;
+};
+
+
+export type QueryAllDeadlineNearingTodosArgs = {
+  query?: Maybe<DeadlineNearingTodosRequest>;
 };
 
 
@@ -178,6 +201,24 @@ export type QueryTodoArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export enum OrderBy {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type PagingInput = {
+  cursor?: Maybe<Scalars['String']>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  totalCount?: Maybe<Scalars['Int']>;
+  hasNextPage?: Maybe<Scalars['Boolean']>;
+  endCursor?: Maybe<Scalars['String']>;
 };
 
 export type CreateUserRequest = {
@@ -307,14 +348,21 @@ export type ResolversTypes = ResolversObject<{
   UndoneTodoResponse: ResolverTypeWrapper<UndoneTodoResponse>;
   DeleteTodoRequest: DeleteTodoRequest;
   DeleteTodoResponse: ResolverTypeWrapper<DeleteTodoResponse>;
+  TodoEdge: ResolverTypeWrapper<TodoEdge>;
+  DeadlineNearingTodosRequest: DeadlineNearingTodosRequest;
+  DeadlineNearingTodosResponse: ResolverTypeWrapper<DeadlineNearingTodosResponse>;
   Query: ResolverTypeWrapper<{}>;
+  OrderBy: OrderBy;
+  PagingInput: PagingInput;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  PageInfo: ResolverTypeWrapper<PageInfo>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: ResolverTypeWrapper<CreateUserResponse>;
   UpdateUserRolesRequest: UpdateUserRolesRequest;
   UpdateUserRolesResponse: ResolverTypeWrapper<UpdateUserRolesResponse>;
   DeleteUserRequest: DeleteUserRequest;
   DeleteUserResponse: ResolverTypeWrapper<DeleteUserResponse>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -337,14 +385,20 @@ export type ResolversParentTypes = ResolversObject<{
   UndoneTodoResponse: UndoneTodoResponse;
   DeleteTodoRequest: DeleteTodoRequest;
   DeleteTodoResponse: DeleteTodoResponse;
+  TodoEdge: TodoEdge;
+  DeadlineNearingTodosRequest: DeadlineNearingTodosRequest;
+  DeadlineNearingTodosResponse: DeadlineNearingTodosResponse;
   Query: {};
+  PagingInput: PagingInput;
+  Int: Scalars['Int'];
+  PageInfo: PageInfo;
+  Boolean: Scalars['Boolean'];
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: CreateUserResponse;
   UpdateUserRolesRequest: UpdateUserRolesRequest;
   UpdateUserRolesResponse: UpdateUserRolesResponse;
   DeleteUserRequest: DeleteUserRequest;
   DeleteUserResponse: DeleteUserResponse;
-  Boolean: Scalars['Boolean'];
 }>;
 
 export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = ResolversObject<{
@@ -417,9 +471,29 @@ export type DeleteTodoResponseResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
+export type TodoEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['TodoEdge'] = ResolversParentTypes['TodoEdge']> = ResolversObject<{
+  todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType>;
+  cursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
+export type DeadlineNearingTodosResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeadlineNearingTodosResponse'] = ResolversParentTypes['DeadlineNearingTodosResponse']> = ResolversObject<{
+  edges?: Resolver<Maybe<Array<Maybe<ResolversTypes['TodoEdge']>>>, ParentType, ContextType>;
+  pageInfo?: Resolver<Maybe<ResolversTypes['PageInfo']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
+}>;
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  allDeadlineNearingTodos?: Resolver<Maybe<ResolversTypes['DeadlineNearingTodosResponse']>, ParentType, ContextType, RequireFields<QueryAllDeadlineNearingTodosArgs, never>>;
   todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QueryTodoArgs, 'id'>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+}>;
+
+export type PageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = ResolversObject<{
+  totalCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  hasNextPage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export type CreateUserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateUserResponse'] = ResolversParentTypes['CreateUserResponse']> = ResolversObject<{
@@ -448,7 +522,10 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   DoneTodoResponse?: DoneTodoResponseResolvers<ContextType>;
   UndoneTodoResponse?: UndoneTodoResponseResolvers<ContextType>;
   DeleteTodoResponse?: DeleteTodoResponseResolvers<ContextType>;
+  TodoEdge?: TodoEdgeResolvers<ContextType>;
+  DeadlineNearingTodosResponse?: DeadlineNearingTodosResponseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  PageInfo?: PageInfoResolvers<ContextType>;
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;
   UpdateUserRolesResponse?: UpdateUserRolesResponseResolvers<ContextType>;
   DeleteUserResponse?: DeleteUserResponseResolvers<ContextType>;

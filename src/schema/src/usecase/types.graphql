@@ -1,0 +1,16 @@
+enum OrderBy {
+  ASC
+  DESC
+}
+
+input PagingInput {
+  cursor: String
+  skip: Int
+  take: Int
+}
+
+type PageInfo {
+  totalCount: Int
+  hasNextPage: Boolean
+  endCursor: String
+}
