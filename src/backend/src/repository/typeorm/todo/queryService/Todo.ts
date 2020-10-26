@@ -38,7 +38,7 @@ export class GqlTodoQueryService implements TodoQueryService {
     const result = await this.repository.find({
       relations: ['owner'], // eager loading で resolver の負荷を下げる
       where: {
-        dueDate: LessThanOrEqual(deadlineDate),
+        dueDate: LessThanOrEqual(deadlineDate.toISOString()),
       },
     });
     if (!result) return { todos: null };
