@@ -1,7 +1,7 @@
 import { GetTodoInteractor } from '../GetTodo';
-import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
-import { MockGetTodoPresenter } from '../__mocks__/MockTodoPresenter';
-import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
+import { MockTodoRepository } from '../_mocks/MockTodoRepository';
+import { MockGetTodoPresenter } from '../_mocks/MockTodoPresenter';
+import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
 
 /**
  * TODOを1つ作成しておく

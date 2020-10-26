@@ -1,9 +1,9 @@
 import { NotFoundError, ConflictError, UnauthorizedError } from 'common';
 
 import { DoneTodoInteractor } from '../DoneTodo';
-import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
-import { MockDoneTodoPresenter } from '../__mocks__/MockTodoPresenter';
-import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
+import { MockTodoRepository } from '../_mocks/MockTodoRepository';
+import { MockDoneTodoPresenter } from '../_mocks/MockTodoPresenter';
+import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
 import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { TodoStatus } from '../../../entity/todo/TodoDto';

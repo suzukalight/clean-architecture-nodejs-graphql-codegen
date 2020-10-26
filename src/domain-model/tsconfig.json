@@ -26,7 +26,7 @@
     "sourceMap": true,
     "composite": true
   },
-  "exclude": ["node_modules", "lib", "**/__mocks__/*", "**/__tests__/*"],
+  "exclude": ["node_modules", "lib", "**/_mocks/*", "**/__tests__/*"],
   "include": ["src/**/*"],
   "references": [{ "path": "../common" }, { "path": "../schema" }]
 }

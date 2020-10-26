@@ -2,9 +2,9 @@ import { NotFoundError, AuthenticationFailedError } from 'common';
 
 import { SignInEmailPasswordInteractor } from '../SignInEmailPassword';
 import { encryptPassword } from '../../../entity/common/Password';
-import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
-import { MockAuthEmailPasswordRepository } from '../__mocks__/MockAuthEmailPasswordRepository';
-import { MockSignInEmailPasswordPresenter } from '../__mocks__/MockAuthPresenter';
+import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
+import { MockAuthEmailPasswordRepository } from '../_mocks/MockAuthEmailPasswordRepository';
+import { MockSignInEmailPasswordPresenter } from '../_mocks/MockAuthPresenter';
 
 /**
  * 認証済みのユーザを1名作成しておく

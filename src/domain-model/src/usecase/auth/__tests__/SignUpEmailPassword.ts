@@ -2,9 +2,9 @@ import { ConflictError, IllegalArgumentError } from 'common';
 
 import { SignUpEmailPasswordInteractor } from '../SignUpEmailPassword';
 import { encryptPassword } from '../../../entity/common/Password';
-import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
-import { MockAuthEmailPasswordRepository } from '../__mocks__/MockAuthEmailPasswordRepository';
-import { MockSignUpEmailPasswordPresenter } from '../__mocks__/MockAuthPresenter';
+import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
+import { MockAuthEmailPasswordRepository } from '../_mocks/MockAuthEmailPasswordRepository';
+import { MockSignUpEmailPasswordPresenter } from '../_mocks/MockAuthPresenter';
 
 /**
  * 認証済みのユーザを1名作成しておく

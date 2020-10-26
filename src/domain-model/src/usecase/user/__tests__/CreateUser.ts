@@ -1,8 +1,8 @@
 import { IllegalArgumentError } from 'common';
 
 import { CreateUserInteractor } from '../CreateUser';
-import { MockUserRepository } from '../__mocks__/MockUserRepository';
-import { MockCreateUserPresenter } from '../__mocks__/MockUserPresenter';
+import { MockUserRepository } from '../_mocks/MockUserRepository';
+import { MockCreateUserPresenter } from '../_mocks/MockUserPresenter';
 
 /**
  * interactor を生成

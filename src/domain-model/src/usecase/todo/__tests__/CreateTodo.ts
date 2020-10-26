@@ -1,9 +1,9 @@
 import { NotFoundError } from 'common';
 
 import { CreateTodoInteractor } from '../CreateTodo';
-import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
-import { MockCreateTodoPresenter } from '../__mocks__/MockTodoPresenter';
-import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
+import { MockTodoRepository } from '../_mocks/MockTodoRepository';
+import { MockCreateTodoPresenter } from '../_mocks/MockTodoPresenter';
+import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
 
 /**
  * オーナーを1名作成しておく

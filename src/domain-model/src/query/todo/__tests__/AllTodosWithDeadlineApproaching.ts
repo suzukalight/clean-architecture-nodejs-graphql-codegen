@@ -1,6 +1,6 @@
 import { AllTodosWithDeadlineApproachingInteractor } from '../AllTodosWithDeadlineApproaching';
-import { MockTodoQueryService } from '../__mocks__/MockTodoQueryService';
-import { MockAllTodosWithDeadlineApproachingPresenter } from '../__mocks__/MockTodoPresenter';
+import { MockTodoQueryService } from '../_mocks/MockTodoQueryService';
+import { MockAllTodosWithDeadlineApproachingPresenter } from '../_mocks/MockTodoPresenter';
 import { TodoDto, TodoStatus } from '../../../entity/todo/TodoDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { RoleTypes } from '../../../entity/common/Role';

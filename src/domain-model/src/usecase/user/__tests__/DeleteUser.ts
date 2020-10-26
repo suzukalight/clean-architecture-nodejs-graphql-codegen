@@ -1,8 +1,8 @@
 import { NotFoundError, UnauthorizedError } from 'common';
 
 import { DeleteUserInteractor } from '../DeleteUser';
-import { MockUserRepository } from '../__mocks__/MockUserRepository';
-import { MockDeleteUserPresenter } from '../__mocks__/MockUserPresenter';
+import { MockUserRepository } from '../_mocks/MockUserRepository';
+import { MockDeleteUserPresenter } from '../_mocks/MockUserPresenter';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { RoleTypes } from '../../../entity/common/Role';
 

@@ -1,6 +1,6 @@
 import { GetUserInteractor } from '../GetUser';
-import { MockUserRepository } from '../__mocks__/MockUserRepository';
-import { MockGetUserPresenter } from '../__mocks__/MockUserPresenter';
+import { MockUserRepository } from '../_mocks/MockUserRepository';
+import { MockGetUserPresenter } from '../_mocks/MockUserPresenter';
 
 /**
  * ユーザを1名作成しておく

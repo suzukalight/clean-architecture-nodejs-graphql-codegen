@@ -2,8 +2,8 @@ import { IllegalArgumentError, NotFoundError, UnauthorizedError } from 'common';
 
 import { UpdateUserRolesInteractor } from '../UpdateUserRoles';
 import { RoleTypes } from '../../../entity/common/Role';
-import { MockUserRepository } from '../__mocks__/MockUserRepository';
-import { MockUpdateUserRolesPresenter } from '../__mocks__/MockUserPresenter';
+import { MockUserRepository } from '../_mocks/MockUserRepository';
+import { MockUpdateUserRolesPresenter } from '../_mocks/MockUserPresenter';
 import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { UpdateUserRolesInputData } from '../interface/usecase';

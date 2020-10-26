@@ -1,9 +1,9 @@
 import { NotFoundError, UnauthorizedError } from 'common';
 
 import { DeleteTodoInteractor } from '../DeleteTodo';
-import { MockTodoRepository } from '../__mocks__/MockTodoRepository';
-import { MockDeleteTodoPresenter } from '../__mocks__/MockTodoPresenter';
-import { MockUserRepository } from '../../user/__mocks__/MockUserRepository';
+import { MockTodoRepository } from '../_mocks/MockTodoRepository';
+import { MockDeleteTodoPresenter } from '../_mocks/MockTodoPresenter';
+import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
 import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
