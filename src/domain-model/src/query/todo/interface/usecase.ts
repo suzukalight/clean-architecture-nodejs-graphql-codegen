@@ -28,11 +28,11 @@ export interface AllTodosUseCase {
   handle(request: AllTodosInputData, actor: UserEntity): void;
 }
 
-export type DeadlineNearingTodosInputData = {
+export type AllTodosWithDeadlineApproachingInputData = {
   dueDate: Date;
   paging?: Nullable<PagingInputData>;
 };
 
-export interface DeadlineNearingTodosUseCase {
-  handle(request: DeadlineNearingTodosInputData, actor: UserEntity): void;
+export interface AllTodosWithDeadlineApproachingUseCase {
+  handle(request: AllTodosWithDeadlineApproachingInputData, actor: UserEntity): void;
 }

@@ -15,8 +15,8 @@ export interface AllTodosPresenter {
   output(response: AllTodosOutputData): void;
 }
 
-export type DeadlineNearingTodosOutputData = AllTodosOutputData;
+export type AllTodosWithDeadlineApproachingOutputData = AllTodosOutputData;
 
-export interface DeadlineNearingTodosPresenter {
-  output(response: DeadlineNearingTodosOutputData): void;
+export interface AllTodosWithDeadlineApproachingPresenter {
+  output(response: AllTodosWithDeadlineApproachingOutputData): void;
 }

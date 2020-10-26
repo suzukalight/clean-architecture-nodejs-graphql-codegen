@@ -1,9 +1,9 @@
 import {
   AllTodosWithDeadlineApproachingPresenter,
   AllTodosWithDeadlineApproachingOutputData,
-} from '../interface/presenter';
+} from 'domain-model';
 
-export class MockAllTodosWithDeadlineApproachingPresenter
+export class GqlAllTodosWithDeadlineApproachingPresenter
   implements AllTodosWithDeadlineApproachingPresenter {
   private response: AllTodosWithDeadlineApproachingOutputData | null = null;
 

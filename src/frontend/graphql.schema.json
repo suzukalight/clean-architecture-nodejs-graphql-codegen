@@ -960,7 +960,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "DeadlineNearingTodosRequest",
+        "name": "AllTodosWithDeadlineApproachingRequest",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -995,7 +995,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "DeadlineNearingTodosResponse",
+        "name": "AllTodosWithDeadlineApproachingResponse",
         "description": null,
         "fields": [
           {
@@ -1038,7 +1038,7 @@
         "description": null,
         "fields": [
           {
-            "name": "allDeadlineNearingTodos",
+            "name": "allTodosWithDeadlineApproaching",
             "description": null,
             "args": [
               {
@@ -1046,7 +1046,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "DeadlineNearingTodosRequest",
+                  "name": "AllTodosWithDeadlineApproachingRequest",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -1054,7 +1054,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "DeadlineNearingTodosResponse",
+              "name": "AllTodosWithDeadlineApproachingResponse",
               "ofType": null
             },
             "isDeprecated": false,

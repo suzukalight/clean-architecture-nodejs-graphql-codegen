@@ -170,27 +170,27 @@ export type TodoEdge = {
   cursor?: Maybe<Scalars['String']>;
 };
 
-export type DeadlineNearingTodosRequest = {
+export type AllTodosWithDeadlineApproachingRequest = {
   dueDate: Scalars['DateTime'];
   paging?: Maybe<PagingInput>;
 };
 
-export type DeadlineNearingTodosResponse = {
-  __typename?: 'DeadlineNearingTodosResponse';
+export type AllTodosWithDeadlineApproachingResponse = {
+  __typename?: 'AllTodosWithDeadlineApproachingResponse';
   edges?: Maybe<Array<Maybe<TodoEdge>>>;
   pageInfo?: Maybe<PageInfo>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  allDeadlineNearingTodos?: Maybe<DeadlineNearingTodosResponse>;
+  allTodosWithDeadlineApproaching?: Maybe<AllTodosWithDeadlineApproachingResponse>;
   todo?: Maybe<Todo>;
   user?: Maybe<User>;
 };
 
 
-export type QueryAllDeadlineNearingTodosArgs = {
-  query?: Maybe<DeadlineNearingTodosRequest>;
+export type QueryAllAllTodosWithDeadlineApproachingArgs = {
+  query?: Maybe<AllTodosWithDeadlineApproachingRequest>;
 };
 
 

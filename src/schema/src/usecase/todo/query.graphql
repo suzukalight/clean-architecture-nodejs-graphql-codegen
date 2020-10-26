@@ -3,11 +3,11 @@ type TodoEdge {
   cursor: String
 }
 
-input DeadlineNearingTodosRequest {
+input AllTodosWithDeadlineApproachingRequest {
   dueDate: DateTime!
   paging: PagingInput
 }
-type DeadlineNearingTodosResponse {
+type AllTodosWithDeadlineApproachingResponse {
   edges: [TodoEdge]
   pageInfo: PageInfo
 }
@@ -15,5 +15,7 @@ type DeadlineNearingTodosResponse {
 type Query {
   todo(id: ID!): Todo
 
-  allDeadlineNearingTodos(query: DeadlineNearingTodosRequest): DeadlineNearingTodosResponse
+  allTodosWithDeadlineApproaching(
+    query: AllTodosWithDeadlineApproachingRequest
+  ): AllTodosWithDeadlineApproachingResponse
 }

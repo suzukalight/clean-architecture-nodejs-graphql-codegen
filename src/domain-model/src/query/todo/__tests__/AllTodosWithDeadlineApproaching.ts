@@ -1,6 +1,6 @@
-import { DeadlineNearingTodosInteractor } from '../DeadlineNearingTodos';
+import { AllTodosWithDeadlineApproachingInteractor } from '../AllTodosWithDeadlineApproaching';
 import { MockTodoQueryService } from '../__mocks__/MockTodoQueryService';
-import { MockDeadlineNearingTodosPresenter } from '../__mocks__/MockTodoPresenter';
+import { MockAllTodosWithDeadlineApproachingPresenter } from '../__mocks__/MockTodoPresenter';
 import { TodoDto, TodoStatus } from '../../../entity/todo/TodoDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { RoleTypes } from '../../../entity/common/Role';
@@ -27,13 +27,13 @@ const setup = async () => {
   const repository = new MockTodoQueryService(todos);
 
   // interactor
-  const presenter = new MockDeadlineNearingTodosPresenter();
-  const interactor = new DeadlineNearingTodosInteractor(repository, presenter);
+  const presenter = new MockAllTodosWithDeadlineApproachingPresenter();
+  const interactor = new AllTodosWithDeadlineApproachingInteractor(repository, presenter);
 
   return { actor, interactor, presenter };
 };
 
-describe('DeadlineNearingTodosInteractor', () => {
+describe('AllTodosWithDeadlineApproachingInteractor', () => {
   test('OK: リクエストを処理し、エンティティを取得できた', async () => {
     const { actor, interactor, presenter } = await setup();
 

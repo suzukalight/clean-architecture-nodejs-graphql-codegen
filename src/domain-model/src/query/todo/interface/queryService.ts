@@ -8,12 +8,12 @@ export type AllTodosQueryResult = {
   pageInfo?: PageInfo;
 };
 
-export type DeadlineNearingTodosQuery = {
+export type AllTodosWithDeadlineApproachingQuery = {
   dueDate: Date;
   daysBeforeWarning: number;
   paging?: Nullable<PagingInputData>;
 };
-export type DeadlineNearingTodosQueryResult = {
+export type AllTodosWithDeadlineApproachingQueryResult = {
   todos: Nullable<TodoDto[]>;
   pageInfo?: PageInfo;
 };
@@ -21,7 +21,7 @@ export type DeadlineNearingTodosQueryResult = {
 export interface TodoQueryService {
   all(query: AllTodosQuery): Promise<AllTodosQueryResult>;
 
-  allDeadlineNearingTodos(
-    query: DeadlineNearingTodosQuery,
-  ): Promise<DeadlineNearingTodosQueryResult>;
+  allTodosWithDeadlineApproaching(
+    query: AllTodosWithDeadlineApproachingQuery,
+  ): Promise<AllTodosWithDeadlineApproachingQueryResult>;
 }

@@ -170,27 +170,27 @@ export type TodoEdge = {
   cursor?: Maybe<Scalars['String']>;
 };
 
-export type DeadlineNearingTodosRequest = {
+export type AllTodosWithDeadlineApproachingRequest = {
   dueDate: Scalars['DateTime'];
   paging?: Maybe<PagingInput>;
 };
 
-export type DeadlineNearingTodosResponse = {
-  __typename?: 'DeadlineNearingTodosResponse';
+export type AllTodosWithDeadlineApproachingResponse = {
+  __typename?: 'AllTodosWithDeadlineApproachingResponse';
   edges?: Maybe<Array<Maybe<TodoEdge>>>;
   pageInfo?: Maybe<PageInfo>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  allDeadlineNearingTodos?: Maybe<DeadlineNearingTodosResponse>;
+  allTodosWithDeadlineApproaching?: Maybe<AllTodosWithDeadlineApproachingResponse>;
   todo?: Maybe<Todo>;
   user?: Maybe<User>;
 };
 
 
-export type QueryAllDeadlineNearingTodosArgs = {
-  query?: Maybe<DeadlineNearingTodosRequest>;
+export type QueryAllTodosWithDeadlineApproachingArgs = {
+  query?: Maybe<AllTodosWithDeadlineApproachingRequest>;
 };
 
 
@@ -349,8 +349,8 @@ export type ResolversTypes = ResolversObject<{
   DeleteTodoRequest: DeleteTodoRequest;
   DeleteTodoResponse: ResolverTypeWrapper<DeleteTodoResponse>;
   TodoEdge: ResolverTypeWrapper<TodoEdge>;
-  DeadlineNearingTodosRequest: DeadlineNearingTodosRequest;
-  DeadlineNearingTodosResponse: ResolverTypeWrapper<DeadlineNearingTodosResponse>;
+  AllTodosWithDeadlineApproachingRequest: AllTodosWithDeadlineApproachingRequest;
+  AllTodosWithDeadlineApproachingResponse: ResolverTypeWrapper<AllTodosWithDeadlineApproachingResponse>;
   Query: ResolverTypeWrapper<{}>;
   OrderBy: OrderBy;
   PagingInput: PagingInput;
@@ -386,8 +386,8 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteTodoRequest: DeleteTodoRequest;
   DeleteTodoResponse: DeleteTodoResponse;
   TodoEdge: TodoEdge;
-  DeadlineNearingTodosRequest: DeadlineNearingTodosRequest;
-  DeadlineNearingTodosResponse: DeadlineNearingTodosResponse;
+  AllTodosWithDeadlineApproachingRequest: AllTodosWithDeadlineApproachingRequest;
+  AllTodosWithDeadlineApproachingResponse: AllTodosWithDeadlineApproachingResponse;
   Query: {};
   PagingInput: PagingInput;
   Int: Scalars['Int'];
@@ -477,14 +477,14 @@ export type TodoEdgeResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
-export type DeadlineNearingTodosResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeadlineNearingTodosResponse'] = ResolversParentTypes['DeadlineNearingTodosResponse']> = ResolversObject<{
+export type AllTodosWithDeadlineApproachingResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AllTodosWithDeadlineApproachingResponse'] = ResolversParentTypes['AllTodosWithDeadlineApproachingResponse']> = ResolversObject<{
   edges?: Resolver<Maybe<Array<Maybe<ResolversTypes['TodoEdge']>>>, ParentType, ContextType>;
   pageInfo?: Resolver<Maybe<ResolversTypes['PageInfo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  allDeadlineNearingTodos?: Resolver<Maybe<ResolversTypes['DeadlineNearingTodosResponse']>, ParentType, ContextType, RequireFields<QueryAllDeadlineNearingTodosArgs, never>>;
+  allTodosWithDeadlineApproaching?: Resolver<Maybe<ResolversTypes['AllTodosWithDeadlineApproachingResponse']>, ParentType, ContextType, RequireFields<QueryAllTodosWithDeadlineApproachingArgs, never>>;
   todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QueryTodoArgs, 'id'>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
 }>;
@@ -523,7 +523,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   UndoneTodoResponse?: UndoneTodoResponseResolvers<ContextType>;
   DeleteTodoResponse?: DeleteTodoResponseResolvers<ContextType>;
   TodoEdge?: TodoEdgeResolvers<ContextType>;
-  DeadlineNearingTodosResponse?: DeadlineNearingTodosResponseResolvers<ContextType>;
+  AllTodosWithDeadlineApproachingResponse?: AllTodosWithDeadlineApproachingResponseResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;
   CreateUserResponse?: CreateUserResponseResolvers<ContextType>;

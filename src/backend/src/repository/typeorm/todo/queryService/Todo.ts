@@ -1,8 +1,8 @@
 import { Connection, LessThanOrEqual, Repository } from 'typeorm';
 import {
   TodoQueryService,
-  DeadlineNearingTodosQuery,
-  DeadlineNearingTodosQueryResult,
+  AllTodosWithDeadlineApproachingQuery,
+  AllTodosWithDeadlineApproachingQueryResult,
   AllTodosQuery,
   denyIfNotSet,
 } from 'domain-model';
@@ -24,7 +24,7 @@ export class GqlTodoQueryService implements TodoQueryService {
     return { todos: null };
   }
 
-  public async allDeadlineNearingTodos(query: DeadlineNearingTodosQuery) {
+  public async allTodosWithDeadlineApproaching(query: AllTodosWithDeadlineApproachingQuery) {
     // how:
     // 1. deadlineを決める。dueDateのdaysBeforeWarning日後を警告日とする。これより古いTODOを探す
     // 2. findする。deadlineより前のdueDateになっているTODOを探す。dueDateを過ぎたものも含む
@@ -43,7 +43,7 @@ export class GqlTodoQueryService implements TodoQueryService {
     });
     if (!result) return { todos: null };
 
-    const res: DeadlineNearingTodosQueryResult = {
+    const res: AllTodosWithDeadlineApproachingQueryResult = {
       todos: result.map((todo) => OrmTodoFactory.toDto(todo)),
     };
     return res;

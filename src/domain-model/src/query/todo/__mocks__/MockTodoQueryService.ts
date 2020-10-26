@@ -2,7 +2,7 @@ import { TodoDto } from '../../../entity/todo';
 import {
   TodoQueryService,
   AllTodosQuery,
-  DeadlineNearingTodosQuery,
+  AllTodosWithDeadlineApproachingQuery,
 } from '../interface/queryService';
 
 type InMemoryStore = {
@@ -24,7 +24,7 @@ export class MockTodoQueryService implements TodoQueryService {
     return { todos: [...this.store.entities.values()] };
   }
 
-  public async allDeadlineNearingTodos(_query: DeadlineNearingTodosQuery) {
+  public async allTodosWithDeadlineApproaching(_query: AllTodosWithDeadlineApproachingQuery) {
     // FIXME: dueDateに基づいて払い出す
     return { todos: [...this.store.entities.values()] };
   }
