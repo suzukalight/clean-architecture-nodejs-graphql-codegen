@@ -22,7 +22,7 @@ const setup = async () => {
     ownerId: '1',
     title: `TODO #${id}`,
     status: TodoStatus.Undone,
-    dueDate: new Date(`2020-0${id}-01`),
+    dueDate: new Date(`2020-01-1${id}`),
   }));
   const repository = new MockTodoQueryService(todos);
 
@@ -34,20 +34,27 @@ const setup = async () => {
 };
 
 describe('AllTodosWithDeadlineApproachingInteractor', () => {
-  test('OK: リクエストを処理し、エンティティを取得できた', async () => {
-    const { actor, interactor, presenter } = await setup();
+  test.each`
+    dueDate         | length
+    ${'2019-10-01'} | ${0}
+    ${'2020-01-07'} | ${0}
+    ${'2020-01-08'} | ${1}
+    ${'2020-01-09'} | ${2}
+    ${'2020-01-10'} | ${3}
+    ${'2020-01-11'} | ${3}
+    ${'2021-01-01'} | ${3}
+  `(
+    'OK: dueDate=$dueDateのとき、エンティティを$length件取得できた',
+    async ({ dueDate, length }: { dueDate: string; length: number }) => {
+      const { actor, interactor, presenter } = await setup();
 
-    const dueDate = new Date('2020-10-01');
-    await interactor.handle({ dueDate }, actor);
+      await interactor.handle({ dueDate: new Date(dueDate) }, actor);
 
-    // response として request で指定したデータが得られた
-    const response = presenter.getResponse();
-    expect(response?.edges?.length).toBe(3);
-  });
-
-  test.todo('OK: dueDateを 2020-01-03 に変更して、エンティティを取得');
-  test.todo('OK: dueDateを 2020-01-04 に変更して、エンティティを取得');
-  test.todo('OK: dueDateを 2020-01-05 に変更して、エンティティを取得');
+      // response として request で指定したデータが得られた
+      const response = presenter.getResponse();
+      expect(response?.edges?.length).toBe(length);
+    },
+  );
 
   test.todo('OK: actorを変えて、エンティティを取得');
   test.todo('OK: actorを変えて、エンティティを0件取得');
