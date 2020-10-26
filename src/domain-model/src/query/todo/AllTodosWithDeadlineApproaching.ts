@@ -8,6 +8,7 @@ import {
   AllTodosWithDeadlineApproachingPresenter,
 } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
+import { denyIfNotSet } from '../../policy';
 
 export class AllTodosWithDeadlineApproachingInteractor
   implements AllTodosWithDeadlineApproachingUseCase {
@@ -20,11 +21,11 @@ export class AllTodosWithDeadlineApproachingInteractor
     this.presenter = presenter;
   }
 
-  public async handle(request: AllTodosWithDeadlineApproachingInputData, _actor: UserEntity) {
-    // TODO: request をチェックする
-    // TODO: actorをチェックする
-    // TODO: actorがfetchできる対象をconditionとして払い出す
+  public async handle(request: AllTodosWithDeadlineApproachingInputData, actor: UserEntity) {
+    denyIfNotSet(request, ['dueDate']);
+    denyIfNotSet(actor, ['id']);
 
+    // TODO: actorがfetchできる対象をconditionとして払い出す
     const result = await this.queryService.allTodosWithDeadlineApproaching({
       dueDate: request.dueDate,
       daysBeforeWarning: this.daysBeforeWarning,
