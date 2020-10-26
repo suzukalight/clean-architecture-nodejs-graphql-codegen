@@ -164,10 +164,33 @@ export type DeleteTodoResponse = {
   todo: Todo;
 };
 
+export type TodoEdge = {
+  __typename?: 'TodoEdge';
+  todo?: Maybe<Todo>;
+  cursor?: Maybe<Scalars['String']>;
+};
+
+export type AllTodosWithDeadlineApproachingRequest = {
+  dueDate: Scalars['DateTime'];
+  paging?: Maybe<PagingInput>;
+};
+
+export type AllTodosWithDeadlineApproachingResponse = {
+  __typename?: 'AllTodosWithDeadlineApproachingResponse';
+  edges?: Maybe<Array<Maybe<TodoEdge>>>;
+  pageInfo?: Maybe<PageInfo>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  allTodosWithDeadlineApproaching?: Maybe<AllTodosWithDeadlineApproachingResponse>;
   todo?: Maybe<Todo>;
   user?: Maybe<User>;
+};
+
+
+export type QueryAllAllTodosWithDeadlineApproachingArgs = {
+  query?: Maybe<AllTodosWithDeadlineApproachingRequest>;
 };
 
 
@@ -178,6 +201,24 @@ export type QueryTodoArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export enum OrderBy {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type PagingInput = {
+  cursor?: Maybe<Scalars['String']>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  totalCount?: Maybe<Scalars['Int']>;
+  hasNextPage?: Maybe<Scalars['Boolean']>;
+  endCursor?: Maybe<Scalars['String']>;
 };
 
 export type CreateUserRequest = {

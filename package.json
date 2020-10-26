@@ -26,6 +26,7 @@
     "rebuild:domain-model": "yarn workspace domain-model rebuild",
     "rebuild:backend": "yarn workspace backend rebuild",
     "rebuild:frontend": "yarn workspace frontend rebuild",
+    "reset:backend": "run-s rebuild:common rebuild:schema rebuild:domain-model rebuild:backend",
     "clean": "run-s clean:frontend clean:backend clean:schema clean:domain-model clean:common clean:modules",
     "clean:modules": "rimraf node_modules",
     "clean:common": "yarn workspace common clean",

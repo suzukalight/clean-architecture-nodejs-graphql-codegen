@@ -97,9 +97,44 @@ type DeleteTodoResponse {
   todo: Todo!
 }
 
+type TodoEdge {
+  todo: Todo
+  cursor: String
+}
+
+input AllTodosWithDeadlineApproachingRequest {
+  dueDate: DateTime!
+  paging: PagingInput
+}
+
+type AllTodosWithDeadlineApproachingResponse {
+  edges: [TodoEdge]
+  pageInfo: PageInfo
+}
+
 type Query {
+  allTodosWithDeadlineApproaching(
+    query: AllTodosWithDeadlineApproachingRequest
+  ): AllTodosWithDeadlineApproachingResponse
   todo(id: ID!): Todo
   user(id: ID!): User
+}
+
+enum OrderBy {
+  ASC
+  DESC
+}
+
+input PagingInput {
+  cursor: String
+  skip: Int
+  take: Int
+}
+
+type PageInfo {
+  totalCount: Int
+  hasNextPage: Boolean
+  endCursor: String
 }
 
 input CreateUserRequest {
