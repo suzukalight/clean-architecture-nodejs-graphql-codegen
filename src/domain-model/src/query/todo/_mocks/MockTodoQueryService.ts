@@ -7,6 +7,7 @@ import {
   TodoQueryService,
   AllTodosQuery,
   AllTodosWithDeadlineApproachingQuery,
+  AllTodosByOwnerIdQuery,
 } from '../interface/queryService';
 
 type InMemoryStore = {
@@ -39,5 +40,15 @@ export class MockTodoQueryService implements TodoQueryService {
     );
 
     return { todos: todosWithDeadlineApproaching };
+  }
+
+  public async allTodosByOwnerId(query: AllTodosByOwnerIdQuery) {
+    denyIfNotSet(query, ['ownerId']);
+    const todos = [...this.store.entities.values()];
+
+    // TODO: actorによる制限
+    const todosByOwnerId = todos.filter((todo) => todo.ownerId === query.ownerId);
+
+    return { todos: todosByOwnerId };
   }
 }

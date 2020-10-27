@@ -20,3 +20,9 @@ export type AllTodosWithDeadlineApproachingOutputData = AllTodosOutputData;
 export interface AllTodosWithDeadlineApproachingPresenter {
   output(response: AllTodosWithDeadlineApproachingOutputData): void;
 }
+
+export type AllTodosByOwnerIdOutputData = AllTodosOutputData;
+
+export interface AllTodosByOwnerIdPresenter {
+  output(response: AllTodosByOwnerIdOutputData): void;
+}

@@ -36,3 +36,12 @@ export type AllTodosWithDeadlineApproachingInputData = {
 export interface AllTodosWithDeadlineApproachingUseCase {
   handle(request: AllTodosWithDeadlineApproachingInputData, actor: UserEntity): void;
 }
+
+export type AllTodosByOwnerIdInputData = {
+  ownerId: string;
+  paging?: Nullable<PagingInputData>;
+};
+
+export interface AllTodosByOwnerIdUseCase {
+  handle(request: AllTodosByOwnerIdInputData, actor: UserEntity): void;
+}
