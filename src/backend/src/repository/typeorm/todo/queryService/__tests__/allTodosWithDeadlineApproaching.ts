@@ -26,7 +26,7 @@ const seedAll = async (connection: Connection, startingPointDueDate: Date) => {
   await Promise.all(creators);
 };
 
-describe('GqlTodoQueryService', () => {
+describe('GqlTodoQueryService::allTodosWithDeadlineApproaching', () => {
   const sqliteDbConnection = new SqliteDbConnection();
 
   beforeAll(async () => {
@@ -52,7 +52,6 @@ describe('GqlTodoQueryService', () => {
     async ({ dueDate, length }: { dueDate: string; length: number }) => {
       const connection = sqliteDbConnection.getConnection();
       if (!connection) throw new Error('cannot connect to test database.');
-
       const todoQueryService = new GqlTodoQueryService(connection);
 
       const result = await todoQueryService.allTodosWithDeadlineApproaching({

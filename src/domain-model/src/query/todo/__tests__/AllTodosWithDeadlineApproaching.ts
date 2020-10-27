@@ -35,7 +35,7 @@ const setup = async () => {
 
 describe('AllTodosWithDeadlineApproachingInteractor', () => {
   test.each`
-    dueDate         | length
+    dueDate                | length
     ${'2019-10-01T00:00Z'} | ${0}
     ${'2020-01-07T00:00Z'} | ${0}
     ${'2020-01-08T00:00Z'} | ${1}
