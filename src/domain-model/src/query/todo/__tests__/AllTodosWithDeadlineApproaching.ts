@@ -22,7 +22,7 @@ const setup = async () => {
     ownerId: '1',
     title: `TODO #${id}`,
     status: TodoStatus.Undone,
-    dueDate: new Date(`2020-01-1${id}`),
+    dueDate: new Date(`2020-01-1${id}T00:00Z`),
   }));
   const repository = new MockTodoQueryService(todos);
 
@@ -36,13 +36,13 @@ const setup = async () => {
 describe('AllTodosWithDeadlineApproachingInteractor', () => {
   test.each`
     dueDate         | length
-    ${'2019-10-01'} | ${0}
-    ${'2020-01-07'} | ${0}
-    ${'2020-01-08'} | ${1}
-    ${'2020-01-09'} | ${2}
-    ${'2020-01-10'} | ${3}
-    ${'2020-01-11'} | ${3}
-    ${'2021-01-01'} | ${3}
+    ${'2019-10-01T00:00Z'} | ${0}
+    ${'2020-01-07T00:00Z'} | ${0}
+    ${'2020-01-08T00:00Z'} | ${1}
+    ${'2020-01-09T00:00Z'} | ${2}
+    ${'2020-01-10T00:00Z'} | ${3}
+    ${'2020-01-11T00:00Z'} | ${3}
+    ${'2021-01-01T00:00Z'} | ${3}
   `(
     'OK: dueDate=$dueDateのとき、エンティティを$length件取得できた',
     async ({ dueDate, length }: { dueDate: string; length: number }) => {

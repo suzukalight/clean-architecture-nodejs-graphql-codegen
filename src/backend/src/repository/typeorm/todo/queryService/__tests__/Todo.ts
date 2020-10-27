@@ -8,7 +8,7 @@ import { RoleTypes } from '../../../../../../../domain-model/lib';
 import { GqlTodoQueryService } from '../Todo';
 import { Connection } from 'typeorm';
 
-const seedAll = async (connection: Connection, date: Date) => {
+const seedAll = async (connection: Connection, startingPointDueDate: Date) => {
   const userRepository = new GqlUserRepository(connection);
   const todoRepository = new GqlTodoRepository(connection);
 
@@ -19,7 +19,7 @@ const seedAll = async (connection: Connection, date: Date) => {
     await todoRepository.create({
       ownerId: actor.getId().toString(),
       title: `TODO #${value}`,
-      dueDate: addDays(date, value),
+      dueDate: addDays(startingPointDueDate, value),
     });
   });
 
@@ -31,7 +31,7 @@ describe('GqlTodoQueryService', () => {
 
   beforeAll(async () => {
     const connection = await sqliteDbConnection.connect();
-    await seedAll(connection, new Date('2020-01-10'));
+    await seedAll(connection, new Date('2020-01-10T00:00Z'));
   });
 
   afterAll(async () => {
@@ -39,14 +39,14 @@ describe('GqlTodoQueryService', () => {
   });
 
   test.each`
-    dueDate         | length
-    ${'2019-10-01'} | ${0}
-    ${'2020-01-07'} | ${0}
-    ${'2020-01-08'} | ${1}
-    ${'2020-01-09'} | ${2}
-    ${'2020-01-10'} | ${3}
-    ${'2020-01-11'} | ${3}
-    ${'2021-01-01'} | ${3}
+    dueDate                | length
+    ${'2019-10-01T00:00Z'} | ${0}
+    ${'2020-01-07T00:00Z'} | ${0}
+    ${'2020-01-08T00:00Z'} | ${1}
+    ${'2020-01-09T00:00Z'} | ${2}
+    ${'2020-01-10T00:00Z'} | ${3}
+    ${'2020-01-11T00:00Z'} | ${3}
+    ${'2021-01-01T00:00Z'} | ${3}
   `(
     'OK: dueDate=$dueDateのとき、エンティティを$length件取得できた',
     async ({ dueDate, length }: { dueDate: string; length: number }) => {

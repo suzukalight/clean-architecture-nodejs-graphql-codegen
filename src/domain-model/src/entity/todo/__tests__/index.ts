@@ -15,7 +15,7 @@ describe('TodoEntity', () => {
     });
 
     test('OK: dueDate込みでエンティティを生成できた', () => {
-      const todo1 = new TodoEntity({ ...todoDto, dueDate: new Date('2020-01-01') });
+      const todo1 = new TodoEntity({ ...todoDto, dueDate: new Date('2020-01-01T00:00Z') });
       expect(todo1.getId().toString()).toBe(todoDto.id);
       expect(todo1.getTitle().toString()).toBe(todoDto.title);
     });
@@ -83,11 +83,11 @@ describe('TodoEntity', () => {
     });
 
     test('OK: dueDate', () => {
-      const dueDate = new Date('2020-01-01');
+      const dueDate = new Date('2020-01-01T00:00Z');
       const todo = new TodoEntity({ ...todoDto, dueDate });
       expect(todo.getDueDate()).toBe(dueDate);
 
-      const newDueDate = new Date('2020-02-02');
+      const newDueDate = new Date('2020-02-02T00:00Z');
       todo.setDueDate(newDueDate);
       expect(todo.getDueDate()).toBe(newDueDate);
     });
