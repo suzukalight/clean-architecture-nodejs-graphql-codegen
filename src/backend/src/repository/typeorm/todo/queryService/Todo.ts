@@ -1,10 +1,12 @@
 import { Connection, LessThanOrEqual, Repository } from 'typeorm';
 import {
   TodoQueryService,
+  denyIfNotSet,
+  AllTodosQuery,
   AllTodosWithDeadlineApproachingQuery,
   AllTodosWithDeadlineApproachingQueryResult,
-  AllTodosQuery,
-  denyIfNotSet,
+  AllTodosByOwnerIdQuery,
+  AllTodosByOwnerIdQueryResult,
 } from 'domain-model';
 import addDays from 'date-fns/addDays';
 
@@ -44,6 +46,22 @@ export class GqlTodoQueryService implements TodoQueryService {
     if (!result) return { todos: null };
 
     const res: AllTodosWithDeadlineApproachingQueryResult = {
+      todos: result.map((todo) => OrmTodoFactory.toDto(todo)),
+    };
+    return res;
+  }
+
+  public async allTodosByOwnerId(query: AllTodosByOwnerIdQuery) {
+    denyIfNotSet(query, ['ownerId']);
+    const { ownerId } = query;
+
+    const result = await this.repository.find({
+      relations: ['owner'], // eager loading で resolver の負荷を下げる
+      where: { ownerId },
+    });
+    if (!result) return { todos: null };
+
+    const res: AllTodosByOwnerIdQueryResult = {
       todos: result.map((todo) => OrmTodoFactory.toDto(todo)),
     };
     return res;
