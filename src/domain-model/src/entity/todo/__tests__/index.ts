@@ -21,31 +21,32 @@ describe('TodoEntity', () => {
     });
 
     test('NG: idが不足しているため、失敗した', () => {
-      const invalidTodoDto = { ...todoDto, id: undefined };
+      const { ownerId, title, status } = todoDto;
+      const invalidTodoDto = { ownerId, title, status };
       expect(() => new TodoEntity((invalidTodoDto as unknown) as TodoDto)).toThrow(
         PropertyRequiredError,
       );
     });
 
     test('NG: ownerIdが不足しているため、失敗した', () => {
-      const invalidTodoDto = { ...todoDto };
-      delete invalidTodoDto.ownerId;
+      const { id, title, status } = todoDto;
+      const invalidTodoDto = { id, title, status };
       expect(() => new TodoEntity((invalidTodoDto as unknown) as TodoDto)).toThrow(
         PropertyRequiredError,
       );
     });
 
     test('NG: titleが不足しているため、失敗した', () => {
-      const invalidTodoDto = { ...todoDto };
-      delete invalidTodoDto.title;
+      const { id, ownerId, status } = todoDto;
+      const invalidTodoDto = { id, ownerId, status };
       expect(() => new TodoEntity((invalidTodoDto as unknown) as TodoDto)).toThrow(
         PropertyRequiredError,
       );
     });
 
     test('NG: statusが不足しているため、失敗した', () => {
-      const invalidTodoDto = { ...todoDto };
-      delete invalidTodoDto.status;
+      const { id, ownerId, title } = todoDto;
+      const invalidTodoDto = { id, ownerId, title };
       expect(() => new TodoEntity((invalidTodoDto as unknown) as TodoDto)).toThrow(
         PropertyRequiredError,
       );
