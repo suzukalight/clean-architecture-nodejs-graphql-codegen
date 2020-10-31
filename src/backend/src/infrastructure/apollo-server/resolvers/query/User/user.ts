@@ -14,7 +14,7 @@ export const user: QueryResolvers<ApolloServerContext> = {
     const presenter = new GqlGetUserByIdPresenter();
     const usecase = new GetUserByIdInteractor(queryService, presenter);
 
-    await usecase.handle({ id: args?.id! }, actor!);
+    await usecase.handle({ id: args?.id }, actor!);
 
     return presenter.getResponse();
   },
