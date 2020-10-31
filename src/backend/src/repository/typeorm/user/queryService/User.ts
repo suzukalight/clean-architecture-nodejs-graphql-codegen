@@ -1,11 +1,10 @@
-import { Connection, LessThanOrEqual, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import {
   UserQueryService,
   denyIfNotSet,
   GetUserByIdQuery,
   GetUserByIdQueryResult,
 } from 'domain-model';
-import addDays from 'date-fns/addDays';
 
 import { User as OrmUser, OrmUserFactory } from '../entity/User';
 
