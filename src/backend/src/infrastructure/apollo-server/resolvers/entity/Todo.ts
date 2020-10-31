@@ -1,8 +1,8 @@
 import { TodoResolvers } from 'schema';
+import { allowOnlyWhenActorHasMemberRole, GetUserByIdInteractor } from 'domain-model';
 
 import { ApolloServerContext } from '../../types';
 import { GqlUserQueryService } from '../../../../repository/typeorm/user/queryService/User';
-import { allowOnlyWhenActorHasMemberRole, GetUserByIdInteractor } from 'domain-model';
 import { GqlGetUserByIdPresenter } from '../../../../presenter/user/GetUserById';
 
 export const Todo: TodoResolvers<ApolloServerContext> = {

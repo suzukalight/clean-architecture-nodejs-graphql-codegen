@@ -1,19 +1,20 @@
 import { QueryResolvers } from 'schema';
-import { GetUserInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
+import { GetUserByIdInteractor, allowOnlyWhenActorHasMemberRole, denyIfNotSet } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';
-import { GqlGetUserPresenter } from '../../../../../presenter/user/GetUser';
-import { GqlUserRepository } from '../../../../../repository/typeorm/user/repository/User';
+import { GqlUserQueryService } from '../../../../../repository/typeorm/user/queryService/User';
+import { GqlGetUserByIdPresenter } from '../../../../../presenter/user/GetUserById';
 
 export const user: QueryResolvers<ApolloServerContext> = {
   user: async (_parent, args, { dbConnection, actor }) => {
+    denyIfNotSet(args, ['id']);
     allowOnlyWhenActorHasMemberRole(actor);
 
-    const repository = new GqlUserRepository(dbConnection);
-    const presenter = new GqlGetUserPresenter();
-    const usecase = new GetUserInteractor(repository, presenter);
+    const queryService = new GqlUserQueryService(dbConnection);
+    const presenter = new GqlGetUserByIdPresenter();
+    const usecase = new GetUserByIdInteractor(queryService, presenter);
 
-    await usecase.handle({ id: args.id });
+    await usecase.handle({ id: args?.id! }, actor!);
 
     return presenter.getResponse();
   },
