@@ -1,11 +1,11 @@
 import { Role } from 'domain-model';
+import { Connection } from 'typeorm';
 
 import { GqlTodoRepository } from '../../repository/Todo';
 import { GqlUserRepository } from '../../../user/repository/User';
 import { SqliteDbConnection } from '../../../_testutils/connection';
 import { RoleTypes } from '../../../../../../../domain-model/lib';
 import { GqlTodoQueryService } from '../Todo';
-import { Connection } from 'typeorm';
 
 const seedAll = async (connection: Connection) => {
   const userRepository = new GqlUserRepository(connection);
