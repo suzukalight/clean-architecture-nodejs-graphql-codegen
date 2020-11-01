@@ -22,7 +22,8 @@ dotenv.config();
  * @param dbConnection TypeORM Connection
  */
 const getContext = async (req: Request, dbConnection: Connection): Promise<ApolloServerContext> => {
-  const token = req?.headers['x-auth-actor'] as string;
+  const authorizationHeader = req?.headers['authorization'] as string;
+  const token = authorizationHeader?.replace(/^Bearer (.*)/, '$1');
   if (!token) return { dbConnection, actor: null };
 
   try {

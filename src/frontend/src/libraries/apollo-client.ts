@@ -30,7 +30,7 @@ const errorLink = onError(({ graphQLErrors, networkError, forward, operation }) 
 
 type AuthHeader = {
   headers?: {
-    'x-auth-actor'?: string;
+    authorization?: string;
   };
 };
 
@@ -39,7 +39,7 @@ const authLink = setContext((_operation, prevContext: AuthHeader) => {
   return {
     headers: {
       ...prevContext.headers,
-      'x-auth-actor': token ?? '',
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
