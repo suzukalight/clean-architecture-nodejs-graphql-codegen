@@ -38,7 +38,6 @@ export enum Role {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
-  email: Scalars['String'];
   roles: Array<Role>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -68,6 +67,26 @@ export type SignInEmailPasswordResponse = {
   token: Scalars['String'];
 };
 
+export type SignUpAuth0Request = {
+  auth0UserId: Scalars['String'];
+};
+
+export type SignUpAuth0Response = {
+  __typename?: 'SignUpAuth0Response';
+  user?: Maybe<User>;
+  token: Scalars['String'];
+};
+
+export type SignInAuth0Request = {
+  auth0UserId: Scalars['String'];
+};
+
+export type SignInAuth0Response = {
+  __typename?: 'SignInAuth0Response';
+  user?: Maybe<User>;
+  token: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createTodo?: Maybe<CreateTodoResponse>;
@@ -75,7 +94,9 @@ export type Mutation = {
   deleteTodo?: Maybe<DeleteTodoResponse>;
   deleteUser?: Maybe<DeleteUserResponse>;
   doneTodo?: Maybe<DoneTodoResponse>;
+  signInAuth0?: Maybe<SignInAuth0Response>;
   signInEmailPassword?: Maybe<SignInEmailPasswordResponse>;
+  signUpAuth0?: Maybe<SignUpAuth0Response>;
   signUpEmailPassword?: Maybe<SignUpEmailPasswordResponse>;
   undoneTodo?: Maybe<UndoneTodoResponse>;
   updateUserRoles?: Maybe<UpdateUserRolesResponse>;
@@ -107,8 +128,18 @@ export type MutationDoneTodoArgs = {
 };
 
 
+export type MutationSignInAuth0Args = {
+  input?: Maybe<SignInAuth0Request>;
+};
+
+
 export type MutationSignInEmailPasswordArgs = {
   input?: Maybe<SignInEmailPasswordRequest>;
+};
+
+
+export type MutationSignUpAuth0Args = {
+  input?: Maybe<SignUpAuth0Request>;
 };
 
 
@@ -189,7 +220,7 @@ export type Query = {
 };
 
 
-export type QueryAllAllTodosWithDeadlineApproachingArgs = {
+export type QueryAllTodosWithDeadlineApproachingArgs = {
   query?: Maybe<AllTodosWithDeadlineApproachingRequest>;
 };
 
@@ -222,7 +253,7 @@ export type PageInfo = {
 };
 
 export type CreateUserRequest = {
-  email: Scalars['String'];
+  _?: Maybe<Scalars['Boolean']>;
 };
 
 export type CreateUserResponse = {
@@ -258,7 +289,7 @@ export type GetUserQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'roles'>
+    & Pick<User, 'id' | 'roles'>
   )> }
 );
 
@@ -322,7 +353,7 @@ export type SignInEmailPasswordMutation = (
     & Pick<SignInEmailPasswordResponse, 'token'>
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'email' | 'roles'>
+      & Pick<User, 'id' | 'roles'>
     )> }
   )> }
 );
@@ -336,13 +367,13 @@ export type GetUserTodosQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'roles'>
+    & Pick<User, 'id' | 'roles'>
     & { todos?: Maybe<Array<Maybe<(
       { __typename?: 'Todo' }
       & Pick<Todo, 'id' | 'ownerId' | 'title' | 'status' | 'dueDate'>
       & { owner?: Maybe<(
         { __typename?: 'User' }
-        & Pick<User, 'id' | 'email'>
+        & Pick<User, 'id'>
       )> }
     )>>> }
   )> }
@@ -353,7 +384,6 @@ export const GetUserDocument = gql`
     query GetUser($id: ID!) {
   user(id: $id) {
     id
-    email
     roles
   }
 }
@@ -503,7 +533,6 @@ export const SignInEmailPasswordDocument = gql`
   signInEmailPassword(input: $input) {
     user {
       id
-      email
       roles
     }
     token
@@ -539,14 +568,12 @@ export const GetUserTodosDocument = gql`
     query GetUserTodos($id: ID!) {
   user(id: $id) {
     id
-    email
     roles
     todos {
       id
       ownerId
       owner {
         id
-        email
       }
       title
       status

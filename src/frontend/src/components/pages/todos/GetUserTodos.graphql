@@ -1,14 +1,12 @@
 query GetUserTodos($id: ID!) {
   user(id: $id) {
     id
-    email
     roles
     todos {
       id
       ownerId
       owner {
         id
-        email
       }
       title
       status
