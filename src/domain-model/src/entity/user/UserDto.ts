@@ -5,7 +5,6 @@ import { TimeStampTypes, denyDoesNotHaveRequiredProperties } from '../utils';
 
 export type UserDto = {
   id: string;
-  email: string;
   roles: RoleType[];
 } & TimeStampTypes;
 
@@ -17,6 +16,6 @@ export const denyIllegalRoles = (roles: string[]) => {
 
 export const denyIllegalUserDto = (user: UserDto) => {
   if (!user) throw new PropertyRequiredError('user');
-  denyDoesNotHaveRequiredProperties(user, ['id', 'email', 'roles']);
+  denyDoesNotHaveRequiredProperties(user, ['id', 'roles']);
   denyIllegalRoles(user.roles);
 };
