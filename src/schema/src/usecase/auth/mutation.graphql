@@ -18,7 +18,27 @@ type SignInEmailPasswordResponse {
   token: String!
 }
 
+input SignUpAuth0Request {
+  auth0UserId: String!
+}
+
+type SignUpAuth0Response {
+  user: User
+  token: String!
+}
+
+input SignInAuth0Request {
+  auth0UserId: String!
+}
+
+type SignInAuth0Response {
+  user: User
+  token: String!
+}
+
 type Mutation {
   signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
   signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
+  signUpAuth0(input: SignUpAuth0Request): SignUpAuth0Response
+  signInAuth0(input: SignInAuth0Request): SignInAuth0Response
 }

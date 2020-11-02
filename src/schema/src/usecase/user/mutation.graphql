@@ -1,5 +1,5 @@
 input CreateUserRequest {
-  email: String!
+  _: Boolean
 }
 
 type CreateUserResponse {
