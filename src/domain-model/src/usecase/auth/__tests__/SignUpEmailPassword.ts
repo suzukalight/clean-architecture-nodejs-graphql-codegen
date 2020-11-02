@@ -12,7 +12,7 @@ import { MockSignUpEmailPasswordPresenter } from '../_mocks/MockAuthPresenter';
 const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
-  const userEntity = await userRepository.create({ email: 'existed@email.com' });
+  const userEntity = await userRepository.create({});
   const userId = userEntity.getId().toString();
 
   // auth repository

@@ -14,7 +14,7 @@ import { UpdateUserRolesInputData } from '../interface/usecase';
 const setup = async () => {
   // repository
   const repository = new MockUserRepository();
-  const actor = await repository.create({ email: 'target@email.com' });
+  const actor = await repository.create({});
 
   // interactor
   const presenter = new MockUpdateUserRolesPresenter();

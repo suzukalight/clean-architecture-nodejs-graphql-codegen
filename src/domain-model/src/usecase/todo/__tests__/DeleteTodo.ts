@@ -13,7 +13,7 @@ import { UserEntity } from '../../../entity/user/UserEntity';
 const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
-  const actor = await userRepository.create({ email: 'target@email.com' });
+  const actor = await userRepository.create({});
 
   // create todo
   const repository = new MockTodoRepository();

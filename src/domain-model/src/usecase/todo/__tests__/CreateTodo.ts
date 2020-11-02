@@ -11,7 +11,7 @@ import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
 const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
-  const userEntity = await userRepository.create({ email: 'target@email.com' });
+  const userEntity = await userRepository.create({});
   const ownerId = userEntity.getId().toString();
 
   // todo interactor

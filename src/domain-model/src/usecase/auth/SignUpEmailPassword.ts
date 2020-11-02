@@ -33,7 +33,7 @@ export class SignUpEmailPasswordInteractor implements SignUpEmailPasswordUseCase
     // TODO: トランザクション
 
     // user エンティティを生成
-    const userEntity = await this.userRepository.create({ email: request.email });
+    const userEntity = await this.userRepository.create({});
     const userId = userEntity.getId().toString();
 
     // auth エンティティを生成

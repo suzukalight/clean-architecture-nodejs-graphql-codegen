@@ -8,7 +8,7 @@ import { MockGetUserPresenter } from '../_mocks/MockUserPresenter';
 const setup = async () => {
   // repository
   const repository = new MockUserRepository();
-  const userEntity = await repository.create({ email: 'target@email.com' });
+  const userEntity = await repository.create({});
   const userId = userEntity.getId().toString();
 
   // interactor

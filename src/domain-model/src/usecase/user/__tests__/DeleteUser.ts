@@ -11,7 +11,7 @@ import { RoleTypes } from '../../../entity/common/Role';
  */
 const setup = async () => {
   const repository = new MockUserRepository();
-  const target = await repository.create({ email: 'aaa@bb.com' });
+  const target = await repository.create({});
 
   const presenter = new MockDeleteUserPresenter();
   const interactor = new DeleteUserInteractor(repository, presenter);
