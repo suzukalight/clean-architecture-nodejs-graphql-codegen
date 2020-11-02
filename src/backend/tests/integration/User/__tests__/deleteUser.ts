@@ -11,7 +11,6 @@ const DELETE_USER = gql`
     deleteUser(input: $input) {
       user {
         id
-        email
       }
     }
   }
@@ -44,7 +43,7 @@ describe('deleteUser', () => {
       });
 
       const { user } = result?.data?.deleteUser ?? {};
-      expect(user?.email).toBe('anonymous@email.com');
+      expect(user).toBeDefined();
     });
 
     test('NG: 存在しないIDを指定した', async () => {
@@ -104,7 +103,7 @@ describe('deleteUser', () => {
       });
 
       const { user } = result?.data?.deleteUser ?? {};
-      expect(user?.email).toBe('member@email.com');
+      expect(user).toBeDefined();
     });
 
     test('NG: 失敗：Adminロールでないactorが操作した', async () => {

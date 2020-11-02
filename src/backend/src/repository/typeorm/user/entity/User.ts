@@ -16,9 +16,6 @@ export class User {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column()
-  email: string;
-
   @Column('simple-array')
   roles: RoleType[];
 
@@ -34,8 +31,7 @@ export class User {
   @DeleteDateColumn()
   readonly deletedAt?: Date;
 
-  constructor(email: string, roles: RoleType[]) {
-    this.email = email;
+  constructor(roles: RoleType[]) {
     this.roles = roles;
   }
 }
@@ -44,7 +40,6 @@ export class OrmUserFactory {
   public static fromDto(user: UserDto): User {
     return {
       id: +user.id,
-      email: user.email,
       roles: user.roles,
       createdAt: user.createdAt ?? undefined,
       updatedAt: user.updatedAt ?? undefined,
@@ -59,7 +54,6 @@ export class OrmUserFactory {
   public static toDto(user: User): UserDto {
     return {
       id: `${user.id}`,
-      email: user.email,
       roles: user.roles,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,

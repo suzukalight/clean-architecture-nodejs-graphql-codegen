@@ -20,8 +20,8 @@ export class GqlUserRepository implements UserRepository {
     return OrmUserFactory.toEntity(result);
   }
 
-  public async create(request: CreateUserInputData) {
-    const user = new OrmUser(request.email, [RoleTypes.Anonymous]);
+  public async create(_request: CreateUserInputData) {
+    const user = new OrmUser([RoleTypes.Anonymous]);
     const repository = this.dbConnection.getRepository(OrmUser);
     const result = await repository.save(user);
 

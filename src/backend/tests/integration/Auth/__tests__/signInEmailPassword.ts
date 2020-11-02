@@ -9,7 +9,6 @@ const SIGN_IN_EMAIL_PASSWORD = gql`
     signInEmailPassword(input: $input) {
       user {
         id
-        email
         roles
       }
       token
@@ -44,7 +43,7 @@ describe('signInEmailPassword', () => {
     });
 
     const { user, token } = result?.data?.signInEmailPassword ?? {};
-    expect(user?.email).toBe('admin@email.com');
+    expect(user).toBeDefined();
     expect(token).toBeDefined();
   });
 

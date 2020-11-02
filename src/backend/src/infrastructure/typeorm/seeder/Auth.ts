@@ -8,12 +8,12 @@ import { GqlAuthEmailPasswordRepository } from '../../../repository/typeorm/auth
  * @param dbConnection
  * @param user
  */
-export const seedAuth = async (dbConnection: Connection, user: UserEntity) => {
+export const seedAuth = async (dbConnection: Connection, user: UserEntity, email: string) => {
   const repository = new GqlAuthEmailPasswordRepository(dbConnection);
 
   const auth = {
     userId: user.getId().toString(),
-    email: user.getEmail().toString(),
+    email,
     passwordEncrypted: await encryptPassword('password1234'),
   };
   return repository.create(auth);
