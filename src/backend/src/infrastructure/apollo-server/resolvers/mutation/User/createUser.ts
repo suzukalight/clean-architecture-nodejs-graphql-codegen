@@ -6,12 +6,12 @@ import { GqlUserRepository } from '../../../../../repository/typeorm/user/reposi
 import { GqlCreateUserPresenter } from '../../../../../presenter/user/CreateUser';
 
 export const createUser: MutationResolvers<ApolloServerContext> = {
-  createUser: async (_parent, args, { dbConnection }) => {
+  createUser: async (_parent, _args, { dbConnection }) => {
     const repository = new GqlUserRepository(dbConnection);
     const presenter = new GqlCreateUserPresenter();
     const usecase = new CreateUserInteractor(repository, presenter);
 
-    await usecase.handle(args.input!);
+    await usecase.handle({});
 
     return presenter.getResponse();
   },

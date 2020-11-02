@@ -12,7 +12,7 @@ const seedAll = async (connection: Connection, startingPointDueDate: Date) => {
   const userRepository = new GqlUserRepository(connection);
   const todoRepository = new GqlTodoRepository(connection);
 
-  const actor = await userRepository.create({ email: 'aaa@bb.com' });
+  const actor = await userRepository.create({});
   actor.addRole(new Role(RoleTypes.Member));
 
   const creators = [1, 2, 3].map(async (value) => {

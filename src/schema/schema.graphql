@@ -132,7 +132,9 @@ type AllTodosWithDeadlineApproachingResponse {
 }
 
 type Query {
-  allTodosWithDeadlineApproaching(query: AllTodosWithDeadlineApproachingRequest): AllTodosWithDeadlineApproachingResponse
+  allTodosWithDeadlineApproaching(
+    query: AllTodosWithDeadlineApproachingRequest
+  ): AllTodosWithDeadlineApproachingResponse
   todo(id: ID!): Todo
   user(id: ID!): User
 }
