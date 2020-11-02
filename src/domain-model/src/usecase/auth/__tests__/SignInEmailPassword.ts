@@ -38,7 +38,6 @@ describe('SignInEmailPasswordInteractor', () => {
 
     // response として request で指定したデータが得られた
     const response = presenter.getResponse();
-    expect(response?.user?.email).toEqual(request.email);
     expect(response?.token).toBeDefined();
   });
 

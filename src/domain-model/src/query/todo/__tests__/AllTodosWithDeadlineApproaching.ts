@@ -12,7 +12,6 @@ const setup = async () => {
   // user repository
   const actor = new UserEntity({
     id: '1',
-    email: 'target@email.com',
     roles: [RoleTypes.Member],
   });
 

@@ -35,7 +35,6 @@ export class MockUserRepository implements UserRepository {
     const id = `${++this.store.idCounter}`;
     const newEntity = new UserEntity({
       id,
-      email: user.email,
       roles: [RoleTypes.Member],
     });
 

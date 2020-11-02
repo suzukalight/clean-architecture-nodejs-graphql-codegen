@@ -8,9 +8,7 @@ export interface GetUserUseCase {
   handle(request: GetUserInputData): void;
 }
 
-export type CreateUserInputData = {
-  email: string;
-};
+export type CreateUserInputData = {};
 
 export interface CreateUserUseCase {
   handle(request: CreateUserInputData): void;

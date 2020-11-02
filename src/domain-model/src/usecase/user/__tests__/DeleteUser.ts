@@ -25,7 +25,6 @@ describe('DeleteUserInteractor', () => {
     const targetId = target.getId().getId();
     const actor = new UserEntity({
       id: `${targetId + 1}`,
-      email: 'actor@email.com',
       roles: [RoleTypes.Admin],
     });
 
@@ -57,7 +56,6 @@ describe('DeleteUserInteractor', () => {
     const targetId = target.getId().getId();
     const actor = new UserEntity({
       id: `${targetId + 1}`,
-      email: 'actor@email.com',
       roles: [RoleTypes.Member],
     });
 
