@@ -1,5 +1,3 @@
-import { IllegalArgumentError } from 'common';
-
 import { CreateUserInteractor } from '../CreateUser';
 import { MockUserRepository } from '../_mocks/MockUserRepository';
 import { MockCreateUserPresenter } from '../_mocks/MockUserPresenter';

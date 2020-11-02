@@ -31,7 +31,7 @@ export class MockUserRepository implements UserRepository {
     return this.store.entities.get(id) ?? null;
   }
 
-  public async create(user: CreateUserInputData) {
+  public async create(_user: CreateUserInputData) {
     const id = `${++this.store.idCounter}`;
     const newEntity = new UserEntity({
       id,

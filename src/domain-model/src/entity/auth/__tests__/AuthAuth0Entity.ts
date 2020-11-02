@@ -1,8 +1,7 @@
-import { IllegalArgumentError, PropertyRequiredError } from 'common';
+import { PropertyRequiredError } from 'common';
 
 import { AuthAuth0Dto } from '../AuthAuth0Dto';
 import { AuthAuth0Entity } from '../AuthAuth0Entity';
-import { encryptPassword } from '../../common/Password';
 
 describe('AuthAuth0Entity', () => {
   let authDto: AuthAuth0Dto;

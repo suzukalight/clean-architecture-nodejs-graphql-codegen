@@ -6,7 +6,7 @@ import { SqliteDbConnection } from '../../../_testutils/connection';
 
 const seedAll = async (connection: Connection) => {
   const userRepository = new GqlUserRepository(connection);
-  const users = [1, 2, 3].map(async (id) => {
+  const users = [1, 2, 3].map(async () => {
     await userRepository.create({});
   });
   await Promise.all(users);

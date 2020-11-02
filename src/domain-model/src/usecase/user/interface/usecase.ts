@@ -8,7 +8,9 @@ export interface GetUserUseCase {
   handle(request: GetUserInputData): void;
 }
 
-export type CreateUserInputData = {};
+export type CreateUserInputData = {
+  _?: boolean;
+};
 
 export interface CreateUserUseCase {
   handle(request: CreateUserInputData): void;
