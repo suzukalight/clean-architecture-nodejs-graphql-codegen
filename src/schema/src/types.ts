@@ -74,7 +74,7 @@ export type SignInOrSignUpAuth0Request = {
 export type SignInOrSignUpAuth0Response = {
   __typename?: 'SignInOrSignUpAuth0Response';
   user?: Maybe<User>;
-  token: Scalars['String'];
+  isNewUser: Scalars['Boolean'];
 };
 
 export type Mutation = {
@@ -356,6 +356,7 @@ export type ResolversTypes = ResolversObject<{
   SignInEmailPasswordResponse: ResolverTypeWrapper<SignInEmailPasswordResponse>;
   SignInOrSignUpAuth0Request: SignInOrSignUpAuth0Request;
   SignInOrSignUpAuth0Response: ResolverTypeWrapper<SignInOrSignUpAuth0Response>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Mutation: ResolverTypeWrapper<{}>;
   CreateTodoRequest: CreateTodoRequest;
   CreateTodoResponse: ResolverTypeWrapper<CreateTodoResponse>;
@@ -373,7 +374,6 @@ export type ResolversTypes = ResolversObject<{
   PagingInput: PagingInput;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: ResolverTypeWrapper<CreateUserResponse>;
   UpdateUserRolesRequest: UpdateUserRolesRequest;
@@ -395,6 +395,7 @@ export type ResolversParentTypes = ResolversObject<{
   SignInEmailPasswordResponse: SignInEmailPasswordResponse;
   SignInOrSignUpAuth0Request: SignInOrSignUpAuth0Request;
   SignInOrSignUpAuth0Response: SignInOrSignUpAuth0Response;
+  Boolean: Scalars['Boolean'];
   Mutation: {};
   CreateTodoRequest: CreateTodoRequest;
   CreateTodoResponse: CreateTodoResponse;
@@ -411,7 +412,6 @@ export type ResolversParentTypes = ResolversObject<{
   PagingInput: PagingInput;
   Int: Scalars['Int'];
   PageInfo: PageInfo;
-  Boolean: Scalars['Boolean'];
   CreateUserRequest: CreateUserRequest;
   CreateUserResponse: CreateUserResponse;
   UpdateUserRolesRequest: UpdateUserRolesRequest;
@@ -459,7 +459,7 @@ export type SignInEmailPasswordResponseResolvers<ContextType = any, ParentType e
 
 export type SignInOrSignUpAuth0ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignInOrSignUpAuth0Response'] = ResolversParentTypes['SignInOrSignUpAuth0Response']> = ResolversObject<{
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  isNewUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 

@@ -56,7 +56,7 @@ input SignInOrSignUpAuth0Request {
 
 type SignInOrSignUpAuth0Response {
   user: User
-  token: String!
+  isNewUser: Boolean!
 }
 
 type Mutation {
