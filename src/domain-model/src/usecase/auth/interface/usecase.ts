@@ -16,18 +16,10 @@ export interface SignUpEmailPasswordUseCase {
   handle(request: SignUpEmailPasswordInputData): void;
 }
 
-export type SignInAuth0InputData = {
+export type SignInOrSignUpAuth0InputData = {
   auth0UserId: string;
 };
 
-export interface SignInAuth0UseCase {
-  handle(request: SignInAuth0InputData): void;
-}
-
-export type SignUpAuth0InputData = {
-  auth0UserId: string;
-};
-
-export interface SignUpAuth0UseCase {
-  handle(request: SignUpAuth0InputData): void;
+export interface SignInOrSignUpAuth0UseCase {
+  handle(request: SignInOrSignUpAuth0InputData): void;
 }

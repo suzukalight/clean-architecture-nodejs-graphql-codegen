@@ -7,7 +7,7 @@ describe('AuthAuth0Entity', () => {
   let authDto: AuthAuth0Dto;
 
   beforeAll(async () => {
-    authDto = { auth0UserId: 'auth0|1', userId: '1' };
+    authDto = { auth0UserId: 'auth0-test|1', userId: '1' };
   });
 
   test('OK: エンティティを生成できた', () => {
@@ -21,7 +21,7 @@ describe('AuthAuth0Entity', () => {
   });
 
   test('NG: userIdが不足しているため、失敗した', () => {
-    const invalidAuthAuth0Dto = { auth0UserId: 'auth0|1' } as AuthAuth0Dto;
+    const invalidAuthAuth0Dto = { auth0UserId: 'auth0-test|1' } as AuthAuth0Dto;
     expect(() => new AuthAuth0Entity(invalidAuthAuth0Dto)).toThrow(PropertyRequiredError);
   });
 });

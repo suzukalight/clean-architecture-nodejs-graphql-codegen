@@ -18,20 +18,11 @@ export interface SignUpEmailPasswordPresenter {
   output(response: SignUpEmailPasswordOutputData): void;
 }
 
-export type SignInAuth0OutputData = {
+export type SignInOrSignUpAuth0OutputData = {
   user: UserDto | null;
-  token: string | null;
+  isNewUser: boolean;
 };
 
-export interface SignInAuth0Presenter {
-  output(response: SignInAuth0OutputData): void;
-}
-
-export type SignUpAuth0OutputData = {
-  user: UserDto | null;
-  token: string | null;
-};
-
-export interface SignUpAuth0Presenter {
-  output(response: SignUpAuth0OutputData): void;
+export interface SignInOrSignUpAuth0Presenter {
+  output(response: SignInOrSignUpAuth0OutputData): void;
 }
