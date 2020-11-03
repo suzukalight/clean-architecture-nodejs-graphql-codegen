@@ -1,4 +1,3 @@
-import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { NotFoundError } from 'common';
 
