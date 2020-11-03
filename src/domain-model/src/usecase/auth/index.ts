@@ -3,5 +3,4 @@ export * from './interface/repository';
 export * from './interface/usecase';
 export * from './SignInEmailPassword';
 export * from './SignUpEmailPassword';
-export * from './SignInAuth0';
-export * from './SignUpAuth0';
+export * from './SignInOrSignUpAuth0';
