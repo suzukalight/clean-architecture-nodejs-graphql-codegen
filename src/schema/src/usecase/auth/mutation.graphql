@@ -18,20 +18,11 @@ type SignInEmailPasswordResponse {
   token: String!
 }
 
-input SignUpAuth0Request {
+input SignInOrSignUpAuth0Request {
   auth0UserId: String!
 }
 
-type SignUpAuth0Response {
-  user: User
-  token: String!
-}
-
-input SignInAuth0Request {
-  auth0UserId: String!
-}
-
-type SignInAuth0Response {
+type SignInOrSignUpAuth0Response {
   user: User
   token: String!
 }
@@ -39,6 +30,5 @@ type SignInAuth0Response {
 type Mutation {
   signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
   signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
-  signUpAuth0(input: SignUpAuth0Request): SignUpAuth0Response
-  signInAuth0(input: SignInAuth0Request): SignInAuth0Response
+  signInOrSignUpAuth0(input: SignInOrSignUpAuth0Request): SignInOrSignUpAuth0Response
 }

@@ -50,20 +50,11 @@ type SignInEmailPasswordResponse {
   token: String!
 }
 
-input SignUpAuth0Request {
+input SignInOrSignUpAuth0Request {
   auth0UserId: String!
 }
 
-type SignUpAuth0Response {
-  user: User
-  token: String!
-}
-
-input SignInAuth0Request {
-  auth0UserId: String!
-}
-
-type SignInAuth0Response {
+type SignInOrSignUpAuth0Response {
   user: User
   token: String!
 }
@@ -74,9 +65,8 @@ type Mutation {
   deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
   deleteUser(input: DeleteUserRequest): DeleteUserResponse
   doneTodo(input: DoneTodoRequest): DoneTodoResponse
-  signInAuth0(input: SignInAuth0Request): SignInAuth0Response
   signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
-  signUpAuth0(input: SignUpAuth0Request): SignUpAuth0Response
+  signInOrSignUpAuth0(input: SignInOrSignUpAuth0Request): SignInOrSignUpAuth0Response
   signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
   undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
   updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
@@ -132,9 +122,7 @@ type AllTodosWithDeadlineApproachingResponse {
 }
 
 type Query {
-  allTodosWithDeadlineApproaching(
-    query: AllTodosWithDeadlineApproachingRequest
-  ): AllTodosWithDeadlineApproachingResponse
+  allTodosWithDeadlineApproaching(query: AllTodosWithDeadlineApproachingRequest): AllTodosWithDeadlineApproachingResponse
   todo(id: ID!): Todo
   user(id: ID!): User
 }
