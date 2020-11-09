@@ -7,11 +7,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await auth0.getSession(req);
 
   if (!session || !session.user) {
-    res.writeHead(307, { Location: '/api/login' });
+    res.writeHead(307, { Location: '/login' });
     res.end();
     return { props: {} };
   }
 
+  res.writeHead(307, { Location: '/todos' });
+  res.end();
   return { props: { user: session.user } };
 };
 
