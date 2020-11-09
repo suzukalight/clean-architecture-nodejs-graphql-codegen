@@ -1,12 +1,9 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import { Stack, PrimaryButton, Text, IStackTokens } from '@fluentui/react';
 import { useRouter } from 'next/router';
 
-import {
-  useSignInEmailPasswordMutation,
-  SignInEmailPasswordRequest,
-} from '../../../generated/graphql-client';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useSignInEmailPasswordMutation } from '../../../generated/graphql-client';
+// import { AuthContext } from '../../contexts/AuthContext';
 
 import styles from './index.module.scss';
 
@@ -15,7 +12,7 @@ const spacingToken: IStackTokens = {
   padding: 's1 0',
 };
 
-type SubmitFunction = (input: SignInEmailPasswordRequest) => void;
+type SubmitFunction = () => void;
 type LoginFormProps = {
   onSubmit: SubmitFunction;
 };
@@ -23,27 +20,26 @@ type LoginFormProps = {
 const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => (
   <Stack>
     <Stack tokens={spacingToken}>
-      <PrimaryButton type="submit">ログイン</PrimaryButton>
+      <PrimaryButton type="submit" onClick={() => onSubmit()}>
+        ログイン
+      </PrimaryButton>
     </Stack>
   </Stack>
 );
 
 const Login = () => {
   const router = useRouter();
-  const { login } = useContext(AuthContext);
+  // const { login } = useContext(AuthContext);
   const [signInEmailPasswordMutation] = useSignInEmailPasswordMutation();
 
-  const handleSubmit = useCallback<SubmitFunction>(
-    async (input) => {
-      try {
-        await login(input);
-        router.push('/todos');
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    [signInEmailPasswordMutation],
-  );
+  const handleSubmit = useCallback<SubmitFunction>(async () => {
+    try {
+      // await login(input);
+      router.push('/todos');
+    } catch (e) {
+      console.error(e);
+    }
+  }, [signInEmailPasswordMutation]);
 
   return (
     <Stack className={styles.wrap}>
