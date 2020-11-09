@@ -60,8 +60,4 @@ const TodosPageContainer: React.FC = () => {
   return <Todos todos={_todos} />;
 };
 
-export const TodosPage: React.FC = () => (
-  <MemberOnly>
-    <TodosPageContainer />
-  </MemberOnly>
-);
+export const TodosPage: React.FC = () => <TodosPageContainer />;
