@@ -30,48 +30,6 @@ type User {
 
 scalar DateTime
 
-input SignUpEmailPasswordRequest {
-  email: String!
-  password: String!
-}
-
-type SignUpEmailPasswordResponse {
-  user: User
-  token: String!
-}
-
-input SignInEmailPasswordRequest {
-  email: String!
-  password: String!
-}
-
-type SignInEmailPasswordResponse {
-  user: User
-  token: String!
-}
-
-input SignInOrSignUpAuth0Request {
-  auth0UserId: String!
-}
-
-type SignInOrSignUpAuth0Response {
-  user: User
-  isNewUser: Boolean!
-}
-
-type Mutation {
-  createTodo(input: CreateTodoRequest): CreateTodoResponse
-  createUser(input: CreateUserRequest): CreateUserResponse
-  deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
-  deleteUser(input: DeleteUserRequest): DeleteUserResponse
-  doneTodo(input: DoneTodoRequest): DoneTodoResponse
-  signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
-  signInOrSignUpAuth0(input: SignInOrSignUpAuth0Request): SignInOrSignUpAuth0Response
-  signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
-  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
-  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
-}
-
 input CreateTodoRequest {
   ownerId: ID!
   title: String!
@@ -106,6 +64,16 @@ type DeleteTodoResponse {
   todo: Todo!
 }
 
+type Mutation {
+  createTodo(input: CreateTodoRequest): CreateTodoResponse
+  createUser(input: CreateUserRequest): CreateUserResponse
+  deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
+  deleteUser(input: DeleteUserRequest): DeleteUserResponse
+  doneTodo(input: DoneTodoRequest): DoneTodoResponse
+  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
+  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
+}
+
 type TodoEdge {
   todo: Todo
   cursor: String
@@ -122,9 +90,7 @@ type AllTodosWithDeadlineApproachingResponse {
 }
 
 type Query {
-  allTodosWithDeadlineApproaching(
-    query: AllTodosWithDeadlineApproachingRequest
-  ): AllTodosWithDeadlineApproachingResponse
+  allTodosWithDeadlineApproaching(query: AllTodosWithDeadlineApproachingRequest): AllTodosWithDeadlineApproachingResponse
   todo(id: ID!): Todo
   user(id: ID!): User
 }
