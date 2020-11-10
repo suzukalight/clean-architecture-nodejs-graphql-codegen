@@ -1,4 +1,4 @@
-import { PropertyRequiredError, IllegalArgumentError } from '../error';
+import { PropertyRequiredError, IllegalArgumentError } from '../../error';
 
 export enum RoleEnum {
   Anonymous = 'ANONYMOUS',
@@ -10,7 +10,7 @@ export const RoleTypes = RoleEnum;
 
 const RoleStrings = Object.values(RoleEnum) as string[];
 
-const denyIllegalRole = (role: string) => {
+export const denyIllegalRole = (role: string) => {
   if (!role) throw new PropertyRequiredError('role');
   if (!RoleStrings.includes(role)) throw new IllegalArgumentError(`${role} はロールではありません`);
 };
@@ -32,10 +32,12 @@ export class Role {
   }
 
   isEqual(role: Role): boolean;
+  isEqual(role: RoleType): boolean;
   isEqual(role: string): boolean;
   isEqual(role: unknown): boolean {
     if (role instanceof Role) return this.role === role.toString();
     if (typeof role === 'string') return this.role === role;
+    if (typeof role === 'object' && RoleStrings.includes((role as object).toString())) return true;
     throw new IllegalArgumentError('比較可能なroleではありません');
   }
 }

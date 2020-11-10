@@ -42,6 +42,7 @@
     "lint": "eslint --fix ./src",
     "format": "prettier --write -l \"./src/**/*.{js,ts,graphql}\"",
     "test": "run-s test:*",
+    "test:common": "yarn workspace common test",
     "test:domain": "yarn workspace domain-model test",
     "test:backend": "yarn workspace backend test",
     "codegen": "run-s codegen:schema codegen:frontend",
