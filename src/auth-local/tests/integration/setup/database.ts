@@ -3,8 +3,7 @@ import { Connection, createConnection } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 
-import { User } from '../../../src/repository/typeorm/user/entity/User';
-import { Todo } from '../../../src/repository/typeorm/todo/entity/Todo';
+import { AuthEmailPassword } from '../../../src/repository/typeorm/auth/entity/AuthEmailPassword';
 import { seedAll } from '../../../src/infrastructure/typeorm/seeder/seedAll';
 
 export const getRandomDbPath = () => `./test_db/${uuidv4()}.sqlite`;
@@ -14,7 +13,7 @@ export const createDbConnection = async (randomDbPath: string) =>
     type: 'sqlite',
     name: randomDbPath,
     database: randomDbPath,
-    entities: [User, Todo],
+    entities: [AuthEmailPassword],
     synchronize: true,
     logging: false,
   });
