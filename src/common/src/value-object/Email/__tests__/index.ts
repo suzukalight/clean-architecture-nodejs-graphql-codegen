@@ -1,4 +1,4 @@
-import { IllegalArgumentError, PropertyRequiredError } from 'common';
+import { IllegalArgumentError, PropertyRequiredError } from '../../../error';
 import { Email, denyIllegalEmail } from '../';
 
 describe('EmailEntity', () => {

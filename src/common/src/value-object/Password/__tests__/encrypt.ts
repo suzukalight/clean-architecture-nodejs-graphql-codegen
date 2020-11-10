@@ -1,4 +1,4 @@
-import { IllegalArgumentError, PropertyRequiredError } from 'common';
+import { IllegalArgumentError, PropertyRequiredError } from '../../../error';
 import { encryptPassword } from '../encrypt';
 
 describe('PasswordEntityEncrypt', () => {

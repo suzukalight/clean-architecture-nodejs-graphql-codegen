@@ -1,5 +1,6 @@
 import { hash } from 'bcrypt';
-import { PropertyRequiredError, IllegalArgumentError } from 'common';
+
+import { PropertyRequiredError, IllegalArgumentError } from '../../error';
 
 const regex = /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i;
 

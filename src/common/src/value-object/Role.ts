@@ -1,4 +1,4 @@
-import { PropertyRequiredError, IllegalArgumentError } from 'common';
+import { PropertyRequiredError, IllegalArgumentError } from '../error';
 
 export enum RoleEnum {
   Anonymous = 'ANONYMOUS',

@@ -1,5 +1,6 @@
 import { compare } from 'bcrypt';
-import { PropertyRequiredError, IllegalArgumentError } from 'common';
+
+import { PropertyRequiredError, IllegalArgumentError } from '../../error';
 
 export const denyIllegalPassword = (passwordEncrypted: string) => {
   if (!passwordEncrypted) throw new PropertyRequiredError('passwordEncrypted');

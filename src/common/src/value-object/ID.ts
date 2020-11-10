@@ -1,4 +1,4 @@
-import { PropertyRequiredError, IllegalArgumentError } from 'common';
+import { PropertyRequiredError, IllegalArgumentError } from '../error';
 
 export const denyIllegalId = (id: string) => {
   if (!id) throw new PropertyRequiredError('id');
