@@ -1,8 +1,6 @@
-import { ValidationError, ConflictError } from 'common';
+import { ValidationError, ConflictError, ID, Role, RoleTypes, RoleType } from 'common';
 
 import { UserDto, denyIllegalUserDto } from './UserDto';
-import { ID } from '../common/ID';
-import { Role, RoleTypes, RoleType } from '../common/Role';
 
 export class UserEntity {
   private id: ID;

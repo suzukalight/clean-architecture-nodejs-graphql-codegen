@@ -18,3 +18,5 @@ export class CreateUserInteractor implements CreateUserUseCase {
     this.presenter.output(outputData);
   }
 }
+
+// TODO: 特権ユーザが Auth と連携してユーザインスタンスを作成するパターンを検討する

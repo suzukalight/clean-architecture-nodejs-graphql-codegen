@@ -1,10 +1,9 @@
-import { NotFoundError, UnauthorizedError } from 'common';
+import { NotFoundError, UnauthorizedError, RoleTypes } from 'common';
 
 import { UserRepository } from './interface/repository';
 import { DeleteUserInputData, DeleteUserUseCase } from './interface/usecase';
 import { DeleteUserOutputData, DeleteUserPresenter } from './interface/presenter';
 import { UserEntity } from '../../entity/user/UserEntity';
-import { RoleTypes } from '../../entity/common/Role';
 import { denyUnauthenticated } from '../../policy/decision/common';
 
 /**

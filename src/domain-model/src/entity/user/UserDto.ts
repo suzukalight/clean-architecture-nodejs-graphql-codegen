@@ -1,6 +1,5 @@
-import { PropertyRequiredError, IllegalArgumentError } from 'common';
+import { PropertyRequiredError, IllegalArgumentError, Role, RoleType } from 'common';
 
-import { Role, RoleType } from '../common/Role';
 import { TimeStampTypes, denyDoesNotHaveRequiredProperties } from '../utils';
 
 export type UserDto = {
