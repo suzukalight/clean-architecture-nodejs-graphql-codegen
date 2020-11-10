@@ -1,7 +1,5 @@
-import { AuthenticationFailedError, UnauthorizedError } from 'common';
+import { AuthenticationFailedError, UnauthorizedError, RoleTypes, ID } from 'common';
 
-import { RoleTypes } from '../../../entity/common/Role';
-import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import {
   denyUnauthenticated,

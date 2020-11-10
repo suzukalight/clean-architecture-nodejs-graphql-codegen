@@ -1,10 +1,9 @@
-import { NotFoundError, UnauthorizedError } from 'common';
+import { NotFoundError, UnauthorizedError, RoleTypes } from 'common';
 
 import { DeleteUserInteractor } from '../DeleteUser';
 import { MockUserRepository } from '../_mocks/MockUserRepository';
 import { MockDeleteUserPresenter } from '../_mocks/MockUserPresenter';
 import { UserEntity } from '../../../entity/user/UserEntity';
-import { RoleTypes } from '../../../entity/common/Role';
 
 /**
  * interactor を生成

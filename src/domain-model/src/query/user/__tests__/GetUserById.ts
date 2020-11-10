@@ -1,9 +1,10 @@
+import { RoleTypes } from 'common';
+
 import { GetUserByIdInteractor } from '../GetUserById';
 import { MockUserQueryService } from '../_mocks/MockUserQueryService';
 import { MockGetUserByIdPresenter } from '../_mocks/MockUserPresenter';
 import { UserDto } from '../../../entity/user/UserDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
-import { RoleTypes } from '../../../entity/common/Role';
 
 /**
  * TODOを3つ作成しておく

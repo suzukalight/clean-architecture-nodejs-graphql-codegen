@@ -1,9 +1,10 @@
+import { RoleTypes } from 'common';
+
 import { AllTodosWithDeadlineApproachingInteractor } from '../AllTodosWithDeadlineApproaching';
 import { MockTodoQueryService } from '../_mocks/MockTodoQueryService';
 import { MockAllTodosWithDeadlineApproachingPresenter } from '../_mocks/MockTodoPresenter';
 import { TodoDto, TodoStatus } from '../../../entity/todo/TodoDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
-import { RoleTypes } from '../../../entity/common/Role';
 
 /**
  * TODOを3つ作成しておく

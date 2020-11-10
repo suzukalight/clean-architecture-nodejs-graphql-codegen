@@ -1,10 +1,9 @@
-import { NotFoundError, UnauthorizedError } from 'common';
+import { NotFoundError, UnauthorizedError, ID } from 'common';
 
 import { DeleteTodoInteractor } from '../DeleteTodo';
 import { MockTodoRepository } from '../_mocks/MockTodoRepository';
 import { MockDeleteTodoPresenter } from '../_mocks/MockTodoPresenter';
 import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
-import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 
 /**

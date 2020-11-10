@@ -1,6 +1,5 @@
-import { NotFoundError } from 'common';
+import { NotFoundError, RoleTypes } from 'common';
 
-import { RoleTypes } from '../../../entity/common/Role';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { UserRepository } from '../interface/repository';
 import { CreateUserInputData } from '../interface/usecase';

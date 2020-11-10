@@ -1,9 +1,7 @@
-import { PropertyRequiredError, ConflictError, ValidationError } from 'common';
+import { PropertyRequiredError, ConflictError, ValidationError, Role, RoleTypes, ID } from 'common';
 
 import { UserDto } from '../UserDto';
 import { UserEntity } from '../UserEntity';
-import { Role, RoleTypes } from '../../common/Role';
-import { ID } from '../../common/ID';
 
 describe('UserEntity', () => {
   describe('constructor', () => {

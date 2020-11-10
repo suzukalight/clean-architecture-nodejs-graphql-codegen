@@ -1,8 +1,7 @@
-import { PropertyRequiredError, ConflictError } from 'common';
+import { PropertyRequiredError, ConflictError, ID } from 'common';
 
 import { TodoDto, TodoStatus } from '../TodoDto';
 import { TodoEntity } from '../TodoEntity';
-import { ID } from '../../common/ID';
 
 describe('TodoEntity', () => {
   describe('constructor', () => {
