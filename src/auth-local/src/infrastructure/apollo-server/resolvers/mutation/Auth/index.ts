@@ -1,4 +1,4 @@
-import { MutationResolvers } from 'schema';
+import { MutationResolvers } from 'auth-local-schema';
 
 import { ApolloServerContext } from '../../../types';
 import { signInEmailPassword } from './signInEmailPassword';

@@ -1,5 +1,5 @@
 import { DateTimeResolver } from 'graphql-scalars';
-import { Resolvers } from 'schema';
+import { Resolvers } from 'auth-local-schema';
 
 // import * as Entities from './entity';
 // import { Query } from './query';

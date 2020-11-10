@@ -1,6 +1,6 @@
-import { MutationResolvers } from 'schema';
-import { SignUpEmailPasswordInteractor } from '../../../../../usecase/auth/SignUpEmailPassword';
+import { MutationResolvers } from 'auth-local-schema';
 
+import { SignUpEmailPasswordInteractor } from '../../../../../usecase/auth/SignUpEmailPassword';
 import { ApolloServerContext } from '../../../types';
 import { GqlAuthEmailPasswordRepository } from '../../../../../repository/typeorm/auth/repository/AuthEmailPassword';
 import { GqlSignUpEmailPasswordPresenter } from '../../../../../presenter/auth/SignUpEmailPassword';

@@ -1,7 +1,7 @@
 import { Connection, Repository } from 'typeorm';
+
 import { AuthEmailPasswordDto } from '../../../../entity/auth/AuthEmailPasswordDto';
 import { AuthEmailPasswordRepository } from '../../../../usecase/auth/interface/repository';
-
 import {
   AuthEmailPassword as OrmAuthEmailPassword,
   OrmAuthEmailPasswordFactory,
