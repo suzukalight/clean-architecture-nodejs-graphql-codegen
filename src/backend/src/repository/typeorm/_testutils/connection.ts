@@ -5,7 +5,6 @@ import fs from 'fs';
 
 import { User } from '../user/entity/User';
 import { Todo } from '../todo/entity/Todo';
-import { AuthEmailPassword } from '../auth/entity/AuthEmailPassword';
 
 export class SqliteDbConnection {
   private path: string;
@@ -32,7 +31,7 @@ export class SqliteDbConnection {
       type: 'sqlite',
       name: this.path,
       database: this.path,
-      entities: [User, Todo, AuthEmailPassword],
+      entities: [User, Todo],
       synchronize: true,
       logging: false,
       // logging: true,
