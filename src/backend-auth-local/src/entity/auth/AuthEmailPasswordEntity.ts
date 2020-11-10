@@ -1,7 +1,6 @@
+import { Email, Password, ID } from 'common';
+
 import { AuthEmailPasswordDto, denyIllegalAuthEmailPasswordDto } from './AuthEmailPasswordDto';
-import { Email } from '../common/Email';
-import { Password } from '../common/Password';
-import { ID } from '../common/ID';
 
 export class AuthEmailPasswordEntity {
   private email: Email;

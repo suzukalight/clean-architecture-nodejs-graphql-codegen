@@ -5,23 +5,19 @@ import { ConflictError } from 'common';
 import { AuthEmailPasswordRepository } from './interface/repository';
 import { SignUpEmailPasswordInputData, SignUpEmailPasswordUseCase } from './interface/usecase';
 import { SignUpEmailPasswordOutputData, SignUpEmailPasswordPresenter } from './interface/presenter';
-import { UserRepository } from '../user/interface/repository';
 import { encryptPassword } from '../../entity/common/Password';
 
 dotenv.config();
 
 export class SignUpEmailPasswordInteractor implements SignUpEmailPasswordUseCase {
   private authRepository: AuthEmailPasswordRepository;
-  private userRepository: UserRepository;
   private presenter: SignUpEmailPasswordPresenter;
 
   constructor(
     authRepository: AuthEmailPasswordRepository,
-    userRepository: UserRepository,
     presenter: SignUpEmailPasswordPresenter,
   ) {
     this.authRepository = authRepository;
-    this.userRepository = userRepository;
     this.presenter = presenter;
   }
 
@@ -29,13 +25,7 @@ export class SignUpEmailPasswordInteractor implements SignUpEmailPasswordUseCase
     // すでに登録されているメールアドレスでは登録できない
     const existedAuthEntity = await this.authRepository.getByEmail(request.email);
     if (existedAuthEntity) throw new ConflictError('そのメールアドレスはすでに登録されています');
-
-    // TODO: トランザクション
-
-    // user エンティティを生成
-    const userEntity = await this.userRepository.create({});
-    const userId = userEntity.getId().toString();
-
+    
     // auth エンティティを生成
     const passwordEncrypted = await encryptPassword(request.password);
     await this.authRepository.create({

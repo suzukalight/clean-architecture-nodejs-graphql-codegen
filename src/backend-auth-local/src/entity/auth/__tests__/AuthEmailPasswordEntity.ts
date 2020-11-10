@@ -1,8 +1,7 @@
-import { IllegalArgumentError, PropertyRequiredError } from 'common';
+import { IllegalArgumentError, PropertyRequiredError, encryptPassword } from 'common';
 
 import { AuthEmailPasswordDto } from '../AuthEmailPasswordDto';
 import { AuthEmailPasswordEntity } from '../AuthEmailPasswordEntity';
-import { encryptPassword } from '../../common/Password';
 
 describe('AuthEmailPasswordEntity', () => {
   const password = 'pass1234';

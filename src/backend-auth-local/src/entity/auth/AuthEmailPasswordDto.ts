@@ -1,7 +1,5 @@
-import { PropertyRequiredError } from 'common';
+import { PropertyRequiredError, denyIllegalEmail, denyIllegalPassword } from 'common';
 
-import { denyIllegalEmail } from '../common/Email';
-import { denyIllegalPassword } from '../common/Password';
 import { TimeStampTypes, denyDoesNotHaveRequiredProperties } from '../utils';
 
 export type AuthEmailPasswordDto = {

@@ -15,11 +15,3 @@ export type SignUpEmailPasswordInputData = {
 export interface SignUpEmailPasswordUseCase {
   handle(request: SignUpEmailPasswordInputData): void;
 }
-
-export type SignInOrSignUpAuth0InputData = {
-  auth0UserId: string;
-};
-
-export interface SignInOrSignUpAuth0UseCase {
-  handle(request: SignInOrSignUpAuth0InputData): void;
-}
