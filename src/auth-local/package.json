@@ -1,5 +1,5 @@
 {
-  "name": "backend-auth-local",
+  "name": "auth-local",
   "version": "1.0.0",
   "main": "index.js",
   "author": "suzukalight <mail@mkubara.com>",

@@ -27,7 +27,7 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false
   },
-  "include": ["src/**/*", "../backend-auth-local/src/infrastructure/typeorm/seeder/Auth.ts"],
+  "include": ["src/**/*"],
   "exclude": ["**/_mocks/*", "**/__tests__/*"],
   "references": [{ "path": "../common" }, { "path": "../schema" }, { "path": "../domain-model" }]
 }
