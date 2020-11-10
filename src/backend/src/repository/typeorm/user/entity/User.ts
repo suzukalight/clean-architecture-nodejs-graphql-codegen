@@ -7,7 +7,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { RoleType, UserDto, UserEntity } from 'domain-model';
+import { RoleType } from 'common';
+import { UserDto, UserEntity } from 'domain-model';
 
 import { Todo } from '../../todo/entity/Todo';
 

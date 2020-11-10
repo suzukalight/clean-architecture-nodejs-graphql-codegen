@@ -1,5 +1,6 @@
 import { Connection } from 'typeorm';
-import { RoleTypes, Role, UserRepository, RoleType } from 'domain-model';
+import { RoleTypes, Role, RoleType } from 'common';
+import { UserRepository } from 'domain-model';
 
 import { GqlUserRepository } from '../../../repository/typeorm/user/repository/User';
 
