@@ -37,7 +37,13 @@ export class Role {
   isEqual(role: unknown): boolean {
     if (role instanceof Role) return this.role === role.toString();
     if (typeof role === 'string') return this.role === role;
-    if (typeof role === 'object' && RoleStrings.includes((role as object).toString())) return true;
+    if (typeof role === 'object') {
+      const targetRoleString = (role as object).toString();
+      if (RoleStrings.some((roleString) => roleString === targetRoleString)) {
+        return this.role === targetRoleString;
+      }
+    }
+
     throw new IllegalArgumentError('比較可能なroleではありません');
   }
 }
