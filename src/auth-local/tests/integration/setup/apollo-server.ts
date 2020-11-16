@@ -6,24 +6,15 @@ import { addResolversToSchema } from '@graphql-tools/schema';
 import { ApolloServer } from 'apollo-server-express';
 import { createTestClient, ApolloServerTestClient } from 'apollo-server-testing';
 import { Connection } from 'typeorm';
-import { UserDto, UserEntity } from 'domain-model';
 
 import { resolvers } from '../../../src/infrastructure/apollo-server/resolvers';
 
 dotenv.config();
 
-const getContext = async (dbConnection: Connection, actor?: UserDto) => {
-  if (!actor) return { dbConnection, actor: null };
-
-  return {
-    dbConnection,
-    actor: new UserEntity(actor),
-  };
-};
+const getContext = async (dbConnection: Connection) => ({ dbConnection });
 
 export const createApolloServerForTesting = async (
   dbConnection: Connection,
-  actor?: UserDto,
 ): Promise<ApolloServerTestClient> => {
   // Configure GraphQL Server
   const schema = loadSchemaSync(path.join(__dirname, '../../../../schema/schema.graphql'), {
@@ -37,7 +28,7 @@ export const createApolloServerForTesting = async (
   // Create GraphQL Server and Apply to Express
   const server = new ApolloServer({
     schema: schemaWithResolvers,
-    context: () => getContext(dbConnection, actor),
+    context: () => getContext(dbConnection),
   });
 
   // Create GraphQL Client for Testing
