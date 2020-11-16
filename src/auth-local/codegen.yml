@@ -1,13 +1,13 @@
 overwrite: true
-schema: 'src/**/*.graphql'
+schema: 'schema/**/*.graphql'
 generates:
-  src/types.ts:
+  src/generated/resolver-types.ts:
     plugins:
       - typescript
       - typescript-resolvers
     config:
       useIndexSignature: true
-  schema.graphql:
+  src/generated/schema.graphql:
     plugins:
       - schema-ast
 config:

@@ -31,7 +31,8 @@
     "db:seed": "ts-node ./src/infrastructure/typeorm/seeder/index.ts",
     "setup": "run-s setup:env docker:upd setup:wait:mysql db:migrate db:seed",
     "setup:env": "node -e \"require('fs').copyFileSync('./.env.default', './.env')\"",
-    "setup:wait:mysql": "node --require ts-node/register ./docker/wait-mysql.ts"
+    "setup:wait:mysql": "node --require ts-node/register ./docker/wait-mysql.ts",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^6.0.16",
@@ -39,7 +40,6 @@
     "@graphql-tools/schema": "^6.0.16",
     "apollo-server": "^2.18.2",
     "apollo-server-express": "^2.18.2",
-    "auth-local-schema": "file:../auth-local-schema",
     "common": "file:../common",
     "cors": "^2.8.5",
     "date-fns": "^2.16.1",
