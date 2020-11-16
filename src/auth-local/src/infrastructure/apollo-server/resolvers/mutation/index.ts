@@ -1,5 +1,4 @@
-import { MutationResolvers } from 'auth-local-schema';
-
+import { MutationResolvers } from '../../../../generated/resolver-types';
 import { Auth } from './Auth';
 
 export const Mutation: MutationResolvers = {
