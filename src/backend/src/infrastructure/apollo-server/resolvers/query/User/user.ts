@@ -1,4 +1,4 @@
-import { QueryResolvers } from 'schema';
+import { QueryResolvers } from 'schema/lib/app/types';
 import { GetUserByIdInteractor, allowOnlyWhenActorHasMemberRole, denyIfNotSet } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';

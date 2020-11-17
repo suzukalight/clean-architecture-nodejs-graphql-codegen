@@ -1,4 +1,4 @@
-import { User } from 'schema';
+import { User } from 'schema/lib/app/types';
 import { GetUserPresenter, GetUserOutputData } from 'domain-model';
 
 import { toGqlUser } from '../utils/converter/user';

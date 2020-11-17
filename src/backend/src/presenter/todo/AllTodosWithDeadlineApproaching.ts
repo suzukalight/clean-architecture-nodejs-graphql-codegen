@@ -1,4 +1,4 @@
-import { AllTodosWithDeadlineApproachingResponse } from 'schema';
+import { AllTodosWithDeadlineApproachingResponse } from 'schema/lib/app/types';
 import {
   AllTodosWithDeadlineApproachingPresenter,
   AllTodosWithDeadlineApproachingOutputData,

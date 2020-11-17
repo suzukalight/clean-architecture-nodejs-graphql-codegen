@@ -1,4 +1,4 @@
-import { UndoneTodoResponse } from 'schema';
+import { UndoneTodoResponse } from 'schema/lib/app/types';
 import { UndoneTodoOutputData, UndoneTodoPresenter } from 'domain-model';
 
 import { toGqlTodo } from '../utils/converter/todo';

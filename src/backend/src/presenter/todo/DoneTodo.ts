@@ -1,4 +1,4 @@
-import { DoneTodoResponse } from 'schema';
+import { DoneTodoResponse } from 'schema/lib/app/types';
 import { DoneTodoPresenter, DoneTodoOutputData } from 'domain-model';
 
 import { toGqlTodo } from '../utils/converter/todo';

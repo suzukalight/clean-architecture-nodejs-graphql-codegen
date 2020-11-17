@@ -1,4 +1,4 @@
-import { Todo } from 'schema';
+import { Todo } from 'schema/lib/app/types';
 import { GetTodoPresenter, GetTodoOutputData } from 'domain-model';
 
 import { toGqlTodo } from '../utils/converter/todo';

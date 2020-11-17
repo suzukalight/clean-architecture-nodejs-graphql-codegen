@@ -8,7 +8,7 @@ import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { Connection } from 'typeorm';
-import { User } from 'schema';
+import { User } from 'schema/lib/app/types';
 
 import { ApolloServerContext } from './types';
 import { resolvers } from './resolvers';

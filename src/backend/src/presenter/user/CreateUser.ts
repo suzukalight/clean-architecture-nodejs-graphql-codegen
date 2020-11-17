@@ -1,4 +1,4 @@
-import { CreateUserResponse } from 'schema';
+import { CreateUserResponse } from 'schema/lib/app/types';
 import { CreateUserPresenter, CreateUserOutputData } from 'domain-model';
 
 import { toGqlUser } from '../utils/converter/user';

@@ -1,4 +1,4 @@
-import { TodoResolvers } from 'schema';
+import { TodoResolvers } from 'schema/lib/app/types';
 import { allowOnlyWhenActorHasMemberRole, GetUserByIdInteractor } from 'domain-model';
 
 import { ApolloServerContext } from '../../types';

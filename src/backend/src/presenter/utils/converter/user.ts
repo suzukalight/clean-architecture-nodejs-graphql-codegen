@@ -1,4 +1,4 @@
-import { Role, User } from 'schema';
+import { Role, User } from 'schema/lib/app/types';
 import { UserDto } from 'domain-model';
 
 export const toGqlUser = (user: UserDto | null | undefined): User | null => {
