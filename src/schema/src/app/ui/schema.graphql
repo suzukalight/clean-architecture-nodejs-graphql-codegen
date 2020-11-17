@@ -1,0 +1,138 @@
+enum TodoStatus {
+  DONE
+  UNDONE
+}
+
+type Todo {
+  createdAt: DateTime
+  dueDate: DateTime
+  id: ID!
+  owner: User
+  ownerId: ID!
+  status: TodoStatus!
+  title: String!
+  updatedAt: DateTime
+}
+
+enum Role {
+  ADMIN
+  ANONYMOUS
+  MEMBER
+}
+
+type User {
+  createdAt: DateTime
+  id: ID!
+  roles: [Role!]!
+  todos: [Todo]
+  updatedAt: DateTime
+}
+
+scalar DateTime
+
+input CreateTodoRequest {
+  dueDate: DateTime
+  ownerId: ID!
+  title: String!
+}
+
+type CreateTodoResponse {
+  todo: Todo
+}
+
+input DoneTodoRequest {
+  id: ID!
+}
+
+type DoneTodoResponse {
+  todo: Todo!
+}
+
+input UndoneTodoRequest {
+  id: ID!
+}
+
+type UndoneTodoResponse {
+  todo: Todo!
+}
+
+input DeleteTodoRequest {
+  id: ID!
+}
+
+type DeleteTodoResponse {
+  todo: Todo!
+}
+
+type Mutation {
+  createTodo(input: CreateTodoRequest): CreateTodoResponse
+  createUser(input: CreateUserRequest): CreateUserResponse
+  deleteTodo(input: DeleteTodoRequest): DeleteTodoResponse
+  deleteUser(input: DeleteUserRequest): DeleteUserResponse
+  doneTodo(input: DoneTodoRequest): DoneTodoResponse
+  undoneTodo(input: UndoneTodoRequest): UndoneTodoResponse
+  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
+}
+
+type TodoEdge {
+  cursor: String
+  todo: Todo
+}
+
+input AllTodosWithDeadlineApproachingRequest {
+  dueDate: DateTime!
+  paging: PagingInput
+}
+
+type AllTodosWithDeadlineApproachingResponse {
+  edges: [TodoEdge]
+  pageInfo: PageInfo
+}
+
+type Query {
+  allTodosWithDeadlineApproaching(query: AllTodosWithDeadlineApproachingRequest): AllTodosWithDeadlineApproachingResponse
+  todo(id: ID!): Todo
+  user(id: ID!): User
+}
+
+enum OrderBy {
+  ASC
+  DESC
+}
+
+input PagingInput {
+  cursor: String
+  skip: Int
+  take: Int
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean
+  totalCount: Int
+}
+
+input CreateUserRequest {
+  _: Boolean
+}
+
+type CreateUserResponse {
+  user: User
+}
+
+input UpdateUserRolesRequest {
+  id: ID!
+  roles: [Role!]!
+}
+
+type UpdateUserRolesResponse {
+  user: User!
+}
+
+input DeleteUserRequest {
+  id: ID!
+}
+
+type DeleteUserResponse {
+  user: User!
+}

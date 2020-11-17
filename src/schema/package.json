@@ -12,6 +12,10 @@
     "clean:lib": "rimraf lib *.tsbuildinfo",
     "clean:modules": "rimraf node_modules",
     "reinstall": "yarn install",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "run-p codegen:*",
+    "codegen:app": "graphql-codegen --config src/app/codegen.yml",
+    "codegen:app-ui": "graphql-codegen --config src/app/ui/codegen.yml",
+    "codegen:auth": "graphql-codegen --config src/auth/codegen.yml",
+    "codegen:auth-ui": "graphql-codegen --config src/auth/ui/codegen.yml"
   }
 }

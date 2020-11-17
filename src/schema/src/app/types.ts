@@ -13,42 +13,42 @@ export type Scalars = {
 };
 
 export enum TodoStatus {
-  Undone = 'UNDONE',
-  Done = 'DONE'
+  Done = 'DONE',
+  Undone = 'UNDONE'
 }
 
 export type Todo = {
   __typename?: 'Todo';
-  id: Scalars['ID'];
-  ownerId: Scalars['ID'];
-  title: Scalars['String'];
-  status: TodoStatus;
-  dueDate?: Maybe<Scalars['DateTime']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
+  dueDate?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID'];
   owner?: Maybe<User>;
+  ownerId: Scalars['ID'];
+  status: TodoStatus;
+  title: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export enum Role {
+  Admin = 'ADMIN',
   Anonymous = 'ANONYMOUS',
-  Member = 'MEMBER',
-  Admin = 'ADMIN'
+  Member = 'MEMBER'
 }
 
 export type User = {
   __typename?: 'User';
+  createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   roles: Array<Role>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
   todos?: Maybe<Array<Maybe<Todo>>>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 
 export type CreateTodoRequest = {
+  dueDate?: Maybe<Scalars['DateTime']>;
   ownerId: Scalars['ID'];
   title: Scalars['String'];
-  dueDate?: Maybe<Scalars['DateTime']>;
 };
 
 export type CreateTodoResponse = {
@@ -131,8 +131,8 @@ export type MutationUpdateUserRolesArgs = {
 
 export type TodoEdge = {
   __typename?: 'TodoEdge';
-  todo?: Maybe<Todo>;
   cursor?: Maybe<Scalars['String']>;
+  todo?: Maybe<Todo>;
 };
 
 export type AllTodosWithDeadlineApproachingRequest = {
@@ -181,9 +181,9 @@ export type PagingInput = {
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  totalCount?: Maybe<Scalars['Int']>;
-  hasNextPage?: Maybe<Scalars['Boolean']>;
   endCursor?: Maybe<Scalars['String']>;
+  hasNextPage?: Maybe<Scalars['Boolean']>;
+  totalCount?: Maybe<Scalars['Int']>;
 };
 
 export type CreateUserRequest = {
@@ -359,23 +359,23 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  ownerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['TodoStatus'], ParentType, ContextType>;
-  dueDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  dueDate?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   owner?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  ownerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['TodoStatus'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   roles?: Resolver<Array<ResolversTypes['Role']>, ParentType, ContextType>;
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   todos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Todo']>>>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
@@ -414,8 +414,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 }>;
 
 export type TodoEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['TodoEdge'] = ResolversParentTypes['TodoEdge']> = ResolversObject<{
-  todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType>;
   cursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  todo?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 
@@ -432,9 +432,9 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 }>;
 
 export type PageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = ResolversObject<{
-  totalCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  hasNextPage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hasNextPage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  totalCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType>;
 }>;
 

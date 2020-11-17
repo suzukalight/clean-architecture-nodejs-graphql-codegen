@@ -1,39 +1,39 @@
 enum TodoStatus {
-  UNDONE
   DONE
+  UNDONE
 }
 
 type Todo {
-  id: ID!
-  ownerId: ID!
-  title: String!
-  status: TodoStatus!
-  dueDate: DateTime
   createdAt: DateTime
-  updatedAt: DateTime
+  dueDate: DateTime
+  id: ID!
   owner: User
+  ownerId: ID!
+  status: TodoStatus!
+  title: String!
+  updatedAt: DateTime
 }
 
 enum Role {
+  ADMIN
   ANONYMOUS
   MEMBER
-  ADMIN
 }
 
 type User {
+  createdAt: DateTime
   id: ID!
   roles: [Role!]!
-  createdAt: DateTime
-  updatedAt: DateTime
   todos: [Todo]
+  updatedAt: DateTime
 }
 
 scalar DateTime
 
 input CreateTodoRequest {
+  dueDate: DateTime
   ownerId: ID!
   title: String!
-  dueDate: DateTime
 }
 
 type CreateTodoResponse {
@@ -75,8 +75,8 @@ type Mutation {
 }
 
 type TodoEdge {
-  todo: Todo
   cursor: String
+  todo: Todo
 }
 
 input AllTodosWithDeadlineApproachingRequest {
@@ -107,9 +107,9 @@ input PagingInput {
 }
 
 type PageInfo {
-  totalCount: Int
-  hasNextPage: Boolean
   endCursor: String
+  hasNextPage: Boolean
+  totalCount: Int
 }
 
 input CreateUserRequest {

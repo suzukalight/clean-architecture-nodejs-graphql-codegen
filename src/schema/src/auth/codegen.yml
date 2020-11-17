@@ -1,13 +1,13 @@
 overwrite: true
-schema: 'src/**/*.graphql'
+schema: 'src/auth/**/*.graphql'
 generates:
-  src/types.ts:
+  src/auth/types.ts:
     plugins:
       - typescript
       - typescript-resolvers
     config:
       useIndexSignature: true
-  schema.graphql:
+  src/auth/schema.graphql:
     plugins:
       - schema-ast
 config:
