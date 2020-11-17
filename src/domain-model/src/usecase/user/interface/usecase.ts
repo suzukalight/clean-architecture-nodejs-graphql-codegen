@@ -9,7 +9,7 @@ export interface GetUserUseCase {
 }
 
 export type CreateUserInputData = {
-  email: string;
+  _?: boolean;
 };
 
 export interface CreateUserUseCase {

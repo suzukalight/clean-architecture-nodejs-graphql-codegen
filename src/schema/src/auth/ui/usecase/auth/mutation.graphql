@@ -1,0 +1,24 @@
+input SignUpEmailPasswordRequest {
+  email: String!
+  password: String!
+}
+
+type SignUpEmailPasswordResponse {
+  userId: String
+  token: String!
+}
+
+input SignInEmailPasswordRequest {
+  email: String!
+  password: String!
+}
+
+type SignInEmailPasswordResponse {
+  userId: String!
+  token: String!
+}
+
+type Mutation {
+  signUpEmailPassword(input: SignUpEmailPasswordRequest): SignUpEmailPasswordResponse
+  signInEmailPassword(input: SignInEmailPasswordRequest): SignInEmailPasswordResponse
+}

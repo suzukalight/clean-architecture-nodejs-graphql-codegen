@@ -1,0 +1,15 @@
+enum Role {
+  ANONYMOUS
+  MEMBER
+  ADMIN
+}
+
+type User {
+  id: ID!
+  roles: [Role!]!
+
+  createdAt: DateTime
+  updatedAt: DateTime
+
+  todos: [Todo]
+}

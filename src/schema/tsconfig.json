@@ -26,6 +26,6 @@
     "sourceMap": true,
     "composite": true
   },
-  "exclude": ["node_modules", "lib", "**/_mocks/*", "**/__tests__/*"],
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "lib", "**/_mocks/*", "**/__tests__/*"]
 }

@@ -1,28 +1,19 @@
-import { ValidationError, ConflictError } from 'common';
+import { ValidationError, ConflictError, ID, Role, RoleTypes, RoleType } from 'common';
 
 import { UserDto, denyIllegalUserDto } from './UserDto';
-import { ID } from '../common/ID';
-import { Email } from '../common/Email';
-import { Role, RoleTypes, RoleType } from '../common/Role';
 
 export class UserEntity {
   private id: ID;
-  private email: Email;
   private roles: Role[] = [new Role(RoleTypes.Anonymous)];
 
   constructor(user: UserDto) {
     denyIllegalUserDto(user);
     this.id = new ID(user.id);
-    this.email = new Email(user.email);
     this.roles = user.roles.map((role) => new Role(role as RoleType));
   }
 
   getId() {
     return this.id;
-  }
-
-  getEmail() {
-    return this.email;
   }
 
   getRoles() {
@@ -31,11 +22,6 @@ export class UserEntity {
 
   setId(id: ID) {
     this.id = id;
-    this.isValid();
-  }
-
-  setEmail(email: Email) {
-    this.email = email;
     this.isValid();
   }
 
@@ -68,7 +54,6 @@ export class UserEntity {
   toDto(): UserDto {
     return {
       id: this.id.toString(),
-      email: this.email.toString(),
       roles: this.roles.map((role) => role.toString()),
     };
   }

@@ -1,6 +1,5 @@
-import { NotFoundError } from 'common';
+import { NotFoundError, RoleTypes } from 'common';
 
-import { RoleTypes } from '../../../entity/common/Role';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { UserRepository } from '../interface/repository';
 import { CreateUserInputData } from '../interface/usecase';
@@ -31,11 +30,10 @@ export class MockUserRepository implements UserRepository {
     return this.store.entities.get(id) ?? null;
   }
 
-  public async create(user: CreateUserInputData) {
+  public async create(_user: CreateUserInputData) {
     const id = `${++this.store.idCounter}`;
     const newEntity = new UserEntity({
       id,
-      email: user.email,
       roles: [RoleTypes.Member],
     });
 

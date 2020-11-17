@@ -1,11 +1,9 @@
-import { MutationResolvers } from 'schema';
+import { MutationResolvers } from 'schema/lib/app/types';
 
 import { User } from './User';
 import { Todo } from './Todo';
-import { Auth } from './Auth';
 
 export const Mutation: MutationResolvers = {
   ...User,
   ...Todo,
-  ...Auth,
 };

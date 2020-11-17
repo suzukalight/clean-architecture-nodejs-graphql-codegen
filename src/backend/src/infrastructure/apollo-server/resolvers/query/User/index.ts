@@ -1,4 +1,4 @@
-import { QueryResolvers } from 'schema';
+import { QueryResolvers } from 'schema/lib/app/types';
 
 import { ApolloServerContext } from '../../../types';
 import { user } from './user';

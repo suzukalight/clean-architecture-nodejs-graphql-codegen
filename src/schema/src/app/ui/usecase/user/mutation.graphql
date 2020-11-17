@@ -1,0 +1,30 @@
+input CreateUserRequest {
+  _: Boolean
+}
+
+type CreateUserResponse {
+  user: User
+}
+
+input UpdateUserRolesRequest {
+  id: ID!
+  roles: [Role!]!
+}
+
+type UpdateUserRolesResponse {
+  user: User!
+}
+
+input DeleteUserRequest {
+  id: ID!
+}
+
+type DeleteUserResponse {
+  user: User!
+}
+
+type Mutation {
+  createUser(input: CreateUserRequest): CreateUserResponse
+  updateUserRoles(input: UpdateUserRolesRequest): UpdateUserRolesResponse
+  deleteUser(input: DeleteUserRequest): DeleteUserResponse
+}

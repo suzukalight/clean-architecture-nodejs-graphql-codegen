@@ -1,4 +1,4 @@
-import { UserResolvers } from 'schema';
+import { UserResolvers } from 'schema/lib/app/types';
 
 import { ApolloServerContext } from '../../types';
 import { GqlTodoQueryService } from '../../../../repository/typeorm/todo/queryService/Todo';

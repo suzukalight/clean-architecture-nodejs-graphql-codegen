@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { Maybe } from 'schema';
+import { Maybe } from 'schema/lib/app/types';
 import { UserEntity } from 'domain-model';
 
 export interface ApolloServerContext {

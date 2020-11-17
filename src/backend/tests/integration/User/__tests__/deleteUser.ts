@@ -1,9 +1,9 @@
 import { ApolloServerTestClient } from 'apollo-server-testing';
 import { gql } from 'apollo-server-express';
+import { RoleTypes } from 'common';
 
 import { SqliteDbConnection } from '../../setup/database';
 import { createApolloServerForTesting } from '../../setup/apollo-server';
-import { RoleTypes } from 'domain-model';
 
 const DELETE_USER = gql`
   # Write your query or mutation here
@@ -11,7 +11,6 @@ const DELETE_USER = gql`
     deleteUser(input: $input) {
       user {
         id
-        email
       }
     }
   }
@@ -44,7 +43,7 @@ describe('deleteUser', () => {
       });
 
       const { user } = result?.data?.deleteUser ?? {};
-      expect(user?.email).toBe('anonymous@email.com');
+      expect(user).toBeDefined();
     });
 
     test('NG: 存在しないIDを指定した', async () => {
@@ -104,7 +103,7 @@ describe('deleteUser', () => {
       });
 
       const { user } = result?.data?.deleteUser ?? {};
-      expect(user?.email).toBe('member@email.com');
+      expect(user).toBeDefined();
     });
 
     test('NG: 失敗：Adminロールでないactorが操作した', async () => {

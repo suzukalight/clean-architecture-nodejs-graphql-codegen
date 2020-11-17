@@ -1,9 +1,10 @@
+import { RoleTypes } from 'common';
+
 import { AllTodosByOwnerIdInteractor } from '../AllTodosByOwnerId';
 import { MockTodoQueryService } from '../_mocks/MockTodoQueryService';
 import { MockAllTodosByOwnerIdPresenter } from '../_mocks/MockTodoPresenter';
 import { TodoDto, TodoStatus } from '../../../entity/todo/TodoDto';
 import { UserEntity } from '../../../entity/user/UserEntity';
-import { RoleTypes } from '../../../entity/common/Role';
 
 /**
  * TODOを3つ作成しておく
@@ -12,7 +13,6 @@ const setup = async () => {
   // user repository
   const actor = new UserEntity({
     id: '1',
-    email: 'target@email.com',
     roles: [RoleTypes.Member],
   });
 

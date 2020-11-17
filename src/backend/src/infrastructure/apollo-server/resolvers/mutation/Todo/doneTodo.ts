@@ -1,4 +1,4 @@
-import { MutationResolvers } from 'schema';
+import { MutationResolvers } from 'schema/lib/app/types';
 import { DoneTodoInteractor, allowOnlyWhenActorHasMemberRole } from 'domain-model';
 
 import { ApolloServerContext } from '../../../types';

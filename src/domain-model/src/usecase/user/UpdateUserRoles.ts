@@ -1,9 +1,8 @@
-import { NotFoundError } from 'common';
+import { NotFoundError, Role, RoleType  } from 'common';
 
 import { UserRepository } from './interface/repository';
 import { UpdateUserRolesInputData, UpdateUserRolesUseCase } from './interface/usecase';
 import { UpdateUserRolesOutputData, UpdateUserRolesPresenter } from './interface/presenter';
-import { Role, RoleType } from '../../entity/common/Role';
 import { UserEntity } from '../../entity/user/UserEntity';
 import { allowOnlyWhenActorIsOwner } from '../../policy/decision/common';
 

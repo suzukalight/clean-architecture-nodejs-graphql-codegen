@@ -1,15 +1,7 @@
-import {
-  PropertyRequiredError,
-  IllegalArgumentError,
-  ConflictError,
-  ValidationError,
-} from 'common';
+import { PropertyRequiredError, ConflictError, ValidationError, Role, RoleTypes, ID } from 'common';
 
 import { UserDto } from '../UserDto';
 import { UserEntity } from '../UserEntity';
-import { Role, RoleTypes } from '../../common/Role';
-import { ID } from '../../common/ID';
-import { Email } from '../../common/Email';
 
 describe('UserEntity', () => {
   describe('constructor', () => {
@@ -17,7 +9,6 @@ describe('UserEntity', () => {
       const user = { id: '1', email: 'aaa@bbb.com', roles: [RoleTypes.Member] };
       const user1 = new UserEntity(user);
       expect(user1.getId().isEqual(user.id)).toBeTruthy();
-      expect(user1.getEmail().isEqual(user.email)).toBeTruthy();
     });
 
     test('NG: idが不足しているため、失敗した', () => {
@@ -25,19 +16,9 @@ describe('UserEntity', () => {
       expect(() => new UserEntity((user as unknown) as UserDto)).toThrow(PropertyRequiredError);
     });
 
-    test('NG: emailが不足しているため、失敗した', () => {
-      const user = { id: '1', roles: [RoleTypes.Member] };
-      expect(() => new UserEntity((user as unknown) as UserDto)).toThrow(PropertyRequiredError);
-    });
-
     test('NG: rolesが不足しているため、失敗した', () => {
       const user = { id: '1', email: 'aaa@bbb.com' };
       expect(() => new UserEntity((user as unknown) as UserDto)).toThrow(PropertyRequiredError);
-    });
-
-    test('NG: 不正なメールアドレスを指定したため、失敗した', () => {
-      const user = { id: '1', email: 'aaaaaaaa', roles: [RoleTypes.Member] };
-      expect(() => new UserEntity((user as unknown) as UserDto)).toThrow(IllegalArgumentError);
     });
   });
 
@@ -51,15 +32,6 @@ describe('UserEntity', () => {
       const newId = new ID('999');
       user.setId(newId);
       expect(user.getId().isEqual(newId)).toBeTruthy();
-    });
-
-    test('OK: Email', () => {
-      const user = new UserEntity(userDto);
-      expect(user.getEmail().isEqual(userDto.email)).toBeTruthy();
-
-      const newEmail = new Email('new_email@bbb.com');
-      user.setEmail(newEmail);
-      expect(user.getEmail().isEqual(newEmail)).toBeTruthy();
     });
 
     test('OK: Roles', () => {

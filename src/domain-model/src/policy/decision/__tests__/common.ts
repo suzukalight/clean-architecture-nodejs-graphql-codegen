@@ -1,7 +1,5 @@
-import { AuthenticationFailedError, UnauthorizedError } from 'common';
+import { AuthenticationFailedError, UnauthorizedError, RoleTypes, ID } from 'common';
 
-import { RoleTypes } from '../../../entity/common/Role';
-import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import {
   denyUnauthenticated,
@@ -13,7 +11,7 @@ import {
 describe('PolicyDecisionCommon', () => {
   describe('denyUnauthenticated', () => {
     test('成功：actorが設定されている', () => {
-      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
+      const actor = new UserEntity({ id: '1', roles: [RoleTypes.Member] });
       denyUnauthenticated(actor);
     });
 
@@ -30,21 +28,20 @@ describe('PolicyDecisionCommon', () => {
 
   describe('denyWhenActorHasOnlyAnonymousRole', () => {
     test('成功：Memberロールが設定されている', () => {
-      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
+      const actor = new UserEntity({ id: '1', roles: [RoleTypes.Member] });
       denyWhenActorHasOnlyAnonymousRole(actor);
     });
 
     test('成功：Anonymous+Member', () => {
       const actor = new UserEntity({
         id: '1',
-        email: 'aaa@bb.com',
         roles: [RoleTypes.Anonymous, RoleTypes.Member],
       });
       denyWhenActorHasOnlyAnonymousRole(actor);
     });
 
     test('失敗：Anonymousロールしか持っていない', () => {
-      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Anonymous] });
+      const actor = new UserEntity({ id: '1', roles: [RoleTypes.Anonymous] });
       expect(() => denyWhenActorHasOnlyAnonymousRole(actor)).toThrow(UnauthorizedError);
     });
 
@@ -61,33 +58,31 @@ describe('PolicyDecisionCommon', () => {
 
   describe('allowOnlyWhenActorHasMemberRole', () => {
     test('成功：Memberロールが設定されている', () => {
-      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
+      const actor = new UserEntity({ id: '1', roles: [RoleTypes.Member] });
       allowOnlyWhenActorHasMemberRole(actor);
     });
 
     test('成功：Anonymous+Member', () => {
       const actor = new UserEntity({
         id: '1',
-        email: 'aaa@bb.com',
         roles: [RoleTypes.Anonymous, RoleTypes.Member],
       });
       denyWhenActorHasOnlyAnonymousRole(actor);
     });
 
     test('失敗：Anonymousロールしか持っていない', () => {
-      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Anonymous] });
+      const actor = new UserEntity({ id: '1', roles: [RoleTypes.Anonymous] });
       expect(() => allowOnlyWhenActorHasMemberRole(actor)).toThrow(UnauthorizedError);
     });
 
     test('失敗：Adminロールしか持っていない', () => {
-      const actor = new UserEntity({ id: '1', email: 'aaa@bb.com', roles: [RoleTypes.Admin] });
+      const actor = new UserEntity({ id: '1', roles: [RoleTypes.Admin] });
       expect(() => allowOnlyWhenActorHasMemberRole(actor)).toThrow(UnauthorizedError);
     });
 
     test('失敗：Anonymous+Admin', () => {
       const actor = new UserEntity({
         id: '1',
-        email: 'aaa@bb.com',
         roles: [RoleTypes.Anonymous, RoleTypes.Admin],
       });
       expect(() => allowOnlyWhenActorHasMemberRole(actor)).toThrow(UnauthorizedError);
@@ -109,7 +104,6 @@ describe('PolicyDecisionCommon', () => {
       const ownerId = new ID('1');
       const actor = new UserEntity({
         id: ownerId.getId(),
-        email: 'aaa@bb.com',
         roles: [RoleTypes.Member],
       });
       allowOnlyWhenActorIsOwner(ownerId, actor);
@@ -117,7 +111,7 @@ describe('PolicyDecisionCommon', () => {
 
     test('失敗：異なるownerId', () => {
       const ownerId = new ID('1');
-      const actor = new UserEntity({ id: '2', email: 'aaa@bb.com', roles: [RoleTypes.Member] });
+      const actor = new UserEntity({ id: '2', roles: [RoleTypes.Member] });
       expect(() => allowOnlyWhenActorIsOwner(ownerId, actor)).toThrow(UnauthorizedError);
     });
 

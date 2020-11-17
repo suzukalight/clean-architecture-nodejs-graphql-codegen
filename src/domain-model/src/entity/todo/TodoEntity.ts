@@ -1,7 +1,6 @@
-import { ConflictError } from 'common';
+import { ConflictError, ID } from 'common';
 
 import { TodoDto, TodoStatus, denyIllegalTodoDto } from './TodoDto';
-import { ID } from '../common/ID';
 
 export class TodoEntity {
   private id: ID;

@@ -3,10 +3,10 @@ import {
   IllegalArgumentError,
   PropertyRequiredError,
   UnauthorizedError,
+  ID,
+  RoleTypes,
 } from 'common';
 
-import { ID } from '../../entity/common/ID';
-import { RoleTypes } from '../../entity/common/Role';
 import { UserEntity } from '../../entity/user/UserEntity';
 
 export const denyIfNotSet = (

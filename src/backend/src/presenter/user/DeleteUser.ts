@@ -1,4 +1,4 @@
-import { DeleteUserResponse } from 'schema';
+import { DeleteUserResponse } from 'schema/lib/app/types';
 import { DeleteUserPresenter, DeleteUserOutputData } from 'domain-model';
 
 import { toGqlUser } from '../utils/converter/user';

@@ -1,17 +1,16 @@
-import { NotFoundError, UnauthorizedError } from 'common';
+import { NotFoundError, UnauthorizedError, RoleTypes } from 'common';
 
 import { DeleteUserInteractor } from '../DeleteUser';
 import { MockUserRepository } from '../_mocks/MockUserRepository';
 import { MockDeleteUserPresenter } from '../_mocks/MockUserPresenter';
 import { UserEntity } from '../../../entity/user/UserEntity';
-import { RoleTypes } from '../../../entity/common/Role';
 
 /**
  * interactor を生成
  */
 const setup = async () => {
   const repository = new MockUserRepository();
-  const target = await repository.create({ email: 'aaa@bb.com' });
+  const target = await repository.create({});
 
   const presenter = new MockDeleteUserPresenter();
   const interactor = new DeleteUserInteractor(repository, presenter);
@@ -25,7 +24,6 @@ describe('DeleteUserInteractor', () => {
     const targetId = target.getId().getId();
     const actor = new UserEntity({
       id: `${targetId + 1}`,
-      email: 'actor@email.com',
       roles: [RoleTypes.Admin],
     });
 
@@ -57,7 +55,6 @@ describe('DeleteUserInteractor', () => {
     const targetId = target.getId().getId();
     const actor = new UserEntity({
       id: `${targetId + 1}`,
-      email: 'actor@email.com',
       roles: [RoleTypes.Member],
     });
 

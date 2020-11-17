@@ -1,4 +1,4 @@
-import { UpdateUserRolesResponse } from 'schema';
+import { UpdateUserRolesResponse } from 'schema/lib/app/types';
 import { UpdateUserRolesPresenter, UpdateUserRolesOutputData } from 'domain-model';
 
 import { toGqlUser } from '../utils/converter/user';

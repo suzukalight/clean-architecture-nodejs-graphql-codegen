@@ -1,0 +1,15 @@
+overwrite: true
+schema: 'src/auth/ui/**/*.graphql'
+generates:
+  src/auth/ui/types.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      useIndexSignature: true
+  src/auth/ui/schema.graphql:
+    plugins:
+      - schema-ast
+config:
+  scalars:
+    DateTime: Date

@@ -3,7 +3,6 @@ import { createConnection } from 'typeorm';
 
 import { User } from '../../repository/typeorm/user/entity/User';
 import { Todo } from '../../repository/typeorm/todo/entity/Todo';
-import { AuthEmailPassword } from '../../repository/typeorm/auth/entity/AuthEmailPassword';
 
 export const createDbConnection = async () => {
   return createConnection({
@@ -13,7 +12,7 @@ export const createDbConnection = async () => {
     username: 'docker',
     password: 'docker',
     database: 'graphql_clean_dev',
-    entities: [User, Todo, AuthEmailPassword],
+    entities: [User, Todo],
     synchronize: false,
     logging: false,
   });

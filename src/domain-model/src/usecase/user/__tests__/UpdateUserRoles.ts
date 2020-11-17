@@ -1,10 +1,8 @@
-import { IllegalArgumentError, NotFoundError, UnauthorizedError } from 'common';
+import { IllegalArgumentError, NotFoundError, UnauthorizedError, RoleTypes, ID } from 'common';
 
 import { UpdateUserRolesInteractor } from '../UpdateUserRoles';
-import { RoleTypes } from '../../../entity/common/Role';
 import { MockUserRepository } from '../_mocks/MockUserRepository';
 import { MockUpdateUserRolesPresenter } from '../_mocks/MockUserPresenter';
-import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { UpdateUserRolesInputData } from '../interface/usecase';
 
@@ -14,7 +12,7 @@ import { UpdateUserRolesInputData } from '../interface/usecase';
 const setup = async () => {
   // repository
   const repository = new MockUserRepository();
-  const actor = await repository.create({ email: 'target@email.com' });
+  const actor = await repository.create({});
 
   // interactor
   const presenter = new MockUpdateUserRolesPresenter();

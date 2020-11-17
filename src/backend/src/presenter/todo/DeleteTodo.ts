@@ -1,4 +1,4 @@
-import { DeleteTodoResponse } from 'schema';
+import { DeleteTodoResponse } from 'schema/lib/app/types';
 import { DeleteTodoPresenter, DeleteTodoOutputData } from 'domain-model';
 
 import { toGqlTodo } from '../utils/converter/todo';

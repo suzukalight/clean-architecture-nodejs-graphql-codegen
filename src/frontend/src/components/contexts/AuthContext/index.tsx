@@ -10,7 +10,7 @@ import {
 import { getToken, resetToken, setToken } from '../../../libraries/auth-token';
 import { client } from '../../../libraries/apollo-client';
 
-type PickedUser = Pick<User, 'id' | 'roles' | 'email'>;
+type PickedUser = Pick<User, 'id' | 'roles'>;
 type Actor = PickedUser | null;
 type Jwt = Pick<User, 'id' | 'roles'>;
 type SubmitFunction = (input: SignInEmailPasswordRequest) => Promise<void>;

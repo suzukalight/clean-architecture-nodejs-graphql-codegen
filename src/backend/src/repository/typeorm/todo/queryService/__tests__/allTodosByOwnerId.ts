@@ -1,20 +1,19 @@
-import { Role } from 'domain-model';
 import { Connection } from 'typeorm';
+import { Role, RoleTypes } from 'common';
 
 import { GqlTodoRepository } from '../../repository/Todo';
 import { GqlUserRepository } from '../../../user/repository/User';
 import { SqliteDbConnection } from '../../../_testutils/connection';
-import { RoleTypes } from '../../../../../../../domain-model/lib';
 import { GqlTodoQueryService } from '../Todo';
 
 const seedAll = async (connection: Connection) => {
   const userRepository = new GqlUserRepository(connection);
   const todoRepository = new GqlTodoRepository(connection);
 
-  const actor = await userRepository.create({ email: 'user1@email.com' });
-  await userRepository.create({ email: 'user2@email.com' });
-  await userRepository.create({ email: 'user3@email.com' });
-  await userRepository.create({ email: 'user4@email.com' });
+  const actor = await userRepository.create({});
+  await userRepository.create({});
+  await userRepository.create({});
+  await userRepository.create({});
   actor.addRole(new Role(RoleTypes.Member));
 
   const creators = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(async (value) => {

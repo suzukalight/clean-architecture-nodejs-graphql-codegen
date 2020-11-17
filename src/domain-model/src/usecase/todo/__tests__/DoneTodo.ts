@@ -1,10 +1,9 @@
-import { NotFoundError, ConflictError, UnauthorizedError } from 'common';
+import { NotFoundError, ConflictError, UnauthorizedError, ID } from 'common';
 
 import { DoneTodoInteractor } from '../DoneTodo';
 import { MockTodoRepository } from '../_mocks/MockTodoRepository';
 import { MockDoneTodoPresenter } from '../_mocks/MockTodoPresenter';
 import { MockUserRepository } from '../../user/_mocks/MockUserRepository';
-import { ID } from '../../../entity/common/ID';
 import { UserEntity } from '../../../entity/user/UserEntity';
 import { TodoStatus } from '../../../entity/todo/TodoDto';
 
@@ -14,7 +13,7 @@ import { TodoStatus } from '../../../entity/todo/TodoDto';
 const setup = async () => {
   // user repository
   const userRepository = new MockUserRepository();
-  const actor = await userRepository.create({ email: 'target@email.com' });
+  const actor = await userRepository.create({});
 
   // create todo
   const repository = new MockTodoRepository();
