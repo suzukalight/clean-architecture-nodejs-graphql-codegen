@@ -27,7 +27,7 @@
     "common": "file:../common",
     "dotenv": "^8.2.0",
     "graphql-scalars": "^1.2.6",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
